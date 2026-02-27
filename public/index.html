@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M9CEGGVX7K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M9CEGGVX7K');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Charts — Verifiable Composite Index | World Intelligence Dashboard</title>
+<meta name="description" content="Anthony Charts is a verifiable composite index tracking Earth, Space, and Human Systems through verified scientific data. World On Edge: 78/100. World Goodness: 54/100. Sources published. Weights locked. Updated weekly.">
+<meta name="keywords" content="composite index, geopolitical risk index, world tension index, global conflict tracker, climate data dashboard, NOAA data, NASA data, GPR index, ACLED conflict data, verifiable index, world intelligence, global indicators">
+<meta name="author" content="Anthony Charts">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://anthonycharts.com">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anthonycharts.com">
+<meta property="og:title" content="Anthony Charts — Verifiable Composite Index">
+<meta property="og:description" content="A verifiable composite index tracking Earth, Space, and Human Systems. World On Edge: 78/100. World Goodness: 54/100. Sources published. Weights locked. Updated weekly.">
+<meta property="og:image" content="https://anthonycharts.com/og-image.png">
+<meta property="og:site_name" content="Anthony Charts">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonycharts">
+<meta name="twitter:title" content="Anthony Charts — Verifiable Composite Index">
+<meta name="twitter:description" content="A verifiable composite index tracking Earth, Space, and Human Systems. World On Edge: 78/100. World Goodness: 54/100. Sources published. Weights locked.">
+<meta name="twitter:image" content="https://anthonycharts.com/og-image.png">
+
+<!-- Structured Data — WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Anthony Charts",
+  "alternateName": "AC Composite Index",
+  "url": "https://anthonycharts.com",
+  "description": "A verifiable composite index tracking Earth, Space, and Human Systems through verified scientific data from NOAA, NASA, GPR, ACLED, IUCN, and others.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Anthony Charts",
+    "url": "https://anthonycharts.com"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://anthonycharts.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Structured Data — Dataset -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Anthony Charts Composite Index",
+  "description": "Verifiable composite indices tracking global geopolitical risk, humanitarian goodness, climate systems, space exploration, and human systems. Updated weekly. Sources and weights published.",
+  "url": "https://anthonycharts.com",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Organization",
+    "name": "Anthony Charts"
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://anthonycharts.com/data/scores-history.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://anthonycharts.com/composites-v1.0.json"
+    }
+  ],
+  "temporalCoverage": "2026/..",
+  "measurementTechnique": "Weighted composite of verified institutional data sources including GPR Index, ACLED, NOAA, NASA, IUCN Red List, World Bank, and others.",
+  "variableMeasured": [
+    "World On Edge Index",
+    "World Goodness Index",
+    "Calm Window Probability",
+    "Global Temperature Anomaly",
+    "Sea Level Rise",
+    "Arctic Sea Ice Extent",
+    "CO2 Concentration",
+    "Exoplanet Discovery Count",
+    "Conflict Deaths",
+    "Peacekeeping Reach",
+    "Wealth Inequality",
+    "Social Mobility Index",
+    "Species Threat Index",
+    "Conservation Coverage"
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Boogaloo&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body.neon{--bg:#020912;--bg2:#040f1e;--card:rgba(4,18,42,.85);--cb:rgba(0,180,255,.18);--cs:0 0 40px rgba(0,180,255,.05);--tx:#dff4ff;--td:rgba(180,220,255,.45);--tdim:rgba(180,220,255,.22);--ac:#00d4ff;--ac2:#ff2d6e;--ac3:#00ff9d;--good:#00ff9d;--bad:#ff2d6e;--warn:#ffd700;--fd:'Orbitron',monospace;--fm:'Share Tech Mono',monospace;--fb:'Share Tech Mono',monospace;--r:10px;--tbg:rgba(2,9,18,.95);--tbo:rgba(0,180,255,.2);}
+body.cartoon{--bg:#f5f0e8;--bg2:#fff9f0;--card:#fff;--cb:#2d2d2d;--cs:5px 5px 0 #2d2d2d;--tx:#1a1a1a;--td:#777;--tdim:#bbb;--ac:#4dabf7;--ac2:#ff6b6b;--ac3:#51cf66;--good:#51cf66;--bad:#ff6b6b;--warn:#fcc419;--fd:'Boogaloo',cursive;--fm:'Nunito',sans-serif;--fb:'Nunito',sans-serif;--r:14px;--tbg:#fcc419;--tbo:#2d2d2d;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);min-height:100vh;transition:background .5s,color .5s;overflow-x:hidden;}
+body.neon{background-image:radial-gradient(ellipse at 15% 40%,rgba(0,180,255,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(255,45,110,.05) 0%,transparent 55%);}
+body.cartoon{background-image:radial-gradient(circle at 5% 5%,#ffe5f080 0%,transparent 35%),radial-gradient(circle at 95% 90%,#e5f0ff80 0%,transparent 35%);}
+body.neon::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,180,255,.011) 3px,rgba(0,180,255,.011) 4px);pointer-events:none;z-index:9999;}
+.hdr{position:sticky;top:0;z-index:500;height:58px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;transition:all .5s;}
+body.neon .hdr{background:rgba(2,9,18,.97);border-bottom:1px solid var(--cb);backdrop-filter:blur(20px);}
+body.cartoon .hdr{background:#fff;border-bottom:3px solid #2d2d2d;box-shadow:0 3px 0 rgba(0,0,0,.08);}
+.logo{display:flex;flex-direction:column;gap:1px;}
+.logo-name{font-family:var(--fd);font-weight:900;font-size:1.35rem;letter-spacing:.06em;line-height:1;transition:all .5s;}
+body.neon .logo-name{color:#fff;text-shadow:0 0 16px rgba(0,180,255,.7),0 0 32px rgba(0,180,255,.3);animation:lglitch 10s infinite;}
+body.cartoon .logo-name{color:#1a1a1a;}
+@keyframes lglitch{0%,88%,100%{text-shadow:0 0 16px rgba(0,180,255,.7),0 0 32px rgba(0,180,255,.3);}90%{text-shadow:-2px 0 #ff2d6e,2px 0 #00d4ff;letter-spacing:.08em;}92%{text-shadow:2px 0 #ff2d6e,-2px 0 #00d4ff;}}
+.logo-sub{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;transition:all .5s;}
+body.neon .logo-sub{color:rgba(0,180,255,.55);font-family:var(--fm);}
+body.cartoon .logo-sub{color:#ff6b6b;font-family:'Nunito';font-weight:800;}
+.hdr-right{display:flex;align-items:center;gap:12px;}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;opacity:.65;font-family:var(--fm);}
+.live-dot{width:7px;height:7px;border-radius:50%;}
+body.neon .live-dot{background:#00ff9d;box-shadow:0 0 8px #00ff9d;animation:pneon 2s infinite;}
+body.cartoon .live-dot{background:#51cf66;animation:pcart 2s infinite;}
+@keyframes pneon{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes pcart{0%,100%{transform:scale(1);}50%{transform:scale(1.5);}}
+.nav-btn{cursor:pointer;padding:7px 14px;border-radius:6px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:all .2s;font-family:var(--fm);background:transparent;}
+body.neon .nav-btn{border:1px solid rgba(0,180,255,.25);color:rgba(0,180,255,.7);}
+body.neon .nav-btn:hover{background:rgba(0,180,255,.08);}
+body.cartoon .nav-btn{border:2px solid #2d2d2d;color:#2d2d2d;}
+body.cartoon .nav-btn:hover{background:#f0f0f0;}
+.mode-btn{cursor:pointer;padding:7px 16px;border-radius:6px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:all .2s;font-family:var(--fm);}
+body.neon .mode-btn{background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.35);color:var(--ac);}
+body.neon .mode-btn:hover{background:rgba(0,180,255,.18);}
+body.cartoon .mode-btn{background:#fcc419;border:2px solid #2d2d2d;color:#2d2d2d;box-shadow:3px 3px 0 #2d2d2d;}
+body.cartoon .mode-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #2d2d2d;}
+.ticker{overflow:hidden;padding:7px 0;transition:all .5s;}
+body.neon .ticker{background:rgba(2,9,18,.9);border-bottom:1px solid var(--tbo);}
+body.cartoon .ticker{background:var(--tbg);border-top:2px solid #2d2d2d;border-bottom:2px solid #2d2d2d;}
+.ticker-outer{display:flex;width:max-content;animation:sticker 38s linear infinite;}
+.ticker-inner{display:flex;gap:56px;padding-right:56px;}
+@keyframes sticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ticker-item{display:flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.12em;white-space:nowrap;font-family:var(--fm);}
+body.neon .ticker-item{color:rgba(0,212,255,.8);}
+body.cartoon .ticker-item{color:#2d2d2d;font-weight:700;}
+.page{display:none;}.page.active{display:block;}
+.main{max-width:1280px;margin:0 auto;padding:36px 28px 60px;display:flex;flex-direction:column;gap:32px;}
+.ptrow{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;}
+.ptitle{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,5vw,3.2rem);line-height:1;transition:all .5s;}
+body.neon .ptitle{background:linear-gradient(130deg,#fff 20%,#00d4ff 60%,#ff2d6e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+body.cartoon .ptitle{color:#1a1a1a;}
+.psub{font-size:.82rem;line-height:1.65;max-width:500px;color:var(--td);font-family:var(--fb);margin-top:10px;}
+body.cartoon .psub{font-size:.92rem;}
+.pdate{font-size:.62rem;text-transform:uppercase;letter-spacing:.2em;color:var(--tdim);font-family:var(--fm);white-space:nowrap;padding-bottom:6px;text-align:right;}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sec-label{font-family:var(--fm);font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--tdim);white-space:nowrap;}
+.sec-rule{flex:1;height:1px;}
+body.neon .sec-rule{background:linear-gradient(to right,rgba(0,180,255,.25),transparent);}
+body.cartoon .sec-rule{background:linear-gradient(to right,#ddd,transparent);}
+.hero-duel{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;}
+.hero-card{border-radius:var(--r);padding:32px 28px;position:relative;overflow:hidden;transition:all .5s;display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer;}
+.hero-card:hover{transform:translateY(-3px);}
+body.neon .hero-card{background:var(--card);border:1px solid var(--cb);box-shadow:var(--cs);backdrop-filter:blur(12px);}
+body.cartoon .hero-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}
+.hero-card-edge{border-radius:var(--r) 0 0 var(--r)!important;}
+.hero-card-good{border-radius:0 var(--r) var(--r) 0!important;}
+body.neon .hero-card-edge::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,45,110,.08),transparent 70%);pointer-events:none;}
+body.neon .hero-card-good::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,157,.07),transparent 70%);pointer-events:none;}
+.hero-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 18px;gap:8px;}
+.vs-label{font-family:var(--fd);font-weight:900;font-size:1.1rem;}
+body.neon .vs-label{color:rgba(255,255,255,.12);}
+body.cartoon .vs-label{color:#ddd;}
+.vs-line{width:1px;height:70px;}
+body.neon .vs-line{background:linear-gradient(to bottom,transparent,rgba(0,180,255,.25),transparent);}
+body.cartoon .vs-line{background:linear-gradient(to bottom,transparent,#ddd,transparent);}
+.hero-mlabel{font-family:var(--fm);font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tdim);text-align:center;}
+.hero-emoji{font-size:2.2rem;line-height:1;}
+body.neon .hero-emoji{display:none;}
+body.cartoon .hero-emoji{display:block;}
+.big-num{font-family:var(--fd);font-weight:900;font-size:2.8rem;line-height:1;text-align:center;transition:all .5s;}
+body.neon .big-num-edge{color:#fff;text-shadow:0 0 20px rgba(255,45,110,.5);}
+body.neon .big-num-good{color:#fff;text-shadow:0 0 20px rgba(0,255,157,.5);}
+body.cartoon .big-num-edge{color:#ff6b6b;}
+body.cartoon .big-num-good{color:#51cf66;}
+.big-status{font-family:var(--fd);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;font-weight:700;}
+body.neon .big-status-edge{color:#ff2d6e;}
+body.neon .big-status-good{color:#00ff9d;}
+body.cartoon .big-status-edge{color:#ff4757;}
+body.cartoon .big-status-good{color:#2ed573;}
+.hero-desc{font-size:.7rem;text-align:center;line-height:1.6;color:var(--td);max-width:240px;font-family:var(--fb);}
+.click-hint{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:var(--tdim);text-transform:uppercase;margin-top:4px;opacity:.7;}
+.meter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:900px){.meter-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.meter-grid{grid-template-columns:1fr;}.hero-duel{grid-template-columns:1fr;}.hero-vs{display:none;}}
+.meter-card{border-radius:var(--r);padding:20px 18px 16px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:visible;transition:all .4s;cursor:pointer;}
+body.neon .meter-card{background:var(--card);border:1px solid var(--cb);box-shadow:var(--cs);backdrop-filter:blur(10px);}
+body.cartoon .meter-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}
+body.neon .meter-card:hover{border-color:rgba(0,180,255,.5);box-shadow:0 0 30px rgba(0,180,255,.1);transform:translateY(-3px);}
+body.cartoon .meter-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #2d2d2d;}
+.tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);z-index:400;padding:8px 12px;border-radius:6px;pointer-events:none;font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;opacity:0;transition:opacity .2s;max-width:240px;white-space:normal;text-align:center;line-height:1.5;}
+.meter-card:hover .tooltip{opacity:1;}
+body.neon .tooltip{background:rgba(0,10,30,.95);border:1px solid rgba(0,180,255,.3);color:rgba(0,212,255,.9);}
+body.cartoon .tooltip{background:#2d2d2d;color:#fff;border-radius:8px;}
+.tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;}
+body.neon .tooltip::after{border-top-color:rgba(0,180,255,.3);}
+body.cartoon .tooltip::after{border-top-color:#2d2d2d;}
+.meter-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.meter-name{font-family:var(--fm);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--td);}
+.meter-cadence{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--tdim);margin-top:2px;}
+.meter-icon{font-size:1.25rem;line-height:1;}
+body.neon .meter-icon{display:none;}
+body.cartoon .meter-icon{display:block;}
+.arc-zone{display:flex;justify-content:center;align-items:center;padding:2px 0;}
+.arc-svg{overflow:visible;}
+.arc-bg-t{fill:none;stroke-linecap:round;}
+body.neon .arc-bg-t{stroke:rgba(0,180,255,.07);}
+body.cartoon .arc-bg-t{stroke:#eee;}
+.arc-fill-t{fill:none;stroke-linecap:round;transition:stroke-dashoffset 1.8s cubic-bezier(.23,1,.32,1),stroke .5s;}
+.meter-bottom{display:flex;justify-content:space-between;align-items:flex-end;}
+.meter-val{font-family:var(--fd);font-weight:900;font-size:1.6rem;line-height:1;}
+.meter-unit{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--tdim);margin-top:3px;}
+.meter-trend{font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:.05em;padding:4px 8px;border-radius:4px;}
+body.neon .t-up{color:#ff2d6e;background:rgba(255,45,110,.1);}
+body.neon .t-dn{color:#00ff9d;background:rgba(0,255,157,.1);}
+body.neon .t-warn{color:#ffd700;background:rgba(255,215,0,.1);}
+body.cartoon .t-up{color:#ff4757;background:#ffe8e8;border:1.5px solid #ff4757;border-radius:20px;}
+body.cartoon .t-dn{color:#2ed573;background:#e8fff2;border:1.5px solid #2ed573;border-radius:20px;}
+body.cartoon .t-warn{color:#e67e00;background:#fff3e0;border:1.5px solid #e67e00;border-radius:20px;}
+.meter-bar-bg{height:4px;border-radius:2px;margin-top:2px;}
+body.neon .meter-bar-bg{background:rgba(0,180,255,.07);}
+body.cartoon .meter-bar-bg{background:#f0f0f0;}
+.meter-bar-fill{height:4px;border-radius:2px;transition:width 1.8s cubic-bezier(.23,1,.32,1);}
+body.neon .a-edge{stroke:#ff2d6e;filter:drop-shadow(0 0 5px rgba(255,45,110,.7));}
+body.neon .a-good{stroke:#00ff9d;filter:drop-shadow(0 0 5px rgba(0,255,157,.7));}
+body.neon .a-temp{stroke:#ff9500;filter:drop-shadow(0 0 5px rgba(255,149,0,.7));}
+body.neon .a-sea{stroke:#00b4ff;filter:drop-shadow(0 0 5px rgba(0,180,255,.7));}
+body.neon .a-planet{stroke:#a78bfa;filter:drop-shadow(0 0 5px rgba(167,139,250,.7));}
+body.neon .a-alien{stroke:#00ffd5;filter:drop-shadow(0 0 5px rgba(0,255,213,.7));}
+body.neon .a-solar{stroke:#ffd700;filter:drop-shadow(0 0 5px rgba(255,215,0,.7));}
+body.neon .a-truth{stroke:#ff6ec7;filter:drop-shadow(0 0 5px rgba(255,110,199,.7));}
+body.neon .a-arctic{stroke:#7dd3fc;filter:drop-shadow(0 0 5px rgba(125,211,252,.7));}
+body.cartoon .a-arctic{stroke:#38bdf8;}
+body.neon .v-arctic{color:#7dd3fc;}
+body.cartoon .v-arctic{color:#0284c7;}
+body.neon .b-arctic{background:linear-gradient(to right,#7dd3fc,#38bdf8);}
+body.cartoon .b-arctic{background:#38bdf8;}
+body.neon .a-co2{stroke:#a3e635;filter:drop-shadow(0 0 5px rgba(163,230,53,.7));}
+body.cartoon .a-co2{stroke:#65a30d;}
+body.neon .v-co2{color:#a3e635;}
+body.cartoon .v-co2{color:#4d7c0f;}
+body.neon .b-co2{background:linear-gradient(to right,#a3e635,#84cc16);}
+body.cartoon .b-co2{background:#84cc16;}
+body.neon .a-neo{stroke:#fb923c;filter:drop-shadow(0 0 5px rgba(251,146,60,.7));}
+body.cartoon .a-neo{stroke:#ea580c;}
+body.neon .v-neo{color:#fb923c;}
+body.cartoon .v-neo{color:#c2410c;}
+body.neon .b-neo{background:linear-gradient(to right,#fb923c,#f97316);}
+body.cartoon .b-neo{background:#f97316;}
+body.cartoon .a-edge{stroke:#ff6b6b;}body.cartoon .a-good{stroke:#51cf66;}
+body.cartoon .a-temp{stroke:#ff9f43;}body.cartoon .a-sea{stroke:#54a0ff;}
+body.cartoon .a-planet{stroke:#a29bfe;}body.cartoon .a-alien{stroke:#00cec9;}
+body.cartoon .a-solar{stroke:#fdcb6e;}body.cartoon .a-truth{stroke:#fd79a8;}
+body.neon .v-edge{color:#ff6b8a;}body.neon .v-good{color:#00ff9d;}body.neon .v-temp{color:#ff9500;}
+body.neon .v-sea{color:#00b4ff;}body.neon .v-planet{color:#a78bfa;}body.neon .v-alien{color:#00ffd5;}
+body.neon .v-solar{color:#ffd700;}body.neon .v-truth{color:#ff6ec7;}
+body.cartoon .v-edge{color:#ff4757;}body.cartoon .v-good{color:#2ed573;}body.cartoon .v-temp{color:#e67e00;}
+body.cartoon .v-sea{color:#2980b9;}body.cartoon .v-planet{color:#6c5ce7;}body.cartoon .v-alien{color:#00b894;}
+body.cartoon .v-solar{color:#e67e00;}body.cartoon .v-truth{color:#d63031;}
+body.neon .b-edge{background:linear-gradient(to right,#ff2d6e,#ff6b35);}
+body.neon .b-good{background:linear-gradient(to right,#00ff9d,#00d4ff);}
+body.neon .b-temp{background:linear-gradient(to right,#ff9500,#ff4500);}
+body.neon .b-sea{background:linear-gradient(to right,#00b4ff,#0070ff);}
+body.neon .b-planet{background:linear-gradient(to right,#a78bfa,#7c3aed);}
+body.neon .b-alien{background:linear-gradient(to right,#00ffd5,#00b4ff);}
+body.neon .b-solar{background:linear-gradient(to right,#ffd700,#ff9500);}
+body.neon .b-truth{background:linear-gradient(to right,#ff6ec7,#ff2d6e);}
+body.cartoon .b-edge{background:#ff6b6b;}body.cartoon .b-good{background:#51cf66;}
+body.cartoon .b-temp{background:#ff9f43;}body.cartoon .b-sea{background:#54a0ff;}
+body.cartoon .b-planet{background:#a29bfe;}body.cartoon .b-alien{background:#00cec9;}
+body.cartoon .b-solar{background:#fdcb6e;}body.cartoon .b-truth{background:#fd79a8;}
+.chart-panel{border-radius:var(--r);padding:26px 24px;}
+body.neon .chart-panel{background:var(--card);border:1px solid var(--cb);backdrop-filter:blur(10px);}
+body.cartoon .chart-panel{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}
+.cp-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.cp-title{font-family:var(--fd);font-weight:900;font-size:1rem;}
+body.cartoon .cp-title{font-size:1.2rem;}
+.cp-sub{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;color:var(--tdim);margin-top:4px;text-transform:uppercase;}
+.cbadge{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;padding:5px 10px;border-radius:4px;font-weight:700;text-transform:uppercase;}
+body.neon .cbadge-red{background:rgba(255,45,110,.12);color:#ff2d6e;border:1px solid rgba(255,45,110,.3);}
+body.cartoon .cbadge-red{background:#ffe8e8;color:#ff4757;border:2px solid #ff4757;border-radius:20px;}
+.trend-svg{width:100%;height:165px;}
+.chart-legend{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--td);}
+.lswatch{width:22px;height:2.5px;border-radius:2px;}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;}
+body.neon .footer{background:rgba(2,5,14,.97);border-top:1px solid rgba(0,180,255,.12);}
+body.cartoon .footer{background:#fff;border-top:3px solid #2d2d2d;}
+.footer-copy,.footer-src{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--tdim);text-transform:uppercase;}
+.footer-src{display:flex;gap:14px;}
+.footer-mlink{cursor:pointer;color:var(--ac);text-decoration:underline;opacity:.7;}
+.footer-mlink:hover{opacity:1;}
+.drawer-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;bottom:0;left:0;right:0;z-index:801;border-radius:20px 20px 0 0;max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform .4s cubic-bezier(.23,1,.32,1);}
+.drawer.open{transform:translateY(0);}
+body.neon .drawer{background:#040f22;border-top:1px solid rgba(0,180,255,.3);box-shadow:0 -20px 60px rgba(0,0,0,.6);}
+body.cartoon .drawer{background:#fff;border-top:4px solid #2d2d2d;box-shadow:0 -8px 0 #2d2d2d;}
+.drawer-handle{width:40px;height:4px;border-radius:2px;margin:14px auto 0;cursor:pointer;}
+body.neon .drawer-handle{background:rgba(0,180,255,.3);}
+body.cartoon .drawer-handle{background:#ddd;}
+.drawer-inner{padding:20px 32px 40px;}
+.drawer-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:16px;}
+.drawer-title{font-family:var(--fd);font-weight:900;font-size:1.6rem;line-height:1.1;}
+body.neon .drawer-title{color:#fff;}
+body.cartoon .drawer-title{color:#1a1a1a;}
+.drawer-emoji{font-size:2.5rem;line-height:1;}
+body.neon .drawer-emoji{display:none;}
+.drawer-close{cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1.1rem;flex-shrink:0;}
+body.neon .drawer-close{background:rgba(0,180,255,.1);border:1px solid rgba(0,180,255,.2);color:var(--ac);}
+body.cartoon .drawer-close{background:#f5f5f5;border:2px solid #2d2d2d;color:#2d2d2d;}
+.drawer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+@media(max-width:680px){.drawer-grid{grid-template-columns:1fr 1fr;}}
+.dstat{padding:16px;border-radius:8px;}
+body.neon .dstat{background:rgba(0,180,255,.05);border:1px solid rgba(0,180,255,.1);}
+body.cartoon .dstat{background:#f8f8f8;border:2px solid #2d2d2d;border-radius:10px;}
+.dstat-val{font-family:var(--fd);font-weight:900;font-size:1.4rem;}
+.dstat-lbl{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tdim);margin-top:4px;}
+.drawer-sources{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.src-chip{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
+body.neon .src-chip{background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.2);color:rgba(0,180,255,.8);}
+body.cartoon .src-chip{background:#e8f4ff;border:1.5px solid #2d2d2d;color:#2d2d2d;border-radius:20px;}
+.drawer-body{font-family:var(--fb);font-size:.88rem;line-height:1.75;color:var(--td);margin-bottom:22px;}
+body.cartoon .drawer-body{font-size:.96rem;}
+.drawer-method{border-radius:8px;padding:16px 18px;margin-bottom:24px;}
+body.neon .drawer-method{background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.12);}
+body.cartoon .drawer-method{background:#f0fff4;border:2px solid #2ed573;border-radius:10px;}
+.drawer-method-title{font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--good);margin-bottom:8px;}
+.drawer-method-text{font-family:var(--fb);font-size:.8rem;line-height:1.7;color:var(--td);}
+
+/* ── TREND BADGE ── */
+.drawer-trend{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:18px;}
+.trend-up{background:rgba(255,45,110,.12);color:#ff6b8a;border:1px solid rgba(255,45,110,.25);}
+.trend-down{background:rgba(0,255,157,.10);color:#00ff9d;border:1px solid rgba(0,255,157,.22);}
+.trend-stable{background:rgba(0,212,255,.08);color:#00d4ff;border:1px solid rgba(0,212,255,.2);}
+.trend-down-bad{background:rgba(255,45,110,.12);color:#ff6b8a;border:1px solid rgba(255,45,110,.25);}
+.trend-up-good{background:rgba(0,255,157,.10);color:#00ff9d;border:1px solid rgba(0,255,157,.22);}
+
+/* ── WEIGHT BARS (composites) ── */
+.drawer-weights{margin-bottom:22px;}
+.drawer-weights-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:12px;}
+.weight-row{margin-bottom:12px;}
+.weight-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+.weight-name{font-family:var(--fb);font-size:.82rem;color:var(--td);}
+.weight-meta{font-family:var(--fm);font-size:.6rem;color:var(--tdim);letter-spacing:.1em;}
+.weight-track{height:6px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:3px;}
+.weight-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.weight-score-row{display:flex;justify-content:space-between;}
+.weight-score{font-family:var(--fm);font-size:.58rem;color:var(--tdim);}
+.weight-contribution{font-family:var(--fm);font-size:.58rem;color:var(--ac);opacity:.8;}
+.calc-box{border-radius:8px;padding:12px 16px;margin-top:14px;font-family:var(--fm);font-size:.72rem;line-height:1.8;}
+body.neon .calc-box{background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.15);color:var(--ac);}
+body.cartoon .calc-box{background:#f0f8ff;border:2px solid #0099cc;color:#0066aa;}
+.calc-final{font-size:.85rem;font-weight:700;color:var(--ac);}
+
+/* ── HISTORY TABLE ── */
+.drawer-history{margin-bottom:22px;}
+.drawer-history-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:10px;}
+.history-table{width:100%;border-collapse:collapse;}
+.history-table th{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08);}
+body.neon .history-table th{color:rgba(0,212,255,.5);}
+body.cartoon .history-table th{color:#888;}
+.history-table td{font-family:var(--fb);font-size:.8rem;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.04);}
+body.neon .history-table td{color:var(--td);}
+body.cartoon .history-table td{color:#333;}
+.history-table tr:last-child td{border-bottom:none;}
+.h-now{font-weight:700;}
+body.neon .h-now{color:#00d4ff;}
+body.cartoon .h-now{color:#0066aa;}
+
+/* ── THRESHOLD MARKERS ── */
+.drawer-thresholds{margin-bottom:22px;}
+.drawer-thresh-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:10px;}
+.thresh-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.thresh-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.thresh-label{font-family:var(--fb);font-size:.8rem;flex:1;}
+body.neon .thresh-label{color:var(--td);}
+body.cartoon .thresh-label{color:#333;}
+.thresh-val{font-family:var(--fm);font-size:.72rem;opacity:.8;}
+.thresh-current{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;background:rgba(0,212,255,.12);color:#00d4ff;padding:2px 8px;border-radius:10px;}
+.share-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.share-label{font-family:var(--fm);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tdim);}
+.share-btn{cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:6px;font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;font-weight:700;text-transform:uppercase;text-decoration:none;}
+body.neon .share-btn{border:1px solid var(--cb);color:var(--tx);background:rgba(0,180,255,.05);}
+body.neon .share-btn:hover{background:rgba(0,180,255,.15);}
+body.cartoon .share-btn{border:2px solid #2d2d2d;color:#2d2d2d;background:#f5f5f5;box-shadow:2px 2px 0 #2d2d2d;}
+body.cartoon .share-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 #2d2d2d;}
+.method-main{max-width:960px;margin:0 auto;padding:40px 28px 80px;display:flex;flex-direction:column;gap:28px;}
+.method-title{font-family:var(--fd);font-weight:900;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;margin-bottom:12px;}
+body.neon .method-title{background:linear-gradient(130deg,#fff 30%,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+body.cartoon .method-title{color:#1a1a1a;}
+.method-intro{font-family:var(--fb);font-size:.9rem;line-height:1.75;color:var(--td);max-width:700px;}
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:680px){.method-grid{grid-template-columns:1fr;}}
+.method-card{border-radius:var(--r);padding:22px 20px;}
+body.neon .method-card{background:var(--card);border:1px solid var(--cb);backdrop-filter:blur(10px);}
+body.cartoon .method-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}
+.method-card-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.method-card-icon{font-size:1.4rem;}
+body.neon .method-card-icon{display:none;}
+.method-card-name{font-family:var(--fd);font-weight:700;font-size:.9rem;}
+.method-card-body{font-family:var(--fb);font-size:.8rem;line-height:1.75;color:var(--td);}
+.method-card-source{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.source-chip{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
+body.neon .source-chip{background:rgba(0,180,255,.12);border:1px solid rgba(0,180,255,.35);color:rgba(0,212,255,.95);}
+body.cartoon .source-chip{background:#e8f4ff;border:1.5px solid #2d2d2d;color:#2d2d2d;border-radius:20px;}
+.why-matters{font-family:var(--fb);font-size:.68rem;line-height:1.5;padding:7px 10px;border-radius:5px;margin-top:2px;}
+body.neon .why-matters{background:rgba(255,255,255,.03);border-left:2px solid rgba(0,212,255,.2);color:rgba(180,220,255,.6);}
+body.cartoon .why-matters{background:#f8fafc;border-left:3px solid #2d2d2d;color:#444;}
+.method-note{border-radius:var(--r);padding:20px;}
+body.neon .method-note{background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.15);}
+body.cartoon .method-note{background:#f0fff4;border:2px solid #2ed573;border-radius:12px;}
+.method-note-title{font-family:var(--fm);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--good);margin-bottom:8px;}
+.method-note-body{font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--td);}
+@keyframes fade-up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.ani{animation:fade-up .5s ease both;}
+body.neon .a-species{stroke:#f472b6;filter:drop-shadow(0 0 5px rgba(244,114,182,.7));}
+body.cartoon .a-species{stroke:#db2777;}
+body.neon .v-species{color:#f472b6;}
+body.cartoon .v-species{color:#9d174d;}
+body.neon .b-species{background:linear-gradient(to right,#f472b6,#ec4899);}
+body.cartoon .b-species{background:#ec4899;}
+body.neon .a-conserve{stroke:#34d399;filter:drop-shadow(0 0 5px rgba(52,211,153,.7));}
+body.cartoon .a-conserve{stroke:#059669;}
+body.neon .v-conserve{color:#34d399;}
+body.cartoon .v-conserve{color:#065f46;}
+body.neon .b-conserve{background:linear-gradient(to right,#34d399,#10b981);}
+body.cartoon .b-conserve{background:#10b981;}
+body.neon .a-conflict{stroke:#f87171;filter:drop-shadow(0 0 5px rgba(248,113,113,.7));}
+body.cartoon .a-conflict{stroke:#dc2626;}
+body.neon .v-conflict{color:#f87171;}
+body.cartoon .v-conflict{color:#991b1b;}
+body.neon .b-conflict{background:linear-gradient(to right,#f87171,#ef4444);}
+body.cartoon .b-conflict{background:#ef4444;}
+body.neon .a-peace{stroke:#60a5fa;filter:drop-shadow(0 0 5px rgba(96,165,250,.7));}
+body.cartoon .a-peace{stroke:#2563eb;}
+body.neon .v-peace{color:#60a5fa;}
+body.cartoon .v-peace{color:#1e40af;}
+body.neon .b-peace{background:linear-gradient(to right,#60a5fa,#3b82f6);}
+body.cartoon .b-peace{background:#3b82f6;}
+body.neon .a-gini{stroke:#c084fc;filter:drop-shadow(0 0 5px rgba(192,132,252,.7));}
+body.cartoon .a-gini{stroke:#7c3aed;}
+body.neon .v-gini{color:#c084fc;}
+body.cartoon .v-gini{color:#4c1d95;}
+body.neon .b-gini{background:linear-gradient(to right,#c084fc,#a855f7);}
+body.cartoon .b-gini{background:#a855f7;}
+body.neon .a-mobility{stroke:#fbbf24;filter:drop-shadow(0 0 5px rgba(251,191,36,.7));}
+body.cartoon .a-mobility{stroke:#d97706;}
+body.neon .v-mobility{color:#fbbf24;}
+body.cartoon .v-mobility{color:#92400e;}
+body.neon .b-mobility{background:linear-gradient(to right,#fbbf24,#f59e0b);}
+body.cartoon .b-mobility{background:#f59e0b;}
+@media(max-width:640px){.nav-btn{display:none;}.live-pill{display:none;}.hdr{padding:0 14px;}.mode-btn{font-size:.62rem;padding:6px 10px;}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo">
+    <span class="logo-name">Anthony Charts</span>
+    <span class="logo-sub" id="logoSub"></span>
+  </div>
+  <div class="hdr-right">
+    <button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="nav-btn" onclick="showPage('methodology')">Methodology</button>
+    <div class="live-pill"><div class="live-dot"></div><span id="liveDate"></span></div>
+    <button class="mode-btn" onclick="toggleMode()" id="modeBtn"></button>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="ticker-outer" id="tickerOuter">
+    <div class="ticker-inner" id="tickerInner">
+      <div class="ticker-item">🌍 WORLD TENSION: 76/100 ↑</div>
+      <div class="ticker-item">💚 WORLD GOODNESS: 58/100 →</div>
+      <div class="ticker-item">🌡️ TEMP ANOMALY: +1.42°C above baseline</div>
+      <div class="ticker-item">🌊 SEA LEVEL: +112mm since 1993</div>
+      <div class="ticker-item">❄️ ARCTIC ICE: 13.8M km² · –1.2M vs median</div>
+      <div class="ticker-item">🌿 CO₂: 424.4 ppm · +3.2/yr</div>
+      <div class="ticker-item">🪐 EXOPLANETS: 5,647 confirmed</div>
+      <div class="ticker-item">☄️ NEO WATCH: 4 close approaches this week · No threats</div>
+      <div class="ticker-item">👽 TECHNOSIG WATCH: 3 candidates active</div>
+      <div class="ticker-item">☀️ SOLAR ACTIVITY: MODERATE — G1 Storm Watch</div>
+      <div class="ticker-item">🎯 INFORMATION INTEGRITY: 61.4% verified claims</div>
+      <div class="ticker-item">🚢 GLOBAL TRADE STRESS: 62/100 · Elevated</div>
+      <div class="ticker-item">🧭 CALM WINDOW PROBABILITY: 28% — LOW</div>
+      <div class="ticker-item">⚖️ WEALTH INEQUALITY: Gini 0.67 · Top 1% owns 38%</div>
+      <div class="ticker-item">📈 SOCIAL MOBILITY: 53.4/100 · Stalled</div>
+      <div class="ticker-item">💔 CONFLICT DEATHS: 28,400 YTD · 56 active zones</div>
+      <div class="ticker-item">🕊️ PEACEKEEPING: 87,000 deployed · 12 missions</div>
+      <div class="ticker-item">🦏 SPECIES THREATENED: 44,016 · 28% of assessed</div>
+      <div class="ticker-item">🌿 CONSERVATION: 17.6% of Earth protected · 30x30 goal</div>
+    </div>
+  </div>
+</div>
+
+<div id="page-dashboard" class="page active">
+<main class="main">
+  <div class="ptrow ani" style="animation-delay:.05s">
+    <div>
+      <div class="ptitle">World On Edge<br>vs. World Goodness</div>
+      <div class="psub">A living intelligence dashboard tracking the forces that shape our world — tension, hope, discovery, and truth. All data sourced from verified scientific and institutional feeds.</div>
+    </div>
+    <div class="pdate" id="lastUpdated"></div>
+  </div>
+
+  <div class="ani" style="animation-delay:.1s">
+    <div class="sec-head"><span class="sec-label">The Balance</span><div class="sec-rule"></div></div>
+    <div class="hero-duel">
+      <div class="hero-card hero-card-edge" onclick="openDrawer('edge')">
+        <div class="hero-mlabel">World On Edge Index</div>
+        <span class="hero-emoji">😰</span>
+        <svg viewBox="0 0 200 120" width="210" style="overflow:visible;">
+          <path class="arc-bg-t" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110"/>
+          <path class="arc-fill-t a-edge" id="hEdgeArc" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110" stroke-dasharray="251" stroke-dashoffset="251"/>
+        </svg>
+        <div class="big-num big-num-edge" id="edgeNum">78</div>
+        <div class="big-status big-status-edge">⚠ HIGH TENSION</div>
+        <div class="hero-desc">Composite of GPR Index, active conflicts, public stress, wealth inequality, species loss, and expert forecasts.</div>
+        <div class="why-matters" style="margin-top:8px;">A composite heartbeat of global geopolitical stress — when this rises, history shows instability follows within 12–18 months.</div>
+        <div class="click-hint">↑ Click for full detail + share</div>
+      </div>
+      <div class="hero-vs">
+        <div class="vs-line"></div>
+        <div class="vs-label">VS</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="hero-card hero-card-good" onclick="openDrawer('good')">
+        <div class="hero-mlabel">World Goodness Index</div>
+        <span class="hero-emoji">💚</span>
+        <svg viewBox="0 0 200 120" width="210" style="overflow:visible;">
+          <path class="arc-bg-t" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110"/>
+          <path class="arc-fill-t a-good" id="hGoodArc" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110" stroke-dasharray="251" stroke-dashoffset="251"/>
+        </svg>
+        <div class="big-num big-num-good" id="goodNum">54</div>
+        <div class="big-status big-status-good">↗ HOLDING STEADY</div>
+        <div class="hero-desc">Tracks humanitarian aid, scientific breakthroughs, poverty reduction, conservation wins, social mobility, and global cooperation.</div>
+        <div class="why-matters" style="margin-top:8px;">Quantifying humanity's collective wins — the half of the story the news almost never tells.</div>
+        <div class="click-hint">↑ Click for full detail + share</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ani" style="animation-delay:.18s">
+    <!-- EARTH PILLAR -->
+    <div class="sec-head"><span class="sec-label">🌍 Earth Pulse</span><div class="sec-rule"></div></div>
+    <div class="meter-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="meter-card" onclick="openDrawer('temp')">
+        <div class="tooltip">NOAA / Copernicus C3S · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Global Temp Anomaly</div><div class="meter-cadence">Updated monthly</div></div><span class="meter-icon">🌡️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-temp" id="arcTemp" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-temp">+1.42°</div><div class="meter-unit">Above 1850–1900 baseline</div></div><div class="meter-trend t-up">↑ Rising</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-temp" style="width:0%" data-w="71%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ Copernicus C3S · NOAA GISSTEMP</div><div class="why-matters">Measures Earth's fever relative to pre-industrial stability — the single most-watched climate signal.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('sea')">
+        <div class="tooltip">NASA Satellite Altimetry · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Sea Level Rise</div><div class="meter-cadence">Updated monthly</div></div><span class="meter-icon">🌊</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-sea" id="arcSea" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-sea">+112mm</div><div class="meter-unit">Since 1993 · +4.1mm/yr</div></div><div class="meter-trend t-up">↑ Accel.</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-sea" style="width:0%" data-w="55%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NASA JPL · CSIRO Altimetry</div><div class="why-matters">Every 10mm of rise threatens millions of coastal residents — this number is permanent and accelerating.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('arctic')">
+        <div class="tooltip">NSIDC Sea Ice Index · Daily</div>
+        <div class="meter-top"><div><div class="meter-name">Arctic Sea Ice Extent</div><div class="meter-cadence">Updated daily · NSIDC</div></div><span class="meter-icon">❄️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-arctic" id="arcArctic" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-arctic">13.8M</div><div class="meter-unit">km² · –1.2M vs median</div></div><div class="meter-trend t-warn">🟡 Near Median</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-arctic" style="width:0%" data-w="48%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NSIDC Sea Ice Index · Daily</div><div class="why-matters">Arctic ice is the planet's air conditioner. Less ice means faster warming everywhere else.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('co2')">
+        <div class="tooltip">NOAA Mauna Loa Observatory · Weekly</div>
+        <div class="meter-top"><div><div class="meter-name">CO₂ Concentration</div><div class="meter-cadence">Updated weekly · Mauna Loa</div></div><span class="meter-icon">🌿</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-co2" id="arcCo2" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-co2">424.4</div><div class="meter-unit">ppm · Pre-industrial: 280ppm</div></div><div class="meter-trend t-up">↑ +3.2/yr</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-co2" style="width:0%" data-w="87%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NOAA Mauna Loa Observatory</div><div class="why-matters">The Keeling Curve — humanity's longest continuous climate measurement. We've added 144ppm since industrialization.</div>
+      </div>
+    </div>
+
+    <!-- SPACE PILLAR -->
+    <div class="sec-head" style="margin-top:22px;"><span class="sec-label">🚀 Space</span><div class="sec-rule"></div></div>
+    <div class="meter-grid">
+      <div class="meter-card" onclick="openDrawer('planet')">
+        <div class="tooltip">NASA Exoplanet Archive · Weekly</div>
+        <div class="meter-top"><div><div class="meter-name">Exoplanet Discovery</div><div class="meter-cadence">Updated weekly</div></div><span class="meter-icon">🪐</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-planet" id="arcPlanet" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-planet">5,647</div><div class="meter-unit">Confirmed · +412 this year</div></div><div class="meter-trend t-dn">↑ Growing</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-planet" style="width:0%" data-w="83%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NASA Exoplanet Archive · JWST</div><div class="why-matters">Tracking our progress in the search for other worlds — each discovery expands the odds we're not alone.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('neo')">
+        <div class="tooltip">NASA CNEOS · Daily</div>
+        <div class="meter-top"><div><div class="meter-name">Near-Earth Object Watch</div><div class="meter-cadence">Updated daily · NASA CNEOS</div></div><span class="meter-icon">☄️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-neo" id="arcNeo" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-neo">4</div><div class="meter-unit">Close approaches this week</div></div><div class="meter-trend t-dn" style="font-weight:700;font-size:.75rem;">✓ NO THREATS</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-neo" style="width:0%" data-w="20%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NASA CNEOS · JPL Sentry</div><div class="why-matters">Planetary awareness, not alarm — JPL's Sentry system monitors every known object. Current impact threat: zero.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('alien')">
+        <div class="tooltip">Breakthrough Listen / SETI · As reported</div>
+        <div class="meter-top"><div><div class="meter-name">Technosignature Watch</div><div class="meter-cadence">Updated as reported</div></div><span class="meter-icon">👽</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-alien" id="arcAlien" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-alien">3</div><div class="meter-unit">Active candidates · BL/SETI</div></div><div class="meter-trend t-warn">→ Watch</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-alien" style="width:0%" data-w="25%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ Breakthrough Listen · SETI Institute</div><div class="why-matters">Tracking the scientific search for signals beyond Earth — a curiosity meter, not a conspiracy one.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('solar')">
+        <div class="tooltip">NOAA Space Weather Center · Daily</div>
+        <div class="meter-top"><div><div class="meter-name">Solar Activity</div><div class="meter-cadence">Updated daily</div></div><span class="meter-icon">☀️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-solar" id="arcSolar" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-solar">G1</div><div class="meter-unit">Geomagnetic storm watch</div></div><div class="meter-trend t-warn">→ Moderate</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-solar" style="width:0%" data-w="60%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ NOAA SWPC · ESA Space Weather</div><div class="why-matters">Solar storms affect GPS, satellites, and power grids worldwide — the sun's mood is everyone's problem.</div>
+      </div>
+    </div>
+
+    <!-- HUMAN SYSTEMS PILLAR -->
+    <div class="sec-head" style="margin-top:22px;"><span class="sec-label">🧠 Human Systems</span><div class="sec-rule"></div></div>
+    <div class="meter-grid">
+      <div class="meter-card" onclick="openDrawer('truth')">
+        <div class="tooltip">IFCN / RSF / NewsGuard · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Information Integrity Index</div><div class="meter-cadence">Updated monthly · Experimental composite</div></div><span class="meter-icon">🎯</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-truth" id="arcTruth" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-truth">61.4%</div><div class="meter-unit">Verified claims · IFCN/RSF</div></div><div class="meter-trend t-up">↓ –4pts YOY</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-truth" style="width:0%" data-w="61%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ IFCN · RSF Press Freedom · NewsGuard</div><div class="why-matters">A democracy's immune system. When verified information falls below 60%, trust in institutions follows.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('supply')">
+        <div class="tooltip">World Bank · PMI · Freightos · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Global Trade Stress</div><div class="meter-cadence">Updated monthly · Composite</div></div><span class="meter-icon">🚢</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-edge" id="arcSupply" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-edge">62</div><div class="meter-unit">Composite stress index · 0–100</div></div><div class="meter-trend t-up">↑ Elevated</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-edge" style="width:0%" data-w="62%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ World Bank · PMI · Freightos Baltic</div><div class="why-matters">When global trade fractures, prices rise and supply chains fail — felt by every household within months.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('gini')">
+        <div class="tooltip">World Inequality Database · Annual</div>
+        <div class="meter-top"><div><div class="meter-name">Wealth Inequality</div><div class="meter-cadence">Updated annually · WID.world</div></div><span class="meter-icon">⚖️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-gini" id="arcGini" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-gini">0.67</div><div class="meter-unit">Global Gini · Top 1% owns 38%</div></div><div class="meter-trend t-up">↑ Widening</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-gini" style="width:0%" data-w="67%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ World Inequality Database · WID.world</div><div class="why-matters">The gap between where wealth concentrates and where people live determines political stability worldwide.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('mobility')">
+        <div class="tooltip">Opportunity Insights · Harvard · Annual</div>
+        <div class="meter-top"><div><div class="meter-name">Social Mobility Index</div><div class="meter-cadence">Updated annually · World Bank</div></div><span class="meter-icon">📈</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-mobility" id="arcMobility" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-mobility">53.4</div><div class="meter-unit">Global avg · 0–100 scale</div></div><div class="meter-trend t-warn">→ Stalled</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-mobility" style="width:0%" data-w="53%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ World Bank GSMI · Opportunity Insights</div><div class="why-matters">If where you're born determines where you end up, the promise of progress is broken. This measures that gap.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('conflict')">
+        <div class="tooltip">ACLED · UCDP · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Conflict Deaths</div><div class="meter-cadence">Updated monthly · ACLED</div></div><span class="meter-icon">💔</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-conflict" id="arcConflict" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-conflict">28.4K</div><div class="meter-unit">Battle deaths YTD · 2026</div></div><div class="meter-trend t-up">↑ Elevated</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-conflict" style="width:0%" data-w="72%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ ACLED · UCDP Uppsala</div><div class="why-matters">Every number here is a life. Tracking this honestly is the minimum we owe to the people in conflict zones.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('peace')">
+        <div class="tooltip">UN DPPA · Active Missions · Monthly</div>
+        <div class="meter-top"><div><div class="meter-name">Peacekeeping Reach</div><div class="meter-cadence">Updated monthly · UN DPPA</div></div><span class="meter-icon">🕊️</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-peace" id="arcPeace" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-peace">87K</div><div class="meter-unit">Personnel deployed · 12 missions</div></div><div class="meter-trend t-dn">→ Holding</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-peace" style="width:0%" data-w="44%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ UN DPPA · UN Peacekeeping</div><div class="why-matters">Paired with conflict deaths to answer: is the world's response proportional to its crises?</div>
+      </div>
+    </div>
+
+    <!-- BIOSPHERE PILLAR -->
+    <div class="sec-head" style="margin-top:22px;"><span class="sec-label">🌱 Biosphere</span><div class="sec-rule"></div></div>
+    <div class="meter-grid">
+      <div class="meter-card" onclick="openDrawer('species')">
+        <div class="tooltip">IUCN Red List · Quarterly</div>
+        <div class="meter-top"><div><div class="meter-name">Species Threat Index</div><div class="meter-cadence">Updated quarterly · IUCN</div></div><span class="meter-icon">🦏</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-species" id="arcSpecies" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-species">44,016</div><div class="meter-unit">Threatened species · IUCN Red List</div></div><div class="meter-trend t-up">↑ Rising</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-species" style="width:0%" data-w="78%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ IUCN Red List of Threatened Species</div><div class="why-matters">Extinction is permanent. Each species lost breaks a link in an ecosystem humans depend on to survive.</div>
+      </div>
+      <div class="meter-card" onclick="openDrawer('conserve')">
+        <div class="tooltip">Protected Planet · UNEP-WCMC · Annual</div>
+        <div class="meter-top"><div><div class="meter-name">Conservation Coverage</div><div class="meter-cadence">Updated annually · UNEP-WCMC</div></div><span class="meter-icon">🌿</span></div>
+        <div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-conserve" id="arcConserve" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div>
+        <div class="meter-bottom"><div><div class="meter-val v-conserve">17.6%</div><div class="meter-unit">Earth's surface protected · 30x30 goal</div></div><div class="meter-trend t-dn">↑ Growing</div></div>
+        <div class="meter-bar-bg"><div class="meter-bar-fill b-conserve" style="width:0%" data-w="59%"></div></div>
+        <div style="margin-top:6px;font-family:var(--fm);font-size:.54rem;color:rgba(0,212,255,.65);letter-spacing:.1em;">ⓘ Protected Planet · UNEP-WCMC</div><div class="why-matters">Tracking the race to protect 30% of Earth by 2030 — the most ambitious conservation target in history.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCES SECTION -->
+  <div class="ani" style="animation-delay:.2s">
+  <div class="sec-head" style="margin-top:32px;"><span class="sec-label">📚 Trusted Sources</span><div class="sec-rule"></div></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;">
+    <a href="https://matteoiacoviello.com/gpr.htm" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">GPR Index</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Caldara & Iacoviello · Geopolitical Risk · Monthly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">matteoiacoviello.com →</div>
+      </div>
+    </a>
+    <a href="https://acleddata.com" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">ACLED</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Armed Conflict Location & Event Data · Real-time conflict tracking</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">acleddata.com →</div>
+      </div>
+    </a>
+    <a href="https://climate.copernicus.eu" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Copernicus C3S</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">EU Climate Change Service · Temp anomaly · Monthly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">climate.copernicus.eu →</div>
+      </div>
+    </a>
+    <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NOAA Mauna Loa</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">The Keeling Curve · CO₂ concentration · Weekly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">gml.noaa.gov →</div>
+      </div>
+    </a>
+    <a href="https://nsidc.org/data/seaice_index" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NSIDC Sea Ice Index</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">National Snow & Ice Data Center · Arctic extent · Daily</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">nsidc.org →</div>
+      </div>
+    </a>
+    <a href="https://exoplanetarchive.ipac.caltech.edu" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA Exoplanet Archive</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Confirmed planet catalog · JWST/TESS · Weekly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">exoplanetarchive.ipac.caltech.edu →</div>
+      </div>
+    </a>
+    <a href="https://cneos.jpl.nasa.gov" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA CNEOS</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Center for Near Earth Object Studies · JPL Sentry · Daily</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">cneos.jpl.nasa.gov →</div>
+      </div>
+    </a>
+    <a href="https://www.iucnredlist.org" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">IUCN Red List</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Species threat assessments · Global biodiversity · Quarterly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">iucnredlist.org →</div>
+      </div>
+    </a>
+    <a href="https://www.protectedplanet.net" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Protected Planet</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">UNEP-WCMC · Conservation coverage · Annual</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">protectedplanet.net →</div>
+      </div>
+    </a>
+    <a href="https://wid.world" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">World Inequality Database</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">WID.world · Gini · Income shares · Annual</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">wid.world →</div>
+      </div>
+    </a>
+    <a href="https://opportunityinsights.org" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Opportunity Insights</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Harvard · Social mobility research · Annual</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">opportunityinsights.org →</div>
+      </div>
+    </a>
+    <a href="https://peacekeeping.un.org" target="_blank" style="text-decoration:none;">
+      <div class="meter-card" style="cursor:pointer;padding:14px 16px;">
+        <div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">UN Peacekeeping</div>
+        <div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">DPPA · Active missions · Personnel deployed · Monthly</div>
+        <div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">peacekeeping.un.org →</div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <div class="ani" style="animation-delay:.24s">
+    <div class="sec-head"><span class="sec-label">10-Year Trend + Expert Projection</span><div class="sec-rule"></div></div>
+    <div class="chart-panel">
+      <div class="cp-head">
+        <div><div class="cp-title">World On Edge vs. Goodness — 2015 to 2027</div><div class="cp-sub">GPR Index · ACLED · Gallup · Conflict Deaths · Species Loss · Historical: Jan 2015 → Feb 2026 · Projection: Eurasia Group, WEF, ACLED · <span style="opacity:.6;">Click event bubbles for context</span></div></div>
+        <span class="cbadge cbadge-red">Elevated Tension</span>
+      </div>
+      <!-- Chart tooltip -->
+      <div id="chartTooltip" style="display:none;position:absolute;z-index:200;pointer-events:none;padding:10px 14px;border-radius:8px;font-family:monospace;font-size:.72rem;line-height:1.6;max-width:220px;box-shadow:0 4px 24px rgba(0,0,0,.5);"></div>
+      <div style="position:relative;">
+      <svg class="trend-svg" viewBox="0 0 1000 290" preserveAspectRatio="xMidYMid meet" style="height:auto;min-height:220px;" id="trendSvg">
+        <defs>
+          <linearGradient id="egA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff2d6e" stop-opacity=".18"/><stop offset="100%" stop-color="#ff2d6e" stop-opacity="0"/></linearGradient>
+          <linearGradient id="ggA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00ff9d" stop-opacity=".12"/><stop offset="100%" stop-color="#00ff9d" stop-opacity="0"/></linearGradient>
+          <linearGradient id="fcGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,215,0,.06)"/><stop offset="100%" stop-color="rgba(255,215,0,.02)"/></linearGradient>
+          <filter id="glow-edge"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow-good"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow-bubble"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Grid -->
+        <g opacity=".06">
+          <line x1="60" y1="20" x2="960" y2="20" stroke="white" stroke-width=".8"/>
+          <line x1="60" y1="70" x2="960" y2="70" stroke="white" stroke-width=".8"/>
+          <line x1="60" y1="120" x2="960" y2="120" stroke="white" stroke-width=".8"/>
+          <line x1="60" y1="170" x2="960" y2="170" stroke="white" stroke-width=".8"/>
+          <line x1="60" y1="220" x2="960" y2="220" stroke="white" stroke-width=".8"/>
+        </g>
+        <!-- Y axis labels -->
+        <text x="52" y="24" font-size="9" fill="rgba(180,220,255,.3)" text-anchor="end" font-family="monospace">100</text>
+        <text x="52" y="74" font-size="9" fill="rgba(180,220,255,.3)" text-anchor="end" font-family="monospace">80</text>
+        <text x="52" y="124" font-size="9" fill="rgba(180,220,255,.3)" text-anchor="end" font-family="monospace">60</text>
+        <text x="52" y="174" font-size="9" fill="rgba(180,220,255,.3)" text-anchor="end" font-family="monospace">40</text>
+        <text x="52" y="224" font-size="9" fill="rgba(180,220,255,.3)" text-anchor="end" font-family="monospace">20</text>
+        <!-- Forecast zone -->
+        <rect x="820" y="15" width="145" height="215" fill="url(#fcGrad)" rx="2"/>
+        <line x1="820" y1="15" x2="820" y2="230" stroke="rgba(255,215,0,.25)" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="828" y="28" font-size="7.5" fill="rgba(255,215,0,.4)" font-family="monospace">PROJECTION →</text>
+        <!-- Area fills -->
+        <polygon fill="url(#egA)" points="60,182 100,168 140,155 180,148 220,138 260,172 300,130 320,95 340,108 360,118 380,105 420,92 460,88 490,80 520,85 560,78 600,72 640,82 680,68 720,62 760,72 800,65 820,58 820,230 60,230"/>
+        <polygon fill="url(#ggA)" points="60,170 100,165 140,162 180,158 220,155 260,160 300,155 320,158 340,152 360,148 380,145 420,148 460,152 490,155 520,150 560,148 600,145 640,142 680,138 720,135 760,132 800,128 820,125 820,230 60,230"/>
+        <!-- Edge line -->
+        <polyline id="chartEdge" filter="url(#glow-edge)" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="60,182 100,168 140,155 180,148 220,138 260,172 300,130 320,95 340,108 360,118 380,105 420,92 460,88 490,80 520,85 560,78 600,72 640,82 680,68 720,62 760,72 800,65 820,58"/>
+        <!-- Good line -->
+        <polyline id="chartGood" filter="url(#glow-good)" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="60,170 100,165 140,162 180,158 220,155 260,160 300,155 320,158 340,152 360,148 380,145 420,148 460,152 490,155 520,150 560,148 600,145 640,142 680,138 720,135 760,132 800,128 820,125"/>
+        <!-- Forecasts -->
+        <polyline id="chartFcEdge" fill="none" stroke-width="2" stroke-dasharray="8,4" stroke-linecap="round" points="820,58 850,55 880,60 910,65 940,62 960,60"/>
+        <polyline id="chartFcGood" fill="none" stroke-width="2" stroke-dasharray="8,4" stroke-linecap="round" points="820,125 850,122 880,118 910,114 940,110 960,106"/>
+
+        <!-- ═══ INTERACTIVE EVENT BUBBLES ═══ -->
+        <!-- Syria/ISIS 2015 -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'Syria / ISIS Peak','2015 · Edge: 45','GPR spiked as ISIS seized major territory across Syria and Iraq. Active conflict zones hit a decade high. Global refugee displacement exceeded 60M for first time since WWII.','edge')">
+          <line x1="80" y1="168" x2="80" y2="232" stroke="rgba(255,45,110,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="80" cy="168" r="7" fill="rgba(255,45,110,.15)" stroke="rgba(255,45,110,.6)" stroke-width="1.5" filter="url(#glow-bubble)"/>
+          <text x="80" y="171" font-size="8" fill="rgba(255,45,110,.9)" text-anchor="middle" font-weight="bold">!</text>
+          <text x="80" y="244" font-size="7" fill="rgba(255,45,110,.5)" text-anchor="middle" font-family="monospace">Syria/ISIS</text>
+        </g>
+
+        <!-- Brexit + US Election 2016 -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'Brexit + US Election','2016 · Edge: 52','Twin shocks to global political order. UK voted to leave EU in June. Trump elected in November. GPR surged on geopolitical uncertainty. Populist wave registered across Europe.','edge')">
+          <line x1="160" y1="155" x2="160" y2="232" stroke="rgba(255,45,110,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="160" cy="155" r="7" fill="rgba(255,45,110,.15)" stroke="rgba(255,45,110,.6)" stroke-width="1.5" filter="url(#glow-bubble)"/>
+          <text x="160" y="158" font-size="8" fill="rgba(255,45,110,.9)" text-anchor="middle" font-weight="bold">!</text>
+          <text x="160" y="244" font-size="7" fill="rgba(255,45,110,.5)" text-anchor="middle" font-family="monospace">Brexit/Elec.</text>
+        </g>
+
+        <!-- mRNA / Science goodness -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'mRNA Science Breakthrough','2020–21 · Goodness boost','Moderna and Pfizer achieved first mRNA vaccine approvals in history — a 30-year research payoff. Global scientific collaboration at unprecedented scale. Goodness index held despite COVID pressure.','good')">
+          <circle cx="390" cy="145" r="7" fill="rgba(0,255,157,.12)" stroke="rgba(0,255,157,.6)" stroke-width="1.5" filter="url(#glow-bubble)"/>
+          <text x="390" y="148" font-size="8" fill="rgba(0,255,157,.9)" text-anchor="middle" font-weight="bold">★</text>
+          <text x="420" y="142" font-size="6.5" fill="rgba(0,255,157,.5)" font-family="monospace">mRNA ↑</text>
+        </g>
+
+        <!-- COVID -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'COVID-19 Outbreak','2020 · Edge: 68 (peak)','Pandemic declared March 2020. GPR hit highest recorded level. 3M+ deaths in 2020 alone. Unprecedented global lockdowns. Supply chains fractured. Edge spiked while Goodness held on vaccine hope.','edge')">
+          <line x1="320" y1="95" x2="320" y2="232" stroke="rgba(255,100,100,.4)" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <circle cx="320" cy="95" r="9" fill="rgba(255,100,100,.2)" stroke="rgba(255,100,100,.8)" stroke-width="2" filter="url(#glow-bubble)"/>
+          <text x="320" y="99" font-size="9" fill="rgba(255,100,100,.95)" text-anchor="middle" font-weight="bold">!</text>
+          <text x="320" y="244" font-size="7.5" fill="rgba(255,100,100,.7)" text-anchor="middle" font-family="monospace">COVID-19</text>
+        </g>
+
+        <!-- Vaccine optimism -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'Vaccine Rollout Begins','2021 · Goodness: 61','Largest mass vaccination in history. 8B doses administered globally by end of 2021. Extreme poverty rate improved. Scientific trust indices rose. Humanitarian aid volume hit decade high.','good')">
+          <line x1="440" y1="88" x2="440" y2="232" stroke="rgba(0,255,157,.2)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="440" cy="88" r="7" fill="rgba(0,255,157,.12)" stroke="rgba(0,255,157,.6)" stroke-width="1.5" filter="url(#glow-bubble)"/>
+          <text x="440" y="91" font-size="8" fill="rgba(0,255,157,.9)" text-anchor="middle" font-weight="bold">★</text>
+          <text x="440" y="244" font-size="7" fill="rgba(0,255,157,.4)" text-anchor="middle" font-family="monospace">Vaccines</text>
+        </g>
+
+        <!-- Ukraine -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'Ukraine Invasion','Feb 2022 · Edge: 79 (decade high)','Russia invaded Ukraine February 24 2022 — largest land war in Europe since WWII. GPR hit highest level since index began. 8M+ displaced. Energy crisis in Europe. Global food supply disrupted. Edge index hit decade maximum.','edge')">
+          <line x1="540" y1="78" x2="540" y2="232" stroke="rgba(255,45,110,.5)" stroke-width="2" stroke-dasharray="3,3"/>
+          <circle cx="540" cy="78" r="10" fill="rgba(255,45,110,.2)" stroke="rgba(255,45,110,.85)" stroke-width="2.5" filter="url(#glow-bubble)"/>
+          <text x="540" y="83" font-size="10" fill="rgba(255,45,110,.95)" text-anchor="middle" font-weight="bold">!</text>
+          <text x="540" y="244" font-size="7.5" fill="rgba(255,45,110,.8)" text-anchor="middle" font-family="monospace" font-weight="bold">Ukraine</text>
+        </g>
+
+        <!-- Gaza -->
+        <g class="evt-bubble" style="cursor:pointer;" onclick="showChartEvent(this,'Gaza / Middle East Escalation','Oct 2023 · Edge: 74','Hamas attack on Israel October 7 2023. IDF ground offensive followed. Conflict spread to Lebanon, Red Sea. Houthi attacks disrupted global shipping. Middle East tension at highest since 2006.','edge')">
+          <line x1="660" y1="68" x2="660" y2="232" stroke="rgba(255,45,110,.35)" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <circle cx="660" cy="68" r="8" fill="rgba(255,45,110,.18)" stroke="rgba(255,45,110,.7)" stroke-width="2" filter="url(#glow-bubble)"/>
+          <text x="660" y="72" font-size="9" fill="rgba(255,45,110,.9)" text-anchor="middle" font-weight="bold">!</text>
+          <text x="660" y="244" font-size="7" fill="rgba(255,45,110,.6)" text-anchor="middle" font-family="monospace">Gaza/M.East</text>
+        </g>
+
+        <!-- NOW dots -->
+        <text x="822" y="12" font-size="7" fill="rgba(255,215,0,.6)" font-family="monospace">NOW</text>
+        <circle cx="820" cy="58" r="5" fill="#ff2d6e" opacity=".95"/>
+        <circle cx="820" cy="125" r="4.5" fill="#00ff9d" opacity=".95"/>
+        <!-- Current value labels -->
+        <text x="836" y="56" font-size="9" fill="rgba(255,45,110,.9)" font-family="monospace" font-weight="bold">78</text>
+        <text x="836" y="123" font-size="9" fill="rgba(0,255,157,.9)" font-family="monospace" font-weight="bold">56</text>
+
+        <!-- Hover line (JS controlled) -->
+        <line id="hoverLine" x1="0" y1="15" x2="0" y2="230" stroke="rgba(255,255,255,.15)" stroke-width="1" stroke-dasharray="4,3" display="none"/>
+
+        <!-- X axis labels -->
+        <g font-size="8.5" fill="rgba(180,220,255,.3)" font-family="monospace" text-anchor="middle">
+          <text x="60" y="272">2015</text>
+          <text x="160" y="272">2016</text>
+          <text x="260" y="272">2018</text>
+          <text x="360" y="272">2019</text>
+          <text x="440" y="272">2020</text>
+          <text x="540" y="272">2022</text>
+          <text x="640" y="272">2023</text>
+          <text x="740" y="272">2024</text>
+          <text x="820" y="272" fill="rgba(255,255,255,.5)">NOW</text>
+          <text x="890" y="272" fill="rgba(255,215,0,.4)">2026</text>
+          <text x="955" y="272" fill="rgba(255,215,0,.3)">2027</text>
+        </g>
+      </svg>
+      </div>
+
+      <!-- Event detail panel -->
+      <div id="evtPanel" style="display:none;border-radius:8px;padding:16px 20px;margin-top:12px;border-left:3px solid #ff2d6e;font-family:monospace;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <div id="evtTitle" style="font-weight:700;font-size:.85rem;margin-bottom:2px;"></div>
+            <div id="evtSub" style="font-size:.65rem;opacity:.5;letter-spacing:.1em;text-transform:uppercase;"></div>
+          </div>
+          <div onclick="document.getElementById('evtPanel').style.display='none'" style="cursor:pointer;opacity:.4;font-size:1rem;">✕</div>
+        </div>
+        <div id="evtBody" style="font-size:.75rem;line-height:1.7;opacity:.8;font-family:var(--fb);"></div>
+      </div>
+
+      <div class="chart-legend" style="margin-top:14px;">
+        <div class="legend-item"><div class="lswatch" id="swEdge"></div><span>World On Edge</span></div>
+        <div class="legend-item"><div class="lswatch" id="swGood"></div><span>World Goodness</span></div>
+        <div class="legend-item"><div class="lswatch" style="background:repeating-linear-gradient(90deg,rgba(255,215,0,.5) 0,rgba(255,215,0,.5) 6px,transparent 6px,transparent 12px);"></div><span>Projection (expert consensus)</span></div>
+        <div class="legend-item" style="gap:6px;"><div style="width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,45,110,.6);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,45,110,.8);font-weight:bold;">!</div><span>Click bubble for context</span></div>
+        <div style="margin-left:auto;font-family:var(--fm);font-size:.55rem;color:var(--tdim);letter-spacing:.08em;">Now includes: Conflict Deaths · Species Loss · Trade Stress</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCES SECTION — below chart -->
+  <div class="ani" style="animation-delay:.28s">
+  <div class="sec-head" style="margin-top:32px;"><span class="sec-label">📚 Trusted Sources</span><div class="sec-rule"></div></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;">
+    <a href="https://matteoiacoviello.com/gpr.htm" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">GPR Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Caldara & Iacoviello · Geopolitical Risk · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">matteoiacoviello.com →</div></div></a>
+    <a href="https://acleddata.com" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">ACLED</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Armed Conflict Location & Event Data · Real-time conflict tracking</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">acleddata.com →</div></div></a>
+    <a href="https://climate.copernicus.eu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Copernicus C3S</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">EU Climate Change Service · Temp anomaly · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">climate.copernicus.eu →</div></div></a>
+    <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NOAA Mauna Loa</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">The Keeling Curve · CO₂ concentration · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">gml.noaa.gov →</div></div></a>
+    <a href="https://nsidc.org/data/seaice_index" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NSIDC Sea Ice Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">National Snow & Ice Data Center · Arctic extent · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">nsidc.org →</div></div></a>
+    <a href="https://exoplanetarchive.ipac.caltech.edu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA Exoplanet Archive</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Confirmed planet catalog · JWST/TESS · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">exoplanetarchive.ipac.caltech.edu →</div></div></a>
+    <a href="https://cneos.jpl.nasa.gov" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA CNEOS</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Center for Near Earth Object Studies · JPL Sentry · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">cneos.jpl.nasa.gov →</div></div></a>
+    <a href="https://www.iucnredlist.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">IUCN Red List</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Species threat assessments · Global biodiversity · Quarterly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">iucnredlist.org →</div></div></a>
+    <a href="https://www.protectedplanet.net" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Protected Planet</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">UNEP-WCMC · Conservation coverage · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">protectedplanet.net →</div></div></a>
+    <a href="https://wid.world" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">World Inequality Database</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">WID.world · Gini · Income shares · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">wid.world →</div></div></a>
+    <a href="https://opportunityinsights.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Opportunity Insights</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Harvard · Social mobility research · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">opportunityinsights.org →</div></div></a>
+    <a href="https://peacekeeping.un.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">UN Peacekeeping</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">DPPA · Active missions · Personnel deployed · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">peacekeeping.un.org →</div></div></a>
+  </div>
+  </div>
+</main>
+</div>
+
+<div id="page-methodology" class="page">
+<div class="method-main">
+
+  <!-- HEADER -->
+  <div class="ani">
+    <div class="method-title">Methodology</div>
+    <div class="method-intro">Anthony Charts is an independent measurement platform that aggregates publicly verifiable scientific and institutional data into transparent composite indicators of global condition. Every input is sourced. Every weight is published. Every revision is logged.<br><br>This document is the editorial standards record for Anthony Charts. It defines what we measure, how we measure it, and the constraints we operate under. It is versioned and dated. Changes are never silent.</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;">
+      <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border-radius:5px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);color:rgba(0,212,255,.8);">Methodology v1.0</div>
+      <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border-radius:5px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);color:rgba(0,212,255,.8);">Published: February 24, 2026</div>
+      <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border-radius:5px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);color:rgba(0,212,255,.8);">Solo-authored · Anthony Migliazzo</div>
+    </div>
+  </div>
+
+  <!-- POSITIONING STATEMENT -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">Platform Statement</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.03s">
+    <div class="method-card">
+      <div class="method-card-body" style="font-size:.88rem;line-height:1.85;">
+        Anthony Charts measures directional change across publicly verifiable inputs. It does not forecast outcomes or prescribe action.<br><br>
+        This platform is descriptive, not prescriptive. It does not tell you what to believe. It shows signal, inputs, and uncertainty — and lets you conclude. When the data shows improvement where others expect decline, or decline where others expect optimism, the data publishes as measured. The numbers win over mood.<br><br>
+        Neutrality here is not a tone choice. It is a structural constraint enforced by documented methodology, pre-declared weights, and public revision logs.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">Measurement Philosophy</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.04s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">⚖️</span><div class="method-card-name">Paired Opposites</div></div>
+      <div class="method-card-body">Every destructive force has a countervailing force. Species extinction is paired with conservation coverage. Conflict deaths with peacekeeping reach. Wealth inequality with social mobility. This pairing is intentional — it prevents the platform from being purely alarming, and it asks the more useful question: is the response proportional to the problem?</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🔬</span><div class="method-card-name">Trusted Sources Only</div></div>
+      <div class="method-card-body">Every meter draws from peer-reviewed data, established institutional databases, or primary government science agencies. NOAA, NASA, IUCN, ACLED, UCDP, World Bank, UN DPPA, Copernicus C3S, NSIDC, Breakthrough Listen. No aggregators. No media outlets. No social signals. The source is always published in the drawer of each meter.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📅</span><div class="method-card-name">Update Cadence</div></div>
+      <div class="method-card-body">Each meter displays its update cadence — daily, weekly, monthly, quarterly, or annual. Values are refreshed when the underlying source publishes. Cadence is always shown on each card. We do not interpolate between updates or smooth values without disclosing it.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🧮</span><div class="method-card-name">Arc Scale Logic</div></div>
+      <div class="method-card-body">Each arc gauge fills from 0% to 100% based on a defined, meaningful scale — not arbitrary. Temp Anomaly = position within the 0–2°C Paris corridor. CO₂ = position between 280ppm (pre-industrial) and 500ppm (extreme risk). Scales are pre-declared and do not change without a logged revision.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📋</span><div class="method-card-name">Composite Independence</div></div>
+      <div class="method-card-body">World On Edge and World Goodness are independently constructed composites measuring different phenomena. They are not inverses of each other — Goodness ≠ 100 − Edge. Each draws from distinct input pools with separately justified weights. Their divergence or convergence is data, not design.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📝</span><div class="method-card-name">Revision Discipline</div></div>
+      <div class="method-card-body">Weights are never silently adjusted. If a composite input changes, a weight shifts, or a source is replaced, it is logged in the Revision Record below with the date, the change, and the rationale. This platform is solo-authored — the revision log is the editorial accountability layer.</div>
+    </div>
+  </div>
+
+  <!-- COMPOSITE INDICES -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">Composite Indices — v1.0 Weights</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.06s">
+
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">😰</span><div class="method-card-name">World On Edge Index</div></div>
+      <div class="method-card-body">
+        Independent composite. 0–100. Higher = more global tension. All inputs normalized to 0–100 before weighting.<br><br>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:35%;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff2d6e,#ff9d00);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">35% · GPR Index (Caldara & Iacoviello)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:25%;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff2d6e,#ff9d00);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">25% · ACLED active conflict event count</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff2d6e,#ff9d00);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · Gallup global worry & stress survey</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff2d6e,#ff9d00);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · Conflict Deaths YTD (ACLED/UCDP)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:10%;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff2d6e,#ff9d00);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">10% · Species Threat Index (IUCN, inverted)</span></div>
+        </div>
+        Current score: <strong>78/100</strong> · Last updated: February 2026
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR</span><span class="source-chip">ACLED</span><span class="source-chip">Gallup</span><span class="source-chip">UCDP</span><span class="source-chip">IUCN</span><span class="source-chip">v1.0 · Feb 2026</span></div>
+    </div>
+
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">💚</span><div class="method-card-name">World Goodness Index</div></div>
+      <div class="method-card-body">
+        Independent composite. 0–100. Higher = stronger positive momentum. All inputs normalized to 0–100 before weighting.<br><br>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:20%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">20% · OCHA humanitarian aid volume</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:20%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">20% · World Bank extreme poverty rate (inverted)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · Our World in Data scientific breakthroughs</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · UN treaty signatures per quarter</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · Social Mobility Index (World Bank GSMI)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:15%;height:6px;border-radius:3px;background:linear-gradient(90deg,#00d4ff,#00ff9d);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">15% · Conservation Coverage growth (Protected Planet)</span></div>
+        </div>
+        Current score: <strong>54/100</strong> · Last updated: February 2026
+      </div>
+      <div class="method-card-source"><span class="source-chip">OCHA</span><span class="source-chip">World Bank</span><span class="source-chip">OWID</span><span class="source-chip">Protected Planet</span><span class="source-chip">v1.0 · Feb 2026</span></div>
+    </div>
+
+  </div>
+
+  <!-- CALM WINDOW -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🧭 Calm Window Probability</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.08s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🧭</span><div class="method-card-name">Calm Window Probability — 28%</div></div>
+      <div class="method-card-body">
+        Probabilistic directional easing estimate — not predictive certainty. This is not a prediction of peace. It is an assessment of the likelihood that global tension meaningfully decreases within the next 12 months, based on current momentum in three signals:<br><br>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40%;height:6px;border-radius:3px;background:rgba(0,212,255,.4);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">40% · GPR 3-month slope (rising = lower calm)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40%;height:6px;border-radius:3px;background:rgba(0,212,255,.4);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">40% · ACLED conflict event trend (growing = lower calm)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:20%;height:6px;border-radius:3px;background:rgba(0,212,255,.4);"></div><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--td);">20% · Volatility compression signal</span></div>
+        </div>
+        At 28%: roughly 1-in-4 directional easing probability over 12 months. All three inputs currently trending toward lower calm. Experimental — methodology subject to revision.<br><br>
+        <em style="font-size:.75rem;opacity:.6;">Found in: World On Edge drawer → stats panel · v1.0 · Feb 2026</em>
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR</span><span class="source-chip">ACLED</span><span class="source-chip">Experimental · v1.0</span></div>
+    </div>
+  </div>
+
+  <!-- EARTH PULSE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🌍 Earth Pulse — Primary Meters</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.10s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌡️</span><div class="method-card-name">Global Temp Anomaly — +1.42°C</div></div><div class="method-card-body">Degrees Celsius above the 1850–1900 pre-industrial baseline. 12-month trailing average. Arc = position within the 0–2°C Paris Agreement risk corridor. Scale pre-declared: 0% arc = baseline; 100% arc = 2°C threshold.</div><div class="method-card-source"><span class="source-chip">Copernicus C3S</span><span class="source-chip">NOAA GISSTEMP</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌊</span><div class="method-card-name">Sea Level Rise — +112mm</div></div><div class="method-card-body">Cumulative rise since January 1993 via satellite altimetry (TOPEX/Poseidon → Jason series → Sentinel-6). Current rate +4.1mm/year. Arc = 0–200mm scale. Rate acceleration disclosed in drawer.</div><div class="method-card-source"><span class="source-chip">NASA JPL Altimetry</span><span class="source-chip">CSIRO</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">❄️</span><div class="method-card-name">Arctic Sea Ice — 13.8M km²</div></div><div class="method-card-body">Daily extent from NSIDC passive microwave satellite. Compared against 1981–2010 climatological median for the same calendar day. Arc = percentile within historical seasonal range for that day.</div><div class="method-card-source"><span class="source-chip">NSIDC Sea Ice Index</span><span class="source-chip">Daily</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌿</span><div class="method-card-name">CO₂ Concentration — 424.4 ppm</div></div><div class="method-card-body">Weekly measurement from NOAA Mauna Loa Observatory (Keeling Curve, begun 1958). Arc = position between 280ppm (pre-industrial) and 500ppm (extreme risk). Pre-declared scale — does not shift.</div><div class="method-card-source"><span class="source-chip">NOAA Mauna Loa</span><span class="source-chip">Scripps Institution</span><span class="source-chip">Weekly</span></div></div>
+  </div>
+
+  <!-- SPACE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🚀 Space — Primary Meters</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.12s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🪐</span><div class="method-card-name">Exoplanet Discovery — 5,647</div></div><div class="method-card-body">Cumulative confirmed exoplanets from NASA Exoplanet Archive — peer-reviewed detections only. JWST and TESS are primary discovery engines. Arc = pace toward 10,000-planet milestone by 2030.</div><div class="method-card-source"><span class="source-chip">NASA Exoplanet Archive</span><span class="source-chip">JWST · TESS</span><span class="source-chip">Weekly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">☄️</span><div class="method-card-name">Near-Earth Object Watch — 4 this week</div></div><div class="method-card-body">Close approaches within 0.05 AU from NASA CNEOS. Impact threat status from JPL Sentry. This is an awareness meter — not a threat alarm. Current impact threats: zero. Arc normalized against historical weekly average.</div><div class="method-card-source"><span class="source-chip">NASA CNEOS</span><span class="source-chip">JPL Sentry</span><span class="source-chip">Daily</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">👽</span><div class="method-card-name">Technosignature Watch — 3 candidates</div></div><div class="method-card-body">Active unresolved candidate signals from Breakthrough Listen's published list and SETI Institute event log. Most candidates resolve to known sources. This tracks the scientific search — not claimed discoveries.</div><div class="method-card-source"><span class="source-chip">Breakthrough Listen</span><span class="source-chip">SETI Institute</span><span class="source-chip">As Reported</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">☀️</span><div class="method-card-name">Solar Activity — G1</div></div><div class="method-card-body">NOAA SWPC 24-hour peak geomagnetic storm rating on G0–G5 scale. G1 = minor. G5 = extreme. Arc = G-scale position normalized 0–100. Relevant to GPS, satellite operations, and power infrastructure.</div><div class="method-card-source"><span class="source-chip">NOAA SWPC</span><span class="source-chip">ESA Space Weather</span><span class="source-chip">Daily</span></div></div>
+  </div>
+
+  <!-- HUMAN SYSTEMS -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🧠 Human Systems — Primary Meters</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.14s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🎯</span><div class="method-card-name">Information Integrity — 61.4%</div></div><div class="method-card-body">Experimental composite. IFCN claim accuracy rate (50%) + RSF Press Freedom inverted (30%) + NewsGuard credibility (20%). Arc = 0% to 100% verified information environment. Weights published. Not a primary research product.</div><div class="method-card-source"><span class="source-chip">IFCN</span><span class="source-chip">RSF</span><span class="source-chip">NewsGuard</span><span class="source-chip">Experimental · v1.0</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🚢</span><div class="method-card-name">Global Trade Stress — 62/100</div></div><div class="method-card-body">Experimental composite. Freightos Baltic Index (35%) + Manufacturing PMI inverted (35%) + World Bank trade volume momentum (30%). COVID peak ~88. Current 62 = elevated, not crisis. Weights published.</div><div class="method-card-source"><span class="source-chip">Freightos Baltic</span><span class="source-chip">PMI</span><span class="source-chip">World Bank</span><span class="source-chip">Experimental · v1.0</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">⚖️</span><div class="method-card-name">Wealth Inequality — Gini 0.67</div></div><div class="method-card-body">Global Gini coefficient from WID.world. 0 = perfect equality; 1 = total concentration. Arc = 0.4 (low inequality) to 0.9 (extreme) pre-declared scale. Current 0.67 = high, widening trend.</div><div class="method-card-source"><span class="source-chip">World Inequality Database</span><span class="source-chip">WID.world</span><span class="source-chip">Annual</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">📈</span><div class="method-card-name">Social Mobility — 53.4/100</div></div><div class="method-card-body">World Bank Global Social Mobility Index — 10 pillars including health, education, fair wages, social protection. Arc = 0 to 100. Global average 53.4 = birth circumstances still strongly predict outcomes in most countries.</div><div class="method-card-source"><span class="source-chip">World Bank GSMI</span><span class="source-chip">Opportunity Insights</span><span class="source-chip">Annual</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">💔</span><div class="method-card-name">Conflict Deaths — 28,400 YTD</div></div><div class="method-card-body">YTD battle deaths from ACLED cross-referenced with UCDP Uppsala. Direct fatalities only — not indirect deaths. Arc = normalized against 50,000 annual threshold (considered extreme).</div><div class="method-card-source"><span class="source-chip">ACLED</span><span class="source-chip">UCDP Uppsala</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🕊️</span><div class="method-card-name">Peacekeeping Reach — 87,000</div></div><div class="method-card-body">Total UN peacekeeping personnel across all active missions per UN DPPA monthly fact sheets. Paired with Conflict Deaths — the ratio of response to crisis. Arc = normalized against 120,000 (2015 peak).</div><div class="method-card-source"><span class="source-chip">UN DPPA</span><span class="source-chip">UN Peacekeeping</span><span class="source-chip">Monthly</span></div></div>
+  </div>
+
+  <!-- BIOSPHERE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🌱 Biosphere — Primary Meters</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.16s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🦏</span><div class="method-card-name">Species Threat Index — 44,016</div></div><div class="method-card-body">Species classified Vulnerable, Endangered, or Critically Endangered on the IUCN Red List. Arc = threatened as % of total assessed (28%), normalized against 50% threshold. Updated quarterly with each Red List assessment cycle.</div><div class="method-card-source"><span class="source-chip">IUCN Red List</span><span class="source-chip">Quarterly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌿</span><div class="method-card-name">Conservation Coverage — 17.6%</div></div><div class="method-card-body">% of Earth's land under formal protection per Protected Planet (UNEP-WCMC + IUCN). Paired with Species Threat. Arc = % of 30x30 target (protect 30% by 2030, agreed COP15 2022) achieved.</div><div class="method-card-source"><span class="source-chip">Protected Planet</span><span class="source-chip">UNEP-WCMC</span><span class="source-chip">Annual</span></div></div>
+  </div>
+
+  <!-- TREND CHART -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">📈 10-Year Trend Chart</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.18s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📈</span><div class="method-card-name">World On Edge vs. Goodness — 2015 to 2027</div></div>
+      <div class="method-card-body">
+        Historical data: GPR monthly values (Caldara & Iacoviello), ACLED annual conflict totals, Gallup Negative Experience Index. Normalized to 0–100, smoothed with 3-month rolling average.<br><br>
+        Projection methodology: Synthesized from Eurasia Group annual risk outlook, WEF Global Risks Report, ACLED conflict trajectory, and IMF economic stress forecasts. Shown as dashed lines with shaded uncertainty zone. Projections are directional estimates — not precise forecasts.<br><br>
+        Interactive event bubbles: Click any bubble on the chart to open a sourced context panel. Red = tension events. Green = goodness moments.
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR Index</span><span class="source-chip">ACLED</span><span class="source-chip">Gallup</span><span class="source-chip">Eurasia Group</span><span class="source-chip">WEF</span></div>
+    </div>
+  </div>
+
+  <!-- REVISION LOG -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">Revision Record</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.19s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📋</span><div class="method-card-name">Change Log — All revisions documented here</div></div>
+      <div class="method-card-body">
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="border-left:2px solid rgba(0,212,255,.3);padding-left:14px;">
+            <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,212,255,.6);margin-bottom:4px;">v1.0 · February 24, 2026 · Initial Publication</div>
+            <div style="font-family:var(--fb);font-size:.78rem;line-height:1.6;color:var(--td);">Platform launched. 17 meters across 4 pillars established. World On Edge composite expanded from 3 to 5 inputs — conflict deaths and species threat added, GPR weight reduced from 50% to 35%. World Goodness expanded from 4 to 6 inputs — social mobility and conservation coverage added. Composite Independence principle established: Edge and Goodness are not inverses.</div>
+          </div>
+          <div style="border-left:2px solid rgba(255,255,255,.08);padding-left:14px;">
+            <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:4px;">Future revisions will appear here</div>
+            <div style="font-family:var(--fb);font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.25);">All weight changes, source substitutions, and scale adjustments will be logged with date, change, and rationale. No silent revisions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING NOTE -->
+  <div class="method-note ani" style="animation-delay:.20s;margin-top:28px;">
+    <div class="method-note-title">⚡ Methodology Commitment</div>
+    <div class="method-note-body">Anthony Charts measures directional change across publicly verifiable inputs. It does not forecast outcomes or prescribe action. This platform is solo-authored under the name Anthony Migliazzo. All composite weights, source selections, and scale definitions are published here and subject to logged revision only. If a graduate student can replicate our composite from this page, we've done our job. If you find an error or a source that has updated, contact us. The goal is accuracy. Always accuracy over drama.<br><br><span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,212,255,.7);">Machine-readable record &rarr;</span> <a href="/composites-v1.0.json" target="_blank" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;color:rgba(0,212,255,.9);text-decoration:none;border-bottom:1px solid rgba(0,212,255,.3);padding-bottom:1px;">composites-v1.0.json</a></div>
+  </div>
+
+</div>
+</div>
+
+  <!-- PHILOSOPHY -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">The Philosophy</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.04s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">⚖️</span><div class="method-card-name">Paired Opposites</div></div>
+      <div class="method-card-body">Every destructive force has a countervailing force. Species extinction is paired with conservation coverage. Conflict deaths with peacekeeping reach. Wealth inequality with social mobility. This pairing is intentional — it prevents the dashboard from being purely alarming, and it asks the more interesting question: is the response proportional to the problem?</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🔬</span><div class="method-card-name">Trusted Sources Only</div></div>
+      <div class="method-card-body">Every meter draws from peer-reviewed data, established institutional databases, or primary government science agencies. NOAA, NASA, IUCN, ACLED, UCDP, World Bank, UN DPPA, Copernicus C3S, NSIDC, Breakthrough Listen. No aggregators. No media outlets. No social signals. The source is always published in the drawer of each meter.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📅</span><div class="method-card-name">Update Cadence Matters</div></div>
+      <div class="method-card-body">Each meter displays its update cadence (daily, weekly, monthly, quarterly, annual). We refresh values when the underlying source publishes. Some meters — like Arctic Ice and Solar Activity — update daily. Others, like Social Mobility and Conservation Coverage, update annually. Cadence is always shown on each card so you know what you're looking at.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🧮</span><div class="method-card-name">Arc Scale Logic</div></div>
+      <div class="method-card-body">Each arc gauge fills from 0% to 100% based on a meaningful scale — not arbitrary. Temp Anomaly arc = position within the 0–2°C Paris corridor. CO₂ arc = position between 280ppm (pre-industrial) and 500ppm (extreme risk). Species Threat arc = threatened as % of all assessed. Scales are documented in each drawer and here below.</div>
+    </div>
+  </div>
+
+  <!-- WORLD ON EDGE / GOODNESS -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🌍 The Balance — Composite Indices</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.06s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">😰</span><div class="method-card-name">World On Edge Index — 78/100</div></div>
+      <div class="method-card-body">A composite 0–100 score now drawing from five inputs:<br><br>
+        · GPR Index (Caldara & Iacoviello) — geopolitical risk language across 10 major global newspapers · <strong>35% weight</strong><br>
+        · ACLED active conflict event count — 56 active zones currently · <strong>25% weight</strong><br>
+        · Gallup global worry and stress survey · <strong>15% weight</strong><br>
+        · Conflict Deaths (ACLED/UCDP) — YTD battle deaths normalized · <strong>15% weight</strong><br>
+        · Species Threat Index (IUCN) — inverted conservation signal · <strong>10% weight</strong><br><br>
+        Score rose from 76 to 78 with the addition of conflict deaths and species loss as direct inputs. All inputs normalized to 0–100 before weighting.
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR · Caldara & Iacoviello</span><span class="source-chip">ACLED</span><span class="source-chip">Gallup</span><span class="source-chip">UCDP</span><span class="source-chip">IUCN</span><span class="source-chip">Monthly</span></div>
+    </div>
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">💚</span><div class="method-card-name">World Goodness Index — 54/100</div></div>
+      <div class="method-card-body">Original composite tracking humanity's positive momentum, now drawing from six inputs:<br><br>
+        · OCHA humanitarian aid volume · <strong>20% weight</strong><br>
+        · World Bank extreme poverty rate (inverted) · <strong>20% weight</strong><br>
+        · Our World in Data scientific breakthrough count · <strong>15% weight</strong><br>
+        · UN treaty signatures per quarter · <strong>15% weight</strong><br>
+        · Social Mobility Index (World Bank GSMI) · <strong>15% weight</strong><br>
+        · Conservation Coverage growth rate (Protected Planet) · <strong>15% weight</strong><br><br>
+        Score fell from 58 to 54 as wealth inequality and stalled social mobility now register as drags on the composite. Conservation wins partially offset the decline.
+      </div>
+      <div class="method-card-source"><span class="source-chip">OCHA</span><span class="source-chip">World Bank</span><span class="source-chip">OWID</span><span class="source-chip">UN Treaty DB</span><span class="source-chip">Protected Planet</span><span class="source-chip">Monthly</span></div>
+    </div>
+  </div>
+
+  <!-- CALM WINDOW -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🧭 Calm Window Probability</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.08s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">🧭</span><div class="method-card-name">Calm Window Probability — 28% (LOW)</div></div>
+      <div class="method-card-body">
+        This is not a prediction of peace. It is a probabilistic assessment of directional easing — the likelihood that global tension meaningfully decreases within the next 12 months, based on current momentum in three signals:<br><br>
+        · <strong>GPR 3-month slope (40% weight)</strong> — Is the Geopolitical Risk Index trending up or down? A falling 3-month slope scores higher.<br>
+        · <strong>ACLED conflict trend (40% weight)</strong> — Are active conflict events growing or shrinking month-over-month? Declining event counts score higher.<br>
+        · <strong>Volatility compression (20% weight)</strong> — Is the GPR falling sharply enough to signal a genuine structural easing, not just noise? Sharp downward momentum scores higher.<br><br>
+        Each input is scored 0–100 and weighted. The final Calm Window score reflects the probability of directional easing — not cessation of conflict. At 28%, the composite says: roughly 1-in-4 chance tensions meaningfully ease in the next year. All three current inputs are trending in the wrong direction: GPR slope is rising, ACLED event counts are elevated, and no volatility compression is evident.<br><br>
+        <em>Found in: World On Edge drawer → stats panel</em>
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR · Caldara & Iacoviello</span><span class="source-chip">ACLED</span><span class="source-chip">Monthly</span><span class="source-chip">Experimental</span></div>
+    </div>
+  </div>
+
+  <!-- EARTH PULSE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🌍 Earth Pulse</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.10s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌡️</span><div class="method-card-name">Global Temp Anomaly — +1.42°C</div></div><div class="method-card-body">Degrees Celsius above the 1850–1900 pre-industrial baseline, per Copernicus C3S and NOAA GISSTEMP. 12-month trailing average. Arc = position within the 0–2°C Paris Agreement risk corridor. 0% arc = baseline; 100% arc = 2°C threshold.</div><div class="method-card-source"><span class="source-chip">Copernicus C3S</span><span class="source-chip">NOAA GISSTEMP</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌊</span><div class="method-card-name">Sea Level Rise — +112mm</div></div><div class="method-card-body">Total cumulative sea level rise since January 1993, measured by satellite altimetry (TOPEX/Poseidon → Jason-1/2/3 → Sentinel-6). Current rate +4.1mm/year, accelerated from ~2.5mm/year in the 1990s. Arc = normalized position on 0–200mm scale.</div><div class="method-card-source"><span class="source-chip">NASA JPL Altimetry</span><span class="source-chip">CSIRO</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">❄️</span><div class="method-card-name">Arctic Sea Ice — 13.8M km²</div></div><div class="method-card-body">Daily sea ice extent (ocean surface ≥15% concentration) from NSIDC passive microwave satellite. Compared against 1981–2010 climatological median for the same calendar day — removing seasonal distortion. Arc = percentile position within the seasonal historical range for that day of year.</div><div class="method-card-source"><span class="source-chip">NSIDC Sea Ice Index</span><span class="source-chip">Daily</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌿</span><div class="method-card-name">CO₂ Concentration — 424.4 ppm</div></div><div class="method-card-body">Weekly atmospheric CO₂ measurement from NOAA's Mauna Loa Observatory — the world's longest continuous CO₂ record (the Keeling Curve, begun 1958). Arc = position between 280ppm (pre-industrial baseline) and 500ppm (extreme risk scenario). Currently at 87% of that corridor.</div><div class="method-card-source"><span class="source-chip">NOAA Mauna Loa Observatory</span><span class="source-chip">Scripps Institution</span><span class="source-chip">Weekly</span></div></div>
+  </div>
+
+  <!-- SPACE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🚀 Space</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.12s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🪐</span><div class="method-card-name">Exoplanet Discovery — 5,647</div></div><div class="method-card-body">Cumulative confirmed exoplanets from NASA's Exoplanet Archive — peer-reviewed, published detections only. JWST and TESS are the primary current discovery engines. Arc reflects pace toward an estimated 10,000-planet milestone by 2030 at current discovery rates.</div><div class="method-card-source"><span class="source-chip">NASA Exoplanet Archive</span><span class="source-chip">JWST · TESS</span><span class="source-chip">Weekly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">☄️</span><div class="method-card-name">Near-Earth Object Watch — 4 this week</div></div><div class="method-card-body">Count of close approaches within 0.05 AU (~7.5M km) from NASA CNEOS close approach database. Impact threat status from JPL Sentry automated system. Arc normalized against historical weekly average. This is a curiosity and awareness meter — not a threat alarm. Current: 0 impact threats tracked.</div><div class="method-card-source"><span class="source-chip">NASA CNEOS</span><span class="source-chip">JPL Sentry</span><span class="source-chip">Daily</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">👽</span><div class="method-card-name">Technosignature Watch — 3 candidates</div></div><div class="method-card-body">Count of active, unresolved technosignature candidate signals from Breakthrough Listen's published list and SETI Institute event log. Most candidates resolve to known sources within weeks. This is a scientific search effort tracker — not a "detected aliens" meter. Arc = candidates as share of 12-month rolling average.</div><div class="method-card-source"><span class="source-chip">Breakthrough Listen</span><span class="source-chip">SETI Institute</span><span class="source-chip">As Reported</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">☀️</span><div class="method-card-name">Solar Activity — G1</div></div><div class="method-card-body">NOAA Space Weather Center's 24-hour peak geomagnetic storm rating on the G0–G5 scale. G1 = minor (radio interference). G3 = strong (power grid fluctuations possible). G5 = extreme (widespread power outages, satellite damage). Arc = G-scale position normalized 0–100.</div><div class="method-card-source"><span class="source-chip">NOAA SWPC</span><span class="source-chip">ESA Space Weather</span><span class="source-chip">Daily</span></div></div>
+  </div>
+
+  <!-- HUMAN SYSTEMS -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🧠 Human Systems</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.14s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🎯</span><div class="method-card-name">Information Integrity — 61.4%</div></div><div class="method-card-body">Experimental composite. IFCN-verified fact-checker claim accuracy rate (50% weight) + RSF Press Freedom Index inverted (30%) + NewsGuard credibility score average (20%). Weights published; not a primary research product. Arc = 0% (total misinformation) to 100% (fully verified information environment).</div><div class="method-card-source"><span class="source-chip">IFCN</span><span class="source-chip">RSF Press Freedom</span><span class="source-chip">NewsGuard</span><span class="source-chip">Monthly · Experimental</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🚢</span><div class="method-card-name">Global Trade Stress — 62/100</div></div><div class="method-card-body">Experimental composite. Freightos Baltic Index normalized freight rates (35%) + Global Manufacturing PMI inverted (35%) + World Bank trade volume index momentum (30%). Arc = 0 (no stress) to 100 (crisis). COVID peak was ~88. Current 62 = elevated, not crisis.</div><div class="method-card-source"><span class="source-chip">Freightos Baltic Index</span><span class="source-chip">PMI Composite</span><span class="source-chip">World Bank</span><span class="source-chip">Monthly · Experimental</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">⚖️</span><div class="method-card-name">Wealth Inequality — Gini 0.67</div></div><div class="method-card-body">Global Gini coefficient from World Inequality Database (WID.world). 0 = perfect equality; 1 = one person owns everything. Top wealth share data from same source. Arc = normalized on 0.4 (low inequality) to 0.9 (extreme inequality) scale. Current 0.67 = high, widening trend.</div><div class="method-card-source"><span class="source-chip">World Inequality Database</span><span class="source-chip">WID.world</span><span class="source-chip">Annual</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">📈</span><div class="method-card-name">Social Mobility — 53.4/100</div></div><div class="method-card-body">World Bank Global Social Mobility Index — composite of 10 pillars including health, education access, education quality, fair wages, and social protection. Arc = 0 (no mobility) to 100 (full mobility). Global average 53.4 means birth circumstances still strongly predict life outcomes in most countries.</div><div class="method-card-source"><span class="source-chip">World Bank GSMI</span><span class="source-chip">Opportunity Insights · Harvard</span><span class="source-chip">Annual</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">💔</span><div class="method-card-name">Conflict Deaths — 28,400 YTD</div></div><div class="method-card-body">Year-to-date battle deaths from ACLED (Armed Conflict Location & Event Data) cross-referenced with UCDP Uppsala. Counts direct battle fatalities only — not indirect deaths from disease or displacement. Arc = normalized against 50,000 annual deaths threshold (considered extreme).</div><div class="method-card-source"><span class="source-chip">ACLED</span><span class="source-chip">UCDP Uppsala</span><span class="source-chip">Monthly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🕊️</span><div class="method-card-name">Peacekeeping Reach — 87,000</div></div><div class="method-card-body">Total UN peacekeeping personnel (troops, police, civilians) deployed across all active missions per UN DPPA monthly fact sheets. Paired directly with Conflict Deaths — the ratio of response to crisis. Arc = normalized against 120,000 (2015 peak deployment). Current 87K = below peak, holding steady.</div><div class="method-card-source"><span class="source-chip">UN DPPA</span><span class="source-chip">UN Peacekeeping</span><span class="source-chip">Monthly</span></div></div>
+  </div>
+
+  <!-- BIOSPHERE -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">🌱 Biosphere</span><div class="sec-rule"></div></div>
+  <div class="method-grid ani" style="animation-delay:.16s">
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🦏</span><div class="method-card-name">Species Threat Index — 44,016</div></div><div class="method-card-body">Total species classified Vulnerable, Endangered, or Critically Endangered on the IUCN Red List — the world\'s most comprehensive biodiversity database. Arc = threatened species as % of total assessed (currently 28%), normalized against a 50% threshold. Updated quarterly with each Red List assessment cycle.</div><div class="method-card-source"><span class="source-chip">IUCN Red List</span><span class="source-chip">Quarterly</span></div></div>
+    <div class="method-card"><div class="method-card-head"><span class="method-card-icon">🌿</span><div class="method-card-name">Conservation Coverage — 17.6%</div></div><div class="method-card-body">Percentage of Earth's land surface under formal protection per Protected Planet (UNEP-WCMC + IUCN). Includes nationally designated protected areas and OECMs. Paired directly with Species Threat — this is the response metric. The 30x30 target (protect 30% of land and ocean by 2030) was agreed at COP15 in 2022. Arc = % of 30x30 target achieved.</div><div class="method-card-source"><span class="source-chip">Protected Planet</span><span class="source-chip">UNEP-WCMC</span><span class="source-chip">Annual</span></div></div>
+  </div>
+
+  <!-- TREND CHART -->
+  <div class="sec-head" style="margin-top:28px;"><span class="sec-label">📈 The 10-Year Chart</span><div class="sec-rule"></div></div>
+  <div class="ani" style="animation-delay:.18s">
+    <div class="method-card">
+      <div class="method-card-head"><span class="method-card-icon">📈</span><div class="method-card-name">World On Edge vs. Goodness — 2015 to 2027</div></div>
+      <div class="method-card-body">
+        The trend chart visualizes both composite indices from January 2015 through the present, with expert-consensus projections through 2027.<br><br>
+        <strong>Historical data:</strong> GPR monthly values (Caldara & Iacoviello), ACLED annual conflict totals, Gallup Negative Experience Index. Normalized to 0–100 scale, smoothed with 3-month rolling average.<br><br>
+        <strong>Projection methodology:</strong> Synthesized from Eurasia Group annual risk outlook, WEF Global Risks Report, ACLED conflict trajectory analysis, and IMF economic stress forecasts. Shown as dashed lines with a shaded uncertainty zone. Projections are directional, not precise.<br><br>
+        <strong>Interactive event bubbles:</strong> Click any ! or ★ bubble on the chart to open a context panel explaining what drove that spike or dip, with sourced data. Red bubbles (!) = tension events. Green bubbles (★) = goodness moments.
+      </div>
+      <div class="method-card-source"><span class="source-chip">GPR Index</span><span class="source-chip">ACLED</span><span class="source-chip">Gallup</span><span class="source-chip">Eurasia Group</span><span class="source-chip">WEF Risk Report</span></div>
+    </div>
+  </div>
+
+
+
+</div>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-handle" onclick="closeDrawer()"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">
+      <div><span class="drawer-emoji" id="dEmoji"></span><div class="drawer-title" id="dTitle"></div></div>
+      <div class="drawer-close" onclick="closeDrawer()">✕</div>
+    </div>
+    <div class="drawer-grid" id="dStats"></div>
+    <div id="dTrend"></div>
+    <div class="drawer-sources" id="dSources"></div>
+    <div class="drawer-body" id="dBody"></div>
+    <div id="dWeights"></div>
+    <div id="dHistory"></div>
+    <div id="dThresholds"></div>
+    <div class="drawer-method"><div class="drawer-method-title">How this is calculated</div><div class="drawer-method-text" id="dMethod"></div></div>
+    <div class="share-bar">
+      <span class="share-label">Share:</span>
+      <a class="share-btn" id="shareX" href="#" target="_blank">𝕏 Post to X</a>
+      <a class="share-btn" id="shareLI" href="#" target="_blank">in LinkedIn</a>
+      <a class="share-btn" id="shareFB" href="#" target="_blank">f Facebook</a>
+      <button class="share-btn" onclick="copyLink()">🔗 Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-copy">© 2026 Anthony Charts · All data publicly sourced</span>
+  <div class="footer-src">
+    <span>NOAA</span><span>NASA</span><span>GPR</span><span>WEF</span><span>SETI/BL</span><span>RSF</span>
+    <span class="footer-mlink" onclick="showPage('methodology')">Methodology →</span>
+  </div>
+</footer>
+
+<script>
+// ── DYNAMIC DATES ──
+(function(){
+  const now = new Date();
+  const opts = {year:'numeric',month:'short',day:'numeric'};
+  const ds = now.toLocaleDateString('en-US',opts);
+  const ts = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('liveDate').textContent = 'Live · '+ds;
+  document.getElementById('lastUpdated').textContent = 'Last Updated\n'+ds+' · '+ts+' local';
+})();
+
+// ── MODE (persisted) ──
+let isNeon = (localStorage.getItem('ac_mode') || 'neon') !== 'cartoon';
+function applyMode(){
+  document.body.className = isNeon ? 'neon' : 'cartoon';
+  document.getElementById('modeBtn').textContent = isNeon ? '🎨 Cartoon' : '⚡ Neon';
+  document.getElementById('logoSub').textContent = isNeon ? '// World Intelligence Dashboard' : '✦ Tracking Everything That Matters ✦';
+  updateChartColors();
+}
+function toggleMode(){
+  isNeon = !isNeon;
+  localStorage.setItem('ac_mode', isNeon ? 'neon' : 'cartoon');
+  applyMode();
+}
+function updateChartColors(){
+  const ec = isNeon?'#ff2d6e':'#ff6b6b', gc = isNeon?'#00ff9d':'#51cf66';
+  sa('chartEdge','stroke',ec); sa('chartGood','stroke',gc);
+  sa('chartFcEdge','stroke',isNeon?'rgba(255,45,110,.45)':'rgba(255,107,107,.5)');
+  sa('chartFcGood','stroke',isNeon?'rgba(0,255,157,.45)':'rgba(81,207,102,.5)');
+  const se=document.getElementById('swEdge'); if(se)se.style.background=ec;
+  const sg=document.getElementById('swGood'); if(sg)sg.style.background=gc;
+}
+function sa(id,attr,val){const e=document.getElementById(id);if(e)e.setAttribute(attr,val);}
+
+// ── TICKER (seamless loop) ──
+function initTicker(){
+  const inner = document.getElementById('tickerInner');
+  const clone = inner.cloneNode(true);
+  document.getElementById('tickerOuter').appendChild(clone);
+}
+
+// ── ARCS ──
+const ARCS=[['hEdgeArc',251,.76],['hGoodArc',251,.58],['arcTemp',170,.71],['arcSea',170,.55],['arcArctic',170,.48],['arcCo2',170,.87],['arcPlanet',170,.83],['arcNeo',170,.20],['arcAlien',170,.25],['arcSolar',170,.60],['arcTruth',170,.61],['arcSupply',170,.62],['arcGini',170,.67],['arcMobility',170,.53],['arcConflict',170,.72],['arcPeace',170,.44],['arcSpecies',170,.78],['arcConserve',170,.59]];
+function animArcs(){
+  ARCS.forEach(([id,tot,pct],i)=>{
+    const el=document.getElementById(id); if(!el)return;
+    setTimeout(()=>{ el.style.strokeDashoffset=tot*(1-pct); },120+i*75);
+  });
+  document.querySelectorAll('.meter-bar-fill').forEach((el,i)=>{
+    const w=el.getAttribute('data-w');
+    setTimeout(()=>{ el.style.width=w; },200+i*80);
+  });
+}
+
+// ── FLICKER ──
+function startFlicker(){
+  setInterval(()=>{
+    if(!isNeon)return;
+    document.getElementById('edgeNum').textContent=(76+(Math.random()*.5-.25)).toFixed(1);
+    document.getElementById('goodNum').textContent=(58+(Math.random()*.4-.2)).toFixed(1);
+  },3800);
+}
+
+// ── PAGE NAV ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── DRAWER DATA ──
+const BASE_URL = 'https://anthonycharts.com';
+const SLUGS = {edge:'world-on-edge',good:'world-goodness',temp:'global-temp',sea:'sea-level',arctic:'arctic-sea-ice',co2:'co2-concentration',planet:'exoplanet-discovery',neo:'near-earth-objects',alien:'technosignature-watch',solar:'solar-activity',truth:'information-integrity',supply:'global-trade-stress',gini:'wealth-inequality',mobility:'social-mobility',conflict:'conflict-deaths',peace:'peacekeeping-reach',species:'species-threat',conserve:'conservation-coverage'};
+const DD = {
+  edge:{emoji:'😰',title:'World On Edge Index',sources:['GPR · Caldara & Iacoviello','ACLED','Gallup World Poll','UCDP Conflict Deaths','IUCN Species Threat','Monthly'],
+    trend:{dir:'up',label:'Rising — all 5 inputs elevated'},
+    stats:[{val:'78/100',lbl:'Current Score'},{val:'HIGH',lbl:'Tension Status'},{val:'127.89',lbl:'GPR Raw Jan 2026'},{val:'56',lbl:'Active Conflicts'},{val:'28%',lbl:'Calm Probability'},{val:'Monthly',lbl:'Update'}],
+    weights:{final:78,inputs:[
+      {name:'GPR Index (Caldara & Iacoviello)',weight:.35,score:89,color:'#ff2d6e'},
+      {name:'ACLED Active Conflict Events',weight:.25,score:78,color:'#ff6b35'},
+      {name:'Gallup Global Worry Survey',weight:.15,score:65,color:'#ff9d00'},
+      {name:'Conflict Deaths YTD',weight:.15,score:57,color:'#ffcc00'},
+      {name:'Species Threat Index (inverted)',weight:.10,score:56,color:'#c084fc'},
+    ]},
+    history:{cols:['Period','Score','Context'],rows:[
+      {period:'Jan 2015',val:'42/100',note:'Post-financial crisis calm'},
+      {period:'Jan 2019',val:'58/100',note:'Trade war tensions rising'},
+      {period:'Jan 2022',val:'71/100',note:'Ukraine invasion begins'},
+      {period:'Jan 2024',val:'74/100',note:'Gaza conflict escalates'},
+      {period:'Feb 2026',val:'78/100',note:'Current — platform launch'},
+    ]},
+    thresholds:{levels:[
+      {val:'0–39',label:'Low — stable geopolitical environment',color:'#00ff9d',current:false},
+      {val:'40–59',label:'Moderate — elevated but manageable',color:'#ffcc00',current:false},
+      {val:'60–74',label:'High — multiple concurrent stress signals',color:'#ff9d00',current:false},
+      {val:'75–89',label:'Very High — systemic risk indicators active',color:'#ff6b35',current:true},
+      {val:'90–100',label:'Critical — structural instability threshold',color:'#ff2d6e',current:false},
+    ]},
+    body:'The World On Edge Index sits at 78/100. GPR hit 127.89 in January 2026, driven by Eurasia conflict language in major global newspapers. ACLED tracks 56 active conflict zones. Gallup 2025 worry levels sit 23% above pre-2020 baselines.\n\nCalm Window (12 months): 28% — LOW. Composite of GPR 3-month slope (40%), ACLED event trend (40%), and volatility compression (20%). All three currently trending unfavorably.',
+    method:'Five inputs normalized 0–100, weighted and summed. GPR (35%): Caldara & Iacoviello index vs 0–200 range. ACLED (25%): active conflict zones vs 0–80 range. Gallup (15%): worry index as published. Conflict Deaths (15%): YTD deaths vs 50,000 threshold. Species Threat (10%): threatened % vs 50% threshold. Weights at anthonycharts.com/composites-v1.0.json',
+    share:'World On Edge: 78/100 — Very High Tension. GPR 127.89, 56 active conflicts, Calm Window 28%. Full breakdown: anthonycharts.com 🌍'},
+
+  good:{emoji:'💚',title:'World Goodness Index',sources:['OCHA','World Bank','Our World in Data','UN Treaty DB','World Bank GSMI','Protected Planet','Monthly'],
+    trend:{dir:'down-bad',label:'Slight decline — inequality dragging composite'},
+    stats:[{val:'54/100',lbl:'Current Score'},{val:'STEADY',lbl:'Status'},{val:'$24.8B',lbl:'Aid Volume 2025'},{val:'8.4%',lbl:'Extreme Poverty'},{val:'17.6%',lbl:'Land Protected'},{val:'Monthly',lbl:'Update'}],
+    weights:{final:54,inputs:[
+      {name:'OCHA Humanitarian Aid Volume',weight:.20,score:62,color:'#00ff9d'},
+      {name:'World Bank Extreme Poverty (inverted)',weight:.20,score:58,color:'#00d4ff'},
+      {name:'Scientific Breakthrough Count',weight:.15,score:70,color:'#a78bfa'},
+      {name:'UN Treaty Signatures / Quarter',weight:.15,score:45,color:'#60a5fa'},
+      {name:'Social Mobility Index (GSMI)',weight:.15,score:53,color:'#34d399'},
+      {name:'Conservation Coverage Growth',weight:.15,score:35,color:'#6ee7b7'},
+    ]},
+    history:{cols:['Period','Score','Context'],rows:[
+      {period:'Jan 2015',val:'61/100',note:'Post-MDG momentum strong'},
+      {period:'Jan 2019',val:'58/100',note:'SDG progress slowing'},
+      {period:'Jan 2021',val:'49/100',note:'COVID collapses aid + cooperation'},
+      {period:'Jan 2024',val:'56/100',note:'Partial recovery'},
+      {period:'Feb 2026',val:'54/100',note:'Current — inequality weighing'},
+    ]},
+    thresholds:{levels:[
+      {val:'0–39',label:'Critical — major positive momentum collapse',color:'#ff2d6e',current:false},
+      {val:'40–54',label:'Low — below historical average',color:'#ff9d00',current:true},
+      {val:'55–69',label:'Moderate — typical peacetime indicators',color:'#ffcc00',current:false},
+      {val:'70–84',label:'High — strong humanitarian signals',color:'#00ff9d',current:false},
+      {val:'85–100',label:'Exceptional — sustained global momentum',color:'#00d4ff',current:false},
+    ]},
+    body:'At 54/100 the World Goodness Index holds below its pre-COVID baseline of ~61. Aid volume and poverty reduction are the strongest inputs. Conservation coverage at 17.6% is growing but slowly. Wealth inequality (Gini 0.67) and stalled social mobility (53.4/100) are the main drags.\n\nNote: Goodness is not the inverse of Edge. Both composites are independently constructed and can move in the same direction simultaneously.',
+    method:'Six inputs normalized 0–100, weighted and summed. Aid (20%): OCHA commitments vs 30B USD. Poverty (20%): World Bank rate inverted. Breakthroughs (15%): OWID annual count vs 50. Treaties (15%): UN quarterly signatures vs 30. Social Mobility (15%): World Bank GSMI 0–100. Conservation (15%): % of 30x30 target achieved. Weights at anthonycharts.com/composites-v1.0.json',
+    share:'World Goodness: 54/100 — below historical average. Aid holding. Inequality dragging. Not the inverse of Edge — independently constructed. anthonycharts.com 💚'},
+
+  temp:{emoji:'🌡️',title:'Global Temp Anomaly',sources:['Copernicus C3S ERA5','NOAA GISSTEMP','Berkeley Earth','Monthly'],
+    trend:{dir:'up',label:'Rising — +0.2°C since 2015, trajectory steepening'},
+    stats:[{val:'+1.42°C',lbl:'12-Month Trailing Avg'},{val:'+1.62°C',lbl:'2024 Annual Record'},{val:'1.5°C',lbl:'Paris Threshold'},{val:'2°C',lbl:'Danger Threshold'},{val:'2030–35',lbl:'Sustained 1.5° Projected'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Year','Anomaly','Context'],rows:[
+      {period:'2000',val:'+0.42°C',note:'Warming clearly established'},
+      {period:'2010',val:'+0.72°C',note:'Hottest decade then recorded'},
+      {period:'2015',val:'+0.90°C',note:'Paris Agreement signed'},
+      {period:'2020',val:'+1.25°C',note:'Warming continues through COVID'},
+      {period:'2024',val:'+1.62°C',note:'Hottest year on record'},
+      {period:'Feb 2026',val:'+1.42°C',note:'Current 12-month trailing avg'},
+    ]},
+    thresholds:{levels:[
+      {val:'+1.42°C',label:'Current — 12-month trailing average',color:'#ff9d00',current:true},
+      {val:'+1.5°C',label:'Paris Agreement threshold — first sustained breach projected 2030–35',color:'#ff6b35',current:false},
+      {val:'+2.0°C',label:'Danger threshold — severe regional disruption',color:'#ff2d6e',current:false},
+      {val:'+3.0°C',label:'Catastrophic — regional uninhabitability scenarios',color:'#c084fc',current:false},
+    ]},
+    body:'We are 1.42°C above the 1850–1900 pre-industrial average (12-month trailing). 2024 broke all records at +1.62°C — the first calendar year above 1.5°C, though the trailing average remains below that threshold. The trajectory has steepened measurably since 2015. At current rates, sustained breach of 1.5°C is projected between 2030–2035.',
+    method:'12-month trailing average of global surface temperature anomaly above 1850–1900 pre-industrial mean. Primary: Copernicus C3S ERA5 reanalysis. Cross-referenced with NOAA GISSTEMP and Berkeley Earth. Arc = position in 0–2°C Paris risk corridor. Updated monthly.',
+    share:'Global temp: +1.42°C above pre-industrial (12-mo avg). 2024 hit +1.62°C — hottest year on record. Paris threshold: 1.5°C. anthonycharts.com 🌡️'},
+
+  sea:{emoji:'🌊',title:'Sea Level Rise',sources:['NASA JPL Altimetry','CSIRO','Sentinel-6 Freilich','Monthly'],
+    trend:{dir:'up',label:'Rising and accelerating — rate 2.5x higher than 1990s'},
+    stats:[{val:'+112mm',lbl:'Since 1993'},{val:'+4.1mm/yr',lbl:'Current Rate'},{val:'x2.5',lbl:'Rate vs 1990s'},{val:'+600mm',lbl:'2100 High Projection'},{val:'Greenland',lbl:'Primary Driver'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Period','Rise','Annual Rate'],rows:[
+      {period:'1993',val:'0mm (baseline)',note:'+1.7mm/yr'},
+      {period:'2000',val:'+23mm',note:'+2.1mm/yr'},
+      {period:'2010',val:'+50mm',note:'+2.8mm/yr'},
+      {period:'2020',val:'+91mm',note:'+3.6mm/yr'},
+      {period:'Feb 2026',val:'+112mm',note:'+4.1mm/yr — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'+50mm',label:'2010 level — nuisance coastal flooding begins',color:'#60a5fa',current:false},
+      {val:'+112mm',label:'Current — Feb 2026',color:'#00d4ff',current:true},
+      {val:'+300mm',label:'High-risk — major coastal infrastructure at risk',color:'#ff9d00',current:false},
+      {val:'+600mm',label:'2100 high-end projection — major city displacement',color:'#ff2d6e',current:false},
+    ]},
+    body:'Global mean sea level up 112mm since 1993. Current rate of +4.1mm/year has accelerated 2.5x from the 1990s (+1.7mm/yr). Primary drivers: thermal expansion of warming oceans (~40%) and ice sheet mass loss from Greenland and West Antarctica (~55%). At current acceleration, projections range from +300mm (low) to +600mm (high) by 2100.',
+    method:'Continuous satellite altimetry: TOPEX/Poseidon (1993) → Jason-1/2/3 → Sentinel-6 Michael Freilich (2020–present). Monthly global mean averages from NASA JPL Physical Oceanography DAAC. Arc = position in 0–200mm scale. Rate acceleration from linear trend analysis of 5-year segments.',
+    share:'Sea level: +112mm since 1993. Rate +4.1mm/yr — 2.5x faster than the 1990s. Greenland driving acceleration. Full trend: anthonycharts.com 🌊'},
+
+  arctic:{emoji:'❄️',title:'Arctic Sea Ice Extent',sources:['NSIDC Sea Ice Index','Passive Microwave Satellite','Daily'],
+    trend:{dir:'down-bad',label:'Below seasonal median — long-term declining trend'},
+    stats:[{val:'13.8M km²',lbl:"Today's Extent"},{val:'–1.2M km²',lbl:'vs Seasonal Median'},{val:'3.37M km²',lbl:'2012 Summer Min. Record'},{val:'Feb 2024',lbl:'Record Low Winter Month'},{val:'15%',lbl:'Min. Concentration Used'},{val:'Daily',lbl:'Update'}],
+    history:{cols:['Period','Feb Extent','vs Median'],rows:[
+      {period:'1980',val:'~16.0M km²',note:'+0.5M above median'},
+      {period:'2000',val:'~15.1M km²',note:'Near median'},
+      {period:'2012',val:'~14.4M km²',note:'–0.8M below median'},
+      {period:'2020',val:'~14.5M km²',note:'–0.8M below median'},
+      {period:'Feb 2026',val:'13.8M km²',note:'–1.2M below — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'Above median',label:'Historically normal winter extent',color:'#00d4ff',current:false},
+      {val:'1981–2010 median',label:'Climatological baseline for this calendar date',color:'#60a5fa',current:false},
+      {val:'–1.2M km²',label:'Current — below seasonal median',color:'#ff9d00',current:true},
+      {val:'Ice-free summer',label:'Projected by 2040–2050 in high-emission scenarios',color:'#ff2d6e',current:false},
+    ]},
+    body:'Arctic Sea Ice Extent is 13.8M km² — 1.2M km² below the 1981–2010 climatological median for this calendar date. Seasonal variation is completely normal: the Arctic freezes in winter, melts in summer. The signal is the long-term decline in both winter maximum and summer minimum extents. Summer 2012 still holds the record minimum at 3.37M km². February 2024 set the record lowest winter extent ever recorded.',
+    method:'NSIDC Sea Ice Index via satellite passive microwave (SMMR, SSM/I, SSMIS). Extent = total ocean area with at least 15% ice concentration. Updated daily. Compared against 1981–2010 median for the same calendar day to remove seasonal signal. Arc = percentile within seasonal historical range.',
+    share:'Arctic ice: 13.8M km² — 1.2M km² below seasonal median. Long-term decline continues. February 2024 was record low winter month. anthonycharts.com ❄️'},
+
+  co2:{emoji:'🌿',title:'CO₂ Concentration',sources:['NOAA Mauna Loa Observatory','Scripps Institution of Oceanography','Weekly'],
+    trend:{dir:'up',label:'Rising — fastest rate in 800,000-year ice core record'},
+    stats:[{val:'424.4 ppm',lbl:'Current Level'},{val:'280 ppm',lbl:'Pre-Industrial'},{val:'+51.6%',lbl:'Total Increase'},{val:'+3.2 ppm/yr',lbl:'Annual Rise Rate'},{val:'1958',lbl:'Keeling Record Begins'},{val:'Weekly',lbl:'Update'}],
+    history:{cols:['Year','CO₂ Level','Context'],rows:[
+      {period:'Pre-industrial',val:'~280 ppm',note:'Holocene stable baseline'},
+      {period:'1958',val:'315 ppm',note:'Keeling measurement begins'},
+      {period:'2000',val:'370 ppm',note:'+90 ppm from baseline'},
+      {period:'2015',val:'400 ppm',note:'First sustained 400ppm breach'},
+      {period:'2020',val:'413 ppm',note:'+133 from baseline'},
+      {period:'Feb 2026',val:'424.4 ppm',note:'+144.4 from baseline — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'350 ppm',label:'Safe zone upper bound — Hansen, 1988 (now exceeded)',color:'#00ff9d',current:false},
+      {val:'400 ppm',label:'Symbolic threshold — permanently breached since 2016',color:'#ffcc00',current:false},
+      {val:'424.4 ppm',label:'Current — Feb 2026',color:'#ff9d00',current:true},
+      {val:'450 ppm',label:'High-risk — 2°C warming likely at sustained levels',color:'#ff6b35',current:false},
+      {val:'500 ppm',label:'Arc maximum — extreme risk scenario',color:'#ff2d6e',current:false},
+    ]},
+    body:'CO₂ at 424.4 ppm — 51.6% above pre-industrial. The rise rate of +3.2ppm/year is faster than any period in the 800,000-year ice core record. The Keeling Curve — the continuous record begun in 1958 at Mauna Loa — is one of the most important datasets in scientific history. Every ppm added is effectively permanent on human timescales (centuries to millennia).',
+    method:'Continuous measurement at NOAA Mauna Loa Observatory since 1958 (the Keeling Curve). Weekly averages from NOAA Global Monitoring Laboratory. Cross-referenced with Scripps Institution CO₂ program. Arc = position between 280ppm (pre-industrial) and 500ppm (extreme risk ceiling).',
+    share:'CO₂: 424.4 ppm — 51.6% above pre-industrial. Rising faster than any point in 800,000 years. The Keeling Curve climbs. anthonycharts.com 🌿'},
+
+  planet:{emoji:'🪐',title:'Exoplanet Discovery',sources:['NASA Exoplanet Archive','JWST Mission','TESS Mission','Weekly'],
+    trend:{dir:'up-good',label:'Rising — JWST accelerating discovery and atmosphere analysis'},
+    stats:[{val:'5,647',lbl:'Confirmed Exoplanets'},{val:'+412',lbl:'Added This Year'},{val:'183',lbl:'In Habitable Zone'},{val:'1992',lbl:'First Confirmed'},{val:'~10,000',lbl:'2030 Projection'},{val:'Weekly',lbl:'Update'}],
+    history:{cols:['Year','Confirmed','Milestone'],rows:[
+      {period:'1992',val:'1',note:'First confirmed — pulsar worlds'},
+      {period:'1995',val:'8',note:'First sun-like star (51 Pegasi b)'},
+      {period:'2009',val:'400+',note:'Kepler mission launches'},
+      {period:'2020',val:'4,300+',note:'TESS extends search'},
+      {period:'2022',val:'5,000+',note:'5,000 milestone crossed'},
+      {period:'Feb 2026',val:'5,647',note:'Current — JWST accelerating'},
+    ]},
+    thresholds:{levels:[
+      {val:'5,647',label:'Current count — confirmed via peer review',color:'#00d4ff',current:true},
+      {val:'~10,000',label:'2030 projection if JWST maintains pace',color:'#a78bfa',current:false},
+      {val:'Biosignature',label:'No confirmed biosignatures yet — JWST now capable of detection',color:'#ffcc00',current:false},
+    ]},
+    body:'5,647 confirmed planets orbiting other stars — a number that was zero 34 years ago. 412 confirmed this year. 183 sit in their star\'s habitable zone where liquid water could exist. JWST can now analyze exoplanet atmospheres directly for chemical biosignatures. No conclusive biological signals detected yet, but the search has genuinely begun.',
+    method:'Raw count from NASA Exoplanet Archive. Confirmed status requires: peer-reviewed publication, independent verification via secondary detection method, and archive acceptance. Habitable zone defined by orbital distance allowing liquid surface water. Arc = pace toward 10,000 milestone by 2030.',
+    share:'5,647 confirmed exoplanets — 412 this year. 183 in habitable zones. JWST now reading atmospheres. The universe is full of worlds. anthonycharts.com 🪐'},
+
+  alien:{emoji:'👽',title:'Technosignature Watch',sources:['Breakthrough Listen','SETI Institute','MeerKAT Telescope','As Reported'],
+    trend:{dir:'stable',label:'Stable — 3 active candidates, none confirmed, none new'},
+    stats:[{val:'3',lbl:'Active Candidates'},{val:'0',lbl:'Confirmed Ever'},{val:'1977',lbl:'Wow! Signal Year'},{val:'1M+',lbl:'Stars Scanned'},{val:'LOW',lbl:'Confirm Probability'},{val:'As Reported',lbl:'Update'}],
+    history:{cols:['Year','Candidate','Outcome'],rows:[
+      {period:'1977',val:"Wow! Signal",note:'Still unexplained — never repeated'},
+      {period:'2016',val:"Tabby's Star",note:'Resolved: dust clouds'},
+      {period:'2020',val:'BLC1 Proxima Cen.',note:'Resolved: RFI interference'},
+      {period:'2022',val:'FAST telescope ×3',note:'Under review — current'},
+      {period:'Feb 2026',val:'3 active',note:'In peer review — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'0 confirmed',label:'Current — no confirmed extraterrestrial signal ever',color:'#00d4ff',current:true},
+      {val:'Candidate',label:'Passes RFI filter + multi-beam — still unresolved',color:'#a78bfa',current:false},
+      {val:'Confirmed detection',label:'Would require: repeatability + independent verification',color:'#ffcc00',current:false},
+    ]},
+    body:'Three signals remain in active review as technosignature candidates. The track record: every prior candidate has resolved to natural causes or radio frequency interference. No signal has ever been confirmed as extraterrestrial intelligence. Breakthrough Listen has scanned 1M+ stars across radio and optical wavelengths. The Wow! Signal of 1977 — 72 seconds of anomalous radio burst — remains the only historical candidate never explained and never repeated.',
+    method:'Manual count from Breakthrough Listen published candidate reports and SETI Institute announcements. Candidate criteria: passed RFI filtering, observed in multiple independent beams, no confirmed natural explanation at time of logging. Updated as reported in peer-reviewed publications.',
+    share:'3 technosignature candidates active. 0 confirmed ever. Wow! Signal still unexplained after 49 years. Breakthrough Listen: 1M+ stars scanned. anthonycharts.com 👽'},
+
+  solar:{emoji:'☀️',title:'Solar Activity',sources:['NOAA SWPC','ESA Space Weather Service','WDC-SILSO Belgium','Daily'],
+    trend:{dir:'down',label:'Declining — past Solar Cycle 25 maximum, activity trending lower'},
+    stats:[{val:'G1',lbl:'Storm Level Today'},{val:'Solar Cycle 25',lbl:'Current Cycle'},{val:'Late 2025',lbl:'Cycle 25 Peak'},{val:'147',lbl:'Sunspot Number'},{val:'G5',lbl:'Maximum Scale'},{val:'Daily',lbl:'Update'}],
+    history:{cols:['Cycle','Peak Storm','Character'],rows:[
+      {period:'Cycle 23 (2003)',val:'G5 Halloween',note:'Grid impacts, satellite loss'},
+      {period:'Cycle 24 (2015)',val:'G4 — weak',note:'Below all predictions'},
+      {period:'Cycle 25 (2023)',val:'G4 — stronger',note:'Higher than predicted'},
+      {period:'Feb 2026',val:'G1 — current',note:'Post-peak, declining'},
+    ]},
+    thresholds:{levels:[
+      {val:'G1 — Minor',label:'Current — weak grid fluctuations at high latitudes',color:'#ffcc00',current:true},
+      {val:'G2 — Moderate',label:'Power grid fluctuations, satellite drag increases',color:'#ff9d00',current:false},
+      {val:'G3 — Strong',label:'GPS degraded, voltage corrections needed',color:'#ff6b35',current:false},
+      {val:'G4 — Severe',label:'Grid problems, satellite failures possible',color:'#ff2d6e',current:false},
+      {val:'G5 — Extreme',label:'Grid collapse risk, widespread satellite damage',color:'#c084fc',current:false},
+    ]},
+    body:'Solar Cycle 25 peaked in late 2025 at higher intensity than NOAA predictions — a notable forecasting miss. G1 is the mildest storm classification: minor power grid fluctuations at very high latitudes, enhanced aurora. We are now descending from the cycle peak. Activity will trend lower through 2026–2028 toward solar minimum.',
+    method:'24-hour peak geomagnetic storm rating from NOAA Space Weather Prediction Center (SWPC). G-scale from Kp-index: G1=Kp≥5, G2=Kp≥6, G3=Kp≥7, G4=Kp≥8, G5=Kp=9. Sunspot number from WDC-SILSO, Royal Observatory of Belgium — international standard since 1849.',
+    share:'Solar Activity: G1 today. Cycle 25 peaked higher than predicted. Now descending. NOAA tracks daily. anthonycharts.com ☀️'},
+
+  neo:{emoji:'☄️',title:'Near-Earth Object Watch',sources:['NASA CNEOS','JPL Sentry System','ESA NEO Coordination','Daily'],
+    trend:{dir:'up-good',label:'Catalog growing — more known = safer, not more dangerous'},
+    stats:[{val:'4',lbl:'Close Approaches/Week'},{val:'0',lbl:'Impact Threats'},{val:'36,000+',lbl:'Known NEOs Total'},{val:'2,350+',lbl:'Potentially Hazardous'},{val:'0.05 AU',lbl:'Close Approach Def.'},{val:'Daily',lbl:'Update'}],
+    history:{cols:['Year','Known NEOs','Milestone'],rows:[
+      {period:'1998',val:'~500',note:'Spaceguard survey begins'},
+      {period:'2005',val:'~4,000',note:'Congress mandates 90% survey'},
+      {period:'2015',val:'~13,000',note:'1km+ objects 95% catalogued'},
+      {period:'2022',val:'~28,000',note:'DART deflection mission success'},
+      {period:'Feb 2026',val:'36,000+',note:'Catalog expanding — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'0 threats',label:'Current — no objects on impact trajectory',color:'#00ff9d',current:true},
+      {val:'Close approach',label:'Within 0.05 AU (~7.5M km) — tracked, not threatening',color:'#00d4ff',current:false},
+      {val:'Potentially hazardous',label:'>140m diameter + passes within 0.05 AU of Earth',color:'#ffcc00',current:false},
+      {val:'Palermo Scale > 0',label:'Would trigger active planetary defense response',color:'#ff2d6e',current:false},
+    ]},
+    body:'NASA tracks 36,000+ near-Earth objects. This week: 4 close approaches, all at safe distances measured in lunar distances (LD). None classified as impact threats by JPL Sentry. A growing catalog means better detection, not more risk. Planetary defense is now real: the DART mission successfully deflected asteroid Dimorphos in 2022 — the first time humanity changed the orbit of a celestial body.',
+    method:'NASA CNEOS close approach database. Close approach = within 0.05 AU (~7.5M km). Impact probability from JPL Sentry automated orbital mechanics. Potentially hazardous: >140m + intersects within 0.05 AU. Updated daily from automated telescope observations worldwide.',
+    share:'4 NEO close approaches this week — all safe. 36,000+ known, 0 threats. DART proved we can deflect them. anthonycharts.com ☄️'},
+
+  gini:{emoji:'⚖️',title:'Wealth Inequality',sources:['World Inequality Database (WID.world)','World Inequality Report 2022','Annual'],
+    trend:{dir:'up',label:'Widening — COVID accelerated gap, no recovery'},
+    stats:[{val:'0.67',lbl:'Global Gini Coefficient'},{val:'38%',lbl:'Top 1% Wealth Share'},{val:'69%',lbl:'Top 10% Share'},{val:'2%',lbl:'Bottom 50% Share'},{val:'Widening',lbl:'Trend'},{val:'Annual',lbl:'Update'}],
+    history:{cols:['Year','Global Gini','Top 1% Share'],rows:[
+      {period:'2000',val:'0.69',note:'38.1% — asset boom begins'},
+      {period:'2010',val:'0.67',note:'37.5%'},
+      {period:'2019',val:'0.65',note:'36.8% — pre-COVID relative low'},
+      {period:'2021',val:'0.68',note:'39.1% — COVID asset spike'},
+      {period:'2026',val:'0.67',note:'38% — not recovered'},
+    ]},
+    thresholds:{levels:[
+      {val:'0.25–0.35',label:'Low inequality — Nordic countries',color:'#00ff9d',current:false},
+      {val:'0.45–0.55',label:'Moderate — OECD average range',color:'#ffcc00',current:false},
+      {val:'0.67',label:'Current global Gini',color:'#ff9d00',current:true},
+      {val:'0.80+',label:'Extreme — approaching oligarchic concentration',color:'#ff2d6e',current:false},
+    ]},
+    body:'Global wealth Gini of 0.67: the top 1% own 38% of all global wealth; the bottom 50% share 2%. Inequality widened sharply during COVID — asset prices rose as wages stalled — and has not meaningfully recovered. Financial asset ownership is the primary wedge: those holding stocks, real estate, and capital benefited; those relying on wages did not.',
+    method:'Global Gini from World Inequality Database (WID.world) — maintained by Piketty, Chancel, Saez, and Zucman. Gini: 0 = perfect equality, 1 = perfect inequality. Arc normalized against 0–1.0 scale, with 0.8 as practical ceiling. Updated annually with World Inequality Report.',
+    share:'Global Gini: 0.67. Top 1% own 38% of wealth. Bottom 50% share 2%. COVID widened the gap. No recovery yet. anthonycharts.com ⚖️'},
+
+  mobility:{emoji:'📈',title:'Social Mobility Index',sources:['World Bank GSMI','Opportunity Insights (Harvard)','Annual'],
+    trend:{dir:'stable',label:'Stalled — no meaningful global progress since 2020'},
+    stats:[{val:'53.4',lbl:'Global Average'},{val:'83.6',lbl:'Denmark (Highest)'},{val:'76.1',lbl:'United States'},{val:'36.7',lbl:'India (Reference)'},{val:'Stalled',lbl:'Global Trend'},{val:'Annual',lbl:'Update'}],
+    history:{cols:['Year','Global Avg','Context'],rows:[
+      {period:'2010',val:'~50.1',note:'Baseline era'},
+      {period:'2015',val:'~51.8',note:'Slow improvement'},
+      {period:'2019',val:'53.0',note:'First GSMI publication'},
+      {period:'2022',val:'53.2',note:'COVID disruption stalls progress'},
+      {period:'2026',val:'53.4',note:'Effectively flat — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'83–90',label:'High — Nordic countries, Australia',color:'#00ff9d',current:false},
+      {val:'70–82',label:'Above average — W. Europe, Canada',color:'#00d4ff',current:false},
+      {val:'53.4',label:'Global average — current',color:'#ffcc00',current:true},
+      {val:'40–52',label:'Below average — South Asia, Sub-Saharan Africa',color:'#ff9d00',current:false},
+      {val:'< 40',label:'Low — birth largely determines outcome',color:'#ff2d6e',current:false},
+    ]},
+    body:'The World Bank Global Social Mobility Index scores countries 0–100 across 10 pillars. The global average of 53.4 reflects a world where birthplace and parental income remain powerful outcome predictors. Nordic countries lead (Denmark: 83.6). The US scores 76.1 — above average but below most peer nations. Progress stalled globally since 2020, with COVID education and labor disruptions erasing gains in many countries.',
+    method:'World Bank GSMI: 10 equal-weight pillars — health, education access, education quality, lifelong learning, technology access, work opportunities, fair wages, working conditions, social protection, institutions. Supplemented by Opportunity Insights intergenerational income mobility data. Annual publication.',
+    share:'Social Mobility: 53.4/100 globally. Denmark leads at 83.6. US: 76.1. Progress stalled since 2020. Where you\'re born still largely determines outcomes. anthonycharts.com 📈'},
+
+  conflict:{emoji:'💔',title:'Conflict Deaths',sources:['ACLED','UCDP Uppsala Conflict Data Program','Monthly'],
+    trend:{dir:'up',label:'Elevated — above pre-2022 baseline, Ukraine and Gaza primary'},
+    stats:[{val:'28,400',lbl:'Battle Deaths YTD'},{val:'56',lbl:'Active Conflict Zones'},{val:'Ukraine',lbl:'Highest Zone'},{val:'Gaza',lbl:'Second Highest'},{val:'~180K',lbl:'2022 Annual Peak'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Year','Battle Deaths','Primary Driver'],rows:[
+      {period:'2010',val:'~50,000',note:'Arab Spring begins'},
+      {period:'2015',val:'~160,000',note:'Syria peak'},
+      {period:'2019',val:'~80,000',note:'Relative decline'},
+      {period:'2022',val:'~180,000',note:'Ukraine invasion — highest since 1990s'},
+      {period:'2023',val:'~120,000',note:'Gaza conflict significant'},
+      {period:'2026 YTD',val:'28,400',note:'Current pace'},
+    ]},
+    thresholds:{levels:[
+      {val:'< 50K/yr',label:'Low — peacetime baseline range',color:'#00ff9d',current:false},
+      {val:'28,400 YTD',label:'Current pace — elevated above pre-2022 avg',color:'#ff9d00',current:true},
+      {val:'100K+/yr',label:'High — multiple major conflicts',color:'#ff6b35',current:false},
+      {val:'150K+/yr',label:'Very High — major interstate war level',color:'#ff2d6e',current:false},
+    ]},
+    body:'28,400 battle deaths recorded YTD in 2026 across 56 active conflict zones. Ukraine and Gaza account for the majority. 2022 Ukraine invasion drove the highest annual total since the 1990s Balkans wars. Current pace is below the 2022 peak but above the pre-2022 decade average. ACLED tracks all political violence: battles, explosions, and violence against civilians — not just battle deaths.',
+    method:'Primary: ACLED — real-time coding of political violence events from media, NGOs, and government sources across 200+ countries. Cross-referenced with UCDP (Uppsala Conflict Data Program) for battle death estimates. Battle deaths only — excludes indirect deaths from displacement or disease. Updated monthly.',
+    share:'28,400 conflict deaths YTD in 2026 — 56 active zones. Ukraine and Gaza primary. Above pre-2022 baseline. Paired with Peacekeeping Reach at anthonycharts.com 💔'},
+
+  peace:{emoji:'🕊️',title:'Peacekeeping Reach',sources:['UN DPPA Monthly Fact Sheets','UN General Assembly Appropriations','Monthly'],
+    trend:{dir:'down-bad',label:'Declining — 27% below 2015 peak, funding under pressure'},
+    stats:[{val:'87,000',lbl:'Personnel Deployed'},{val:'12',lbl:'Active Missions'},{val:'$6.4B',lbl:'Annual Budget'},{val:'120,000',lbl:'2015 Peak'},{val:'0.5%',lbl:'Of Global Military Spend'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Year','Personnel','Missions'],rows:[
+      {period:'2005',val:'~70,000',note:'Post-Cold War expansion'},
+      {period:'2010',val:'~100,000',note:'Haiti, DRC, Sudan active'},
+      {period:'2015',val:'~120,000',note:'All-time peak deployment'},
+      {period:'2020',val:'~95,000',note:'COVID and drawdowns'},
+      {period:'Feb 2026',val:'87,000',note:'Current — 12 missions'},
+    ]},
+    thresholds:{levels:[
+      {val:'120,000+',label:'Peak capacity — 2015 level',color:'#00ff9d',current:false},
+      {val:'87,000',label:'Current — 27% below peak',color:'#ffcc00',current:true},
+      {val:'56 zones active',label:'Conflict zones vs 12 peacekeeping missions',color:'#ff9d00',current:false},
+      {val:'$6.4B budget',label:'<0.5% of global military spending ($2.2T)',color:'#ff6b35',current:false},
+    ]},
+    body:'87,000 UN peacekeeping personnel deployed across 12 missions — 27% below the 2015 peak of 120,000. DR Congo (MONUSCO) remains the largest. The $6.4B annual budget is less than 0.5% of global military spending ($2.2T). Paired against 56 active conflict zones, peacekeeping covers roughly 1 in 5. The ratio of these two meters tells you whether the world\'s response capacity is proportional to its crises.',
+    method:'UN DPPA monthly fact sheets. Personnel = troops + police + civilian international/national staff. Budget from UN General Assembly appropriations. Mission count = active mandated operations. Updated monthly from official UN reporting.',
+    share:'87,000 peacekeepers, 12 missions — 27% below 2015 peak. Budget $6.4B = <0.5% of global military spend. 56 conflict zones vs 12 missions. anthonycharts.com 🕊️'},
+
+  species:{emoji:'🦏',title:'Species Threat Index',sources:['IUCN Red List','Quarterly Update'],
+    trend:{dir:'up',label:'Rising — threat rate accelerating, 902 confirmed extinct since 1500'},
+    stats:[{val:'44,016',lbl:'Threatened Species'},{val:'157,190',lbl:'Total Assessed'},{val:'28%',lbl:'% at Risk'},{val:'902',lbl:'Extinct Since 1500'},{val:'41%',lbl:'Amphibians at Risk'},{val:'Quarterly',lbl:'Update'}],
+    history:{cols:['Year','Threatened','% Assessed'],rows:[
+      {period:'2000',val:'~18,000',note:'~24% of assessed'},
+      {period:'2010',val:'~25,000',note:'~26% of assessed'},
+      {period:'2016',val:'~24,000',note:'Assessment coverage grows'},
+      {period:'2020',val:'~35,000',note:'28% — COVID gaps assessments'},
+      {period:'Feb 2026',val:'44,016',note:'28% — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'< 20%',label:'Below historical average — relative stability',color:'#00ff9d',current:false},
+      {val:'28%',label:'Current — 44,016 of 157,190 assessed',color:'#ff9d00',current:true},
+      {val:'> 35%',label:'Elevated crisis — mass extinction indicators active',color:'#ff6b35',current:false},
+      {val:'50%',label:'Arc maximum — mass extinction scenario',color:'#ff2d6e',current:false},
+    ]},
+    body:'44,016 species classified as threatened (Vulnerable, Endangered, or Critically Endangered) — 28% of all assessed. 902 confirmed extinctions since 1500, with the rate accelerating sharply since 1900. Most threatened: amphibians (41%), reef corals (34%), sharks and rays (31%). Primary drivers: habitat loss, invasive species, overexploitation, pollution, and climate change.',
+    method:'IUCN Red List — the world\'s most comprehensive biodiversity database. Assessed across nine categories from Least Concern to Extinct. Threatened = Vulnerable + Endangered + Critically Endangered. Updated quarterly. Arc = threatened % of assessed, normalized against 50% ceiling.',
+    share:'44,016 species threatened — 28% of all assessed. 902 extinct since 1500. Paired with Conservation Coverage. anthonycharts.com 🦏'},
+
+  conserve:{emoji:'🌿',title:'Conservation Coverage',sources:['Protected Planet (UNEP-WCMC + IUCN)','Annual Update'],
+    trend:{dir:'up-good',label:'Growing — but below pace required for 30x30 by 2030'},
+    stats:[{val:'17.6%',lbl:'Land Protected'},{val:'8.2%',lbl:'Ocean Protected'},{val:'30%',lbl:'30x30 Target'},{val:'2030',lbl:'Target Year'},{val:'196',lbl:'Countries Committed'},{val:'Annual',lbl:'Update'}],
+    history:{cols:['Year','Land','Ocean'],rows:[
+      {period:'2000',val:'~10%',note:'~1% ocean'},
+      {period:'2010',val:'~14%',note:'~3% ocean — Aichi targets'},
+      {period:'2016',val:'~15%',note:'~4% ocean'},
+      {period:'2020',val:'~17%',note:'~7% ocean — momentum growing'},
+      {period:'Feb 2026',val:'17.6%',note:'8.2% ocean — current'},
+    ]},
+    thresholds:{levels:[
+      {val:'10%',label:'Pre-2010 baseline — Aichi era',color:'#60a5fa',current:false},
+      {val:'17.6%',label:'Current land coverage — Feb 2026',color:'#00d4ff',current:true},
+      {val:'30%',label:'30x30 target — COP15, 2022',color:'#00ff9d',current:false},
+      {val:'50%',label:"Half-Earth (E.O. Wilson) — long-term aspirational",color:'#a78bfa',current:false},
+    ]},
+    body:'17.6% of land and 8.2% of oceans are formally protected — up from 14% land and 3% ocean in 2010. The 30x30 target was agreed at COP15 in Montreal in 2022 by 196 countries. At current rates, land may reach 30% by 2030, but ocean at 8.2% will fall far short. Quality of protection matters equally: paper parks with no enforcement are counted the same as actively managed reserves.',
+    method:'Protected Planet database by UNEP-WCMC and IUCN. Counts nationally designated protected areas and OECMs (Other Effective Area-Based Conservation Measures). Updated annually with country submissions to the Convention on Biological Diversity. Arc = % of 30x30 land target achieved.',
+    share:'17.6% land protected. 8.2% ocean. Racing toward 30x30 by 2030 — ocean will fall short at current pace. Paired with Species Threat. anthonycharts.com 🌿'},
+
+  supply:{emoji:'🚢',title:'Global Trade Stress',sources:['Freightos Baltic Index','S&P Global PMI','World Bank Trade Index','Monthly · Experimental'],
+    trend:{dir:'up',label:'Rising — freight elevated, PMI below expansion threshold'},
+    stats:[{val:'62/100',lbl:'Stress Index'},{val:'ELEVATED',lbl:'Status'},{val:'+18%',lbl:'Freight Rates YOY'},{val:'47.2',lbl:'Manufacturing PMI'},{val:'88',lbl:'COVID Peak Score'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Period','Score','Driver'],rows:[
+      {period:'2019 pre-COVID',val:'~35/100',note:'Normal trade conditions'},
+      {period:'2021 peak',val:'~88/100',note:'Supply chain collapse'},
+      {period:'2023',val:'~45/100',note:'Near-normalization'},
+      {period:'2024',val:'~58/100',note:'Red Sea disruptions begin'},
+      {period:'Feb 2026',val:'62/100',note:'Current — elevated'},
+    ]},
+    thresholds:{levels:[
+      {val:'< 40',label:'Normal — typical global trade conditions',color:'#00ff9d',current:false},
+      {val:'40–59',label:'Elevated — friction present but functioning',color:'#ffcc00',current:false},
+      {val:'62',label:'Current — Red Sea disruption + PMI contraction',color:'#ff9d00',current:true},
+      {val:'70–79',label:'High stress — visible supply chain disruption',color:'#ff6b35',current:false},
+      {val:'80+',label:'Crisis — COVID-level disruption',color:'#ff2d6e',current:false},
+    ]},
+    body:'Global Trade Stress at 62/100 — elevated, well below COVID crisis levels (~88 in 2021). Houthi attacks on Red Sea shipping are rerouting cargo around Africa (+14 days transit, +18% freight cost YOY). Global manufacturing PMI at 47.2 — below the 50 expansion threshold for the third consecutive month. Tariff uncertainty weighing on forward orders. Experimental composite — weights published and subject to revision.',
+    method:'Experimental composite: Freightos Baltic Index (35%) — global container freight benchmark normalized historically. Manufacturing PMI inverted (35%) — S&P Global composite, inverted so contraction = higher stress. World Bank trade volume momentum (30%) — month-over-month change. Weights at anthonycharts.com/composites-v1.0.json',
+    share:'Trade Stress: 62/100. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. COVID peak was 88. Full breakdown: anthonycharts.com 🚢'},
+
+  truth:{emoji:'🎯',title:'Information Integrity Index',sources:['IFCN Fact-Checkers Network','RSF Press Freedom Index','NewsGuard','Monthly · Experimental'],
+    trend:{dir:'down-bad',label:'Declining — down 4 pts YOY, 10+ pts below pre-COVID'},
+    stats:[{val:'61.4%',lbl:'Verified Claim Rate'},{val:'–4 pts',lbl:'Year over Year'},{val:'~72%',lbl:'2019 Baseline'},{val:'RSF 65',lbl:'Press Freedom Score'},{val:'1,000+',lbl:'Sites Rated'},{val:'Monthly',lbl:'Update'}],
+    history:{cols:['Period','Score','Context'],rows:[
+      {period:'2019',val:'~72%',note:'Pre-COVID baseline'},
+      {period:'2020',val:'~65%',note:'COVID misinformation surge'},
+      {period:'2022',val:'~67%',note:'Partial recovery'},
+      {period:'2024',val:'~65.4%',note:'Election year pressure'},
+      {period:'Feb 2026',val:'61.4%',note:'Current — declining'},
+    ]},
+    thresholds:{levels:[
+      {val:'> 80%',label:'High integrity — most major claims accurate',color:'#00ff9d',current:false},
+      {val:'65–79%',label:'Moderate — significant misinformation present',color:'#ffcc00',current:false},
+      {val:'61.4%',label:'Current — 4 in 10 major claims failing',color:'#ff9d00',current:true},
+      {val:'< 50%',label:'Low — majority of claims unverified or false',color:'#ff2d6e',current:false},
+    ]},
+    body:'Information Integrity at 61.4%: roughly 4 in 10 major claims reviewed by IFCN-certified fact-checkers did not meet accuracy standards. Down 4 points year-over-year and 10+ points below the pre-COVID baseline of ~72%. RSF Press Freedom Index global average of 65/100 reflects deteriorating journalist safety and editorial independence. This is the signal that gets the least attention relative to its downstream consequences — degraded information quality makes every other measurement harder to act on. Experimental composite.',
+    method:'Experimental composite: IFCN claim accuracy rate (50%) — from IFCN-verified fact-checkers internationally. RSF Press Freedom Index inverted (30%) — higher freedom = higher integrity score. NewsGuard credibility average (20%) — ratings of major news and information sources. Experimental — weights subject to revision, published at anthonycharts.com/composites-v1.0.json',
+    share:'Information Integrity: 61.4% — 4 in 10 major claims not meeting accuracy standards. Down 4pts YOY. 10+ pts below pre-COVID. anthonycharts.com 🎯'}
+};
+
+function showChartEvent(el, title, sub, body, type){
+  const panel = document.getElementById('evtPanel');
+  const isEdge = type === 'edge';
+  panel.style.display = 'block';
+  panel.style.borderLeftColor = isEdge ? '#ff2d6e' : '#00ff9d';
+  document.getElementById('evtTitle').textContent = title;
+  document.getElementById('evtTitle').style.color = isEdge ? '#ff2d6e' : '#00ff9d';
+  document.getElementById('evtSub').textContent = sub;
+  document.getElementById('evtBody').textContent = body;
+  const isNeon = document.body.classList.contains('neon');
+  panel.style.background = isNeon ? 'rgba(10,10,30,.95)' : '#fff';
+  panel.style.color = isNeon ? 'rgba(200,220,255,.9)' : '#1a1a2e';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function openDrawer(key){
+  const d=DD[key]; if(!d)return;
+  const emojiEl=document.getElementById('dEmoji');
+  emojiEl.textContent=d.emoji;
+  emojiEl.style.display=isNeon?'none':'block';
+  document.getElementById('dTitle').textContent=d.title;
+  document.getElementById('dStats').innerHTML=d.stats.map(s=>`<div class="dstat"><div class="dstat-val">${s.val}</div><div class="dstat-lbl">${s.lbl}</div></div>`).join('');
+
+  // ── TREND BADGE ──
+  const trendEl=document.getElementById('dTrend');
+  if(d.trend){
+    const cls={'up':'trend-up','down':'trend-down','stable':'trend-stable','up-good':'trend-up-good','down-bad':'trend-down-bad'}[d.trend.dir]||'trend-stable';
+    const arrows={'up':'↑','down':'↓','stable':'→','up-good':'↑','down-bad':'↓'};
+    trendEl.innerHTML=`<div class="drawer-trend ${cls}">${arrows[d.trend.dir]||'→'} ${d.trend.label}</div>`;
+  } else { trendEl.innerHTML=''; }
+
+  document.getElementById('dSources').innerHTML=d.sources.map(s=>`<span class="src-chip">${s}</span>`).join('');
+  document.getElementById('dBody').textContent=d.body;
+
+  // ── WEIGHT BARS (composites only) ──
+  const wEl=document.getElementById('dWeights');
+  if(d.weights){
+    const rows=d.weights.inputs.map(w=>{
+      const pct=Math.round(w.weight*100);
+      const score=w.score;
+      const contrib=(score*w.weight).toFixed(1);
+      return `<div class="weight-row">
+        <div class="weight-header"><span class="weight-name">${w.name}</span><span class="weight-meta">${pct}% weight · Score: ${score}/100</span></div>
+        <div class="weight-track"><div class="weight-fill" style="width:${score}%;background:${w.color}"></div></div>
+        <div class="weight-score-row"><span class="weight-score">Normalized 0–100</span><span class="weight-contribution">Contributes ${contrib} pts</span></div>
+      </div>`;
+    }).join('');
+    wEl.innerHTML=`<div class="drawer-weights"><div class="drawer-weights-title">Input Breakdown — How the score is built</div>${rows}
+      <div class="calc-box">${d.weights.inputs.map(w=>`(${Math.round(w.score)} × ${Math.round(w.weight*100)}%)`).join(' + ')} = <span class="calc-final">${d.weights.final}/100</span></div>
+    </div>`;
+  } else { wEl.innerHTML=''; }
+
+  // ── HISTORY TABLE ──
+  const hEl=document.getElementById('dHistory');
+  if(d.history){
+    const rows=d.history.rows.map((r,i)=>`<tr><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.period}</td><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.val}</td><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.note}</td></tr>`).join('');
+    hEl.innerHTML=`<div class="drawer-history"><div class="drawer-history-title">Historical Context</div>
+      <table class="history-table"><thead><tr><th>${d.history.cols[0]}</th><th>${d.history.cols[1]}</th><th>${d.history.cols[2]}</th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  } else { hEl.innerHTML=''; }
+
+  // ── THRESHOLD MARKERS ──
+  const thEl=document.getElementById('dThresholds');
+  if(d.thresholds){
+    const rows=d.thresholds.levels.map(t=>`<div class="thresh-row">
+      <div class="thresh-dot" style="background:${t.color}"></div>
+      <span class="thresh-label">${t.label}</span>
+      <span class="thresh-val" style="color:${t.color}">${t.val}</span>
+      ${t.current?'<span class="thresh-current">◀ NOW</span>':''}
+    </div>`).join('');
+    thEl.innerHTML=`<div class="drawer-thresholds"><div class="drawer-thresh-title">Scale & Thresholds</div>${rows}</div>`;
+  } else { thEl.innerHTML=''; }
+
+  document.getElementById('dMethod').textContent=d.method;
+  const slug=SLUGS[key]||key;
+  const url=encodeURIComponent(BASE_URL);
+  const txt=encodeURIComponent(d.share+' '+BASE_URL);
+  document.getElementById('shareX').href=`https://twitter.com/intent/tweet?text=${txt}`;
+  document.getElementById('shareLI').href=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  document.getElementById('shareFB').href=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function copyLink(){
+  const key=Object.keys(SLUGS).find(k=>document.getElementById('dTitle').textContent===DD[k]?.title)||'';
+  const url=BASE_URL;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btns=document.querySelectorAll('.share-btn');
+    const cb=Array.from(btns).find(b=>b.textContent.includes('Copy'));
+    if(cb){const o=cb.textContent;cb.textContent='✓ Copied!';setTimeout(()=>cb.textContent=o,2000);}
+  });
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+
+window.addEventListener('load',()=>{
+  applyMode();
+  initTicker();
+  animArcs();
+  startFlicker();
+});
+</script>
+</body>
+</html>

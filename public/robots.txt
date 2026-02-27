@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Public data files — explicitly allow crawling
+Allow: /composites-v1.0.json
+Allow: /data/scores-history.csv
+Allow: /methodology
+
+Sitemap: https://anthonycharts.com/sitemap.xml

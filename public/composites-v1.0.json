@@ -1,0 +1,348 @@
+{
+  "platform": "Anthony Charts",
+  "document": "Composite Index Definitions",
+  "version": "1.0",
+  "published": "2026-02-24",
+  "author": "Anthony Migliazzo",
+  "status": "LOCKED",
+  "note": "Weights and scale definitions in this file are pre-committed. No silent revisions. All changes must be logged in the revision_record below with date, change, and rationale.",
+
+  "principles": {
+    "composite_independence": "World On Edge and World Goodness are independently constructed. Goodness ≠ 100 − Edge. They draw from distinct input pools with separately justified weights.",
+    "normalization": "All inputs normalized to 0–100 before weighting is applied.",
+    "revision_discipline": "Weights may only change with a logged revision entry. Retroactive adjustment to match narrative is prohibited.",
+    "descriptive_not_prescriptive": "Anthony Charts measures directional change. It does not forecast outcomes or prescribe action."
+  },
+
+  "composites": {
+
+    "world_on_edge": {
+      "name": "World On Edge Index",
+      "version": "1.0",
+      "locked": "2026-02-24",
+      "range": "0–100",
+      "direction": "Higher = more global tension",
+      "current_score": 78,
+      "current_score_date": "2026-02",
+      "inputs": [
+        {
+          "name": "GPR Index",
+          "source": "Caldara & Iacoviello — geopolitical risk language across 10 major global newspapers",
+          "weight": 0.35,
+          "normalization": "GPR raw value normalized against 0–200 historical range"
+        },
+        {
+          "name": "ACLED Active Conflict Event Count",
+          "source": "Armed Conflict Location & Event Data Project",
+          "weight": 0.25,
+          "normalization": "Active conflict zones normalized against 0–80 historical range"
+        },
+        {
+          "name": "Gallup Global Worry & Stress Survey",
+          "source": "Gallup World Poll annual negative experience index",
+          "weight": 0.15,
+          "normalization": "Worry index normalized 0–100 as published"
+        },
+        {
+          "name": "Conflict Deaths YTD",
+          "source": "ACLED cross-referenced with UCDP Uppsala — direct battle fatalities only",
+          "weight": 0.15,
+          "normalization": "YTD deaths normalized against 50,000 annual threshold (extreme)"
+        },
+        {
+          "name": "Species Threat Index (inverted)",
+          "source": "IUCN Red List — threatened species as % of total assessed, inverted as stress signal",
+          "weight": 0.10,
+          "normalization": "Threatened % normalized against 0–50% scale"
+        }
+      ],
+      "weight_total": 1.00,
+      "arc_scale": "0 = no geopolitical stress / 100 = maximum stress",
+      "update_cadence": "Monthly",
+      "experimental": false
+    },
+
+    "world_goodness": {
+      "name": "World Goodness Index",
+      "version": "1.0",
+      "locked": "2026-02-24",
+      "range": "0–100",
+      "direction": "Higher = stronger positive global momentum",
+      "current_score": 54,
+      "current_score_date": "2026-02",
+      "inputs": [
+        {
+          "name": "OCHA Humanitarian Aid Volume",
+          "source": "UN Office for the Coordination of Humanitarian Affairs — total aid commitments",
+          "weight": 0.20,
+          "normalization": "Aid volume normalized against 0–30B USD annual range"
+        },
+        {
+          "name": "World Bank Extreme Poverty Rate (inverted)",
+          "source": "World Bank — % living below $2.15/day PPP, inverted (lower poverty = higher goodness)",
+          "weight": 0.20,
+          "normalization": "Poverty rate inverted: goodness = 100 − normalized poverty %"
+        },
+        {
+          "name": "Scientific Breakthrough Count",
+          "source": "Our World in Data — peer-reviewed major scientific milestone tracking",
+          "weight": 0.15,
+          "normalization": "Annual breakthrough count normalized against 0–50 range"
+        },
+        {
+          "name": "UN Treaty Signatures Per Quarter",
+          "source": "UN Treaty Collection database — multilateral treaty ratifications",
+          "weight": 0.15,
+          "normalization": "Quarterly signatures normalized against 0–30 historical range"
+        },
+        {
+          "name": "Social Mobility Index",
+          "source": "World Bank Global Social Mobility Index — 10 pillars including health, education, fair wages",
+          "weight": 0.15,
+          "normalization": "Published 0–100 scale used directly"
+        },
+        {
+          "name": "Conservation Coverage Growth Rate",
+          "source": "Protected Planet (UNEP-WCMC + IUCN) — % of Earth's land under formal protection",
+          "weight": 0.15,
+          "normalization": "Coverage % normalized as share of 30x30 target (30% by 2030)"
+        }
+      ],
+      "weight_total": 1.00,
+      "arc_scale": "0 = no positive momentum / 100 = maximum positive momentum",
+      "update_cadence": "Monthly",
+      "experimental": false
+    },
+
+    "calm_window": {
+      "name": "Calm Window Probability",
+      "version": "1.0",
+      "locked": "2026-02-24",
+      "range": "0–100",
+      "direction": "Higher = greater probability of directional tension easing",
+      "current_score": 28,
+      "current_score_date": "2026-02",
+      "disclaimer": "Probabilistic directional easing estimate — not predictive certainty. This is not a prediction of peace.",
+      "inputs": [
+        {
+          "name": "GPR 3-Month Slope",
+          "source": "Caldara & Iacoviello GPR Index — 3-month directional momentum",
+          "weight": 0.40,
+          "normalization": "Rising slope scores lower (less calm probable); falling slope scores higher"
+        },
+        {
+          "name": "ACLED Conflict Event Trend",
+          "source": "ACLED — month-over-month change in active conflict event count",
+          "weight": 0.40,
+          "normalization": "Growing event counts score lower; declining counts score higher"
+        },
+        {
+          "name": "Volatility Compression Signal",
+          "source": "GPR standard deviation — sharp downward momentum = structural easing signal",
+          "weight": 0.20,
+          "normalization": "High compression (sharp fall) scores higher; noise-level change scores lower"
+        }
+      ],
+      "weight_total": 1.00,
+      "arc_scale": "0 = near-zero easing probability / 100 = high easing probability",
+      "update_cadence": "Monthly",
+      "experimental": true
+    },
+
+    "information_integrity": {
+      "name": "Information Integrity Index",
+      "version": "1.0",
+      "locked": "2026-02-24",
+      "range": "0–100",
+      "direction": "Higher = more verified information environment",
+      "current_score": 61.4,
+      "current_score_date": "2026-02",
+      "inputs": [
+        {
+          "name": "IFCN Claim Accuracy Rate",
+          "source": "International Fact-Checking Network — verified fact-checker claim accuracy",
+          "weight": 0.50,
+          "normalization": "Accuracy % used directly as 0–100"
+        },
+        {
+          "name": "RSF Press Freedom Index (inverted)",
+          "source": "Reporters Without Borders — global press freedom score, inverted",
+          "weight": 0.30,
+          "normalization": "RSF score inverted: higher freedom = higher integrity signal"
+        },
+        {
+          "name": "NewsGuard Credibility Score Average",
+          "source": "NewsGuard — average credibility rating across major news sources",
+          "weight": 0.20,
+          "normalization": "Published 0–100 score used directly"
+        }
+      ],
+      "weight_total": 1.00,
+      "arc_scale": "0 = total misinformation environment / 100 = fully verified environment",
+      "update_cadence": "Monthly",
+      "experimental": true
+    },
+
+    "global_trade_stress": {
+      "name": "Global Trade Stress Index",
+      "version": "1.0",
+      "locked": "2026-02-24",
+      "range": "0–100",
+      "direction": "Higher = more trade system stress",
+      "current_score": 62,
+      "current_score_date": "2026-02",
+      "reference_points": {
+        "covid_peak": 88,
+        "elevated_threshold": 60,
+        "crisis_threshold": 80
+      },
+      "inputs": [
+        {
+          "name": "Freightos Baltic Index",
+          "source": "Freightos — global container freight rate benchmark",
+          "weight": 0.35,
+          "normalization": "Freight rates normalized against 0–15,000 USD/FEU historical range"
+        },
+        {
+          "name": "Global Manufacturing PMI (inverted)",
+          "source": "S&P Global Manufacturing PMI composite — inverted (contraction = higher stress)",
+          "weight": 0.35,
+          "normalization": "PMI inverted: below 50 = contraction = higher stress score"
+        },
+        {
+          "name": "World Bank Trade Volume Momentum",
+          "source": "World Bank — global trade volume index month-over-month momentum",
+          "weight": 0.30,
+          "normalization": "Declining momentum scores higher stress; growth scores lower"
+        }
+      ],
+      "weight_total": 1.00,
+      "arc_scale": "0 = no trade stress / 100 = crisis-level stress",
+      "update_cadence": "Monthly",
+      "experimental": true
+    }
+  },
+
+  "primary_meter_scales": {
+    "global_temp_anomaly": {
+      "unit": "°C above 1850–1900 baseline",
+      "arc_min": 0,
+      "arc_max": 2.0,
+      "arc_basis": "Paris Agreement 0–2°C risk corridor",
+      "source": "Copernicus C3S + NOAA GISSTEMP",
+      "cadence": "Monthly"
+    },
+    "sea_level_rise": {
+      "unit": "mm cumulative since January 1993",
+      "arc_min": 0,
+      "arc_max": 200,
+      "arc_basis": "0–200mm pre-declared scale",
+      "source": "NASA JPL Satellite Altimetry + CSIRO",
+      "cadence": "Monthly"
+    },
+    "arctic_sea_ice": {
+      "unit": "million km² extent",
+      "arc_basis": "Percentile within 1981–2010 climatological seasonal range for same calendar day",
+      "source": "NSIDC Sea Ice Index",
+      "cadence": "Daily"
+    },
+    "co2_concentration": {
+      "unit": "ppm atmospheric CO₂",
+      "arc_min": 280,
+      "arc_max": 500,
+      "arc_basis": "280ppm pre-industrial baseline to 500ppm extreme risk scenario",
+      "source": "NOAA Mauna Loa Observatory + Scripps Institution",
+      "cadence": "Weekly"
+    },
+    "exoplanet_count": {
+      "unit": "cumulative confirmed exoplanets",
+      "arc_basis": "Pace toward 10,000-planet milestone by 2030 at current discovery rates",
+      "source": "NASA Exoplanet Archive",
+      "cadence": "Weekly"
+    },
+    "neo_watch": {
+      "unit": "close approaches within 0.05 AU this week",
+      "arc_basis": "Normalized against historical weekly average",
+      "source": "NASA CNEOS + JPL Sentry",
+      "cadence": "Daily",
+      "note": "Awareness meter — not a threat alarm. Impact threats tracked separately."
+    },
+    "technosignature_watch": {
+      "unit": "active unresolved candidate signals",
+      "arc_basis": "Candidates as share of 12-month rolling average",
+      "source": "Breakthrough Listen + SETI Institute",
+      "cadence": "As reported",
+      "note": "Scientific search tracker — not a claimed detection meter."
+    },
+    "solar_activity": {
+      "unit": "NOAA G-scale (G0–G5)",
+      "arc_min": 0,
+      "arc_max": 5,
+      "arc_basis": "G-scale normalized 0–100",
+      "source": "NOAA SWPC + ESA Space Weather",
+      "cadence": "Daily"
+    },
+    "wealth_inequality": {
+      "unit": "Global Gini coefficient",
+      "arc_min": 0.4,
+      "arc_max": 0.9,
+      "arc_basis": "0.4 = low inequality / 0.9 = extreme inequality",
+      "source": "World Inequality Database (WID.world)",
+      "cadence": "Annual"
+    },
+    "social_mobility": {
+      "unit": "World Bank GSMI score 0–100",
+      "arc_min": 0,
+      "arc_max": 100,
+      "arc_basis": "Published GSMI scale used directly",
+      "source": "World Bank Global Social Mobility Index",
+      "cadence": "Annual"
+    },
+    "conflict_deaths": {
+      "unit": "YTD battle deaths",
+      "arc_min": 0,
+      "arc_max": 50000,
+      "arc_basis": "50,000 annual deaths = extreme threshold",
+      "source": "ACLED + UCDP Uppsala",
+      "cadence": "Monthly",
+      "note": "Direct battle fatalities only. Indirect deaths from disease or displacement excluded."
+    },
+    "peacekeeping_reach": {
+      "unit": "total UN peacekeeping personnel deployed",
+      "arc_min": 0,
+      "arc_max": 120000,
+      "arc_basis": "120,000 = 2015 peak deployment",
+      "source": "UN DPPA monthly fact sheets",
+      "cadence": "Monthly"
+    },
+    "species_threat": {
+      "unit": "species classified VU/EN/CR on IUCN Red List",
+      "arc_basis": "Threatened as % of total assessed, normalized against 50% threshold",
+      "source": "IUCN Red List",
+      "cadence": "Quarterly"
+    },
+    "conservation_coverage": {
+      "unit": "% of Earth's land under formal protection",
+      "arc_basis": "% of 30x30 target (30% by 2030, agreed COP15 2022) achieved",
+      "source": "Protected Planet (UNEP-WCMC + IUCN)",
+      "cadence": "Annual"
+    }
+  },
+
+  "revision_record": [
+    {
+      "version": "1.0",
+      "date": "2026-02-24",
+      "type": "Initial lock",
+      "changes": [
+        "Platform launched with 17 meters across 4 pillars",
+        "World On Edge expanded from 3 to 5 inputs — conflict deaths and species threat added, GPR weight reduced from 0.50 to 0.35",
+        "World Goodness expanded from 4 to 6 inputs — social mobility and conservation coverage added",
+        "Composite Independence principle established: Edge and Goodness are not inverses",
+        "Calm Window, Information Integrity, and Trade Stress designated Experimental",
+        "All arc scales pre-declared and locked"
+      ],
+      "rationale": "Initial publication. All weights set by editorial judgment at launch."
+    }
+  ]
+}
