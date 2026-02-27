@@ -1,0 +1,4 @@
+node_modules\n.next\n*.svg\n*.json\n*.mjs\n*.ts\n*.css\n*.md\n*.ico\nREADME*\ntsconfig*\neslint*\npostcss*\nnext.config*\npackage*\n.gitignore
+.next/
+node_modules/
+.next/
