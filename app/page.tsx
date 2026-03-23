@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
-
 export default function Home() {
-  redirect('/index.html')
+  return (
+    <meta httpEquiv="refresh" content="0;url=/index.html" />
+  )
 }
