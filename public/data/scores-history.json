@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "note": "Each entry = one published issue. All meter values recorded at publish time. Meter keys match drawer keys in index.html. arc_pct = normalized 0-1 for arc fill.",
+  "issues": [
+    {
+      "date": "2026-02-24",
+      "issue": "1",
+      "label": "Launch",
+      "type": "standard",
+      "meters": {
+        "edge":     { "value": 78,      "display": "78",     "arc_pct": 0.78 },
+        "good":     { "value": 54,      "display": "54",     "arc_pct": 0.54 },
+        "calm":     { "value": 28,      "display": "28%",    "arc_pct": 0.28 },
+        "temp":     { "value": 1.42,    "display": "+1.42°", "arc_pct": 0.71 },
+        "sea":      { "value": 112,     "display": "+112mm", "arc_pct": 0.56 },
+        "arctic":   { "value": 13.8,    "display": "13.8M",  "arc_pct": 0.48 },
+        "co2":      { "value": 424.4,   "display": "424.4",  "arc_pct": 0.87 },
+        "planet":   { "value": 5647,    "display": "5,647",  "arc_pct": 0.83 },
+        "neo":      { "value": 4,       "display": "4",      "arc_pct": 0.20 },
+        "alien":    { "value": 3,       "display": "3",      "arc_pct": 0.25 },
+        "solar":    { "value": 1,       "display": "G1",     "arc_pct": 0.20 },
+        "truth":    { "value": 61.4,    "display": "61.4%",  "arc_pct": 0.61 },
+        "supply":   { "value": 62,      "display": "62",     "arc_pct": 0.62 },
+        "gini":     { "value": 0.67,    "display": "0.67",   "arc_pct": 0.67 },
+        "mobility": { "value": 53.4,    "display": "53.4",   "arc_pct": 0.53 },
+        "conflict": { "value": 0,       "display": "—",      "arc_pct": 0.05 },
+        "peace":    { "value": 87000,   "display": "87K",    "arc_pct": 0.44 },
+        "species":  { "value": 44016,   "display": "44,016", "arc_pct": 0.78 },
+        "conserve": { "value": 17.6,    "display": "17.6%",  "arc_pct": 0.59 }
+      }
+    },
+    {
+      "date": "2026-02-28",
+      "issue": "1E",
+      "label": "Iran War",
+      "type": "emergency",
+      "meters": {
+        "edge":     { "value": 86,      "display": "86",     "arc_pct": 0.86 },
+        "good":     { "value": 48,      "display": "48",     "arc_pct": 0.48 },
+        "calm":     { "value": 12,      "display": "12%",    "arc_pct": 0.12 },
+        "temp":     { "value": 1.42,    "display": "+1.42°", "arc_pct": 0.71 },
+        "sea":      { "value": 112,     "display": "+112mm", "arc_pct": 0.56 },
+        "arctic":   { "value": 13.8,    "display": "13.8M",  "arc_pct": 0.48 },
+        "co2":      { "value": 424.4,   "display": "424.4",  "arc_pct": 0.87 },
+        "planet":   { "value": 5647,    "display": "5,647",  "arc_pct": 0.83 },
+        "neo":      { "value": 4,       "display": "4",      "arc_pct": 0.20 },
+        "alien":    { "value": 3,       "display": "3",      "arc_pct": 0.25 },
+        "solar":    { "value": 1,       "display": "G1",     "arc_pct": 0.20 },
+        "truth":    { "value": 54.2,    "display": "54.2%",  "arc_pct": 0.54 },
+        "supply":   { "value": 79,      "display": "79",     "arc_pct": 0.79 },
+        "gini":     { "value": 0.67,    "display": "0.67",   "arc_pct": 0.67 },
+        "mobility": { "value": 53.4,    "display": "53.4",   "arc_pct": 0.53 },
+        "conflict": { "value": 480,     "display": "480+",   "arc_pct": 0.42 },
+        "peace":    { "value": 87000,   "display": "87K",    "arc_pct": 0.44 },
+        "species":  { "value": 44016,   "display": "44,016", "arc_pct": 0.78 },
+        "conserve": { "value": 17.6,    "display": "17.6%",  "arc_pct": 0.59 }
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "issue": "2",
+      "label": "Week 2",
+      "type": "standard",
+      "meters": {
+        "edge":     { "value": 89,      "display": "89",     "arc_pct": 0.89 },
+        "good":     { "value": 45,      "display": "45",     "arc_pct": 0.45 },
+        "calm":     { "value": 6,       "display": "6%",     "arc_pct": 0.06 },
+        "temp":     { "value": 1.42,    "display": "+1.42°", "arc_pct": 0.71 },
+        "sea":      { "value": 112,     "display": "+112mm", "arc_pct": 0.56 },
+        "arctic":   { "value": 13.8,    "display": "13.8M",  "arc_pct": 0.48 },
+        "co2":      { "value": 424.4,   "display": "424.4",  "arc_pct": 0.87 },
+        "planet":   { "value": 5647,    "display": "5,647",  "arc_pct": 0.83 },
+        "neo":      { "value": 4,       "display": "4",      "arc_pct": 0.20 },
+        "alien":    { "value": 3,       "display": "3",      "arc_pct": 0.25 },
+        "solar":    { "value": 1,       "display": "G1",     "arc_pct": 0.60 },
+        "truth":    { "value": 51.8,    "display": "51.8%",  "arc_pct": 0.52 },
+        "supply":   { "value": 88,      "display": "88",     "arc_pct": 0.88 },
+        "gini":     { "value": 0.67,    "display": "0.67",   "arc_pct": 0.67 },
+        "mobility": { "value": 53.4,    "display": "53.4",   "arc_pct": 0.53 },
+        "conflict": { "value": 1255,    "display": "1,255+", "arc_pct": 0.72 },
+        "peace":    { "value": 87000,   "display": "87K",    "arc_pct": 0.44 },
+        "species":  { "value": 44016,   "display": "44,016", "arc_pct": 0.78 },
+        "conserve": { "value": 17.6,    "display": "17.6%",  "arc_pct": 0.59 }
+      }
+    }
+  ]
+}
