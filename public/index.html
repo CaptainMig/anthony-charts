@@ -151,7 +151,7 @@ function initTicker(){
   document.getElementById('tickerOuter').appendChild(clone);
 }
 // ── ARCS ──
-const ARCS=[['hEdgeArc',251,.76],['hGoodArc',251,.58],['arcTemp',170,.71],['arcSea',170,.55],['arcArctic',170,.30],['arcCo2',170,.69],['arcPlanet',170,.61],['arcNeo',170,.20],['arcAlien',170,.25],['arcSolar',170,.60],['arcTruth',170,.61],['arcSupply',170,.81],['arcGini',170,.67],['arcMobility',170,.53],['arcConflict',170,.72],['arcPeace',170,.44],['arcSpecies',170,.78],['arcConserve',170,.59]];
+const ARCS=[['hEdgeArc',251,.88],['hGoodArc',251,.47],['arcTemp',170,.71],['arcSea',170,.55],['arcArctic',170,.30],['arcCo2',170,.69],['arcPlanet',170,.61],['arcNeo',170,.20],['arcAlien',170,.25],['arcSolar',170,.60],['arcTruth',170,.50],['arcSupply',170,.81],['arcGini',170,.67],['arcMobility',170,.53],['arcConflict',170,.72],['arcPeace',170,.44],['arcSpecies',170,.78],['arcConserve',170,.59]];
 function animArcs(){
   ARCS.forEach(([id,tot,pct],i)=>{
     const el=document.getElementById(id); if(!el)return;
@@ -167,7 +167,7 @@ function startFlicker(){
   setInterval(()=>{
     if(!isNeon)return;
     document.getElementById('edgeNum').textContent=88;
-    document.getElementById('goodNum').textContent=(58+(Math.random()*.4-.2)).toFixed(1);
+    document.getElementById('goodNum').textContent=(47+(Math.random()*.4-.2)).toFixed(1);
   },3800);
 }
 // ── PAGE NAV ──
@@ -511,25 +511,26 @@ const DD = {
     method:'Protected Planet database by UNEP-WCMC and IUCN. Counts nationally designated protected areas and OECMs (Other Effective Area-Based Conservation Measures). Updated annually with country submissions to the Convention on Biological Diversity. Arc = % of 30x30 land target achieved.',
     share:'17.6% land protected. 8.2% ocean. Racing toward 30x30 by 2030 — ocean will fall short at current pace. Paired with Species Threat. anthonycharts.com 🌿'},
   supply:{emoji:'🚢',title:'Global Trade Stress',sources:['Freightos Baltic Index','S&P Global PMI','World Bank Trade Index','Monthly · Experimental'],
-    trend:{dir:'up',label:'Rising — freight elevated, PMI below expansion threshold'},
-    stats:[{val:'62/100',lbl:'Stress Index'},{val:'ELEVATED',lbl:'Status'},{val:'+18%',lbl:'Freight Rates YOY'},{val:'47.2',lbl:'Manufacturing PMI'},{val:'88',lbl:'COVID Peak Score'},{val:'Monthly',lbl:'Update'}],
+    trend:{dir:'down',label:'Easing — down from the 88 peak, still elevated'},
+    stats:[{val:'81/100',lbl:'Stress Index'},{val:'HIGH',lbl:'Status'},{val:'+18%',lbl:'Freight Rates YOY'},{val:'47.2',lbl:'Manufacturing PMI'},{val:'88',lbl:'Recent Peak Score'},{val:'Monthly',lbl:'Update'}],
     history:{cols:['Period','Score','Driver'],rows:[
       {period:'2019 pre-COVID',val:'~35/100',note:'Normal trade conditions'},
       {period:'2021 peak',val:'~88/100',note:'Supply chain collapse'},
       {period:'2023',val:'~45/100',note:'Near-normalization'},
       {period:'2024',val:'~58/100',note:'Red Sea disruptions begin'},
-      {period:'Feb 2026',val:'62/100',note:'Current — elevated'},
+      {period:'Feb 2026',val:'62/100',note:'Platform launch baseline'},
+      {period:'Jun 2026',val:'81/100',note:'Current — high, easing from 88 peak'},
     ]},
     thresholds:{levels:[
       {val:'< 40',label:'Normal — typical global trade conditions',color:'#00ff9d',current:false},
       {val:'40–59',label:'Elevated — friction present but functioning',color:'#ffcc00',current:false},
-      {val:'62',label:'Current — Red Sea disruption + PMI contraction',color:'#ff9d00',current:true},
+      {val:'60–69',label:'Elevated-high — Red Sea + war-driven freight',color:'#ff9d00',current:false},
       {val:'70–79',label:'High stress — visible supply chain disruption',color:'#ff6b35',current:false},
-      {val:'80+',label:'Crisis — COVID-level disruption',color:'#ff2d6e',current:false},
+      {val:'80+',label:'Current (81) — crisis-level, easing from the 88 peak',color:'#ff2d6e',current:true},
     ]},
-    body:'Global Trade Stress at 62/100 — elevated, well below COVID crisis levels (~88 in 2021). Houthi attacks on Red Sea shipping are rerouting cargo arou...',
+    body:'Global Trade Stress at 81/100 — high and easing from the 88 wartime peak. Houthi attacks on Red Sea shipping are rerouting cargo arou...',
     method:'Experimental composite: Freightos Baltic Index (35%) — global container freight benchmark normalized historically. Manufacturing PMI inverted (35%) — S&P Global composite, inverted so contraction = higher stress. World Bank trade volume momentum (30%) — month-over-month change. Weights at anthonycharts.com/composites-v1.0.json',
-    share:'Trade Stress: 62/100. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. COVID peak was 88. Full breakdown: anthonycharts.com 🚢'},
+    share:'Trade Stress: 81/100 — high, easing from the 88 peak. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. Full breakdown: anthonycharts.com 🚢'},
   truth:{emoji:'🎯',title:'Information Integrity Index',sources:['IFCN Fact-Checkers Network','RSF Press Freedom Index','NewsGuard','Monthly · Experimental'],
     trend:{dir:'down-bad',label:'Declining — down 4 pts YOY, 10+ pts below pre-COVID'},
     stats:[{val:'49.5%',lbl:'Verified Claim Rate'},{val:'–4 pts',lbl:'Year over Year'},{val:'~72%',lbl:'2019 Baseline'},{val:'RSF 65',lbl:'Press Freedom Score'},{val:'1,000+',lbl:'Sites Rated'},{val:'Monthly',lbl:'Update'}],
