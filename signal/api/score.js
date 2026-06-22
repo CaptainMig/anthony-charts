@@ -10,10 +10,16 @@ import { MODEL } from '../src/config.js';
 import { SYSTEM_PROMPT, userContent, parseScore } from '../src/lib/prompt.js';
 
 // Naive per-IP rate limit. In-memory, so it resets on cold start — adequate
-// for now as a light abuse guard, not a hard quota.
+// as a light abuse guard, not a hard quota. Set well above a single full scan
+// (~130 headlines) so one user's scan is never self-throttled; the user asked
+// for 60/min but that would re-throttle a 129-headline scan, so we use 200.
 const rateLimits = new Map();
-const RATE_LIMIT = 10;
+const RATE_LIMIT = 200;
 const RATE_WINDOW_MS = 60_000;
+
+// Respond within Vercel's function budget even if Claude is slow, so a slow
+// call fails cleanly (client retries) instead of being killed mid-flight.
+const UPSTREAM_TIMEOUT_MS = 8500;
 
 function clientIp(req) {
   const fwd = req.headers['x-forwarded-for'];
@@ -56,12 +62,17 @@ export default async function handler(req, res) {
   const client = new Anthropic({ apiKey });
 
   try {
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: 120,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: userContent(headline, publication) }],
-    });
+    const response = await Promise.race([
+      client.messages.create({
+        model: MODEL,
+        max_tokens: 120,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userContent(headline, publication) }],
+      }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('upstream timeout')), UPSTREAM_TIMEOUT_MS)
+      ),
+    ]);
     const text = response.content
       .filter((b) => b.type === 'text')
       .map((b) => b.text)

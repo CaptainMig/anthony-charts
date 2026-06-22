@@ -8,7 +8,7 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {
-    "api/score.js": { "memory": 256, "maxDuration": 30 },
-    "api/feed.js": { "memory": 256, "maxDuration": 15 }
+    "api/score.js": { "memory": 256, "maxDuration": 10 },
+    "api/feed.js": { "memory": 256, "maxDuration": 10 }
   }
 }

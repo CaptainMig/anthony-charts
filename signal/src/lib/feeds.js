@@ -121,12 +121,23 @@ async function fetchFeed(feed, onRateLimit) {
   const primary = await fetchViaRss2json(feed, onRateLimit);
   if (primary.status === 'ok') return primary;
 
+  // rss2json didn't yield items — fall back to our own server-side proxy.
+  console.log(
+    `[signal] rss2json ${primary.status}${primary.reason ? ` (${primary.reason})` : ''} for ${feed.name} — trying /api/feed`
+  );
   const fallback = await fetchViaServer(feed);
-  if (fallback.status === 'ok') return fallback;
+  if (fallback.status === 'ok') {
+    console.log(`[signal] /api/feed recovered ${feed.name}`);
+    return fallback;
+  }
+  console.warn(
+    `[signal] both sources failed for ${feed.name} (${feed.url}) — rss2json: ${primary.reason || primary.status}, proxy: ${fallback.reason || fallback.status}`
+  );
 
-  // Neither produced items — report empty if either was merely empty.
+  // Neither produced items — report empty if either was merely empty, else
+  // carry the proxy reason (more informative than the rss2json one).
   if (primary.status === 'empty' || fallback.status === 'empty') return { status: 'empty' };
-  return primary;
+  return { status: 'error', reason: fallback.reason || primary.reason || 'unknown' };
 }
 
 /**
@@ -157,7 +168,7 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
       continue;
     }
     if (r.status === 'error') {
-      errored.push({ name: r.feed.name, reason: r.reason });
+      errored.push({ name: r.feed.name, reason: r.reason, url: r.feed.url });
       continue;
     }
     for (const item of r.items) {

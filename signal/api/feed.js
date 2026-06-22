@@ -62,6 +62,7 @@ export default async function handler(req, res) {
 
   try {
     const r = await fetch(url, {
+      redirect: 'follow',
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SignalBot/1.0)', Accept: 'application/rss+xml, application/xml, text/xml, */*' },
     });
     if (!r.ok) return res.status(200).json({ status: 'error', reason: `HTTP ${r.status}` });
