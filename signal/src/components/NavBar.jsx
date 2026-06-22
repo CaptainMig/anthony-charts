@@ -3,7 +3,7 @@ import { ACCENT } from '../config.js';
 const todayLabel = () =>
   new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-export default function NavBar({ articleCount, scanning, progress, onScan, onSettings }) {
+export default function NavBar({ articleCount, scanning, progress, onScan, onHelp }) {
   return (
     <nav className="sticky top-0 z-30 border-b-hair border-white/10 bg-ink/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-4">
@@ -29,11 +29,12 @@ export default function NavBar({ articleCount, scanning, progress, onScan, onSet
 
           <button
             type="button"
-            onClick={onSettings}
-            title="API key settings"
-            className="rounded-sm border-hair border-white/15 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-white/55 transition-colors hover:border-white/30 hover:text-white/80"
+            onClick={onHelp}
+            title="How this works"
+            aria-label="How this works"
+            className="flex h-7 w-7 items-center justify-center rounded-sm border-hair border-white/15 font-mono text-[12px] text-white/55 transition-colors hover:border-white/30 hover:text-white/80"
           >
-            Key
+            ?
           </button>
 
           <button
