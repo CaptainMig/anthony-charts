@@ -10,6 +10,7 @@ const ENDPOINT = '/api/score';
 // Score one headline via the proxy. Retries once; on total failure marks it
 // UNVERIFIED so the row still renders.
 async function scoreOne(headline) {
+  let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetch(ENDPOINT, {
@@ -17,13 +18,19 @@ async function scoreOne(headline) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ headline: headline.title, publication: headline.publication }),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // Surface the server's error body (e.g. missing key) rather than a bare status.
+      if (!res.ok) {
+        const detail = await res.json().catch(() => ({}));
+        throw new Error(`HTTP ${res.status}${detail.error ? ` — ${detail.error}` : ''}`);
+      }
       const score = await res.json();
-      if (!score || !score.verdict) throw new Error('bad payload');
+      if (!score || !score.verdict) throw new Error('response missing verdict');
       return score;
     } catch (err) {
+      lastErr = err;
       if (attempt === 1) {
-        // Final failure — degrade so the table still renders the row.
+        // Final failure — log the real cause, then degrade so the row still renders.
+        console.warn('[signal] /api/score failed, using fallback:', lastErr?.message || lastErr);
         return { verdict: 'UNVERIFIED', bias: 'CENTER', truth: 1, sens: 5, click: 5, failed: true };
       }
     }

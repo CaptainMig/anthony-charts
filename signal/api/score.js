@@ -24,9 +24,16 @@ function clientIp(req) {
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // Health check — GET /api/score returns whether the key is wired up. This is
+  // the fastest way to confirm the function deployed and the env var is set.
+  if (req.method === 'GET') {
+    return res.status(200).json({ ok: true, hasKey: !!process.env.ANTHROPIC_API_KEY });
+  }
+
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   // Rate limit per IP per minute.
@@ -62,6 +69,12 @@ export default async function handler(req, res) {
     const score = parseScore(text);
     return res.status(200).json(score);
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    console.error('Scoring error:', e);
+    return res.status(500).json({
+      error: e.message,
+      type: e?.constructor?.name,
+      status: e?.status,
+      hasKey: !!process.env.ANTHROPIC_API_KEY,
+    });
   }
 }
