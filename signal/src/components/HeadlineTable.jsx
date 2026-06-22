@@ -172,7 +172,7 @@ export default function HeadlineTable({ headlines }) {
                     <div className="w-[110px] shrink-0 px-3">
                       <VerdictPill verdict={h.score.verdict} />
                     </div>
-                    <div className="flex-1 truncate px-3">
+                    <div className="flex-1 truncate px-3" title={h.title}>
                       <a
                         href={h.link}
                         target="_blank"

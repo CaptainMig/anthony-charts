@@ -1,0 +1,80 @@
+// ---------------------------------------------------------------------------
+// Serverless scoring proxy (Vercel function).
+//
+// Keeps the Anthropic API key server-side — it is read from
+// process.env.ANTHROPIC_API_KEY and never reaches the browser. Scores ONE
+// headline per request using the shared NERVA prompt.
+// ---------------------------------------------------------------------------
+import Anthropic from '@anthropic-ai/sdk';
+import { MODEL } from '../src/config.js';
+import { SYSTEM_PROMPT, userContent, parseScore } from '../src/lib/prompt.js';
+
+// Naive per-IP rate limit. In-memory, so it resets on cold start — adequate
+// for now as a light abuse guard, not a hard quota.
+const rateLimits = new Map();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60_000;
+
+function clientIp(req) {
+  const fwd = req.headers['x-forwarded-for'];
+  const first = (Array.isArray(fwd) ? fwd[0] : fwd || '').split(',')[0].trim();
+  return first || 'unknown';
+}
+
+export default async function handler(req, res) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // Health check — GET /api/score returns whether the key is wired up. This is
+  // the fastest way to confirm the function deployed and the env var is set.
+  if (req.method === 'GET') {
+    return res.status(200).json({ ok: true, hasKey: !!process.env.ANTHROPIC_API_KEY });
+  }
+
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // Rate limit per IP per minute.
+  const ip = clientIp(req);
+  const now = Date.now();
+  let window = rateLimits.get(ip);
+  if (!window || now > window.reset) {
+    window = { count: 0, reset: now + RATE_WINDOW_MS };
+  }
+  window.count++;
+  rateLimits.set(ip, window);
+  if (window.count > RATE_LIMIT) return res.status(429).json({ error: 'Rate limited' });
+
+  const { headline, publication } = req.body || {};
+  if (!headline) return res.status(400).json({ error: 'Missing headline' });
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'Server not configured' });
+
+  const client = new Anthropic({ apiKey });
+
+  try {
+    const response = await client.messages.create({
+      model: MODEL,
+      max_tokens: 120,
+      system: SYSTEM_PROMPT,
+      messages: [{ role: 'user', content: userContent(headline, publication) }],
+    });
+    const text = response.content
+      .filter((b) => b.type === 'text')
+      .map((b) => b.text)
+      .join('');
+    const score = parseScore(text);
+    return res.status(200).json(score);
+  } catch (e) {
+    console.error('Scoring error:', e);
+    return res.status(500).json({
+      error: e.message,
+      type: e?.constructor?.name,
+      status: e?.status,
+      hasKey: !!process.env.ANTHROPIC_API_KEY,
+    });
+  }
+}

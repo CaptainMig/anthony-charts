@@ -60,6 +60,5 @@ export const ACCENT = '#5aabb0';
 export const INK = '#0f0d0a';
 
 export const STORAGE_KEYS = {
-  apiKey: 'signal.apiKey',
   lastScan: 'signal.lastScan',
 };

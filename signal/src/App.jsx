@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { STORAGE_KEYS } from './config.js';
 import { fetchAllFeeds } from './lib/feeds.js';
-import { makeClient, scoreHeadlines } from './lib/scoring.js';
+import { scoreHeadlines } from './lib/scoring.js';
 import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.js';
 import { setIntegrityScore } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
@@ -9,7 +9,7 @@ import AtmosphereBar from './components/AtmosphereBar.jsx';
 import StatsStrip from './components/StatsStrip.jsx';
 import Scorecards from './components/Scorecards.jsx';
 import HeadlineTable from './components/HeadlineTable.jsx';
-import ApiKeyModal from './components/ApiKeyModal.jsx';
+import MethodologyPanel from './components/MethodologyPanel.jsx';
 
 function loadCache() {
   try {
@@ -26,9 +26,6 @@ function loadCache() {
 export default function App() {
   const cached = loadCache();
 
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem(STORAGE_KEYS.apiKey) || '');
-  const [showKeyModal, setShowKeyModal] = useState(false);
-
   // Scored headlines: each is a feed headline with a `.score` attached.
   const [scored, setScored] = useState(cached?.scored || []);
   const [meta, setMeta] = useState(
@@ -38,6 +35,7 @@ export default function App() {
   const [scanning, setScanning] = useState(false);
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [selectedPub, setSelectedPub] = useState(null);
+  const [showHelp, setShowHelp] = useState(false);
 
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
@@ -47,13 +45,7 @@ export default function App() {
     setIntegrityScore(integrityScore(scored));
   }, [scored]);
 
-  async function runScan(keyOverride) {
-    const key = keyOverride ?? apiKey;
-    if (!key) {
-      setShowKeyModal(true);
-      return;
-    }
-
+  async function runScan() {
     const myRun = ++runRef.current;
     setScanning(true);
     setSelectedPub(null);
@@ -85,8 +77,7 @@ export default function App() {
     const collected = [];
     setScored([]);
 
-    const client = makeClient(key);
-    await scoreHeadlines(client, headlines, {
+    await scoreHeadlines(headlines, {
       shouldStop: () => runRef.current !== myRun,
       onScored: (headline, score) => {
         if (runRef.current !== myRun) return;
@@ -98,22 +89,31 @@ export default function App() {
 
     if (runRef.current !== myRun) return;
 
+    // If a large share of headlines fell back, the scoring proxy is failing —
+    // surface it instead of silently showing a wall of UNVERIFIED.
+    const failedCount = collected.filter((h) => h.score.failed).length;
+    const finalStatus =
+      failedCount > 0
+        ? [
+            ...status,
+            `${failedCount}/${collected.length} headlines could not be scored — check the /api/score proxy and the ANTHROPIC_API_KEY env var in Vercel`,
+          ]
+        : status;
+    setMeta({ fetchedCount, sourcesActive, status: finalStatus });
+
     setScanning(false);
     try {
       localStorage.setItem(
         STORAGE_KEYS.lastScan,
-        JSON.stringify({ at: Date.now(), scored: collected, meta: { fetchedCount, sourcesActive, status } })
+        JSON.stringify({
+          at: Date.now(),
+          scored: collected,
+          meta: { fetchedCount, sourcesActive, status: finalStatus },
+        })
       );
     } catch {
       /* localStorage may be full or unavailable — non-fatal */
     }
-  }
-
-  function saveKey(key) {
-    setApiKey(key);
-    localStorage.setItem(STORAGE_KEYS.apiKey, key);
-    setShowKeyModal(false);
-    runScan(key);
   }
 
   // Derived views.
@@ -140,8 +140,8 @@ export default function App() {
         articleCount={articleCount}
         scanning={scanning}
         progress={progress}
-        onScan={() => runScan()}
-        onSettings={() => setShowKeyModal(true)}
+        onScan={runScan}
+        onHelp={() => setShowHelp(true)}
       />
 
       {meta.status.length > 0 && (
@@ -173,12 +173,7 @@ export default function App() {
         </p>
       </footer>
 
-      <ApiKeyModal
-        open={showKeyModal}
-        initialKey={apiKey}
-        onSave={saveKey}
-        onClose={() => setShowKeyModal(false)}
-      />
+      <MethodologyPanel open={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   );
 }

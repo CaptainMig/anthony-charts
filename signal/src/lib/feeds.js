@@ -40,7 +40,7 @@ function cleanTitle(raw) {
  *   { status: 'error', reason }   — network/proxy failure
  * Handles a single 429 by waiting 30s (signalled via onRateLimit) and retrying.
  */
-async function fetchFeed(feed, onRateLimit, attemptedRetry = false) {
+async function fetchViaRss2json(feed, onRateLimit, attemptedRetry = false) {
   const url = `${RSS2JSON}?rss_url=${encodeURIComponent(feed.url)}&count=${HEADLINES_PER_FEED}`;
   let res;
   try {
@@ -53,7 +53,7 @@ async function fetchFeed(feed, onRateLimit, attemptedRetry = false) {
     if (attemptedRetry) return { status: 'error', reason: 'rate limited' };
     onRateLimit?.();
     await sleep(RATE_LIMIT_WAIT_MS);
-    return fetchFeed(feed, onRateLimit, true);
+    return fetchViaRss2json(feed, onRateLimit, true);
   }
 
   if (!res.ok) return { status: 'error', reason: `HTTP ${res.status}` };
@@ -79,6 +79,54 @@ async function fetchFeed(feed, onRateLimit, attemptedRetry = false) {
     .filter((it) => it.title.length > 0);
 
   return items.length ? { status: 'ok', items } : { status: 'empty' };
+}
+
+// Fallback: fetch the feed through our own serverless proxy (/api/feed), which
+// fetches + parses the RSS server-side, bypassing both CORS and rss2json's
+// rate limits.
+async function fetchViaServer(feed) {
+  let res;
+  try {
+    res = await fetch(`/api/feed?url=${encodeURIComponent(feed.url)}`);
+  } catch (err) {
+    return { status: 'error', reason: err.message || 'proxy unreachable' };
+  }
+  if (!res.ok) return { status: 'error', reason: `proxy HTTP ${res.status}` };
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return { status: 'error', reason: 'proxy bad JSON' };
+  }
+  if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
+    return { status: data.status === 'empty' ? 'empty' : 'error', reason: data.reason };
+  }
+
+  const items = data.items
+    .slice(0, HEADLINES_PER_FEED)
+    .map((it) => ({
+      title: cleanTitle(it.title),
+      link: it.link || '#',
+      pubDate: it.pubDate || null,
+    }))
+    .filter((it) => it.title.length > 0);
+
+  return items.length ? { status: 'ok', items } : { status: 'empty' };
+}
+
+// Try rss2json first; if it doesn't yield headlines, fall back to our own
+// server-side proxy before giving up.
+async function fetchFeed(feed, onRateLimit) {
+  const primary = await fetchViaRss2json(feed, onRateLimit);
+  if (primary.status === 'ok') return primary;
+
+  const fallback = await fetchViaServer(feed);
+  if (fallback.status === 'ok') return fallback;
+
+  // Neither produced items — report empty if either was merely empty.
+  if (primary.status === 'empty' || fallback.status === 'empty') return { status: 'empty' };
+  return primary;
 }
 
 /**

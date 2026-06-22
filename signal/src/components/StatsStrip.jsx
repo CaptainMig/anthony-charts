@@ -18,7 +18,7 @@ function integrityColor(pct) {
 
 function Stat({ label, value, color }) {
   return (
-    <div className="flex flex-col gap-1 px-4 py-3">
+    <div className="flex flex-col gap-1 border-b-hair border-r-hair border-white/10 px-4 py-3">
       <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
         {label}
       </span>
@@ -35,7 +35,7 @@ function Stat({ label, value, color }) {
 export default function StatsStrip({ stats }) {
   return (
     <section className="mx-auto max-w-[1400px] px-6 pt-6">
-      <div className="grid grid-cols-2 divide-x-hair divide-y-hair divide-white/10 border-hair border-white/10 sm:grid-cols-3 lg:grid-cols-6 lg:divide-y-0">
+      <div className="grid grid-cols-2 border-l-hair border-t-hair border-white/10 sm:grid-cols-3 lg:grid-cols-6">
         <Stat label="Total Headlines" value={stats.totalHeadlines} color={ACCENT} />
         <Stat label="Sources Active" value={stats.sourcesActive} color={ACCENT} />
         <Stat
