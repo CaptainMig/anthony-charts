@@ -1,0 +1,24 @@
+{
+  "name": "anthony-signal",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Anthony Charts · Signal — a media integrity scanner that scores live news headlines through a NERVA-derived rubric.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11"
+  }
+}

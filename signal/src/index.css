@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0f0d0a;
+  color: #e8e4dc;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hairline borders — the design system calls for 0.5px. */
+.border-hair {
+  border-width: 0.5px;
+}
+
+/* Thin, unobtrusive scrollbars to keep the data-dense look clean. */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(232, 228, 220, 0.14);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(90, 171, 176, 0.4);
+}
+
+/* Tabular numerals everywhere numbers are shown — keeps columns aligned. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
