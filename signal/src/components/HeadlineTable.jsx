@@ -32,6 +32,26 @@ function VerdictPill({ verdict }) {
   );
 }
 
+const SLAM_RED = '#f08080';
+
+// Slam-journalism badge: solid for a core verb, muted outline for a watch verb.
+function SlamBadge({ slam }) {
+  const core = slam.tier === 'core';
+  return (
+    <span
+      className="shrink-0 rounded-[2px] px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider"
+      title={`Slam-journalism verb (${slam.tier}): "${slam.term}"`}
+      style={
+        core
+          ? { color: SLAM_RED, backgroundColor: `${SLAM_RED}1f`, border: `0.5px solid ${SLAM_RED}66` }
+          : { color: 'rgba(240,128,128,0.6)', border: '0.5px solid rgba(240,128,128,0.28)' }
+      }
+    >
+      SLAM · {slam.term}
+    </span>
+  );
+}
+
 function ScoreCell({ value, invert = false }) {
   const v = invert ? 11 - value : value;
   const color = v >= 7 ? '#6fd49a' : v >= 4 ? '#c8971f' : '#f08080';
@@ -50,7 +70,12 @@ export default function HeadlineTable({ headlines }) {
   const [viewport, setViewport] = useState(560);
 
   const filtered = useMemo(() => {
-    const base = filter === 'ALL' ? headlines : headlines.filter((h) => h.score.verdict === filter);
+    const base =
+      filter === 'ALL'
+        ? headlines
+        : filter === 'SLAM'
+          ? headlines.filter((h) => h.slam?.matched)
+          : headlines.filter((h) => h.score.verdict === filter);
     const col = COLUMNS.find((c) => c.key === sort.key);
     const dir = sort.dir === 'asc' ? 1 : -1;
     // Secondary sort always falls back to Publication then Owner for stability.
@@ -65,9 +90,12 @@ export default function HeadlineTable({ headlines }) {
   }, [headlines, filter, sort]);
 
   const counts = useMemo(() => {
-    const c = { ALL: headlines.length };
+    const c = { ALL: headlines.length, SLAM: 0 };
     for (const v of VERDICTS) c[v] = 0;
-    for (const h of headlines) c[h.score.verdict]++;
+    for (const h of headlines) {
+      c[h.score.verdict]++;
+      if (h.slam?.matched) c.SLAM++;
+    }
     return c;
   }, [headlines]);
 
@@ -107,6 +135,20 @@ export default function HeadlineTable({ headlines }) {
             </button>
           );
         })}
+
+        {/* Slam chip — orthogonal to verdicts: filters to slam-flagged rows. */}
+        <button
+          type="button"
+          onClick={() => setFilter(filter === 'SLAM' ? 'ALL' : 'SLAM')}
+          className="ml-1 rounded-sm border-hair px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors"
+          style={{
+            color: filter === 'SLAM' ? '#0f0d0a' : SLAM_RED,
+            backgroundColor: filter === 'SLAM' ? SLAM_RED : 'transparent',
+            borderColor: `${SLAM_RED}66`,
+          }}
+        >
+          SLAM {counts.SLAM ?? 0}
+        </button>
       </div>
 
       <div className="overflow-hidden rounded-sm border-hair border-white/10">
@@ -168,16 +210,17 @@ export default function HeadlineTable({ headlines }) {
                     >
                       <VerdictPill verdict={h.score.verdict} />
                     </div>
-                    <div className="flex-1 truncate px-3" title={h.title}>
+                    <div className="flex min-w-0 flex-1 items-center gap-2 px-3" title={h.title}>
                       <a
                         href={h.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[13px] text-[#e8e4dc]/90 hover:text-teal hover:underline"
+                        className="truncate text-[13px] text-[#e8e4dc]/90 hover:text-teal hover:underline"
                         title={h.title}
                       >
                         {h.title}
                       </a>
+                      {h.slam?.matched && <SlamBadge slam={h.slam} />}
                     </div>
                     <div className="w-[110px] shrink-0 truncate px-3 font-mono text-[11px] text-white/60">
                       {h.publication}

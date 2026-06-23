@@ -12,7 +12,9 @@ function decode(s) {
   if (!s) return '';
   return s
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
-    .replace(/<[^>]+>/g, '')
+    // Decode entities BEFORE stripping tags, so double-encoded HTML (common in
+    // Google News descriptions) collapses to plain text rather than leaving
+    // literal <a>/<font> tags behind.
     .replace(/&amp;/g, '&')
     .replace(/&#3[89];/g, (m) => (m === '&#38;' ? '&' : "'"))
     .replace(/&lt;/g, '<')
@@ -20,6 +22,7 @@ function decode(s) {
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
     .replace(/&nbsp;/g, ' ')
+    .replace(/<[^>]+>/g, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -64,7 +67,13 @@ export default async function handler(req, res) {
   try {
     const r = await fetch(url, {
       redirect: 'follow',
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SignalBot/1.0)', Accept: 'application/rss+xml, application/xml, text/xml, */*' },
+      headers: {
+        // A real browser UA — many origins (Politico, CNN, WaPo) 403 non-browser
+        // agents. This is the single most common cause of feed 403s.
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+        Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
+      },
     });
     if (!r.ok) return res.status(200).json({ status: 'error', reason: `HTTP ${r.status}` });
     const xml = await r.text();

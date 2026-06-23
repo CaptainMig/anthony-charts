@@ -1,15 +1,35 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { STORAGE_KEYS } from './config.js';
+import { STORAGE_KEYS, INTEGRITY_VERDICTS } from './config.js';
 import { fetchAllFeeds } from './lib/feeds.js';
 import { scoreHeadlines } from './lib/scoring.js';
 import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.js';
-import { setIntegrityScore } from './lib/integrity.js';
+import { detectSlam, slamStats } from './lib/slam.js';
+import { bootstrapCI } from './lib/bootstrap.js';
+import { permutationTest } from './lib/permutation.js';
+import { setFramingIntegrity } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
 import StatsStrip from './components/StatsStrip.jsx';
 import Scorecards from './components/Scorecards.jsx';
 import HeadlineTable from './components/HeadlineTable.jsx';
 import MethodologyPanel from './components/MethodologyPanel.jsx';
+
+const meanPct = (arr) =>
+  arr.length ? (100 * arr.reduce((s, x) => s + x, 0)) / arr.length : 0;
+
+// Plain-language read of the permutation test for the CURRENT scan only.
+function permVerdict(perm) {
+  if (!perm) return '';
+  if (perm.underpowered) {
+    return `Only ${perm.n_flagged} flagged headline${perm.n_flagged === 1 ? '' : 's'} — not enough to test yet.`;
+  }
+  const gap = perm.observedDiff;
+  const gapStr = `${gap >= 0 ? '+' : ''}${gap.toFixed(1)} sensationalism`;
+  const pStr = perm.p < 0.001 ? 'p < 0.001' : `p = ${perm.p.toFixed(2)}`;
+  return perm.p < 0.05
+    ? `Observed gap ${gapStr}. Slam-flagged headlines run hotter than chance (${pStr}). Hypothesis holds for this scan.`
+    : `Observed gap ${gapStr}. No significant difference this scan (${pStr}). The verb may be decoration.`;
+}
 
 function loadCache() {
   try {
@@ -40,9 +60,9 @@ export default function App() {
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
 
-  // Keep the exported integrity score current as headlines stream in.
+  // Keep the exported Framing Integrity value current as headlines stream in.
   useEffect(() => {
-    setIntegrityScore(integrityScore(scored));
+    setFramingIntegrity(integrityScore(scored));
   }, [scored]);
 
   async function runScan() {
@@ -120,20 +140,44 @@ export default function App() {
     }
   }
 
+  // The slam flag is deterministic on the headline text — derive it (handles
+  // cached scans too) rather than storing it.
+  const scoredSlam = useMemo(
+    () => scored.map((h) => ({ ...h, slam: detectSlam(h.title) })),
+    [scored]
+  );
+  const slam = useMemo(() => slamStats(scoredSlam), [scoredSlam]);
+
+  // Uncertainty math is heavier (2000 bootstrap / 5000 permutation), so compute
+  // it once on the FINAL scan — not on every per-headline tick while scanning.
+  const uncertainty = useMemo(() => {
+    if (scanning || scoredSlam.length === 0) return null;
+    const intVals = scoredSlam.map((h) => (INTEGRITY_VERDICTS.includes(h.score.verdict) ? 1 : 0));
+    const slamVals = scoredSlam.map((h) => (h.slam.matched ? 1 : 0));
+    const sensVals = scoredSlam.map((h) => h.score.sens);
+    return {
+      integrityCI: bootstrapCI(intVals, meanPct),
+      slamCI: bootstrapCI(slamVals, meanPct),
+      perm: permutationTest(slamVals, sensVals),
+    };
+  }, [scanning, scoredSlam]);
+
   // Derived views.
   const distribution = useMemo(() => atmosphere(scored), [scored]);
   const cards = useMemo(() => scorecards(scored), [scored]);
   const stats = useMemo(
-    () =>
-      stripStats(scored, {
+    () => ({
+      ...stripStats(scored, {
         totalHeadlines: scored.length,
         sourcesActive: meta.sourcesActive,
       }),
-    [scored, meta.sourcesActive]
+      slamIndex: slam.index,
+    }),
+    [scored, meta.sourcesActive, slam.index]
   );
   const tableRows = useMemo(
-    () => (selectedPub ? scored.filter((h) => h.publication === selectedPub) : scored),
-    [scored, selectedPub]
+    () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
+    [scoredSlam, selectedPub]
   );
 
   const articleCount = meta.fetchedCount || scored.length;
@@ -157,8 +201,40 @@ export default function App() {
       )}
 
       <AtmosphereBar distribution={distribution} total={scored.length} />
-      <StatsStrip stats={stats} />
+      <StatsStrip
+        stats={stats}
+        integrityCI={uncertainty?.integrityCI}
+        slamCI={uncertainty?.slamCI}
+      />
       <Scorecards cards={cards} selected={selectedPub} onSelect={setSelectedPub} />
+
+      {scored.length > 0 && (
+        <div className="mx-auto max-w-[1400px] px-6 pt-6">
+          <p className="font-mono text-[11px] tracking-wide text-white/45">
+            <span className="text-[#f08080]">Slam Index {slam.index}%</span>
+            <span className="mx-2 text-white/20">·</span>
+            {slam.flaggedCount > 0 ? (
+              <>
+                avg sensationalism — flagged{' '}
+                <span className="tabular-nums text-white/80">{slam.avgSensFlagged.toFixed(1)}</span> vs
+                rest{' '}
+                <span className="tabular-nums text-white/80">{slam.avgSensRest.toFixed(1)}</span>
+                <span className="mx-2 text-white/20">·</span>
+                <span className="text-white/35">{slam.flaggedCount} flagged</span>
+              </>
+            ) : (
+              <span className="text-white/35">no slam-flagged headlines this scan</span>
+            )}
+          </p>
+          {uncertainty && (
+            <p className="mt-1.5 max-w-3xl font-mono text-[11px] leading-relaxed text-white/55">
+              {permVerdict(uncertainty.perm)}
+              <span className="text-white/30"> Single-scan result, not a standing conclusion.</span>
+            </p>
+          )}
+        </div>
+      )}
+
       <HeadlineTable headlines={tableRows} />
 
       {scored.length === 0 && !scanning && (

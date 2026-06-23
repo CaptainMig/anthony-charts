@@ -5,13 +5,27 @@
 // News feeds. `name` is the short publication label shown in the UI, `owner`
 // is the parent entity used for the secondary sort and the scorecard subtitle.
 export const FEEDS = [
-  { name: 'AP Top News', owner: 'Associated Press', url: 'https://apnews.com/rss/apf-topnews' },
-  { name: 'AP Politics', owner: 'Associated Press', url: 'https://apnews.com/rss/politics' },
-  { name: 'AP World', owner: 'Associated Press', url: 'https://apnews.com/rss/world-news' },
-  { name: 'AP Business', owner: 'Associated Press', url: 'https://apnews.com/rss/business' },
+  // AP killed apnews.com/rss/* and Reuters discontinued public RSS — recover both
+  // source-restricted through Google News. These return headline + thin snippet
+  // (no full article body), so they are flagged `thinBody` and routed through the
+  // scorer's empty-body path. See methodology panel.
+  {
+    name: 'AP (via Google News)',
+    owner: 'Associated Press',
+    url: 'https://news.google.com/rss/search?q=site:apnews.com+when:1d&hl=en-US&gl=US&ceid=US:en',
+    thinBody: true,
+  },
+  {
+    name: 'Reuters (via Google News)',
+    owner: 'Thomson Reuters',
+    url: 'https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en',
+    thinBody: true,
+  },
+  { name: 'Washington Post', owner: 'Jeff Bezos / Nash Holdings', url: 'https://feeds.washingtonpost.com/rss/national' },
+  { name: 'WaPo World', owner: 'Jeff Bezos / Nash Holdings', url: 'https://feeds.washingtonpost.com/rss/world' },
+  { name: 'WaPo Politics', owner: 'Jeff Bezos / Nash Holdings', url: 'https://feeds.washingtonpost.com/rss/politics' },
   { name: 'BBC News', owner: 'BBC / UK Public', url: 'https://feeds.bbci.co.uk/news/rss.xml' },
   { name: 'BBC World', owner: 'BBC / UK Public', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
-  { name: 'Reuters World', owner: 'Thomson Reuters', url: 'https://feeds.reuters.com/reuters/worldNews' },
   { name: 'NPR News', owner: 'NPR / Public', url: 'https://feeds.npr.org/1001/rss.xml' },
   { name: 'Fox News', owner: 'News Corp', url: 'https://moxie.foxnews.com/google-publisher/latest.xml' },
   { name: 'CBS News', owner: 'Paramount / CBS', url: 'https://www.cbsnews.com/latest/rss/main' },
@@ -53,7 +67,7 @@ export const VERDICT_DEFINITIONS = {
   MISLEADING: 'engineered to trigger reaction, distorts or omits facts for outrage/clicks',
 };
 
-// Verdicts that count toward the Integrity Score.
+// Verdicts that count toward Framing Integrity.
 export const INTEGRITY_VERDICTS = ['VERIFIED', 'CONTEXTUAL'];
 
 export const ACCENT = '#5aabb0';
