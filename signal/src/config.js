@@ -67,7 +67,7 @@ export const VERDICT_DEFINITIONS = {
   MISLEADING: 'engineered to trigger reaction, distorts or omits facts for outrage/clicks',
 };
 
-// Verdicts that count toward the Integrity Score.
+// Verdicts that count toward Framing Integrity.
 export const INTEGRITY_VERDICTS = ['VERIFIED', 'CONTEXTUAL'];
 
 export const ACCENT = '#5aabb0';

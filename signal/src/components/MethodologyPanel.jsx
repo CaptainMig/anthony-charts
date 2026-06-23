@@ -130,12 +130,18 @@ export default function MethodologyPanel({ open, onClose }) {
             ))}
           </div>
 
-          <SectionHeader>Integrity Score</SectionHeader>
+          <SectionHeader>Framing Integrity</SectionHeader>
           <p className="text-[12.5px] leading-relaxed text-white/65">
-            The Integrity Score at the top is the percentage of today&apos;s headlines rated VERIFIED
-            or CONTEXTUAL — the fraction of coverage that, by this rubric, gives you an accurate
-            picture of events. It feeds directly into the Anthony Charts Info Integrity meter on the
-            main dashboard.
+            Framing Integrity is the percentage of today&apos;s headlines rated VERIFIED or
+            CONTEXTUAL — the share that fairly represent their own article. It feeds the Framing
+            Integrity meter on the Anthony Charts dashboard.
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-white/65">
+            <span style={{ color: '#c8971f' }}>Read it carefully:</span> a high score means
+            headlines match their articles. It does <span className="text-white/85">not</span> mean
+            the underlying reporting is accurate or unbiased. An outlet whose headlines faithfully
+            frame slanted or propagandistic articles still scores high — Signal audits the
+            headline-to-article relationship, not whether the news itself is true.
           </p>
 
           <SectionHeader>Sources &amp; the SLAM flag</SectionHeader>
@@ -143,7 +149,7 @@ export default function MethodologyPanel({ open, onClose }) {
             AP and Reuters discontinued their public RSS feeds, so they are recovered via Google
             News aggregation and scored on the headline plus a limited snippet — not the full
             article. Their fidelity signal is therefore weaker than direct-feed sources; the
-            integrity number reflects that honestly rather than hiding the gap.
+            framing-integrity number reflects that honestly rather than hiding the gap.
           </p>
           <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
             The <span style={{ color: '#f08080' }}>SLAM</span> badge is a transparent lexicon match,

@@ -12,8 +12,10 @@ export function emptyVerdictCounts() {
 }
 
 /**
- * The headline integrity score: % of scored headlines that are VERIFIED or
- * CONTEXTUAL, 0-100. This is the value getIntegrityScore() exports.
+ * Framing Integrity: % of scored headlines that are VERIFIED or CONTEXTUAL,
+ * 0-100 — the share whose headline fairly represents its own article (not a
+ * measure of whether the news is true). This is the value the renamed
+ * getFramingIntegrity() export surfaces. (Internal name kept for a small diff.)
  */
 export function integrityScore(scored) {
   if (!scored.length) return 0;

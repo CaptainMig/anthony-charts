@@ -72,7 +72,7 @@ export default function StatsStrip({ stats, integrityCI, slamCI }) {
           color={scoreColor(stats.avgClick, true)}
         />
         <Stat
-          label="Integrity Score"
+          label="Framing Integrity"
           value={`${stats.integrity}%`}
           color={integrityColor(stats.integrity)}
           interval={ciLabel(integrityCI)}
@@ -84,6 +84,13 @@ export default function StatsStrip({ stats, integrityCI, slamCI }) {
           interval={ciLabel(slamCI)}
         />
       </div>
+
+      {/* Always-visible honesty line so the top metric can't be misread as
+          "% of the news that is true." */}
+      <p className="mt-2 font-mono text-[11px] leading-relaxed text-white/40">
+        <span className="text-white/60">Framing Integrity</span> = share of headlines that fairly
+        represent their own article — not a measure of whether the news is true.
+      </p>
     </section>
   );
 }

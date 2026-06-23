@@ -43,8 +43,10 @@ This is a standalone, fully client-side page intended to live at
 | `UNVERIFIED` | anonymous sources, speculation as fact, premature conclusions |
 | `MISLEADING` | engineered to trigger reaction, distorts or omits facts for clicks |
 
-The **Integrity Score** is the percentage of scored headlines that are
-`VERIFIED` or `CONTEXTUAL`.
+The **Framing Integrity** metric is the percentage of scored headlines that are
+`VERIFIED` or `CONTEXTUAL` — the share whose headline fairly represents its own
+article. It is **not** a measure of whether the news is true: faithful framing
+of slanted reporting still scores high.
 
 ## API key
 
@@ -55,10 +57,11 @@ prompt for it if it isn't set.
 
 ## Future hook
 
-`src/lib/integrity.js` exports `getIntegrityScore()` returning the current
-session's Integrity Score (0–100). It's also attached to `window` so the main
-AnthonyCharts dashboard can read it for the Info Integrity meter without
-importing the bundle.
+`src/lib/integrity.js` exports `getFramingIntegrity()` returning the current
+session's Framing Integrity (0–100). It's also attached to `window` so the main
+AnthonyCharts dashboard can read it for the Framing Integrity meter without
+importing the bundle. (Renamed from `getIntegrityScore` / `window.getIntegrityScore`
+— the consumer must update to `window.getFramingIntegrity`.)
 
 ## Local development
 

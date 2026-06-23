@@ -6,7 +6,7 @@ import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.
 import { detectSlam, slamStats } from './lib/slam.js';
 import { bootstrapCI } from './lib/bootstrap.js';
 import { permutationTest } from './lib/permutation.js';
-import { setIntegrityScore } from './lib/integrity.js';
+import { setFramingIntegrity } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
 import StatsStrip from './components/StatsStrip.jsx';
@@ -60,9 +60,9 @@ export default function App() {
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
 
-  // Keep the exported integrity score current as headlines stream in.
+  // Keep the exported Framing Integrity value current as headlines stream in.
   useEffect(() => {
-    setIntegrityScore(integrityScore(scored));
+    setFramingIntegrity(integrityScore(scored));
   }, [scored]);
 
   async function runScan() {
