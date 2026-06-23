@@ -39,6 +39,16 @@ export const FEEDS = [
   { name: 'WSJ', owner: 'News Corp', url: 'https://feeds.a.dj.com/rss/RSSWorldNews.xml' },
   { name: 'NY Times', owner: 'NYT Co.', url: 'https://rss.nytimes.com/services/xml/rss/nyt/US.xml' },
   { name: 'LA Times', owner: 'Patrick Soon-Shiong', url: 'https://www.latimes.com/world/rss2.0.xml' },
+  // Added for owner-grouping (Part 2). Owner labels are load-bearing — they must
+  // match their corporate parent exactly (NY Post shares News Corp with WSJ;
+  // Sky shares Comcast with NBC/CNBC).
+  { name: 'New York Post', owner: 'News Corp', url: 'https://nypost.com/feed/' },
+  // Sky News primary feed; fallbacks if home.xml dies: .../world.xml, .../us.xml
+  { name: 'Sky News', owner: 'Comcast', url: 'https://feeds.skynews.com/feeds/rss/home.xml' },
+  { name: 'Fortune', owner: 'Fortune Media', url: 'https://fortune.com/feed/' },
+  // FT is paywalled — flag thinBody so its emptied body routes into the scorer's
+  // existing empty-body rule (Fidelity 5, VERIFIED unless a self-evident tease).
+  { name: 'Financial Times', owner: 'Nikkei', url: 'https://www.ft.com/rss/home', thinBody: true },
 ];
 
 export const HEADLINES_PER_FEED = 10;
