@@ -3,6 +3,7 @@ import { STORAGE_KEYS } from './config.js';
 import { fetchAllFeeds } from './lib/feeds.js';
 import { scoreHeadlines } from './lib/scoring.js';
 import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.js';
+import { detectSlam, slamStats } from './lib/slam.js';
 import { setIntegrityScore } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
@@ -120,20 +121,30 @@ export default function App() {
     }
   }
 
+  // The slam flag is deterministic on the headline text — derive it (handles
+  // cached scans too) rather than storing it.
+  const scoredSlam = useMemo(
+    () => scored.map((h) => ({ ...h, slam: detectSlam(h.title) })),
+    [scored]
+  );
+  const slam = useMemo(() => slamStats(scoredSlam), [scoredSlam]);
+
   // Derived views.
   const distribution = useMemo(() => atmosphere(scored), [scored]);
   const cards = useMemo(() => scorecards(scored), [scored]);
   const stats = useMemo(
-    () =>
-      stripStats(scored, {
+    () => ({
+      ...stripStats(scored, {
         totalHeadlines: scored.length,
         sourcesActive: meta.sourcesActive,
       }),
-    [scored, meta.sourcesActive]
+      slamIndex: slam.index,
+    }),
+    [scored, meta.sourcesActive, slam.index]
   );
   const tableRows = useMemo(
-    () => (selectedPub ? scored.filter((h) => h.publication === selectedPub) : scored),
-    [scored, selectedPub]
+    () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
+    [scoredSlam, selectedPub]
   );
 
   const articleCount = meta.fetchedCount || scored.length;
@@ -159,6 +170,28 @@ export default function App() {
       <AtmosphereBar distribution={distribution} total={scored.length} />
       <StatsStrip stats={stats} />
       <Scorecards cards={cards} selected={selectedPub} onSelect={setSelectedPub} />
+
+      {scored.length > 0 && (
+        <div className="mx-auto max-w-[1400px] px-6 pt-6">
+          <p className="font-mono text-[11px] tracking-wide text-white/45">
+            <span className="text-[#f08080]">Slam Index {slam.index}%</span>
+            <span className="mx-2 text-white/20">·</span>
+            {slam.flaggedCount > 0 ? (
+              <>
+                avg sensationalism — flagged{' '}
+                <span className="tabular-nums text-white/80">{slam.avgSensFlagged.toFixed(1)}</span> vs
+                rest{' '}
+                <span className="tabular-nums text-white/80">{slam.avgSensRest.toFixed(1)}</span>
+                <span className="mx-2 text-white/20">·</span>
+                <span className="text-white/35">{slam.flaggedCount} flagged</span>
+              </>
+            ) : (
+              <span className="text-white/35">no slam-flagged headlines this scan</span>
+            )}
+          </p>
+        </div>
+      )}
+
       <HeadlineTable headlines={tableRows} />
 
       {scored.length === 0 && !scanning && (

@@ -182,9 +182,14 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
         title: item.title,
         link: item.link,
         pubDate: item.pubDate,
-        summary: item.summary || '',
+        // Aggregator feeds (Google News) carry only a noisy snippet, not the
+        // article body. Empty it so the scorer's empty-body branch fires
+        // deterministically (Fidelity 5, VERIFIED unless a tease — never
+        // MISLEADING) instead of judging headline-vs-snippet.
+        summary: r.feed.thinBody ? '' : item.summary || '',
         publication: r.feed.name,
         owner: r.feed.owner,
+        thinBody: !!r.feed.thinBody,
         key,
       });
     }

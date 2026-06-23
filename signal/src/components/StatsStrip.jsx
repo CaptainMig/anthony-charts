@@ -16,6 +16,13 @@ function integrityColor(pct) {
   return '#f08080';
 }
 
+// Slam Index: higher = more "slam journalism" framing = more concerning.
+function slamColor(pct) {
+  if (pct >= 25) return '#f08080';
+  if (pct >= 10) return '#c8971f';
+  return 'rgba(232,228,220,0.85)';
+}
+
 function Stat({ label, value, color }) {
   return (
     <div className="flex flex-col gap-1 border-b-hair border-r-hair border-white/10 px-4 py-3">
@@ -35,7 +42,7 @@ function Stat({ label, value, color }) {
 export default function StatsStrip({ stats }) {
   return (
     <section className="mx-auto max-w-[1400px] px-6 pt-6">
-      <div className="grid grid-cols-2 border-l-hair border-t-hair border-white/10 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 border-l-hair border-t-hair border-white/10 sm:grid-cols-3 lg:grid-cols-7">
         <Stat label="Total Headlines" value={stats.totalHeadlines} color={ACCENT} />
         <Stat label="Sources Active" value={stats.sourcesActive} color={ACCENT} />
         <Stat
@@ -57,6 +64,11 @@ export default function StatsStrip({ stats }) {
           label="Integrity Score"
           value={`${stats.integrity}%`}
           color={integrityColor(stats.integrity)}
+        />
+        <Stat
+          label="Slam Index"
+          value={`${stats.slamIndex ?? 0}%`}
+          color={slamColor(stats.slamIndex ?? 0)}
         />
       </div>
     </section>

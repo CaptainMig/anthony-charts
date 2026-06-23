@@ -138,6 +138,22 @@ export default function MethodologyPanel({ open, onClose }) {
             main dashboard.
           </p>
 
+          <SectionHeader>Sources &amp; the SLAM flag</SectionHeader>
+          <p className="text-[12.5px] leading-relaxed text-white/60">
+            AP and Reuters discontinued their public RSS feeds, so they are recovered via Google
+            News aggregation and scored on the headline plus a limited snippet — not the full
+            article. Their fidelity signal is therefore weaker than direct-feed sources; the
+            integrity number reflects that honestly rather than hiding the gap.
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
+            The <span style={{ color: '#f08080' }}>SLAM</span> badge is a transparent lexicon match,
+            not an AI score: a fixed list of conflict verbs (&quot;slams&quot;, &quot;blasts&quot;,
+            &quot;rips into&quot;…) flagged on the headline text. It never changes a verdict. The{' '}
+            <span className="font-mono">Slam Index</span> is the share of headlines with any match,
+            shown next to the average sensationalism of flagged vs unflagged headlines so you can
+            check the correlation yourself.
+          </p>
+
           <p className="mt-8 border-t-hair border-white/10 pt-4 text-[10px] leading-relaxed text-white/30">
             Signal scores reflect AI editorial synthesis, not ground truth. Scoring is fast and
             imperfect. Use it as a signal, not a verdict. Headlines remain © their respective
