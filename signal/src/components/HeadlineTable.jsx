@@ -14,8 +14,7 @@ const COLUMNS = [
   { key: 'headline', label: 'Headline', get: (h) => h.title.toLowerCase(), align: 'left', grow: true },
   { key: 'publication', label: 'Publication', get: (h) => h.publication.toLowerCase(), align: 'left' },
   { key: 'owner', label: 'Owner', get: (h) => h.owner.toLowerCase(), align: 'left' },
-  { key: 'bias', label: 'Bias', get: (h) => h.score.bias, align: 'left' },
-  { key: 'truth', label: 'Truth', get: (h) => h.score.truth, align: 'right' },
+  { key: 'truth', label: 'Fidelity', get: (h) => h.score.truth, align: 'right' },
   { key: 'sens', label: 'Sens', get: (h) => h.score.sens, align: 'right' },
   { key: 'click', label: 'Clickbait', get: (h) => h.score.click, align: 'right' },
   { key: 'age', label: 'Age', get: (h) => ageMinutes(h.pubDate), align: 'right' },
@@ -31,12 +30,6 @@ function VerdictPill({ verdict }) {
       {verdict}
     </span>
   );
-}
-
-function biasColor(bias) {
-  if (bias === 'LEFT') return '#8bbef0';
-  if (bias === 'RIGHT') return '#f08080';
-  return 'rgba(232,228,220,0.6)';
 }
 
 function ScoreCell({ value, invert = false }) {
@@ -169,7 +162,10 @@ export default function HeadlineTable({ headlines }) {
                       className="h-full w-[3px] shrink-0"
                       style={{ backgroundColor: VERDICT_COLORS[h.score.verdict] }}
                     />
-                    <div className="w-[110px] shrink-0 px-3">
+                    <div
+                      className="w-[110px] shrink-0 px-3"
+                      title={h.score.rationale || undefined}
+                    >
                       <VerdictPill verdict={h.score.verdict} />
                     </div>
                     <div className="flex-1 truncate px-3" title={h.title}>
@@ -188,9 +184,6 @@ export default function HeadlineTable({ headlines }) {
                     </div>
                     <div className="w-[110px] shrink-0 truncate px-3 font-mono text-[11px] text-white/40">
                       {h.owner}
-                    </div>
-                    <div className="w-[110px] shrink-0 px-3 font-mono text-[11px]">
-                      <span style={{ color: biasColor(h.score.bias) }}>{h.score.bias}</span>
                     </div>
                     <div className="w-[110px] shrink-0 px-3 text-right text-[12px]">
                       <ScoreCell value={h.score.truth} />

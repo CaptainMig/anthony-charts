@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   rateLimits.set(ip, window);
   if (window.count > RATE_LIMIT) return res.status(429).json({ error: 'Rate limited' });
 
-  const { headline, publication } = req.body || {};
+  const { headline, article } = req.body || {};
   if (!headline) return res.status(400).json({ error: 'Missing headline' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -65,9 +65,10 @@ export default async function handler(req, res) {
     const response = await Promise.race([
       client.messages.create({
         model: MODEL,
-        max_tokens: 120,
+        max_tokens: 160,
+        temperature: 0, // classification task — determinism over creativity
         system: SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: userContent(headline, publication) }],
+        messages: [{ role: 'user', content: userContent(headline, article) }],
       }),
       new Promise((_, reject) =>
         setTimeout(() => reject(new Error('upstream timeout')), UPSTREAM_TIMEOUT_MS)

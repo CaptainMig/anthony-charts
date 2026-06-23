@@ -26,20 +26,16 @@ const VERDICT_ROWS = [
 
 const SCORE_ROWS = [
   {
-    label: 'Truth (1–10)',
-    text: 'How factually grounded and checkable is the claim? 10 = fully verified fact. 1 = unfounded or unverifiable.',
+    label: 'Fidelity (0–10)',
+    text: "How accurately the headline conveys its own article's main claim. 10 = exact, no distortion. 0 = contradicts or invents. Signal judges the headline against the article it links to — not whether the event is true in the world.",
   },
   {
-    label: 'Sensationalism (1–10)',
-    text: 'How emotionally charged is the language? 1 = flat and neutral. 10 = maximally inflammatory.',
+    label: 'Sensationalism (0–10)',
+    text: 'How emotionally charged is the language, beyond what the article supports? 0 = flat and proportionate. 10 = maximally inflammatory.',
   },
   {
-    label: 'Clickbait (1–10)',
-    text: 'Does the headline withhold information to force a click? 1 = tells you everything. 10 = pure curiosity gap.',
-  },
-  {
-    label: 'Bias',
-    text: "The political lean of the headline's framing, not the outlet. LEFT / CENTER / RIGHT based on word choice and emphasis.",
+    label: 'Clickbait (0–10)',
+    text: 'Does the headline withhold information to force a click? 0 = tells you everything. 10 = pure curiosity gap.',
   },
 ];
 

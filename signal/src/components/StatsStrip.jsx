@@ -39,7 +39,7 @@ export default function StatsStrip({ stats }) {
         <Stat label="Total Headlines" value={stats.totalHeadlines} color={ACCENT} />
         <Stat label="Sources Active" value={stats.sourcesActive} color={ACCENT} />
         <Stat
-          label="Avg Truth"
+          label="Avg Fidelity"
           value={stats.avgTruth ? stats.avgTruth.toFixed(1) : '—'}
           color={scoreColor(stats.avgTruth)}
         />
@@ -48,7 +48,11 @@ export default function StatsStrip({ stats }) {
           value={stats.avgSens ? stats.avgSens.toFixed(1) : '—'}
           color={scoreColor(stats.avgSens, true)}
         />
-        <Stat label="Dominant Bias" value={stats.dominantBias} />
+        <Stat
+          label="Avg Clickbait"
+          value={stats.avgClick ? stats.avgClick.toFixed(1) : '—'}
+          color={scoreColor(stats.avgClick, true)}
+        />
         <Stat
           label="Integrity Score"
           value={`${stats.integrity}%`}

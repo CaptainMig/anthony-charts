@@ -44,6 +44,7 @@ function parse(xml) {
       title: decode(tag(b, 'title')),
       link: linkOf(b),
       pubDate: decode(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated')) || null,
+      summary: decode(tag(b, 'description') || tag(b, 'content:encoded') || tag(b, 'summary')).slice(0, 800),
     }))
     .filter((it) => it.title.length > 5)
     .slice(0, HEADLINES_PER_FEED);

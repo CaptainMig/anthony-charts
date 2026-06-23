@@ -16,7 +16,7 @@ async function scoreOne(headline) {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ headline: headline.title, publication: headline.publication }),
+        body: JSON.stringify({ headline: headline.title, article: headline.summary || '' }),
       });
       // Surface the server's error body (e.g. missing key) rather than a bare status.
       if (!res.ok) {
@@ -31,7 +31,7 @@ async function scoreOne(headline) {
       if (attempt === 1) {
         // Final failure — log the real cause, then degrade so the row still renders.
         console.warn('[signal] /api/score failed, using fallback:', lastErr?.message || lastErr);
-        return { verdict: 'UNVERIFIED', bias: 'CENTER', truth: 1, sens: 5, click: 5, failed: true };
+        return { verdict: 'UNVERIFIED', truth: 5, sens: 5, click: 5, rationale: 'scoring failed', failed: true };
       }
     }
   }

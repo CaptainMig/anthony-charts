@@ -75,6 +75,7 @@ async function fetchViaRss2json(feed, onRateLimit, attemptedRetry = false) {
       title: cleanTitle(it.title),
       link: it.link || '#',
       pubDate: it.pubDate || null,
+      summary: cleanTitle(it.description || it.content || '').slice(0, 800),
     }))
     .filter((it) => it.title.length > 0);
 
@@ -109,6 +110,7 @@ async function fetchViaServer(feed) {
       title: cleanTitle(it.title),
       link: it.link || '#',
       pubDate: it.pubDate || null,
+      summary: cleanTitle(it.summary || '').slice(0, 800),
     }))
     .filter((it) => it.title.length > 0);
 
@@ -180,6 +182,7 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
         title: item.title,
         link: item.link,
         pubDate: item.pubDate,
+        summary: item.summary || '',
         publication: r.feed.name,
         owner: r.feed.owner,
         key,
