@@ -33,16 +33,6 @@ export function atmosphere(scored) {
   }));
 }
 
-// Dominant political-bias label across scored headlines.
-function dominantBias(scored) {
-  if (!scored.length) return '—';
-  const tally = { LEFT: 0, CENTER: 0, RIGHT: 0 };
-  for (const h of scored) tally[h.score.bias] = (tally[h.score.bias] || 0) + 1;
-  const [label] = Object.entries(tally).sort((a, b) => b[1] - a[1])[0];
-  const titleCase = label.charAt(0) + label.slice(1).toLowerCase();
-  return titleCase;
-}
-
 // The six headline stats for the strip.
 export function stripStats(scored, { totalHeadlines, sourcesActive }) {
   return {
@@ -50,7 +40,7 @@ export function stripStats(scored, { totalHeadlines, sourcesActive }) {
     sourcesActive,
     avgTruth: round1(avg(scored.map((h) => h.score.truth))),
     avgSens: round1(avg(scored.map((h) => h.score.sens))),
-    dominantBias: dominantBias(scored),
+    avgClick: round1(avg(scored.map((h) => h.score.click))),
     integrity: integrityScore(scored),
   };
 }

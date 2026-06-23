@@ -31,7 +31,7 @@ export const HEADLINES_PER_FEED = 10;
 
 // Anthropic model + concurrency for the scoring queue.
 export const MODEL = 'claude-sonnet-4-6';
-export const CONCURRENCY = 5;
+export const CONCURRENCY = 3;
 
 // The five verdicts, in display order, with their palette colors and the
 // definitions injected into every scoring prompt.

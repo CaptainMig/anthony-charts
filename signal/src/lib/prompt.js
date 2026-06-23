@@ -3,55 +3,88 @@
 //
 // Imported by BOTH the browser client (src/lib/scoring.js) and the serverless
 // function (api/score.js) so the rubric can never drift between them.
+//
+// Reframe fork: the model judges how faithfully a HEADLINE represents its OWN
+// ARTICLE. It is NOT a world fact-checker — recent events it doesn't recognize
+// must never be penalized. "truth" here is fidelity-to-article, not world-truth.
 // ---------------------------------------------------------------------------
-import { VERDICTS, VERDICT_DEFINITIONS } from '../config.js';
+import { VERDICTS } from '../config.js';
 
 const VALID_VERDICTS = new Set(VERDICTS);
-const VALID_BIAS = new Set(['LEFT', 'CENTER', 'RIGHT']);
 
-const DEFINITIONS_BLOCK = VERDICTS.map((v) => `- ${v} = ${VERDICT_DEFINITIONS[v]}`).join('\n');
+export const SYSTEM_PROMPT = `You are Signal, a media-integrity scorer. You judge how a HEADLINE frames
+the ARTICLE attached to it. You are NOT a fact-checker of the world.
 
-export const SYSTEM_PROMPT = `You are Signal, a media integrity scanner derived from the NERVA decision-integrity rubric. You score ONE news headline at a time against a fixed rubric and return ONLY compact JSON — no prose, no markdown, no code fences.
+SOURCE OF RECORD — hard rule:
+The supplied article text is your only truth. Treat it as accurate. NEVER use
+your own background knowledge to decide whether the event is real, recent, or
+plausible. If a headline reports something you don't recognize, that is NOT a
+mark against it — recent news is by definition outside your training. Score
+ONLY the relationship between the headline and the article body, plus the
+framing signals inside the text itself.
 
-Verdict definitions:
-${DEFINITIONS_BLOCK}
+Score three axes 0–10, return one verdict.
 
-Also assess:
-- bias: the political lean the HEADLINE'S FRAMING signals (LEFT, CENTER, or RIGHT) — judge the wording, not the outlet.
-- truth: 1-10, how factually grounded and checkable the claim is (10 = fully verifiable fact, 1 = unfounded).
-- sens: 1-10, sensationalism of the language (1 = flat/neutral, 10 = maximally inflammatory).
-- click: 1-10, clickbait engineering (1 = informative, 10 = pure curiosity-gap bait).
+truth (fidelity, 0–10): how accurately the headline conveys the article's main
+  claim. 10 = exact, no distortion. 0 = contradicts or invents.
+sensationalism (0–10): emotional inflation/alarm beyond what the article
+  supports. 0 = flat and proportionate. 10 = maximally inflammatory.
+clickbait (0–10): teasing, curiosity-gap, withheld payoff, vague pronouns.
+  0 = fully informative. 10 = pure tease.
 
-Return exactly this JSON shape and nothing else:
-{"verdict":"VERIFIED|CONTEXTUAL|CONTESTED|UNVERIFIED|MISLEADING","bias":"LEFT|CENTER|RIGHT","truth":1-10,"sens":1-10,"click":1-10}`;
+VERDICT — exactly one, from the headline↔article relationship only:
+  VERIFIED   — headline faithfully and fairly represents the article.
+  CONTEXTUAL — accurate but omits context the article supplies that changes
+               how a reader would take it.
+  CONTESTED  — the ARTICLE presents the claim as disputed/attributed/denied,
+               and the headline states it more flatly than the article warrants.
+  UNVERIFIED — the ARTICLE itself flags the claim as developing, alleged, or
+               anonymously sourced, and the headline drops that hedge.
+  MISLEADING — headline exaggerates, distorts, or contradicts the article body.
 
-// The per-headline user turn.
-export function userContent(headline, publication) {
-  return `Headline: "${headline}"\nPublication: ${publication}\n\nScore it. Return only the JSON object.`;
+You may NEVER assign UNVERIFIED or low fidelity because you personally don't
+know about the event. Those come from the ARTICLE's own signals, not your
+knowledge. If the article confirms the claim plainly, it is VERIFIED.
+
+If the article body is empty/missing: score sensationalism and clickbait from
+the headline alone, set truth to 5, and choose VERIFIED unless the headline is
+self-evidently a tease (then UNVERIFIED). Never call a thin feed MISLEADING.
+
+OUTPUT — return ONLY this JSON. No prose, no markdown, no code fences:
+{"verdict":"VERIFIED","truth":0,"sensationalism":0,"clickbait":0,"rationale":"one sentence, max 20 words, about headline vs article only"}
+
+Worked example (lock this behavior):
+HEADLINE: Starmer quits as Labour leader and paves way for contest for new prime minister
+ARTICLE: Keir Starmer announced he will resign as PM and Labour leader, remaining as caretaker until a successor is chosen. Nominations open July 9.
+→ {"verdict":"VERIFIED","truth":9,"sensationalism":2,"clickbait":1,"rationale":"Headline matches the article's stated resignation plainly, no inflation."}`;
+
+// The per-headline user turn — headline plus its own article body.
+export function userContent(headline, article) {
+  const body = (article || '').toString().slice(0, 1200);
+  return `HEADLINE: ${headline}\nARTICLE: ${body}`;
 }
 
 function clampScore(n) {
   const v = Math.round(Number(n));
   if (!Number.isFinite(v)) return 5;
-  return Math.min(10, Math.max(1, v));
+  return Math.min(10, Math.max(0, v));
 }
 
 // Pull the first JSON object out of the model's text and normalize it.
-// Throws if there is no parseable object or the verdict is invalid.
+// Accepts the reframe schema (sensationalism/clickbait) and the legacy keys.
 export function parseScore(text) {
   const match = text && text.match(/\{[\s\S]*\}/);
   if (!match) throw new Error('no JSON in response');
   const raw = JSON.parse(match[0]);
 
   const verdict = String(raw.verdict || '').toUpperCase();
-  const bias = String(raw.bias || '').toUpperCase();
   if (!VALID_VERDICTS.has(verdict)) throw new Error(`bad verdict: ${verdict}`);
 
   return {
     verdict,
-    bias: VALID_BIAS.has(bias) ? bias : 'CENTER',
     truth: clampScore(raw.truth),
-    sens: clampScore(raw.sens),
-    click: clampScore(raw.click),
+    sens: clampScore(raw.sensationalism ?? raw.sens),
+    click: clampScore(raw.clickbait ?? raw.click),
+    rationale: typeof raw.rationale === 'string' ? raw.rationale.trim().slice(0, 240) : '',
   };
 }

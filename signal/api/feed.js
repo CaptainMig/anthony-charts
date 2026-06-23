@@ -44,6 +44,7 @@ function parse(xml) {
       title: decode(tag(b, 'title')),
       link: linkOf(b),
       pubDate: decode(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated')) || null,
+      summary: decode(tag(b, 'description') || tag(b, 'content:encoded') || tag(b, 'summary')).slice(0, 800),
     }))
     .filter((it) => it.title.length > 5)
     .slice(0, HEADLINES_PER_FEED);
@@ -62,6 +63,7 @@ export default async function handler(req, res) {
 
   try {
     const r = await fetch(url, {
+      redirect: 'follow',
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SignalBot/1.0)', Accept: 'application/rss+xml, application/xml, text/xml, */*' },
     });
     if (!r.ok) return res.status(200).json({ status: 'error', reason: `HTTP ${r.status}` });

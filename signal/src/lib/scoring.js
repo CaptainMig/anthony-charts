@@ -6,35 +6,50 @@
 import { CONCURRENCY } from '../config.js';
 
 const ENDPOINT = '/api/score';
+const MAX_ATTEMPTS = 4;
 
-// Score one headline via the proxy. Retries once; on total failure marks it
-// UNVERIFIED so the row still renders.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Score one headline via the proxy. Retries throttling/server errors with
+// exponential backoff + jitter; gives up on auth/bad-request errors (they
+// won't fix themselves). On total failure marks the row UNVERIFIED so it still
+// renders.
 async function scoreOne(headline) {
   let lastErr;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ headline: headline.title, publication: headline.publication }),
+        body: JSON.stringify({ headline: headline.title, article: headline.summary || '' }),
       });
-      // Surface the server's error body (e.g. missing key) rather than a bare status.
-      if (!res.ok) {
-        const detail = await res.json().catch(() => ({}));
-        throw new Error(`HTTP ${res.status}${detail.error ? ` — ${detail.error}` : ''}`);
+
+      if (res.ok) {
+        const score = await res.json();
+        if (!score || !score.verdict) throw new Error('response missing verdict');
+        return score;
       }
-      const score = await res.json();
-      if (!score || !score.verdict) throw new Error('response missing verdict');
-      return score;
+
+      const detail = await res.json().catch(() => ({}));
+      // Auth / bad request won't recover on retry — stop and surface it.
+      if (res.status === 400 || res.status === 401 || res.status === 403) {
+        console.warn(`[signal] /api/score ${res.status} (not retrying): ${detail.error || ''}`);
+        break;
+      }
+      // 429 / 5xx / timeout — retryable.
+      throw new Error(`HTTP ${res.status}${detail.error ? ` — ${detail.error}` : ''}`);
     } catch (err) {
       lastErr = err;
-      if (attempt === 1) {
-        // Final failure — log the real cause, then degrade so the row still renders.
-        console.warn('[signal] /api/score failed, using fallback:', lastErr?.message || lastErr);
-        return { verdict: 'UNVERIFIED', bias: 'CENTER', truth: 1, sens: 5, click: 5, failed: true };
-      }
+    }
+
+    if (attempt < MAX_ATTEMPTS - 1) {
+      // 0.5s, 1s, 2s (+ jitter) — eases throttling from our proxy or Anthropic.
+      await sleep(500 * 2 ** attempt + Math.random() * 250);
     }
   }
+
+  console.warn('[signal] /api/score failed after retries, using fallback:', lastErr?.message || lastErr);
+  return { verdict: 'UNVERIFIED', truth: 5, sens: 5, click: 5, rationale: 'scoring failed', failed: true };
 }
 
 /**

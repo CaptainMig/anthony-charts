@@ -66,7 +66,11 @@ export default function App() {
 
     if (skipped.length) status.push(`${skipped.length} feed(s) empty: ${skipped.join(', ')}`);
     if (errored.length)
-      status.push(`${errored.length} feed(s) failed: ${errored.map((e) => e.name).join(', ')}`);
+      status.push(
+        `${errored.length} feed(s) failed: ${errored
+          .map((e) => `${e.name} (${e.reason || 'error'})`)
+          .join(', ')}`
+      );
 
     const sourcesActive = new Set(headlines.map((h) => h.publication)).size;
     const fetchedCount = headlines.length;
