@@ -23,23 +23,34 @@ function slamColor(pct) {
   return 'rgba(232,228,220,0.85)';
 }
 
-function Stat({ label, value, color }) {
+// A 95% bootstrap interval rendered small + muted, e.g. "(66–82%)".
+function ciLabel(ci) {
+  if (!ci) return null;
+  return `(${Math.round(ci.lo)}–${Math.round(ci.hi)}%)`;
+}
+
+function Stat({ label, value, color, interval }) {
   return (
     <div className="flex flex-col gap-1 border-b-hair border-r-hair border-white/10 px-4 py-3">
       <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
         {label}
       </span>
-      <span
-        className="font-display text-2xl font-semibold tabular-nums"
-        style={{ color: color || '#e8e4dc' }}
-      >
-        {value}
+      <span className="flex items-baseline gap-1.5">
+        <span
+          className="font-display text-2xl font-semibold tabular-nums"
+          style={{ color: color || '#e8e4dc' }}
+        >
+          {value}
+        </span>
+        {interval && (
+          <span className="font-mono text-[11px] tabular-nums text-white/30">{interval}</span>
+        )}
       </span>
     </div>
   );
 }
 
-export default function StatsStrip({ stats }) {
+export default function StatsStrip({ stats, integrityCI, slamCI }) {
   return (
     <section className="mx-auto max-w-[1400px] px-6 pt-6">
       <div className="grid grid-cols-2 border-l-hair border-t-hair border-white/10 sm:grid-cols-3 lg:grid-cols-7">
@@ -64,11 +75,13 @@ export default function StatsStrip({ stats }) {
           label="Integrity Score"
           value={`${stats.integrity}%`}
           color={integrityColor(stats.integrity)}
+          interval={ciLabel(integrityCI)}
         />
         <Stat
           label="Slam Index"
           value={`${stats.slamIndex ?? 0}%`}
           color={slamColor(stats.slamIndex ?? 0)}
+          interval={ciLabel(slamCI)}
         />
       </div>
     </section>
