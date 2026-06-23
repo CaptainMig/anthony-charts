@@ -149,7 +149,9 @@ export default function MethodologyPanel({ open, onClose }) {
             AP and Reuters discontinued their public RSS feeds, so they are recovered via Google
             News aggregation and scored on the headline plus a limited snippet — not the full
             article. Their fidelity signal is therefore weaker than direct-feed sources; the
-            framing-integrity number reflects that honestly rather than hiding the gap.
+            framing-integrity number reflects that honestly rather than hiding the gap. The
+            Financial Times is paywall-limited and scored the same way — headline plus snippet, a
+            weaker fidelity signal than full-text sources.
           </p>
           <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
             The <span style={{ color: '#f08080' }}>SLAM</span> badge is a transparent lexicon match,
