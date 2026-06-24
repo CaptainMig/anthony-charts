@@ -163,6 +163,24 @@ export default function App() {
     };
   }, [scanning, scoredSlam]);
 
+  // Derived views.
+  const distribution = useMemo(() => atmosphere(scored), [scored]);
+  const cards = useMemo(() => scorecards(scored), [scored]);
+  const stats = useMemo(
+    () => ({
+      ...stripStats(scored, {
+        totalHeadlines: scored.length,
+        sourcesActive: meta.sourcesActive,
+      }),
+      slamIndex: slam.index,
+    }),
+    [scored, meta.sourcesActive, slam.index]
+  );
+  const tableRows = useMemo(
+    () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
+    [scoredSlam, selectedPub]
+  );
+
   const briefDate = useMemo(
     () => new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
     []
@@ -170,7 +188,7 @@ export default function App() {
 
   // Today's Briefing — assembled purely from the scan's own aggregates (no API,
   // no model). Numbers are taken from the same values the stat strip shows so
-  // the two can never disagree.
+  // the two can never disagree. Declared after `stats` so it can read it.
   const briefing = useMemo(() => {
     if (scanning) return null; // assembles when the scan completes
     if (scoredSlam.length === 0) return buildBriefing({ date: briefDate, n: 0 });
@@ -218,24 +236,6 @@ export default function App() {
         : null,
     });
   }, [scanning, scoredSlam, uncertainty, stats, slam.flaggedCount, briefDate]);
-
-  // Derived views.
-  const distribution = useMemo(() => atmosphere(scored), [scored]);
-  const cards = useMemo(() => scorecards(scored), [scored]);
-  const stats = useMemo(
-    () => ({
-      ...stripStats(scored, {
-        totalHeadlines: scored.length,
-        sourcesActive: meta.sourcesActive,
-      }),
-      slamIndex: slam.index,
-    }),
-    [scored, meta.sourcesActive, slam.index]
-  );
-  const tableRows = useMemo(
-    () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
-    [scoredSlam, selectedPub]
-  );
 
   const articleCount = meta.fetchedCount || scored.length;
 
