@@ -9,19 +9,22 @@
 // We use the channel live_stream embed so the rail always resolves the
 // broadcaster's CURRENT live news stream without us tracking rotating video IDs.
 //
-// ⚠️ VERIFY THE CHANNEL IDS: these are best-effort and could not be confirmed
-// from the build sandbox (no outbound network). Each should be checked against
-// the broadcaster's official YouTube channel; swap in a specific `videoId` if a
-// channel's live_stream embed doesn't resolve. A wrong/blocked ID degrades to
-// "stream unavailable" — it never breaks the layout.
+// ⚠️ VERIFY THE CHANNEL IDS: best-effort, not confirmable from the build sandbox
+// (no outbound network). ABC News Live and Sky News were reported not playing —
+// their channel `live_stream` embeds don't resolve (likely embedding disabled on
+// their live, which no ID can fix), so they're replaced here with DW News and
+// France 24 English, two reliably embeddable 24/7 English news streams. To bring
+// a specific broadcaster back, set a `videoId` (the 11-char ID from that
+// channel's live video → Share → Embed) instead of `channelId`. A bad/blocked
+// entry degrades to "stream unavailable" — it never breaks the layout.
 // ---------------------------------------------------------------------------
 
 export const LIVE_TV_CHANNELS = [
-  { name: 'ABC News Live', channelId: 'UCBi2mrWuNuyYy4gbM6fU18Q' },
-  { name: 'Sky News', channelId: 'UCoMdktPbSTixAyNGwb-UYkQ' },
   { name: 'NBC News NOW', channelId: 'UCeY0bbntWzzVIaj2z3QigXg' },
   { name: 'Al Jazeera English', channelId: 'UCNye-wNBqNL5ZzHSJj3l8Bg' },
   { name: 'Bloomberg Television', channelId: 'UCIALMKvObZNtJ6AmdCLP7Lg' },
+  { name: 'DW News', channelId: 'UCknLrEdhRCp1aegoMqRaCZg' },
+  { name: 'France 24 English', channelId: 'UCQfwfsi5VrQ8yKZ-UWmAEFg' },
 ];
 
 // Build the official YouTube embed URL. Muted by default; autoplay applies only
