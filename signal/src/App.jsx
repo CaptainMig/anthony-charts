@@ -6,6 +6,7 @@ import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.
 import { detectSlam, slamStats } from './lib/slam.js';
 import { bootstrapCI } from './lib/bootstrap.js';
 import { permutationTest } from './lib/permutation.js';
+import { buildBriefing } from './lib/briefing.js';
 import { setFramingIntegrity } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
@@ -162,6 +163,62 @@ export default function App() {
     };
   }, [scanning, scoredSlam]);
 
+  const briefDate = useMemo(
+    () => new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    []
+  );
+
+  // Today's Briefing — assembled purely from the scan's own aggregates (no API,
+  // no model). Numbers are taken from the same values the stat strip shows so
+  // the two can never disagree.
+  const briefing = useMemo(() => {
+    if (scanning) return null; // assembles when the scan completes
+    if (scoredSlam.length === 0) return buildBriefing({ date: briefDate, n: 0 });
+
+    const verdictCounts = {};
+    const slamTally = {};
+    for (const h of scoredSlam) {
+      verdictCounts[h.score.verdict] = (verdictCounts[h.score.verdict] || 0) + 1;
+      if (h.slam.matched) slamTally[h.publication] = (slamTally[h.publication] || 0) + 1;
+    }
+    // The single outlet with the most slam hits (null on a tie or none).
+    let topOutlet = null;
+    let topCount = 0;
+    let tie = false;
+    for (const [pub, c] of Object.entries(slamTally)) {
+      if (c > topCount) {
+        topCount = c;
+        topOutlet = pub;
+        tie = false;
+      } else if (c === topCount) {
+        tie = true;
+      }
+    }
+    if (tie || topCount === 0) topOutlet = null;
+
+    return buildBriefing({
+      date: briefDate,
+      n: stats.totalHeadlines,
+      sources: stats.sourcesActive,
+      fi: stats.integrity,
+      fiLo: uncertainty?.integrityCI.lo,
+      fiHi: uncertainty?.integrityCI.hi,
+      avgSens: stats.avgSens,
+      avgClick: stats.avgClick,
+      verdictCounts,
+      slam: uncertainty
+        ? {
+            computed: true,
+            flaggedCount: slam.flaggedCount,
+            index: stats.slamIndex,
+            lo: uncertainty.slamCI.lo,
+            hi: uncertainty.slamCI.hi,
+            topOutlet,
+          }
+        : null,
+    });
+  }, [scanning, scoredSlam, uncertainty, stats, slam.flaggedCount, briefDate]);
+
   // Derived views.
   const distribution = useMemo(() => atmosphere(scored), [scored]);
   const cards = useMemo(() => scorecards(scored), [scored]);
@@ -191,6 +248,20 @@ export default function App() {
         onScan={runScan}
         onHelp={() => setShowHelp(true)}
       />
+
+      {(scanning || scored.length > 0 || meta.fetchedCount > 0) && (
+        <section className="mx-auto max-w-[1400px] px-6 pt-6">
+          <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
+            Today&apos;s Briefing
+          </h2>
+          <p className="max-w-3xl font-display text-[15px] leading-relaxed text-[#e8e4dc]/90">
+            {scanning ? 'Brief assembles when the scan completes.' : briefing}
+          </p>
+          <p className="mt-1.5 font-mono text-[10px] tracking-wide text-white/30">
+            Generated from this scan&apos;s aggregates — not written by AI.
+          </p>
+        </section>
+      )}
 
       {meta.status.length > 0 && (
         <div className="mx-auto max-w-[1400px] px-6 pt-3">
