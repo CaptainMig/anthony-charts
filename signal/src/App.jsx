@@ -7,6 +7,7 @@ import { detectSlam, slamStats } from './lib/slam.js';
 import { bootstrapCI } from './lib/bootstrap.js';
 import { permutationTest } from './lib/permutation.js';
 import { buildBriefing } from './lib/briefing.js';
+import { fetchTrends, makeTrendingMatcher } from './lib/trends.js';
 import { setFramingIntegrity } from './lib/integrity.js';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
@@ -14,6 +15,7 @@ import StatsStrip from './components/StatsStrip.jsx';
 import Scorecards from './components/Scorecards.jsx';
 import HeadlineTable from './components/HeadlineTable.jsx';
 import MethodologyPanel from './components/MethodologyPanel.jsx';
+import TrendsPanel from './components/TrendsPanel.jsx';
 
 const meanPct = (arr) =>
   arr.length ? (100 * arr.reduce((s, x) => s + x, 0)) / arr.length : 0;
@@ -57,6 +59,9 @@ export default function App() {
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [selectedPub, setSelectedPub] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  // Google Trends — display-only, fetched independently of scoring. null until
+  // first fetch resolves; { status: 'ok'|'error', terms } thereafter.
+  const [trends, setTrends] = useState(null);
 
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
@@ -66,11 +71,33 @@ export default function App() {
     setFramingIntegrity(integrityScore(scored));
   }, [scored]);
 
+  // Fetch Google Trends once on mount — fully independent of scoring. fetchTrends
+  // never throws and never retries, so a Trends outage can't touch a scan.
+  useEffect(() => {
+    let alive = true;
+    fetchTrends().then((t) => {
+      if (alive) setTrends(t);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // Display-only matcher for the trending cross-reference dot on headline rows.
+  const isTrending = useMemo(
+    () => makeTrendingMatcher(trends?.status === 'ok' ? trends.terms : []),
+    [trends]
+  );
+
   async function runScan() {
     const myRun = ++runRef.current;
     setScanning(true);
     setSelectedPub(null);
     setProgress({ done: 0, total: 0 });
+
+    // Refresh Trends in parallel — fire-and-forget, never awaited, so a slow or
+    // broken Trends endpoint cannot delay or break the scan.
+    fetchTrends().then(setTrends);
 
     const status = [];
     const { headlines, skipped, errored } = await fetchAllFeeds({
@@ -306,7 +333,8 @@ export default function App() {
         </div>
       )}
 
-      <HeadlineTable headlines={tableRows} />
+      <TrendsPanel trends={trends} />
+      <HeadlineTable headlines={tableRows} isTrending={isTrending} />
 
       {scored.length === 0 && !scanning && (
         <div className="mx-auto max-w-[1400px] px-6 pb-20 text-center">

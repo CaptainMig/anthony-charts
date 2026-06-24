@@ -62,7 +62,7 @@ function ScoreCell({ value, invert = false }) {
   );
 }
 
-export default function HeadlineTable({ headlines }) {
+export default function HeadlineTable({ headlines, isTrending }) {
   const [filter, setFilter] = useState('ALL');
   const [sort, setSort] = useState({ key: 'age', dir: 'asc' });
   const scrollRef = useRef(null);
@@ -211,6 +211,16 @@ export default function HeadlineTable({ headlines }) {
                       <VerdictPill verdict={h.score.verdict} />
                     </div>
                     <div className="flex min-w-0 flex-1 items-center gap-2 px-3" title={h.title}>
+                      {(() => {
+                        const trend = isTrending ? isTrending(h.title) : null;
+                        return trend ? (
+                          <span
+                            className="h-1.5 w-1.5 shrink-0 rounded-full"
+                            style={{ backgroundColor: '#c8971f' }}
+                            title={`Trending on Google: ${trend}`}
+                          />
+                        ) : null;
+                      })()}
                       <a
                         href={h.link}
                         target="_blank"
