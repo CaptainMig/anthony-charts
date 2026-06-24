@@ -48,8 +48,12 @@ function parse(xml) {
       link: linkOf(b),
       pubDate: decode(tag(b, 'pubDate') || tag(b, 'published') || tag(b, 'updated')) || null,
       summary: decode(tag(b, 'description') || tag(b, 'content:encoded') || tag(b, 'summary')).slice(0, 800),
+      // Google Trends RSS only — search-volume string (e.g. "200,000+"). null elsewhere.
+      traffic: decode(tag(b, 'ht:approx_traffic')) || null,
     }))
-    .filter((it) => it.title.length > 5)
+    // >1 (not >5) so short trend terms like "NBA"/"Messi" survive; real news
+    // item titles are always long, so this doesn't admit junk for news feeds.
+    .filter((it) => it.title.length > 1)
     .slice(0, HEADLINES_PER_FEED);
 }
 
