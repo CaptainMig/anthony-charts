@@ -3,7 +3,7 @@ import { ACCENT } from '../config.js';
 const todayLabel = () =>
   new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-export default function NavBar({ articleCount, scanning, progress, onScan, onHelp }) {
+export default function NavBar({ articleCount, scanning, progress, onScan, onHelp, tvOn, onToggleTv }) {
   return (
     <nav className="sticky top-0 z-30 border-b-hair border-white/10 bg-ink/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-4">
@@ -26,6 +26,21 @@ export default function NavBar({ articleCount, scanning, progress, onScan, onHel
           <span className="rounded-sm border-hair border-white/15 px-2.5 py-1 font-mono text-[11px] tabular-nums text-white/70">
             {articleCount} articles
           </span>
+
+          <button
+            type="button"
+            onClick={onToggleTv}
+            title="Live news TV (off by default)"
+            aria-pressed={!!tvOn}
+            className="rounded-sm border-hair px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors"
+            style={{
+              color: tvOn ? '#0f0d0a' : 'rgba(232,228,220,0.55)',
+              backgroundColor: tvOn ? '#e8e4dc' : 'transparent',
+              borderColor: 'rgba(255,255,255,0.15)',
+            }}
+          >
+            Live TV
+          </button>
 
           <button
             type="button"

@@ -16,6 +16,7 @@ import Scorecards from './components/Scorecards.jsx';
 import HeadlineTable from './components/HeadlineTable.jsx';
 import MethodologyPanel from './components/MethodologyPanel.jsx';
 import TrendsPanel from './components/TrendsPanel.jsx';
+import TvRail from './components/TvRail.jsx';
 
 const meanPct = (arr) =>
   arr.length ? (100 * arr.reduce((s, x) => s + x, 0)) / arr.length : 0;
@@ -59,6 +60,8 @@ export default function App() {
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [selectedPub, setSelectedPub] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  // Live TV rail — OFF by default. No iframe/video network exists until on.
+  const [liveTv, setLiveTv] = useState(false);
   // Google Trends — display-only, fetched independently of scoring. null until
   // first fetch resolves; { status: 'ok'|'error', terms } thereafter.
   const [trends, setTrends] = useState(null);
@@ -274,6 +277,8 @@ export default function App() {
         progress={progress}
         onScan={runScan}
         onHelp={() => setShowHelp(true)}
+        tvOn={liveTv}
+        onToggleTv={() => setLiveTv((v) => !v)}
       />
 
       {(scanning || scored.length > 0 || meta.fetchedCount > 0) && (
@@ -353,6 +358,7 @@ export default function App() {
       </footer>
 
       <MethodologyPanel open={showHelp} onClose={() => setShowHelp(false)} />
+      <TvRail open={liveTv} onClose={() => setLiveTv(false)} />
     </div>
   );
 }
