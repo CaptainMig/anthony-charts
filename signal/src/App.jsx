@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { STORAGE_KEYS, INTEGRITY_VERDICTS } from './config.js';
+import { STORAGE_KEYS, INTEGRITY_VERDICTS, CACHE_VERSION, CACHE_TTL_MS } from './config.js';
 import { fetchAllFeeds } from './lib/feeds.js';
 import { scoreHeadlines } from './lib/scoring.js';
 import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.js';
@@ -41,6 +41,13 @@ function loadCache() {
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed.scored)) return null;
+    // Evict caches from an older app version (wrong shape / old feed set) and
+    // scans past their TTL. Without this, a returning visitor keeps seeing an
+    // old scan forever — localStorage survives reloads, so a hard refresh alone
+    // never clears it (the classic "stale in a normal window, fine in incognito"
+    // symptom). A miss here just lands on the same empty state a fresh visit sees.
+    if (parsed.v !== CACHE_VERSION) return null;
+    if (typeof parsed.at !== 'number' || Date.now() - parsed.at > CACHE_TTL_MS) return null;
     return parsed;
   } catch {
     return null;
@@ -161,6 +168,7 @@ export default function App() {
       localStorage.setItem(
         STORAGE_KEYS.lastScan,
         JSON.stringify({
+          v: CACHE_VERSION,
           at: Date.now(),
           scored: collected,
           meta: { fetchedCount, sourcesActive, status: finalStatus },

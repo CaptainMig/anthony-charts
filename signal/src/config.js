@@ -86,3 +86,14 @@ export const INK = '#0f0d0a';
 export const STORAGE_KEYS = {
   lastScan: 'signal.lastScan',
 };
+
+// Bump this whenever the cached scan's shape, the feed set, or the scoring
+// changes. A cache stamped with an older version is discarded on load, so a
+// returning visitor can never be stranded on a stale scan that a hard refresh
+// won't clear (localStorage survives reloads; only a version/TTL check evicts
+// it). Mirrors a fresh/incognito visit: empty state → prompt to scan.
+export const CACHE_VERSION = 2;
+
+// A cached scan older than this is treated as stale and ignored. Signal reports
+// "the news right now," so a day-old scan shouldn't masquerade as current.
+export const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
