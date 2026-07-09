@@ -8,8 +8,10 @@
 // ---------------------------------------------------------------------------
 
 // Unofficial endpoint (Google killed the official Trends API) — fetched through
-// our own server proxy because the browser can't reach it (CORS).
-const TRENDS_RSS = 'https://trends.google.com/trends/trendingsearches/daily/rss?geo=US';
+// our own server proxy because the browser can't reach it (CORS). The old
+// /trends/trendingsearches/daily/rss endpoint died with the Trending Now
+// redesign; this is its successor. Same RSS shape incl. ht:approx_traffic.
+const TRENDS_RSS = 'https://trends.google.com/trending/rss?geo=US';
 
 /**
  * Fetch the daily US trending searches. Always resolves (never throws):
