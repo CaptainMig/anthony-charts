@@ -103,7 +103,7 @@ export default function App() {
     fetchTrends().then(setTrends);
 
     const status = [];
-    const { headlines, skipped, errored } = await fetchAllFeeds({
+    const { headlines, skipped, errored, staleFeeds, drops } = await fetchAllFeeds({
       onRateLimit: ({ feed }) => {
         if (runRef.current !== myRun) return;
         setMeta((m) => ({
@@ -122,6 +122,19 @@ export default function App() {
           .map((e) => `${e.name} (${e.reason || 'error'})`)
           .join(', ')}`
       );
+    // Feed hygiene — surface every dropped item honestly. A feed whose items
+    // ALL dropped as stale is a frozen/archived feed, reported as such rather
+    // than silently vanishing from the scan.
+    const fullyStale = new Set(staleFeeds.map((f) => f.name));
+    for (const f of staleFeeds) {
+      status.push(`${f.name}: ${f.dropped} items dropped (stale feed — nothing newer than 48h)`);
+    }
+    for (const d of drops.filter((d) => !fullyStale.has(d.name))) {
+      const parts = [];
+      if (d.stale) parts.push(`${d.stale} stale >48h`);
+      if (d.malformed) parts.push(`${d.malformed} malformed`);
+      status.push(`${d.name}: ${d.stale + d.malformed} item(s) dropped (${parts.join(', ')})`);
+    }
 
     const sourcesActive = new Set(headlines.map((h) => h.publication)).size;
     const fetchedCount = headlines.length;

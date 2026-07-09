@@ -1,10 +1,11 @@
 // ---------------------------------------------------------------------------
 // RSS ingestion via the free rss2json.com proxy.
 // ---------------------------------------------------------------------------
-import { FEEDS, HEADLINES_PER_FEED } from '../config.js';
+import { FEEDS, HEADLINES_PER_FEED, MAX_ITEM_AGE_HOURS, MIN_HEADLINE_CHARS } from '../config.js';
 
 const RSS2JSON = 'https://api.rss2json.com/v1/api.json';
 const RATE_LIMIT_WAIT_MS = 30_000;
+const MAX_ITEM_AGE_MS = MAX_ITEM_AGE_HOURS * 60 * 60 * 1000;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -31,6 +32,37 @@ function cleanTitle(raw) {
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ');
   return txt.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Freshness gate. 'fresh' = parseable date within MAX_ITEM_AGE_HOURS of scan
+ * time; 'stale' = parseable but older; 'undated' = no parseable date (kept but
+ * tagged — we don't assume fresh or stale). Stale items are dropped before
+ * scoring so a frozen feed snapshot can't contaminate totals, aggregates, the
+ * Briefing, or the scan history.
+ */
+export function classifyFreshness(pubDate, now = Date.now()) {
+  if (!pubDate) return 'undated';
+  const then = new Date(pubDate).getTime();
+  if (!Number.isFinite(then)) return 'undated';
+  return now - then > MAX_ITEM_AGE_MS ? 'stale' : 'fresh';
+}
+
+/**
+ * Sanity filter. True when a cleaned "headline" is obviously not a headline:
+ * still contains HTML markup (some feeds double-encode, so entity decoding can
+ * resurrect literal <a href=...> fragments AFTER tag stripping — the Sky News
+ * artifact), is empty once any residual tags are stripped, or is shorter than
+ * MIN_HEADLINE_CHARS. Rejected items are counted in the status line and never
+ * scored.
+ */
+export function isMalformedTitle(title) {
+  const t = (title || '').trim();
+  if (!t) return true;
+  if (/<\s*a\b|href\s*=|<\//i.test(t)) return true; // anchor/href/closing-tag fragments
+  if (/<[a-z!/][^>]*>/i.test(t)) return true; // any other residual tag
+  if (t.replace(/<[^>]*>/g, '').trim().length < MIN_HEADLINE_CHARS) return true;
+  return false;
 }
 
 /**
@@ -143,15 +175,21 @@ async function fetchFeed(feed, onRateLimit) {
 }
 
 /**
- * Pull every configured feed in parallel, flatten, dedupe by headline text.
+ * Pull every configured feed in parallel, gate for freshness and sanity,
+ * flatten, dedupe by headline text.
  *
  * @param {(info) => void} onRateLimit  called when a 429 triggers a 30s wait.
- * @returns {{ headlines, skipped, errored }}
- *   headlines — deduped [{ id, title, link, pubDate, publication, owner, key }]
- *   skipped   — feed names that came back empty
- *   errored   — [{ name, reason }] feeds that failed
+ * @returns {{ headlines, skipped, errored, staleFeeds, drops }}
+ *   headlines  — deduped, fresh-or-undated, sane
+ *                [{ id, title, link, pubDate, undated, publication, owner, key }]
+ *   skipped    — feed names that came back empty
+ *   errored    — [{ name, reason }] feeds that failed
+ *   staleFeeds — [{ name, dropped }] feeds whose items ALL dropped as stale
+ *                (a frozen/archived feed — surfaced, never silently vanished)
+ *   drops      — [{ name, stale, malformed, kept, fetched }] per-feed counts,
+ *                only for feeds that dropped at least one item
  */
-export async function fetchAllFeeds({ onRateLimit } = {}) {
+export async function fetchAllFeeds({ onRateLimit, now = Date.now() } = {}) {
   const results = await Promise.all(
     FEEDS.map((feed) =>
       fetchFeed(feed, () => onRateLimit?.({ feed: feed.name })).then((r) => ({ feed, ...r }))
@@ -161,6 +199,8 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
   const headlines = [];
   const skipped = [];
   const errored = [];
+  const staleFeeds = [];
+  const drops = [];
   const seen = new Set();
   let counter = 0;
 
@@ -173,15 +213,33 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
       errored.push({ name: r.feed.name, reason: r.reason, url: r.feed.url });
       continue;
     }
+
+    let stale = 0;
+    let malformed = 0;
+    let kept = 0;
     for (const item of r.items) {
+      // Sanity filter first: a malformed "headline" is junk regardless of date.
+      if (isMalformedTitle(item.title)) {
+        malformed++;
+        continue;
+      }
+      // Freshness gate: stale items are dropped before scoring; undated items
+      // are kept but tagged so nothing downstream mistakes them for fresh.
+      const freshness = classifyFreshness(item.pubDate, now);
+      if (freshness === 'stale') {
+        stale++;
+        continue;
+      }
       const key = dedupeKey(item.title);
       if (!key || seen.has(key)) continue;
       seen.add(key);
+      kept++;
       headlines.push({
         id: `h${counter++}`,
         title: item.title,
         link: item.link,
-        pubDate: item.pubDate,
+        pubDate: freshness === 'undated' ? null : item.pubDate,
+        undated: freshness === 'undated',
         // Aggregator feeds (Google News) carry only a noisy snippet, not the
         // article body. Empty it so the scorer's empty-body branch fires
         // deterministically (Fidelity 5, VERIFIED unless a tease — never
@@ -193,7 +251,16 @@ export async function fetchAllFeeds({ onRateLimit } = {}) {
         key,
       });
     }
+
+    if (stale > 0 || malformed > 0) {
+      drops.push({ name: r.feed.name, stale, malformed, kept, fetched: r.items.length });
+    }
+    // Every item stale → the feed is serving a frozen snapshot. Report it as a
+    // stale feed rather than letting the source silently disappear.
+    if (kept === 0 && stale > 0) {
+      staleFeeds.push({ name: r.feed.name, dropped: stale });
+    }
   }
 
-  return { headlines, skipped, errored };
+  return { headlines, skipped, errored, staleFeeds, drops };
 }

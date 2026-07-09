@@ -149,9 +149,30 @@ export default function MethodologyPanel({ open, onClose }) {
             AP and Reuters discontinued their public RSS feeds, so they are recovered via Google
             News aggregation and scored on the headline plus a limited snippet — not the full
             article. Their fidelity signal is therefore weaker than direct-feed sources; the
-            framing-integrity number reflects that honestly rather than hiding the gap. The
-            Financial Times is paywall-limited and scored the same way — headline plus snippet, a
-            weaker fidelity signal than full-text sources.
+            framing-integrity number reflects that honestly rather than hiding the gap. The Wall
+            Street Journal&apos;s direct RSS endpoint froze in early 2025 and now serves an
+            archived snapshot, so WSJ is recovered the same way. The Financial Times is
+            paywall-limited and scored the same way — headline plus snippet, a weaker fidelity
+            signal than full-text sources.
+          </p>
+
+          <SectionHeader>Feed hygiene</SectionHeader>
+          <p className="text-[12.5px] leading-relaxed text-white/60">
+            Before anything is scored, two gates run on every fetched item. A{' '}
+            <span className="text-white/80">freshness gate</span> drops any item published more
+            than 48 hours before the scan — stale items are never scored and never counted in
+            totals, aggregates, the Briefing, or history. Items with no parseable date are kept
+            but tagged undated rather than assumed fresh. A{' '}
+            <span className="text-white/80">sanity filter</span> rejects obviously malformed
+            headlines (residual HTML fragments, empty or near-empty strings). Every drop is
+            reported in the scan status line, and a feed whose items are all stale is flagged as
+            a stale feed rather than silently disappearing.
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
+            <span style={{ color: '#c8971f' }}>Historical note:</span> scans recorded before July
+            9, 2026 predate these gates and could include stale or malformed feed items, so trend
+            comparisons across that date are not strictly like-for-like. Existing scan history has
+            not been rewritten — it is a record.
           </p>
           <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
             The <span style={{ color: '#f08080' }}>SLAM</span> badge is a transparent lexicon match,

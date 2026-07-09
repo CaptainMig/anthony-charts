@@ -36,7 +36,16 @@ export const FEEDS = [
   { name: 'The Hill', owner: 'Nexstar Media', url: 'https://thehill.com/feed/' },
   { name: 'Politico', owner: 'Axel Springer', url: 'https://www.politico.com/rss/politicopicks.xml' },
   { name: 'The Guardian', owner: 'Scott Trust', url: 'https://www.theguardian.com/world/rss' },
-  { name: 'WSJ', owner: 'News Corp', url: 'https://feeds.a.dj.com/rss/RSSWorldNews.xml' },
+  // WSJ's direct endpoint (feeds.a.dj.com/rss/RSSWorldNews.xml) froze around
+  // Jan 2025 and now serves an archived snapshot — live scans showed every item
+  // ~500+ days old. Recovered source-restricted through Google News like
+  // AP/Reuters above (headline + thin snippet, so thinBody).
+  {
+    name: 'WSJ (via Google News)',
+    owner: 'News Corp',
+    url: 'https://news.google.com/rss/search?q=site:wsj.com+when:1d&hl=en-US&gl=US&ceid=US:en',
+    thinBody: true,
+  },
   { name: 'NY Times', owner: 'NYT Co.', url: 'https://rss.nytimes.com/services/xml/rss/nyt/US.xml' },
   { name: 'LA Times', owner: 'Patrick Soon-Shiong', url: 'https://www.latimes.com/world/rss2.0.xml' },
   // Added for owner-grouping (Part 2). Owner labels are load-bearing — they must
@@ -52,6 +61,15 @@ export const FEEDS = [
 ];
 
 export const HEADLINES_PER_FEED = 10;
+
+// Feed hygiene (see lib/feeds.js). Items with a parseable published date older
+// than this are dropped before scoring — never counted in totals, aggregates,
+// the Briefing, or history. Items with NO parseable date are kept but tagged
+// `undated` (not assumed fresh or stale).
+export const MAX_ITEM_AGE_HOURS = 48;
+// A cleaned "headline" shorter than this is rejected as malformed (feed junk,
+// nav fragments), as is anything still containing HTML markup after cleaning.
+export const MIN_HEADLINE_CHARS = 15;
 
 // Anthropic model + concurrency for the scoring queue.
 export const MODEL = 'claude-sonnet-4-6';
