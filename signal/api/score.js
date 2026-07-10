@@ -17,9 +17,12 @@ const rateLimits = new Map();
 const RATE_LIMIT = 200;
 const RATE_WINDOW_MS = 60_000;
 
-// Respond within Vercel's function budget even if Claude is slow, so a slow
-// call fails cleanly (client retries) instead of being killed mid-flight.
-const UPSTREAM_TIMEOUT_MS = 8500;
+// Upstream budget, well inside the 60s function ceiling (vercel.json), so a
+// hung Anthropic call returns a structured, honest fallback response instead
+// of the platform killing the function mid-flight. Fallbacks render as
+// UNSCORED client-side — a default score presented as a score is exactly what
+// Signal exists to catch.
+const UPSTREAM_TIMEOUT_MS = 25_000;
 
 function clientIp(req) {
   const fwd = req.headers['x-forwarded-for'];
@@ -59,34 +62,41 @@ export default async function handler(req, res) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'Server not configured' });
 
-  const client = new Anthropic({ apiKey });
+  const client = new Anthropic({ apiKey, maxRetries: 0 });
 
+  // AbortController budget: a genuinely hung upstream call is cancelled (not
+  // just raced past) and reported as a structured fallback the client can
+  // render as UNSCORED and retry — never as a silent default score.
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), UPSTREAM_TIMEOUT_MS);
   try {
-    const response = await Promise.race([
-      client.messages.create({
+    const response = await client.messages.create(
+      {
         model: MODEL,
         max_tokens: 160,
         temperature: 0, // classification task — determinism over creativity
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: userContent(headline, article) }],
-      }),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('upstream timeout')), UPSTREAM_TIMEOUT_MS)
-      ),
-    ]);
+      },
+      { signal: ctrl.signal }
+    );
     const text = response.content
       .filter((b) => b.type === 'text')
       .map((b) => b.text)
       .join('');
     const score = parseScore(text);
-    return res.status(200).json(score);
+    return res.status(200).json({ ok: true, ...score });
   } catch (e) {
-    console.error('Scoring error:', e);
-    return res.status(500).json({
-      error: e.message,
-      type: e?.constructor?.name,
+    const aborted = ctrl.signal.aborted || e?.name === 'AbortError' || e?.name === 'APIUserAbortError';
+    console.error('Scoring error:', aborted ? 'upstream timeout' : e);
+    return res.status(200).json({
+      ok: false,
+      fallback: true,
+      reason: aborted ? 'timeout' : 'error',
+      detail: e?.message,
       status: e?.status,
-      hasKey: !!process.env.ANTHROPIC_API_KEY,
     });
+  } finally {
+    clearTimeout(timer);
   }
 }

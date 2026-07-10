@@ -6,17 +6,20 @@ const ROW_HEIGHT = 44; // px — fixed so the virtual window math stays simple
 const VIRTUALIZE_OVER = 100;
 const OVERSCAN = 8;
 
-const FILTERS = ['ALL', ...VERDICTS];
+// UNSCORED is a failure state, not a verdict — it filters like one but its
+// rows are grey and carry no numbers.
+const FILTERS = ['ALL', ...VERDICTS, 'UNSCORED'];
 
-// Column definitions: how to read the sort key from a row.
+// Column definitions: how to read the sort key from a row. Null scores
+// (UNSCORED rows) sort below every real number.
 const COLUMNS = [
   { key: 'verdict', label: 'Verdict', get: (h) => h.score.verdict, align: 'left' },
   { key: 'headline', label: 'Headline', get: (h) => h.title.toLowerCase(), align: 'left', grow: true },
   { key: 'publication', label: 'Publication', get: (h) => h.publication.toLowerCase(), align: 'left' },
   { key: 'owner', label: 'Owner', get: (h) => h.owner.toLowerCase(), align: 'left' },
-  { key: 'truth', label: 'Fidelity', get: (h) => h.score.truth, align: 'right' },
-  { key: 'sens', label: 'Sens', get: (h) => h.score.sens, align: 'right' },
-  { key: 'click', label: 'Clickbait', get: (h) => h.score.click, align: 'right' },
+  { key: 'truth', label: 'Fidelity', get: (h) => h.score.truth ?? -1, align: 'right' },
+  { key: 'sens', label: 'Sens', get: (h) => h.score.sens ?? -1, align: 'right' },
+  { key: 'click', label: 'Clickbait', get: (h) => h.score.click ?? -1, align: 'right' },
   { key: 'age', label: 'Age', get: (h) => ageMinutes(h.pubDate), align: 'right' },
 ];
 
@@ -53,6 +56,10 @@ function SlamBadge({ slam }) {
 }
 
 function ScoreCell({ value, invert = false }) {
+  // UNSCORED rows carry no numbers — render an em dash, never a default score.
+  if (value == null) {
+    return <span className="font-mono text-white/25">—</span>;
+  }
   const v = invert ? 11 - value : value;
   const color = v >= 7 ? '#6fd49a' : v >= 4 ? '#c8971f' : '#f08080';
   return (
@@ -90,10 +97,10 @@ export default function HeadlineTable({ headlines, isTrending }) {
   }, [headlines, filter, sort]);
 
   const counts = useMemo(() => {
-    const c = { ALL: headlines.length, SLAM: 0 };
+    const c = { ALL: headlines.length, SLAM: 0, UNSCORED: 0 };
     for (const v of VERDICTS) c[v] = 0;
     for (const h of headlines) {
-      c[h.score.verdict]++;
+      if (h.score.verdict in c) c[h.score.verdict]++;
       if (h.slam?.matched) c.SLAM++;
     }
     return c;

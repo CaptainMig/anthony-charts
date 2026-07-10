@@ -10,10 +10,31 @@ const MAX_ATTEMPTS = 4;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// The honest failure marker. NEVER a default score dressed up as a verdict —
+// UNSCORED rows render grey and are excluded from every average, and the app
+// runs one retry pass over them after the first sweep completes.
+export function unscoredMarker(reason) {
+  return {
+    verdict: 'UNSCORED',
+    unscored: true,
+    truth: null,
+    sens: null,
+    click: null,
+    rationale: `not scored (${reason})`,
+  };
+}
+
+// True for rows that carry a real model verdict. Also rejects the legacy
+// `failed: true` fallback rows that older cached scans may still contain.
+export function isRealScore(score) {
+  return !!score && !score.unscored && !score.failed;
+}
+
 // Score one headline via the proxy. Retries throttling/server errors with
 // exponential backoff + jitter; gives up on auth/bad-request errors (they
-// won't fix themselves). On total failure marks the row UNVERIFIED so it still
-// renders.
+// won't fix themselves). A structured server fallback ({ok:false} — upstream
+// timeout/error after the server burned its own 25s budget) is returned as
+// UNSCORED immediately; the caller's post-sweep retry pass picks it up.
 async function scoreOne(headline) {
   let lastErr;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
@@ -26,6 +47,10 @@ async function scoreOne(headline) {
 
       if (res.ok) {
         const score = await res.json();
+        if (score?.fallback) {
+          console.warn(`[signal] /api/score fallback (${score.reason}): ${score.detail || ''}`);
+          return unscoredMarker(score.reason || 'error');
+        }
         if (!score || !score.verdict) throw new Error('response missing verdict');
         return score;
       }
@@ -36,7 +61,7 @@ async function scoreOne(headline) {
         console.warn(`[signal] /api/score ${res.status} (not retrying): ${detail.error || ''}`);
         break;
       }
-      // 429 / 5xx / timeout — retryable.
+      // 429 / 5xx — retryable.
       throw new Error(`HTTP ${res.status}${detail.error ? ` — ${detail.error}` : ''}`);
     } catch (err) {
       lastErr = err;
@@ -48,8 +73,8 @@ async function scoreOne(headline) {
     }
   }
 
-  console.warn('[signal] /api/score failed after retries, using fallback:', lastErr?.message || lastErr);
-  return { verdict: 'UNVERIFIED', truth: 5, sens: 5, click: 5, rationale: 'scoring failed', failed: true };
+  console.warn('[signal] /api/score failed after retries, marking UNSCORED:', lastErr?.message || lastErr);
+  return unscoredMarker('proxy unreachable');
 }
 
 /**

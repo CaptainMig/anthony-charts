@@ -31,10 +31,20 @@ export const FEEDS = [
   { name: 'CBS News', owner: 'Paramount / CBS', url: 'https://www.cbsnews.com/latest/rss/main' },
   { name: 'ABC News', owner: 'Disney / ABC', url: 'https://abcnews.go.com/abcnews/usheadlines' },
   { name: 'NBC News', owner: 'Comcast / NBCUniversal', url: 'https://feeds.nbcnews.com/nbcnews/public/news' },
-  { name: 'CNN', owner: 'Warner Bros. Discovery', url: 'https://rss.cnn.com/rss/cnn_topstories.rss' },
+  // rss.cnn.com is a FeedBurner-era host that stopped serving reliably (one of
+  // the 7 outright feed failures in the July 2026 sweep) — recovered
+  // source-restricted through Google News like AP/Reuters/WSJ, labeled honestly.
+  {
+    name: 'CNN (via Google News)',
+    owner: 'Warner Bros. Discovery',
+    url: 'https://news.google.com/rss/search?q=site:cnn.com+when:1d&hl=en-US&gl=US&ceid=US:en',
+    thinBody: true,
+  },
   { name: 'CNBC', owner: 'Comcast / NBCUniversal', url: 'https://www.cnbc.com/id/100727362/device/rss/rss.html' },
   { name: 'The Hill', owner: 'Nexstar Media', url: 'https://thehill.com/feed/' },
-  { name: 'Politico', owner: 'Axel Springer', url: 'https://www.politico.com/rss/politicopicks.xml' },
+  // www.politico.com/rss/politicopicks.xml failed in the July 2026 sweep;
+  // rss.politico.com is Politico's canonical feed host and still publishes.
+  { name: 'Politico', owner: 'Axel Springer', url: 'https://rss.politico.com/politics-news.xml' },
   { name: 'The Guardian', owner: 'Scott Trust', url: 'https://www.theguardian.com/world/rss' },
   // WSJ's direct endpoint (feeds.a.dj.com/rss/RSSWorldNews.xml) froze around
   // Jan 2025 and now serves an archived snapshot — live scans showed every item
@@ -85,6 +95,9 @@ export const VERDICT_COLORS = {
   CONTESTED: '#c5a0f0',
   UNVERIFIED: '#c8971f',
   MISLEADING: '#f08080',
+  // Not a model verdict: the scoring call failed (timeout/error) and the row is
+  // shown grey and excluded from every average. See lib/scoring.js.
+  UNSCORED: '#8d939e',
 };
 
 export const VERDICT_DEFINITIONS = {

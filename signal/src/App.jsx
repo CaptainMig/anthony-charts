@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { STORAGE_KEYS, INTEGRITY_VERDICTS } from './config.js';
 import { fetchAllFeeds } from './lib/feeds.js';
-import { scoreHeadlines } from './lib/scoring.js';
+import { scoreHeadlines, isRealScore } from './lib/scoring.js';
 import { atmosphere, scorecards, stripStats, integrityScore } from './lib/stats.js';
 import { detectSlam, slamStats } from './lib/slam.js';
 import { bootstrapCI } from './lib/bootstrap.js';
@@ -69,10 +69,16 @@ export default function App() {
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
 
+  // Rows with a real model verdict. UNSCORED rows (scoring call failed) and
+  // legacy failed-fallback rows from old cached scans render in the table but
+  // are excluded from every aggregate — a default presented as a score is
+  // exactly what Signal exists to catch.
+  const realScored = useMemo(() => scored.filter((h) => isRealScore(h.score)), [scored]);
+
   // Keep the exported Framing Integrity value current as headlines stream in.
   useEffect(() => {
-    setFramingIntegrity(integrityScore(scored));
-  }, [scored]);
+    setFramingIntegrity(integrityScore(realScored));
+  }, [realScored]);
 
   // Fetch Google Trends once on mount — fully independent of scoring. fetchTrends
   // never throws and never retries, so a Trends outage can't touch a scan.
@@ -157,14 +163,34 @@ export default function App() {
 
     if (runRef.current !== myRun) return;
 
-    // If a large share of headlines fell back, the scoring proxy is failing —
-    // surface it instead of silently showing a wall of UNVERIFIED.
-    const failedCount = collected.filter((h) => h.score.failed).length;
+    // Retry pass: one more sweep over anything that came back UNSCORED
+    // (upstream timeout/error). Successes replace their rows in place.
+    const firstPassUnscored = collected.filter((h) => h.score.unscored);
+    if (firstPassUnscored.length) {
+      setMeta((m) => ({
+        ...m,
+        status: [...status, `retrying ${firstPassUnscored.length} unscored headline(s)…`],
+      }));
+      await scoreHeadlines(firstPassUnscored, {
+        shouldStop: () => runRef.current !== myRun,
+        onScored: (headline, score) => {
+          if (runRef.current !== myRun || score.unscored) return;
+          const i = collected.findIndex((h) => h.id === headline.id);
+          if (i !== -1) collected[i] = { ...collected[i], score };
+          setScored([...collected]);
+        },
+      });
+      if (runRef.current !== myRun) return;
+    }
+
+    // Anything still UNSCORED after the retry pass stays visibly grey and out
+    // of the averages — surfaced here instead of hidden in a default verdict.
+    const unscoredCount = collected.filter((h) => h.score.unscored).length;
     const finalStatus =
-      failedCount > 0
+      unscoredCount > 0
         ? [
             ...status,
-            `${failedCount}/${collected.length} headlines could not be scored — check the /api/score proxy and the ANTHROPIC_API_KEY env var in Vercel`,
+            `${unscoredCount}/${collected.length} headline(s) UNSCORED after retry (scoring timeout/error) — shown grey, excluded from averages`,
           ]
         : status;
     setMeta({ fetchedCount, sourcesActive, status: finalStatus });
@@ -190,34 +216,41 @@ export default function App() {
     () => scored.map((h) => ({ ...h, slam: detectSlam(h.title) })),
     [scored]
   );
-  const slam = useMemo(() => slamStats(scoredSlam), [scoredSlam]);
+  // Aggregates (slam stats, uncertainty, briefing) only ever see rows with a
+  // real verdict — UNSCORED rows appear in the table but never in the math.
+  const realScoredSlam = useMemo(
+    () => scoredSlam.filter((h) => isRealScore(h.score)),
+    [scoredSlam]
+  );
+  const slam = useMemo(() => slamStats(realScoredSlam), [realScoredSlam]);
 
   // Uncertainty math is heavier (2000 bootstrap / 5000 permutation), so compute
   // it once on the FINAL scan — not on every per-headline tick while scanning.
   const uncertainty = useMemo(() => {
-    if (scanning || scoredSlam.length === 0) return null;
-    const intVals = scoredSlam.map((h) => (INTEGRITY_VERDICTS.includes(h.score.verdict) ? 1 : 0));
-    const slamVals = scoredSlam.map((h) => (h.slam.matched ? 1 : 0));
-    const sensVals = scoredSlam.map((h) => h.score.sens);
+    if (scanning || realScoredSlam.length === 0) return null;
+    const intVals = realScoredSlam.map((h) => (INTEGRITY_VERDICTS.includes(h.score.verdict) ? 1 : 0));
+    const slamVals = realScoredSlam.map((h) => (h.slam.matched ? 1 : 0));
+    const sensVals = realScoredSlam.map((h) => h.score.sens);
     return {
       integrityCI: bootstrapCI(intVals, meanPct),
       slamCI: bootstrapCI(slamVals, meanPct),
       perm: permutationTest(slamVals, sensVals),
     };
-  }, [scanning, scoredSlam]);
+  }, [scanning, realScoredSlam]);
 
-  // Derived views.
-  const distribution = useMemo(() => atmosphere(scored), [scored]);
-  const cards = useMemo(() => scorecards(scored), [scored]);
+  // Derived views. Distribution, scorecards, and averages are computed over
+  // really-scored rows only; the headline count stays the full row count.
+  const distribution = useMemo(() => atmosphere(realScored), [realScored]);
+  const cards = useMemo(() => scorecards(realScored), [realScored]);
   const stats = useMemo(
     () => ({
-      ...stripStats(scored, {
+      ...stripStats(realScored, {
         totalHeadlines: scored.length,
         sourcesActive: meta.sourcesActive,
       }),
       slamIndex: slam.index,
     }),
-    [scored, meta.sourcesActive, slam.index]
+    [realScored, scored.length, meta.sourcesActive, slam.index]
   );
   const tableRows = useMemo(
     () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
@@ -234,11 +267,11 @@ export default function App() {
   // the two can never disagree. Declared after `stats` so it can read it.
   const briefing = useMemo(() => {
     if (scanning) return null; // assembles when the scan completes
-    if (scoredSlam.length === 0) return buildBriefing({ date: briefDate, n: 0 });
+    if (realScoredSlam.length === 0) return buildBriefing({ date: briefDate, n: 0 });
 
     const verdictCounts = {};
     const slamTally = {};
-    for (const h of scoredSlam) {
+    for (const h of realScoredSlam) {
       verdictCounts[h.score.verdict] = (verdictCounts[h.score.verdict] || 0) + 1;
       if (h.slam.matched) slamTally[h.publication] = (slamTally[h.publication] || 0) + 1;
     }
@@ -259,7 +292,9 @@ export default function App() {
 
     return buildBriefing({
       date: briefDate,
-      n: stats.totalHeadlines,
+      // Count only really-scored rows — the briefing's integrity/tone numbers
+      // are computed over these, so the headline count must match.
+      n: realScoredSlam.length,
       sources: stats.sourcesActive,
       fi: stats.integrity,
       fiLo: uncertainty?.integrityCI.lo,
@@ -278,7 +313,7 @@ export default function App() {
           }
         : null,
     });
-  }, [scanning, scoredSlam, uncertainty, stats, slam.flaggedCount, briefDate]);
+  }, [scanning, realScoredSlam, uncertainty, stats, slam.flaggedCount, briefDate]);
 
   const articleCount = meta.fetchedCount || scored.length;
 
@@ -316,7 +351,7 @@ export default function App() {
         </div>
       )}
 
-      <AtmosphereBar distribution={distribution} total={scored.length} />
+      <AtmosphereBar distribution={distribution} total={realScored.length} />
       <StatsStrip
         stats={stats}
         integrityCI={uncertainty?.integrityCI}
