@@ -58,11 +58,23 @@ HEADLINE: Starmer quits as Labour leader and paves way for contest for new prime
 ARTICLE: Keir Starmer announced he will resign as PM and Labour leader, remaining as caretaker until a successor is chosen. Nominations open July 9.
 → {"verdict":"VERIFIED","truth":9,"sensationalism":2,"clickbait":1,"rationale":"Headline matches the article's stated resignation plainly, no inflation."}`;
 
-// The per-headline user turn — headline plus its own article body.
-export function userContent(headline, article) {
-  const body = (article || '').toString().slice(0, 1200);
+// The per-headline user turn — headline plus its own article body. Sweep
+// scoring truncates the body hard (feed snippets); full-text mode (the
+// article detail page) sends the extracted article at a much higher budget.
+export function userContent(headline, article, { maxChars = 1200 } = {}) {
+  const body = (article || '').toString().slice(0, maxChars);
   return `HEADLINE: ${headline}\nARTICLE: ${body}`;
 }
+
+// Appended to the system prompt in full-text mode: same rubric and verdicts,
+// but the model is told the body is the real article and asked for a fuller
+// rationale (the detail page shows it verbatim).
+export const FULLTEXT_SUFFIX = `
+
+FULL-TEXT MODE: the ARTICLE below is the extracted full text of the story (it
+may be truncated). Judge whether the body actually supports the headline's
+claim. rationale: 2-3 sentences, max 60 words, citing what the body does or
+does not support.`;
 
 function clampScore(n) {
   const v = Math.round(Number(n));
@@ -85,6 +97,6 @@ export function parseScore(text) {
     truth: clampScore(raw.truth),
     sens: clampScore(raw.sensationalism ?? raw.sens),
     click: clampScore(raw.clickbait ?? raw.click),
-    rationale: typeof raw.rationale === 'string' ? raw.rationale.trim().slice(0, 240) : '',
+    rationale: typeof raw.rationale === 'string' ? raw.rationale.trim().slice(0, 420) : '',
   };
 }

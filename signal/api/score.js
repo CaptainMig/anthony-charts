@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 import Anthropic from '@anthropic-ai/sdk';
 import { MODEL } from '../src/config.js';
-import { SYSTEM_PROMPT, userContent, parseScore } from '../src/lib/prompt.js';
+import { SYSTEM_PROMPT, FULLTEXT_SUFFIX, userContent, parseScore } from '../src/lib/prompt.js';
 
 // Naive per-IP rate limit. In-memory, so it resets on cold start — adequate
 // as a light abuse guard, not a hard quota. Set well above a single full scan
@@ -56,8 +56,11 @@ export default async function handler(req, res) {
   rateLimits.set(ip, window);
   if (window.count > RATE_LIMIT) return res.status(429).json({ error: 'Rate limited' });
 
-  const { headline, article } = req.body || {};
+  // mode 'fulltext' (article detail page): the body is extracted article text,
+  // scored at a higher budget with a fuller rationale. Default: sweep mode.
+  const { headline, article, mode } = req.body || {};
   if (!headline) return res.status(400).json({ error: 'Missing headline' });
+  const fulltext = mode === 'fulltext';
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'Server not configured' });
@@ -73,10 +76,15 @@ export default async function handler(req, res) {
     const response = await client.messages.create(
       {
         model: MODEL,
-        max_tokens: 160,
+        max_tokens: fulltext ? 300 : 160,
         temperature: 0, // classification task — determinism over creativity
-        system: SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: userContent(headline, article) }],
+        system: fulltext ? SYSTEM_PROMPT + FULLTEXT_SUFFIX : SYSTEM_PROMPT,
+        messages: [
+          {
+            role: 'user',
+            content: userContent(headline, article, { maxChars: fulltext ? 6000 : 1200 }),
+          },
+        ],
       },
       { signal: ctrl.signal }
     );

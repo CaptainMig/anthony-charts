@@ -9,6 +9,8 @@ import { permutationTest } from './lib/permutation.js';
 import { buildBriefing } from './lib/briefing.js';
 import { fetchTrends, makeTrendingMatcher } from './lib/trends.js';
 import { setFramingIntegrity } from './lib/integrity.js';
+import { articleId, decodeShare, encodeShare } from './lib/article.js';
+import ArticleDetail from './components/ArticleDetail.jsx';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
 import StatsStrip from './components/StatsStrip.jsx';
@@ -33,6 +35,21 @@ function permVerdict(perm) {
   return perm.p < 0.05
     ? `Observed gap ${gapStr}. Slam-flagged headlines run hotter than chance (${pStr}). Hypothesis holds for this scan.`
     : `Observed gap ${gapStr}. No significant difference this scan (${pStr}). The verb may be decoration.`;
+}
+
+// Resolve the article route from the current URL. Two entry shapes:
+//   /article/:id?d=…   — internal navigation (pushState) and share links
+//   /?article=:id&d=…  — hard loads, handed over by api/og.js after unfurlers
+//                        read their per-article OG meta
+// Returns { id, payload } or null.
+function articleRoute() {
+  const { pathname, search } = window.location;
+  const params = new URLSearchParams(search);
+  const m = pathname.match(/^\/article\/([a-z0-9]+)$/i);
+  const id = m ? m[1] : params.get('article');
+  if (!id) return null;
+  const d = params.get('d');
+  return { id, payload: d ? decodeShare(d) : null };
 }
 
 function loadCache() {
@@ -68,6 +85,27 @@ export default function App() {
 
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
+
+  // Article detail route — /article/:id. Kept in sync with the History API so
+  // back/forward and shared links behave like real pages.
+  const [route, setRoute] = useState(() => articleRoute());
+  useEffect(() => {
+    const onPop = () => setRoute(articleRoute());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  function openArticle(h) {
+    const id = articleId(h.link);
+    window.history.pushState({}, '', `/article/${id}?d=${encodeShare(h)}`);
+    setRoute({ id, payload: null });
+    window.scrollTo({ top: 0 });
+  }
+
+  function closeArticle() {
+    window.history.pushState({}, '', '/');
+    setRoute(null);
+  }
 
   // Rows with a real model verdict. UNSCORED rows (scoring call failed) and
   // legacy failed-fallback rows from old cached scans render in the table but
@@ -317,6 +355,14 @@ export default function App() {
 
   const articleCount = meta.fetchedCount || scored.length;
 
+  // Detail-route headline: prefer the live scan's row (fresh score, pubDate);
+  // fall back to the share payload for devices that never ran a scan.
+  const articleHeadline = useMemo(() => {
+    if (!route) return null;
+    const local = scored.find((h) => articleId(h.link) === route.id);
+    return local || route.payload || null;
+  }, [route, scored]);
+
   return (
     <div className="min-h-screen bg-ink">
       <NavBar
@@ -329,6 +375,26 @@ export default function App() {
         onToggleTv={() => setLiveTv((v) => !v)}
       />
 
+      {route ? (
+        articleHeadline ? (
+          <ArticleDetail headline={articleHeadline} onBack={closeArticle} />
+        ) : (
+          <section className="mx-auto max-w-[900px] px-6 pb-20 pt-10">
+            <button
+              type="button"
+              onClick={closeArticle}
+              className="mb-4 font-mono text-[11px] uppercase tracking-wider text-teal hover:underline"
+            >
+              ← Back to scan
+            </button>
+            <p className="font-mono text-[12px] text-white/45">
+              Article not found — it isn&apos;t in the current scan and this link carries no share
+              payload. Run a scan or use the original share link.
+            </p>
+          </section>
+        )
+      ) : (
+        <>
       {(scanning || scored.length > 0 || meta.fetchedCount > 0) && (
         <section className="mx-auto max-w-[1400px] px-6 pt-6">
           <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
@@ -387,7 +453,7 @@ export default function App() {
       )}
 
       <TrendsPanel trends={trends} />
-      <HeadlineTable headlines={tableRows} isTrending={isTrending} />
+      <HeadlineTable headlines={tableRows} isTrending={isTrending} onOpen={openArticle} />
 
       {scored.length === 0 && !scanning && (
         <div className="mx-auto max-w-[1400px] px-6 pb-20 text-center">
@@ -396,6 +462,8 @@ export default function App() {
             news outlets and score them for media integrity.
           </p>
         </div>
+      )}
+        </>
       )}
 
       <footer className="border-t-hair border-white/10 px-6 py-6">

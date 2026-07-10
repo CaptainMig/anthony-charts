@@ -69,7 +69,7 @@ function ScoreCell({ value, invert = false }) {
   );
 }
 
-export default function HeadlineTable({ headlines, isTrending }) {
+export default function HeadlineTable({ headlines, isTrending, onOpen }) {
   const [filter, setFilter] = useState('ALL');
   const [sort, setSort] = useState({ key: 'age', dir: 'asc' });
   const scrollRef = useRef(null);
@@ -228,14 +228,23 @@ export default function HeadlineTable({ headlines, isTrending }) {
                           />
                         ) : null;
                       })()}
+                      <button
+                        type="button"
+                        onClick={() => onOpen?.(h)}
+                        className="truncate text-left text-[13px] text-[#e8e4dc]/90 hover:text-teal hover:underline"
+                        title={`${h.title} — open detail view`}
+                      >
+                        {h.title}
+                      </button>
                       <a
                         href={h.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="truncate text-[13px] text-[#e8e4dc]/90 hover:text-teal hover:underline"
-                        title={h.title}
+                        className="shrink-0 font-mono text-[11px] text-white/30 hover:text-teal"
+                        title="Open original article"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        {h.title}
+                        ↗
                       </a>
                       {h.slam?.matched && <SlamBadge slam={h.slam} />}
                     </div>

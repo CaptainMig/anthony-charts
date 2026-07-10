@@ -5,10 +5,14 @@
   "framework": "vite",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/article/:id", "destination": "/api/og?id=:id" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {
     "api/score.js": { "memory": 256, "maxDuration": 60 },
-    "api/feed.js": { "memory": 256, "maxDuration": 30 }
+    "api/feed.js": { "memory": 256, "maxDuration": 30 },
+    "api/extract.js": { "memory": 256, "maxDuration": 30 },
+    "api/factcheck.js": { "memory": 256, "maxDuration": 15 },
+    "api/og.js": { "memory": 256, "maxDuration": 10 }
   }
 }
