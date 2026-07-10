@@ -1,0 +1,9 @@
+{
+  "asOf": null,
+  "windowHours": 24,
+  "scored": 0,
+  "total": 0,
+  "meanIntegrity": null,
+  "medianIntegrity": null,
+  "note": "Committed fallback seed for /api/aggregate cold starts. A null/zero snapshot deliberately fails the anthonycharts generator's stale/thin-sample guard, so the published Info Integrity meter never moves on missing data."
+}

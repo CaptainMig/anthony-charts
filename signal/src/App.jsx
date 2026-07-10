@@ -10,6 +10,7 @@ import { buildBriefing } from './lib/briefing.js';
 import { fetchTrends, makeTrendingMatcher } from './lib/trends.js';
 import { setFramingIntegrity } from './lib/integrity.js';
 import { articleId, decodeShare, encodeShare } from './lib/article.js';
+import { submitAggregate } from './lib/aggregate.js';
 import ArticleDetail from './components/ArticleDetail.jsx';
 import NavBar from './components/NavBar.jsx';
 import AtmosphereBar from './components/AtmosphereBar.jsx';
@@ -232,6 +233,10 @@ export default function App() {
           ]
         : status;
     setMeta({ fetchedCount, sourcesActive, status: finalStatus });
+
+    // Publish this sweep's aggregate for the AnthonyCharts generator —
+    // fire-and-forget, real scores from the last 24h only.
+    submitAggregate(collected);
 
     setScanning(false);
     try {
