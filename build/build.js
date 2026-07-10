@@ -11,9 +11,10 @@
  *     node build/verify.js     # proves the rendered DOM only changed where intended
  *
  * Every value-bearing region (hero, meter tiles, ticker, drawers, arcs,
- * meta tags, methodology footer, chart NOW labels, the flicker target and
- * the banner) is regenerated from the JSON. Nothing else in the page is
- * touched. Each substitution asserts its match count, so a template change
+ * meta tags, methodology footer, the trend chart series, the flicker target
+ * and the banner) is regenerated from the JSON (plus, for the trend chart,
+ * the append-only ledger public/data/scores-history.csv). Nothing else in
+ * the page is touched. Each substitution asserts its match count, so a template change
  * that breaks an anchor fails loudly instead of silently skipping.
  */
 const fs = require('fs');
@@ -101,8 +102,44 @@ sub(/World On Edge \(\d+\)/, () => `World On Edge (${E})`, 1, 'mth-edge');
 sub(/World Goodness \(\d+\)/, () => `World Goodness (${G})`, 1, 'mth-good');
 sub(/Calm Window \(\d+%\)/, () => `Calm Window (${C}%)`, 1, 'mth-calm');
 sub(/Trade Stress \(\d+\)/, () => `Trade Stress (${TR})`, 1, 'mth-trade');
-sub(/(<text x="836" y="56"[^>]*>)\d+(<\/text>)/, (m, a, b) => a + E + b, 1, 'chart-edge');
-sub(/(<text x="836" y="123"[^>]*>)\d+(<\/text>)/, (m, a, b) => a + G + b, 1, 'chart-good');
+// ── 10-year trend chart (window.AC_TREND injected before the module script) ──
+// The pre-ledger shape (Jan 2015 → late 2025) is the traced approximation from
+// the redesign prototype; every point from Issue 1 onward comes from the
+// append-only ledger public/data/scores-history.csv. The chart module keeps its
+// inline events/explainer/options and re-stitches the projection to the last
+// real row, so only `historical` is emitted here.
+const TREND_BASELINE = [
+  [2015.0, 42, 38], [2015.5, 48, 37], [2016.0, 46, 40], [2016.5, 52, 41],
+  [2017.0, 50, 42], [2017.5, 49, 43], [2018.0, 54, 44], [2018.5, 55, 45],
+  [2019.0, 56, 45], [2019.5, 58, 44], [2020.1, 72, 38], [2020.5, 66, 41],
+  [2020.9, 63, 46], [2021.5, 60, 48], [2022.15, 76, 44], [2022.7, 73, 45],
+  [2023.2, 75, 45], [2023.8, 82, 44], [2024.3, 80, 46], [2024.8, 81, 46],
+  [2025.3, 84, 46], [2025.45, 86, 46], [2025.8, 86, 47],
+];
+function trendSeries() {
+  const csv = fs.readFileSync(path.join(ROOT, 'public/data/scores-history.csv'), 'utf8')
+    .trim().split(/\r?\n/);
+  const cols = csv[0].split(',').map(h => h.replace(/"/g, '').trim().toLowerCase());
+  const di = cols.indexOf('date'), ei = cols.indexOf('world_on_edge'), gi = cols.indexOf('world_goodness');
+  if (di < 0 || ei < 0 || gi < 0) throw new Error('[build] scores-history.csv: date/world_on_edge/world_goodness columns not found');
+  // Decimal year, matching the chart module's own date mapping.
+  const decYear = iso => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return y + ((m - 1) + (d - 1) / 31) / 12;
+  };
+  const lastBase = TREND_BASELINE[TREND_BASELINE.length - 1][0];
+  const rows = csv.slice(1).map(line => {
+    const c = line.split(',').map(s => s.replace(/^"|"$/g, '').trim());
+    const t = decYear(c[di]), e = parseFloat(c[ei]), g = parseFloat(c[gi]);
+    if (!isFinite(t) || !isFinite(e) || !isFinite(g)) throw new Error(`[build] scores-history.csv: bad row: ${line}`);
+    return [Math.round(t * 1000) / 1000, e, g];
+  }).filter(r => r[0] > lastBase).sort((a, b) => a[0] - b[0]);
+  if (!rows.length) throw new Error('[build] scores-history.csv: no ledger rows after the baseline series');
+  return TREND_BASELINE.concat(rows);
+}
+sub(/window\.AC_TREND = null;\/\*BUILD:AC_TREND\*\//,
+  () => 'window.AC_TREND = ' + JSON.stringify({ historical: trendSeries() }) + ';',
+  1, 'AC_TREND');
 sub(/getElementById\('edgeNum'\)\.textContent=\d+;/, () => `getElementById('edgeNum').textContent=${E};`, 1, 'flick-edge');
 sub(/getElementById\('goodNum'\)\.textContent=\(\d+\+/, () => `getElementById('goodNum').textContent=(${G}+`, 1, 'flick-good');
 

@@ -41,6 +41,12 @@ function normalize(doc) {
   });
   doc.querySelectorAll('path[id]').forEach(p => p.removeAttribute('style'));
   doc.querySelectorAll('.meter-bar-fill').forEach(b => b.setAttribute('style', 'width:0%'));
+  // The trend chart module renders itself from window.AC_TREND, which the
+  // generator intentionally replaces with the real ledger series — so its
+  // generated DOM legitimately differs from the template's inline-fallback
+  // render. Blank it here; the injected series is verified separately below.
+  const trend = doc.getElementById('ac-trend');
+  if (trend) trend.innerHTML = '';
   // Blank behavioural script source (the generator reformats the DD/ARCS
   // literals as JSON — same effect, different text). JSON-LD is kept and
   // compared since it is content. Drawer data and arc values are verified
@@ -116,6 +122,36 @@ setTimeout(() => {
   } else {
     failures++;
     console.log('✗ arc table differs\n  reference: ' + arcRef + '\n  generated: ' + arcGen);
+  }
+
+  // 4) Injected trend series: the generated page's chart config must start at
+  //    the 2015 baseline, be strictly ascending in time, end on the ledger's
+  //    last row, and carry a projection stitched to that row.
+  try {
+    const cfg = genDom.window.AC_TREND;
+    const csv = fs.readFileSync(path.join(ROOT, 'public/data/scores-history.csv'), 'utf8').trim().split(/\r?\n/);
+    const cols = csv[0].split(',').map(h => h.replace(/"/g, '').trim().toLowerCase());
+    const last = csv[csv.length - 1].split(',').map(s => s.replace(/^"|"$/g, '').trim());
+    const lastEdge = parseFloat(last[cols.indexOf('world_on_edge')]);
+    const lastGood = parseFloat(last[cols.indexOf('world_goodness')]);
+    const H = cfg.historical;
+    const problems = [];
+    if (H[0][0] !== 2015) problems.push(`first row t=${H[0][0]}, expected 2015`);
+    for (let i = 1; i < H.length; i++) if (H[i][0] <= H[i - 1][0]) problems.push(`t not ascending at index ${i}`);
+    const end = H[H.length - 1];
+    if (end[1] !== lastEdge || end[2] !== lastGood) problems.push(`endpoint ${end[1]}/${end[2]}, ledger says ${lastEdge}/${lastGood}`);
+    if (JSON.stringify(cfg.projection[0]) !== JSON.stringify(end)) problems.push('projection not stitched to last historical row');
+    if (!cfg.events || !cfg.events.length) problems.push('inline events were lost in the merge');
+    if (!cfg.explainer || !cfg.explainer.desc) problems.push('inline explainer was lost in the merge');
+    if (problems.length) {
+      failures++;
+      console.log('✗ trend series: ' + problems.join('; '));
+    } else {
+      console.log(`✓ trend series: ${H.length} rows, endpoint ${end[1]}/${end[2]} matches ledger, projection stitched`);
+    }
+  } catch (e) {
+    failures++;
+    console.log('✗ trend series check threw: ' + e.message);
   }
 
   console.log(failures === 0 ? '\nPASS — rendered output is visually identical.' : `\nFAIL — ${failures} difference(s).`);
