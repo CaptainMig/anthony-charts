@@ -3,6 +3,25 @@
     "schema": "v17.0",
     "note": "Single source of truth for AnthonyCharts. Edit this file, run build/build.js, verify with build/verify.js. Drawers/ticker/tiles/arcs are generated into public/index.html."
   },
+  "signal_blend": {
+    "enabled": false,
+    "_note": "Task 4 plumbing — DISABLED pending Anthony's sign-off on the new weight split (published weights are locked). Flipping enabled to true is the versioned methodology change: the generator fetches `url` at build time, and if the aggregate is fresh (<48h) with >= min_scored real scores, re-weights Info Integrity and emits the drawer WEIGHTS block + dated methodology line.",
+    "url": "https://anthony-signal.vercel.app/api/aggregate",
+    "min_scored": 30,
+    "weights": {
+      "ifcn": 0.4,
+      "rsf": 0.25,
+      "newsguard": 0.15,
+      "signal": 0.2
+    },
+    "components": {
+      "_note": "TODO(Anthony): replace with the real IFCN/RSF/NewsGuard subscores before enabling. Placeholders reproduce the published 49.5% composite exactly.",
+      "ifcn": 49.5,
+      "rsf": 49.5,
+      "newsguard": 49.5
+    },
+    "note": "JUL 2026 — Info Integrity adds Signal Scanner at 20%; prior weights renormalized (IFCN 50→40, RSF 30→25, NewsGuard 20→15)."
+  },
   "banner": {
     "raw": "ISSUE 5 - June 11, 2026 - Day 103 - Fragile De-escalation"
   },
