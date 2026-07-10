@@ -57,6 +57,12 @@ function parse(xml) {
     .slice(0, HEADLINES_PER_FEED);
 }
 
+// ~10-minute cache so the hourly job and page loads don't hammer sources.
+// Two layers: an in-memory map (per warm instance) plus s-maxage so Vercel's
+// CDN serves repeat hits without invoking the function at all.
+const CACHE_TTL_MS = 10 * 60 * 1000;
+const cache = new Map(); // url -> { at, payload }
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -68,9 +74,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ status: 'error', reason: 'Missing or invalid url' });
   }
 
+  const hit = cache.get(url);
+  if (hit && Date.now() - hit.at < CACHE_TTL_MS) {
+    res.setHeader('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300');
+    return res.status(200).json(hit.payload);
+  }
+
   try {
     const r = await fetch(url, {
       redirect: 'follow',
+      // Bounded well inside the 30s function ceiling so a hung origin returns a
+      // structured error the client can act on instead of a platform kill.
+      signal: AbortSignal.timeout(20_000),
       headers: {
         // A real browser UA — many origins (Politico, CNN, WaPo) 403 non-browser
         // agents. This is the single most common cause of feed 403s.
@@ -82,7 +97,13 @@ export default async function handler(req, res) {
     if (!r.ok) return res.status(200).json({ status: 'error', reason: `HTTP ${r.status}` });
     const xml = await r.text();
     const items = parse(xml);
-    return res.status(200).json(items.length ? { status: 'ok', items } : { status: 'empty' });
+    const payload = items.length ? { status: 'ok', items } : { status: 'empty' };
+    // Only successful parses are cached — errors stay retryable immediately.
+    if (payload.status === 'ok') {
+      cache.set(url, { at: Date.now(), payload });
+      res.setHeader('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300');
+    }
+    return res.status(200).json(payload);
   } catch (e) {
     return res.status(200).json({ status: 'error', reason: e.message });
   }

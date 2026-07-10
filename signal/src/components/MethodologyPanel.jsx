@@ -22,6 +22,10 @@ const VERDICT_ROWS = [
     verdict: 'MISLEADING',
     text: 'The headline is engineered to trigger a reaction. It distorts, omits, or exaggerates facts in a way that serves outrage over accuracy.',
   },
+  {
+    verdict: 'UNSCORED',
+    text: 'Not a verdict: the scoring call failed (timeout or error) even after a retry. The row is shown grey with no numbers and is excluded from every average — Signal never presents a default as a score.',
+  },
 ];
 
 const SCORE_ROWS = [
