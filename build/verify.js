@@ -114,15 +114,31 @@ setTimeout(() => {
   const wRows = (() => { w.pgOpenDrawer('truth'); const n = doc.querySelectorAll('.dwr-wrow').length; w.pgCloseDrawer(); return n; })();
   check('Info Integrity drawer shows locked weights block', wRows === data.drawers.truth.weights.inputs.length, String(wRows));
 
-  // 5. Signal × Trends honesty label
+  // 5. Signal × Trends honesty label + click-through contract
   const sig = doc.querySelector('.pg-signal-panel');
   if (data.signal_trends?.enabled) {
-    check('Signal × Trends renders its rows', !!sig && doc.querySelectorAll('.pg-sigrow').length === data.signal_trends.rows.length);
+    const rows = data.signal_trends.rows;
+    check('Signal × Trends renders its rows', !!sig && doc.querySelectorAll('.pg-sigrow').length === rows.length);
     check('SAMPLE DATA label present while sample=true',
       data.signal_trends.sample ? sig.textContent.includes('SAMPLE DATA') : !sig.textContent.includes('SAMPLE DATA'));
+    // Headlines/rings link ONLY when the row carries a real destination —
+    // a sample row must never link to a made-up article.
+    const linked = doc.querySelectorAll('.pg-siglink').length;
+    const ringLinks = [...doc.querySelectorAll('.pg-sigrow > a')].length;
+    check('headline links match rows with a real `link`', linked === rows.filter((r) => r.link).length, `${linked} anchors`);
+    check('score-ring links match rows with a real `signalUrl`', ringLinks === rows.filter((r) => r.signalUrl).length, `${ringLinks} anchors`);
+    const srcLink = doc.querySelector('.pg-sigsrclink');
+    check('SIGNAL SCANNER in footer links to anthony-signal',
+      !!srcLink && srcLink.href === 'https://anthony-signal.vercel.app/' && srcLink.target === '_blank');
   } else {
     check('Signal × Trends hidden when disabled', !sig);
   }
+  // Signal appears in Trusted Sources and the feed count derives from data
+  const srcCells = [...doc.querySelectorAll('.pg-srccell')];
+  check('Signal Scanner listed in Trusted Sources',
+    srcCells.some((c) => c.textContent.includes('Signal Scanner') && c.href === 'https://anthony-signal.vercel.app/'));
+  check('source count derives from data',
+    [...doc.querySelectorAll('.pg-secnote')].some((n) => n.textContent.includes(`${data.sources.length} FEEDS`)));
 
   // 6. weight chips trace to drawer weights (both footer + methodology page)
   const chips = [...doc.querySelectorAll('.pg-chip')].map((n) => n.textContent);

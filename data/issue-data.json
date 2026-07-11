@@ -2549,12 +2549,18 @@
       "desc": "DPPA · Missions & personnel",
       "cadence": "MONTHLY",
       "url": "https://peacekeeping.un.org"
+    },
+    {
+      "name": "Signal Scanner",
+      "desc": "Anthony Charts · Headline framing integrity, scored per sweep",
+      "cadence": "LIVE",
+      "url": "https://anthony-signal.vercel.app"
     }
   ],
   "signal_trends": {
     "enabled": true,
     "sample": true,
-    "_note": "Guardrail 5: rows below are the prototype samples. The footer shows a SAMPLE DATA label while sample=true; it only comes off when a real Signal x Trends pipeline replaces these rows.",
+    "_note": "Guardrail 5: rows below are the prototype samples; the footer shows a SAMPLE DATA label while sample=true. Row contract: {score, headline, source, time, trend, query, match, link, signalUrl} — `link` (source article, new tab) and `signalUrl` (Signal article page, /article/:id on anthony-signal) make the headline and score ring clickable; sample rows carry null for both because their headlines have no real articles. The real pipeline fills them.",
     "rows": [
       {
         "score": 92,
@@ -2563,7 +2569,9 @@
         "time": "2H AGO",
         "trend": "+340%",
         "query": "nato article 4",
-        "match": true
+        "match": true,
+        "link": null,
+        "signalUrl": null
       },
       {
         "score": 71,
@@ -2572,7 +2580,9 @@
         "time": "8H AGO",
         "trend": "+150%",
         "query": "shipping rates",
-        "match": true
+        "match": true,
+        "link": null,
+        "signalUrl": null
       },
       {
         "score": 88,
@@ -2581,7 +2591,9 @@
         "time": "5H AGO",
         "trend": "+85%",
         "query": "co2 record",
-        "match": true
+        "match": true,
+        "link": null,
+        "signalUrl": null
       },
       {
         "score": 95,
@@ -2590,7 +2602,9 @@
         "time": "1D AGO",
         "trend": "+12%",
         "query": "exoplanets",
-        "match": false
+        "match": false,
+        "link": null,
+        "signalUrl": null
       }
     ]
   }
