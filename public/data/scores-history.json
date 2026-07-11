@@ -25,7 +25,7 @@
         },
         "temp": {
           "value": 1.42,
-          "display": "+1.42\u00b0",
+          "display": "+1.42°",
           "arc_pct": 0.71
         },
         "sea": {
@@ -85,7 +85,7 @@
         },
         "conflict": {
           "value": 0,
-          "display": "\u2014",
+          "display": "—",
           "arc_pct": 0.05
         },
         "peace": {
@@ -128,7 +128,7 @@
         },
         "temp": {
           "value": 1.42,
-          "display": "+1.42\u00b0",
+          "display": "+1.42°",
           "arc_pct": 0.71
         },
         "sea": {
@@ -231,7 +231,7 @@
         },
         "temp": {
           "value": 1.42,
-          "display": "+1.42\u00b0",
+          "display": "+1.42°",
           "arc_pct": 0.71
         },
         "sea": {
@@ -334,7 +334,7 @@
         },
         "temp": {
           "value": 1.47,
-          "display": "+1.47\u00b0",
+          "display": "+1.47°",
           "arc_pct": 0.74
         },
         "sea": {
@@ -396,6 +396,109 @@
           "value": 5300,
           "display": "5,300+",
           "arc_pct": 0.92
+        },
+        "peace": {
+          "value": 87000,
+          "display": "87K",
+          "arc_pct": 0.44
+        },
+        "species": {
+          "value": 44016,
+          "display": "44,016",
+          "arc_pct": 0.78
+        },
+        "conserve": {
+          "value": 17.6,
+          "display": "17.6%",
+          "arc_pct": 0.59
+        }
+      }
+    },
+    {
+      "date": "2026-06-11",
+      "issue": "5",
+      "label": "Fragile De-escalation",
+      "type": "standard",
+      "meters": {
+        "edge": {
+          "value": "88",
+          "display": "88",
+          "arc_pct": 0.88
+        },
+        "good": {
+          "value": "47",
+          "display": "47",
+          "arc_pct": 0.47
+        },
+        "calm": {
+          "value": 31,
+          "display": "31%",
+          "arc_pct": 0.31
+        },
+        "temp": {
+          "value": 1.42,
+          "display": "+1.42°",
+          "arc_pct": 0.71
+        },
+        "sea": {
+          "value": 112,
+          "display": "+112mm",
+          "arc_pct": 0.55
+        },
+        "arctic": {
+          "value": null,
+          "display": "REC. LOW",
+          "arc_pct": 0.3
+        },
+        "co2": {
+          "value": 431.1,
+          "display": "431.1",
+          "arc_pct": 0.69
+        },
+        "planet": {
+          "value": 6128,
+          "display": "6,128",
+          "arc_pct": 0.61
+        },
+        "neo": {
+          "value": 4,
+          "display": "4",
+          "arc_pct": 0.2
+        },
+        "alien": {
+          "value": 3,
+          "display": "3",
+          "arc_pct": 0.25
+        },
+        "solar": {
+          "value": 1,
+          "display": "G1",
+          "arc_pct": 0.6
+        },
+        "truth": {
+          "value": 49.5,
+          "display": "49.5%",
+          "arc_pct": 0.5
+        },
+        "supply": {
+          "value": 81,
+          "display": "81",
+          "arc_pct": 0.81
+        },
+        "gini": {
+          "value": 0.67,
+          "display": "0.67",
+          "arc_pct": 0.67
+        },
+        "mobility": {
+          "value": 53.4,
+          "display": "53.4",
+          "arc_pct": 0.53
+        },
+        "conflict": {
+          "value": 28400,
+          "display": "28.4K",
+          "arc_pct": 0.72
         },
         "peace": {
           "value": 87000,

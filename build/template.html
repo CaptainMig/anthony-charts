@@ -96,23 +96,219 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Boogaloo&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}body.neon{--bg:#020912;--bg2:#040f1e;--card:rgba(4,18,42,.85);--cb:rgba(0,180,255,.18);--cs:0 0 40px rgba(0,180,255,.05);--tx:#dff4ff;--td:rgba(180,220,255,.45);--tdim:rgba(180,220,255,.22);--ac:#00d4ff;--ac2:#ff2d6e;--ac3:#00ff9d;--good:#00ff9d;--bad:#ff2d6e;--warn:#ffd700;--fd:'Orbitron',monospace;--fm:'Share Tech Mono',monospace;--fb:'Share Tech Mono',monospace;--r:10px;--tbg:rgba(2,9,18,.95);--tbo:rgba(0,180,255,.2);}body.cartoon{--bg:#f5f0e8;--bg2:#fff9f0;--card:#fff;--cb:#2d2d2d;--cs:5px 5px 0 #2d2d2d;--tx:#1a1a1a;--td:#777;--tdim:#bbb;--ac:#4dabf7;--ac2:#ff6b6b;--ac3:#51cf66;--good:#51cf66;--bad:#ff6b6b;--warn:#fcc419;--fd:'Boogaloo',cursive;--fm:'Nunito',sans-serif;--fb:'Nunito',sans-serif;--r:14px;--tbg:#fcc419;--tbo:#2d2d2d;}html{scroll-behavior:smooth;}body{background:var(--bg);color:var(--tx);font-family:var(--fb);min-height:100vh;transition:background .5s,color .5s;overflow-x:hidden;}body.neon{background-image:radial-gradient(ellipse at 15% 40%,rgba(0,180,255,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(255,45,110,.05) 0%,transparent 55%);}body.cartoon{background-image:radial-gradient(circle at 5% 5%,#ffe5f080 0%,transparent 35%),radial-gradient(circle at 95% 90%,#e5f0ff80 0%,transparent 35%);}body.neon::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,180,255,.011) 3px,rgba(0,180,255,.011) 4px);pointer-events:none;z-index:9999;}.hdr{position:sticky;top:0;z-index:500;height:58px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;transition:all .5s;}body.neon .hdr{background:rgba(2,9,18,.97);border-bottom:1px solid var(--cb);backdrop-filter:blur(20px);}body.cartoon .hdr{background:#fff;border-bottom:3px solid #2d2d2d;box-shadow:0 3px 0 rgba(0,0,0,.08);}.logo{display:flex;flex-direction:column;gap:1px;}.logo-name{font-family:var(--fd);font-weight:900;font-size:1.35rem;letter-spacing:.06em;line-height:1;transition:all .5s;}body.neon .logo-name{color:#fff;text-shadow:0 0 16px rgba(0,180,255,.7),0 0 32px rgba(0,180,255,.3);animation:lglitch 10s infinite;}body.cartoon .logo-name{color:#1a1a1a;}@keyframes lglitch{0%,88%,100%{text-shadow:0 0 16px rgba(0,180,255,.7),0 0 32px rgba(0,180,255,.3);}90%{text-shadow:-2px 0 #ff2d6e,2px 0 #00d4ff;letter-spacing:.08em;}92%{text-shadow:2px 0 #ff2d6e,-2px 0 #00d4ff;}}.logo-sub{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;transition:all .5s;}body.neon .logo-sub{color:rgba(0,180,255,.55);font-family:var(--fm);}body.cartoon .logo-sub{color:#ff6b6b;font-family:'Nunito';font-weight:800;}.hdr-right{display:flex;align-items:center;gap:12px;}.live-pill{display:flex;align-items:center;gap:6px;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;opacity:.65;font-family:var(--fm);}.live-dot{width:7px;height:7px;border-radius:50%;}body.neon .live-dot{background:#00ff9d;box-shadow:0 0 8px #00ff9d;animation:pneon 2s infinite;}body.cartoon .live-dot{background:#51cf66;animation:pcart 2s infinite;}@keyframes pneon{0%,100%{opacity:1;}50%{opacity:.3;}}@keyframes pcart{0%,100%{transform:scale(1);}50%{transform:scale(1.5);}}.nav-btn{cursor:pointer;padding:7px 14px;border-radius:6px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:all .2s;font-family:var(--fm);background:transparent;}body.neon .nav-btn{border:1px solid rgba(0,180,255,.25);color:rgba(0,180,255,.7);}body.neon .nav-btn:hover{background:rgba(0,180,255,.08);}body.cartoon .nav-btn{border:2px solid #2d2d2d;color:#2d2d2d;}body.cartoon .nav-btn:hover{background:#f0f0f0;}.mode-btn{cursor:pointer;padding:7px 16px;border-radius:6px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:all .2s;font-family:var(--fm);}body.neon .mode-btn{background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.35);color:var(--ac);}body.neon .mode-btn:hover{background:rgba(0,180,255,.18);}body.cartoon .mode-btn{background:#fcc419;border:2px solid #2d2d2d;color:#2d2d2d;box-shadow:3px 3px 0 #2d2d2d;}body.cartoon .mode-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #2d2d2d;}.ticker{overflow:hidden;padding:7px 0;transition:all .5s;}body.neon .ticker{background:rgba(2,9,18,.9);border-bottom:1px solid var(--tbo);}body.cartoon .ticker{background:var(--tbg);border-top:2px solid #2d2d2d;border-bottom:2px solid #2d2d2d;}.ticker-outer{display:flex;width:max-content;animation:sticker 38s linear infinite;}.ticker-inner{display:flex;gap:56px;padding-right:56px;}@keyframes sticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}.ticker-item{display:flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.12em;white-space:nowrap;font-family:var(--fm);}body.neon .ticker-item{color:rgba(0,212,255,.8);}body.cartoon .ticker-item{color:#2d2d2d;font-weight:700;}.page{display:none;}.page.active{display:block;}.main{max-width:1280px;margin:0 auto;padding:36px 28px 60px;display:flex;flex-direction:column;gap:32px;}.ptrow{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;}.ptitle{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,5vw,3.2rem);line-height:1;transition:all .5s;}body.neon .ptitle{background:linear-gradient(130deg,#fff 20%,#00d4ff 60%,#ff2d6e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}body.cartoon .ptitle{color:#1a1a1a;}.psub{font-size:.82rem;line-height:1.65;max-width:500px;color:var(--td);font-family:var(--fb);margin-top:10px;}body.cartoon .psub{font-size:.92rem;}.pdate{font-size:.62rem;text-transform:uppercase;letter-spacing:.2em;color:var(--tdim);font-family:var(--fm);white-space:nowrap;padding-bottom:6px;text-align:right;}.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px;}.sec-label{font-family:var(--fm);font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--tdim);white-space:nowrap;}.sec-rule{flex:1;height:1px;}body.neon .sec-rule{background:linear-gradient(to right,rgba(0,180,255,.25),transparent);}body.cartoon .sec-rule{background:linear-gradient(to right,#ddd,transparent);}.hero-duel{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;}.hero-card{border-radius:var(--r);padding:32px 28px;position:relative;overflow:hidden;transition:all .5s;display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer;}.hero-card:hover{transform:translateY(-3px);}body.neon .hero-card{background:var(--card);border:1px solid var(--cb);box-shadow:var(--cs);backdrop-filter:blur(12px);}body.cartoon .hero-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}.hero-card-edge{border-radius:var(--r) 0 0 var(--r)!important;}.hero-card-good{border-radius:0 var(--r) var(--r) 0!important;}body.neon .hero-card-edge::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,45,110,.08),transparent 70%);pointer-events:none;}body.neon .hero-card-good::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,255,157,.07),transparent 70%);pointer-events:none;}.hero-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 18px;gap:8px;}.vs-label{font-family:var(--fd);font-weight:900;font-size:1.1rem;}body.neon .vs-label{color:rgba(255,255,255,.12);}body.cartoon .vs-label{color:#ddd;}.vs-line{width:1px;height:70px;}body.neon .vs-line{background:linear-gradient(to bottom,transparent,rgba(0,180,255,.25),transparent);}body.cartoon .vs-line{background:linear-gradient(to bottom,transparent,#ddd,transparent);}.hero-mlabel{font-family:var(--fm);font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tdim);text-align:center;}.hero-emoji{font-size:2.2rem;line-height:1;}body.neon .hero-emoji{display:none;}body.cartoon .hero-emoji{display:block;}.big-num{font-family:var(--fd);font-weight:900;font-size:2.8rem;line-height:1;text-align:center;transition:all .5s;}body.neon .big-num-edge{color:#fff;text-shadow:0 0 20px rgba(255,45,110,.5);}body.neon .big-num-good{color:#fff;text-shadow:0 0 20px rgba(0,255,157,.5);}body.cartoon .big-num-edge{color:#ff6b6b;}body.cartoon .big-num-good{color:#51cf66;}.big-status{font-family:var(--fd);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;font-weight:700;}body.neon .big-status-edge{color:#ff2d6e;}body.neon .big-status-good{color:#00ff9d;}body.cartoon .big-status-edge{color:#ff4757;}body.cartoon .big-status-good{color:#2ed573;}.hero-desc{font-size:.7rem;text-align:center;line-height:1.6;color:var(--td);max-width:240px;font-family:var(--fb);}.click-hint{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:var(--tdim);text-transform:uppercase;margin-top:4px;opacity:.7;}.meter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}@media(max-width:900px){.meter-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:560px){.meter-grid{grid-template-columns:1fr;}.hero-duel{grid-template-columns:1fr;}.hero-vs{display:none;}}.meter-card{border-radius:var(--r);padding:20px 18px 16px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:visible;transition:all .4s;cursor:pointer;}body.neon .meter-card{background:var(--card);border:1px solid var(--cb);box-shadow:var(--cs);backdrop-filter:blur(10px);}body.cartoon .meter-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}body.neon .meter-card:hover{border-color:rgba(0,180,255,.5);box-shadow:0 0 30px rgba(0,180,255,.1);transform:translateY(-3px);}body.cartoon .meter-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #2d2d2d;}.tooltip{position:absolute;bottom:calc(100%+10px);left:50%;transform:translateX(-50%);z-index:400;padding:8px 12px;border-radius:6px;pointer-events:none;font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;opacity:0;transition:opacity .2s;max-width:240px;white-space:normal;text-align:center;line-height:1.5;}.meter-card:hover .tooltip{opacity:1;}body.neon .tooltip{background:rgba(0,10,30,.95);border:1px solid rgba(0,180,255,.3);color:rgba(0,212,255,.9);}body.cartoon .tooltip{background:#2d2d2d;color:#fff;border-radius:8px;}.tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;}body.neon .tooltip::after{border-top-color:rgba(0,180,255,.3);}body.cartoon .tooltip::after{border-top-color:#2d2d2d;}.meter-top{display:flex;justify-content:space-between;align-items:flex-start;}.meter-name{font-family:var(--fm);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--td);}.meter-cadence{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--tdim);margin-top:2px;}.meter-icon{font-size:1.25rem;line-height:1;}body.neon .meter-icon{display:none;}body.cartoon .meter-icon{display:block;}.arc-zone{display:flex;justify-content:center;align-items:center;padding:2px 0;}.arc-svg{overflow:visible;}.arc-bg-t{fill:none;stroke-linecap:round;}body.neon .arc-bg-t{stroke:rgba(0,180,255,.07);}body.cartoon .arc-bg-t{stroke:#eee;}.arc-fill-t{fill:none;stroke-linecap:round;transition:stroke-dashoffset 1.8s cubic-bezier(.23,1,.32,1),stroke .5s;}.meter-bottom{display:flex;justify-content:space-between;align-items:flex-end;}.meter-val{font-family:var(--fd);font-weight:900;font-size:1.6rem;line-height:1;}.meter-unit{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--tdim);margin-top:3px;}.meter-trend{font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:.05em;padding:4px 8px;border-radius:4px;}body.neon .t-up{color:#ff2d6e;background:rgba(255,45,110,.1);}body.neon .t-dn{color:#00ff9d;background:rgba(0,255,157,.1);}body.neon .t-warn{color:#ffd700;background:rgba(255,215,0,.1);}body.cartoon .t-up{color:#ff4757;background:#ffe8e8;border:1.5px solid #ff4757;border-radius:20px;}body.cartoon .t-dn{color:#2ed573;background:#e8fff2;border:1.5px solid #2ed573;border-radius:20px;}body.cartoon .t-warn{color:#e67e00;background:#fff3e0;border:1.5px solid #e67e00;border-radius:20px;}.meter-bar-bg{height:4px;border-radius:2px;margin-top:2px;}body.neon .meter-bar-bg{background:rgba(0,180,255,.07);}body.cartoon .meter-bar-bg{background:#f0f0f0;}.meter-bar-fill{height:4px;border-radius:2px;transition:width 1.8s cubic-bezier(.23,1,.32,1);}body.neon .a-edge{stroke:#ff2d6e;filter:drop-shadow(0 0 5px rgba(255,45,110,.7));}body.neon .a-good{stroke:#00ff9d;filter:drop-shadow(0 0 5px rgba(0,255,157,.7));}body.neon .a-temp{stroke:#ff9500;filter:drop-shadow(0 0 5px rgba(255,149,0,.7));}body.neon .a-sea{stroke:#00b4ff;filter:drop-shadow(0 0 5px rgba(0,180,255,.7));}body.neon .a-planet{stroke:#a78bfa;filter:drop-shadow(0 0 5px rgba(167,139,250,.7));}body.neon .a-alien{stroke:#00ffd5;filter:drop-shadow(0 0 5px rgba(0,255,213,.7));}body.neon .a-solar{stroke:#ffd700;filter:drop-shadow(0 0 5px rgba(255,215,0,.7));}body.neon .a-truth{stroke:#ff6ec7;filter:drop-shadow(0 0 5px rgba(255,110,199,.7));}body.neon .a-arctic{stroke:#7dd3fc;filter:drop-shadow(0 0 5px rgba(125,211,252,.7));}body.cartoon .a-arctic{stroke:#38bdf8;}body.neon .v-arctic{color:#7dd3fc;}body.cartoon .v-arctic{color:#0284c7;}body.neon .b-arctic{background:linear-gradient(to right,#7dd3fc,#38bdf8);}body.cartoon .b-arctic{background:#38bdf8;}body.neon .a-co2{stroke:#a3e635;filter:drop-shadow(0 0 5px rgba(163,230,53,.7));}body.cartoon .a-co2{stroke:#65a30d;}body.neon .v-co2{color:#a3e635;}body.cartoon .v-co2{color:#4d7c0f;}body.neon .b-co2{background:linear-gradient(to right,#a3e635,#84cc16);}body.cartoon .b-co2{background:#84cc16;}body.neon .a-neo{stroke:#fb923c;filter:drop-shadow(0 0 5px rgba(251,146,60,.7));}body.cartoon .a-neo{stroke:#ea580c;}body.neon .v-neo{color:#fb923c;}body.cartoon .v-neo{color:#c2410c;}body.neon .b-neo{background:linear-gradient(to right,#fb923c,#f97316);}body.cartoon .b-neo{background:#f97316;}body.cartoon .a-edge{stroke:#ff6b6b;}body.cartoon .a-good{stroke:#51cf66;}body.cartoon .a-temp{stroke:#ff9f43;}body.cartoon .a-sea{stroke:#54a0ff;}body.cartoon .a-planet{stroke:#a29bfe;}body.cartoon .a-alien{stroke:#00cec9;}body.cartoon .a-solar{stroke:#fdcb6e;}body.cartoon .a-truth{stroke:#fd79a8;}body.neon .v-edge{color:#ff6b8a;}body.neon .v-good{color:#00ff9d;}body.neon .v-temp{color:#ff9500;}body.neon .v-sea{color:#00b4ff;}body.neon .v-planet{color:#a78bfa;}body.neon .v-alien{color:#00ffd5;}body.neon .v-solar{color:#ffd700;}body.neon .v-truth{color:#ff6ec7;}body.cartoon .v-edge{color:#ff4757;}body.cartoon .v-good{color:#2ed573;}body.cartoon .v-temp{color:#e67e00;}body.cartoon .v-sea{color:#2980b9;}body.cartoon .v-planet{color:#6c5ce7;}body.cartoon .v-alien{color:#00b894;}body.cartoon .v-solar{color:#e67e00;}body.cartoon .v-truth{color:#d63031;}body.neon .b-edge{background:linear-gradient(to right,#ff2d6e,#ff6b35);}body.neon .b-good{background:linear-gradient(to right,#00ff9d,#00d4ff);}body.neon .b-temp{background:linear-gradient(to right,#ff9500,#ff4500);}body.neon .b-sea{background:linear-gradient(to right,#00b4ff,#0070ff);}body.neon .b-planet{background:linear-gradient(to right,#a78bfa,#7c3aed);}body.neon .b-alien{background:linear-gradient(to right,#00ffd5,#00b4ff);}body.neon .b-solar{background:linear-gradient(to right,#ffd700,#ff9500);}body.neon .b-truth{background:linear-gradient(to right,#ff6ec7,#ff2d6e);}body.cartoon .b-edge{background:#ff6b6b;}body.cartoon .b-good{background:#51cf66;}body.cartoon .b-temp{background:#ff9f43;}body.cartoon .b-sea{background:#54a0ff;}body.cartoon .b-planet{background:#a29bfe;}body.cartoon .b-alien{background:#00cec9;}body.cartoon .b-solar{background:#fdcb6e;}body.cartoon .b-truth{background:#fd79a8;}.footer{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;}body.neon .footer{background:rgba(2,5,14,.97);border-top:1px solid rgba(0,180,255,.12);}body.cartoon .footer{background:#fff;border-top:3px solid #2d2d2d;}.footer-copy,.footer-src{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--tdim);text-transform:uppercase;}.footer-src{display:flex;gap:14px;}.footer-mlink{cursor:pointer;color:var(--ac);text-decoration:underline;opacity:.7;}.footer-mlink:hover{opacity:1;}.drawer-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s;}.drawer-overlay.open{opacity:1;pointer-events:all;}.drawer{position:fixed;bottom:0;left:0;right:0;z-index:801;border-radius:20px 20px 0 0;max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform .4s cubic-bezier(.23,1,.32,1);}.drawer.open{transform:translateY(0);}body.neon .drawer{background:#040f22;border-top:1px solid rgba(0,180,255,.3);box-shadow:0 -20px 60px rgba(0,0,0,.6);}body.cartoon .drawer{background:#fff;border-top:4px solid #2d2d2d;box-shadow:0 -8px 0 #2d2d2d;}.drawer-handle{width:40px;height:4px;border-radius:2px;margin:14px auto 0;cursor:pointer;}body.neon .drawer-handle{background:rgba(0,180,255,.3);}body.cartoon .drawer-handle{background:#ddd;}.drawer-inner{padding:20px 32px 40px;}.drawer-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:16px;}.drawer-title{font-family:var(--fd);font-weight:900;font-size:1.6rem;line-height:1.1;}body.neon .drawer-title{color:#fff;}body.cartoon .drawer-title{color:#1a1a1a;}.drawer-emoji{font-size:2.5rem;line-height:1;}body.neon .drawer-emoji{display:none;}.drawer-close{cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1.1rem;flex-shrink:0;}body.neon .drawer-close{background:rgba(0,180,255,.1);border:1px solid rgba(0,180,255,.2);color:var(--ac);}body.cartoon .drawer-close{background:#f5f5f5;border:2px solid #2d2d2d;color:#2d2d2d;}.drawer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}@media(max-width:680px){.drawer-grid{grid-template-columns:1fr 1fr;}}.dstat{padding:16px;border-radius:8px;}body.neon .dstat{background:rgba(0,180,255,.05);border:1px solid rgba(0,180,255,.1);}body.cartoon .dstat{background:#f8f8f8;border:2px solid #2d2d2d;border-radius:10px;}.dstat-val{font-family:var(--fd);font-weight:900;font-size:1.4rem;}.dstat-lbl{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tdim);margin-top:4px;}.drawer-sources{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}.src-chip{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;padding:3px 8px;border-radius:4px;text-transform:uppercase;}body.neon .src-chip{background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.2);color:rgba(0,180,255,.8);}body.cartoon .src-chip{background:#e8f4ff;border:1.5px solid #2d2d2d;color:#2d2d2d;border-radius:20px;}.drawer-body{font-family:var(--fb);font-size:.88rem;line-height:1.75;color:var(--td);margin-bottom:22px;}body.cartoon .drawer-body{font-size:.96rem;}.drawer-method{border-radius:8px;padding:16px 18px;margin-bottom:24px;}body.neon .drawer-method{background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.12);}body.cartoon .drawer-method{background:#f0fff4;border:2px solid #2ed573;border-radius:10px;}.drawer-method-title{font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--good);margin-bottom:8px;}.drawer-method-text{font-family:var(--fb);font-size:.8rem;line-height:1.7;color:var(--td);}.drawer-trend{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:18px;}.trend-up{background:rgba(255,45,110,.12);color:#ff6b8a;border:1px solid rgba(255,45,110,.25);}.trend-down{background:rgba(0,255,157,.10);color:#00ff9d;border:1px solid rgba(0,255,157,.22);}.trend-stable{background:rgba(0,212,255,.08);color:#00d4ff;border:1px solid rgba(0,212,255,.2);}.trend-down-bad{background:rgba(255,45,110,.12);color:#ff6b8a;border:1px solid rgba(255,45,110,.25);}.trend-up-good{background:rgba(0,255,157,.10);color:#00ff9d;border:1px solid rgba(0,255,157,.22);}.drawer-weights{margin-bottom:22px;}.drawer-weights-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:12px;}.weight-row{margin-bottom:12px;}.weight-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}.weight-name{font-family:var(--fb);font-size:.82rem;color:var(--td);}.weight-meta{font-family:var(--fm);font-size:.6rem;color:var(--tdim);letter-spacing:.1em;}.weight-track{height:6px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:3px;}.weight-fill{height:100%;border-radius:3px;transition:width .8s ease;}.weight-score-row{display:flex;justify-content:space-between;}.weight-score{font-family:var(--fm);font-size:.58rem;color:var(--tdim);}.weight-contribution{font-family:var(--fm);font-size:.58rem;color:var(--ac);opacity:.8;}.calc-box{border-radius:8px;padding:12px 16px;margin-top:14px;font-family:var(--fm);font-size:.72rem;line-height:1.8;}body.neon .calc-box{background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.15);color:var(--ac);}body.cartoon .calc-box{background:#f0f8ff;border:2px solid #0099cc;color:#0066aa;}.calc-final{font-size:.85rem;font-weight:700;color:var(--ac);}.drawer-history{margin-bottom:22px;}.drawer-history-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:10px;}.history-table{width:100%;border-collapse:collapse;}.history-table th{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08);}body.neon .history-table th{color:rgba(0,212,255,.5);}body.cartoon .history-table th{color:#888;}.history-table td{font-family:var(--fb);font-size:.8rem;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.04);}body.neon .history-table td{color:var(--td);}body.cartoon .history-table td{color:#333;}.history-table tr:last-child td{border-bottom:none;}.h-now{font-weight:700;}body.neon .h-now{color:#00d4ff;}body.cartoon .h-now{color:#0066aa;}.drawer-thresholds{margin-bottom:22px;}.drawer-thresh-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:10px;}.thresh-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}.thresh-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}.thresh-label{font-family:var(--fb);font-size:.8rem;flex:1;}body.neon .thresh-label{color:var(--td);}body.cartoon .thresh-label{color:#333;}.thresh-val{font-family:var(--fm);font-size:.72rem;opacity:.8;}.thresh-current{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;background:rgba(0,212,255,.12);color:#00d4ff;padding:2px 8px;border-radius:10px;}.share-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}.share-label{font-family:var(--fm);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tdim);}.share-btn{cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:6px;font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;font-weight:700;text-transform:uppercase;text-decoration:none;}body.neon .share-btn{border:1px solid var(--cb);color:var(--tx);background:rgba(0,180,255,.05);}body.neon .share-btn:hover{background:rgba(0,180,255,.15);}body.cartoon .share-btn{border:2px solid #2d2d2d;color:#2d2d2d;background:#f5f5f5;box-shadow:2px 2px 0 #2d2d2d;}body.cartoon .share-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 #2d2d2d;}.method-main{max-width:960px;margin:0 auto;padding:40px 28px 80px;display:flex;flex-direction:column;gap:28px;}.method-title{font-family:var(--fd);font-weight:900;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;margin-bottom:12px;}body.neon .method-title{background:linear-gradient(130deg,#fff 30%,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}body.cartoon .method-title{color:#1a1a1a;}.method-intro{font-family:var(--fb);font-size:.9rem;line-height:1.75;color:var(--td);max-width:700px;}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}@media(max-width:680px){.method-grid{grid-template-columns:1fr;}}.method-card{border-radius:var(--r);padding:22px 20px;}body.neon .method-card{background:var(--card);border:1px solid var(--cb);backdrop-filter:blur(10px);}body.cartoon .method-card{background:#fff;border:3px solid #2d2d2d;box-shadow:var(--cs);}.method-card-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}.method-card-icon{font-size:1.4rem;}body.neon .method-card-icon{display:none;}.method-card-name{font-family:var(--fd);font-weight:700;font-size:.9rem;}.method-card-body{font-family:var(--fb);font-size:.8rem;line-height:1.75;color:var(--td);}.method-card-source{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}.source-chip{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;padding:3px 8px;border-radius:4px;text-transform:uppercase;}body.neon .source-chip{background:rgba(0,180,255,.12);border:1px solid rgba(0,180,255,.35);color:rgba(0,212,255,.95);}body.cartoon .source-chip{background:#e8f4ff;border:1.5px solid #2d2d2d;color:#2d2d2d;border-radius:20px;}.why-matters{font-family:var(--fb);font-size:.68rem;line-height:1.5;padding:7px 10px;border-radius:5px;margin-top:2px;}body.neon .why-matters{background:rgba(255,255,255,.03);border-left:2px solid rgba(0,212,255,.2);color:rgba(180,220,255,.6);}body.cartoon .why-matters{background:#f8fafc;border-left:3px solid #2d2d2d;color:#444;}.method-note{border-radius:var(--r);padding:20px;}body.neon .method-note{background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.15);}body.cartoon .method-note{background:#f0fff4;border:2px solid #2ed573;border-radius:12px;}.method-note-title{font-family:var(--fm);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--good);margin-bottom:8px;}.method-note-body{font-family:var(--fb);font-size:.82rem;line-height:1.75;color:var(--td);}@keyframes fade-up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}.ani{animation:fade-up .5s ease both;}body.neon .a-species{stroke:#f472b6;filter:drop-shadow(0 0 5px rgba(244,114,182,.7));}body.cartoon .a-species{stroke:#db2777;}body.neon .v-species{color:#f472b6;}body.cartoon .v-species{color:#9d174d;}body.neon .b-species{background:linear-gradient(to right,#f472b6,#ec4899);}body.cartoon .b-species{background:#ec4899;}body.neon .a-conserve{stroke:#34d399;filter:drop-shadow(0 0 5px rgba(52,211,153,.7));}body.cartoon .a-conserve{stroke:#059669;}body.neon .v-conserve{color:#34d399;}body.cartoon .v-conserve{color:#065f46;}body.neon .b-conserve{background:linear-gradient(to right,#34d399,#10b981);}body.cartoon .b-conserve{background:#10b981;}body.neon .a-conflict{stroke:#f87171;filter:drop-shadow(0 0 5px rgba(248,113,113,.7));}body.cartoon .a-conflict{stroke:#dc2626;}body.neon .v-conflict{color:#f87171;}body.cartoon .v-conflict{color:#991b1b;}body.neon .b-conflict{background:linear-gradient(to right,#f87171,#ef4444);}body.cartoon .b-conflict{background:#ef4444;}body.neon .a-peace{stroke:#60a5fa;filter:drop-shadow(0 0 5px rgba(96,165,250,.7));}body.cartoon .a-peace{stroke:#2563eb;}body.neon .v-peace{color:#60a5fa;}body.cartoon .v-peace{color:#1e40af;}body.neon .b-peace{background:linear-gradient(to right,#60a5fa,#3b82f6);}body.cartoon .b-peace{background:#3b82f6;}body.neon .a-gini{stroke:#c084fc;filter:drop-shadow(0 0 5px rgba(192,132,252,.7));}body.cartoon .a-gini{stroke:#7c3aed;}body.neon .v-gini{color:#c084fc;}body.cartoon .v-gini{color:#4c1d95;}body.neon .b-gini{background:linear-gradient(to right,#c084fc,#a855f7);}body.cartoon .b-gini{background:#a855f7;}body.neon .a-mobility{stroke:#fbbf24;filter:drop-shadow(0 0 5px rgba(251,191,36,.7));}body.cartoon .a-mobility{stroke:#d97706;}body.neon .v-mobility{color:#fbbf24;}body.cartoon .v-mobility{color:#92400e;}body.neon .b-mobility{background:linear-gradient(to right,#fbbf24,#f59e0b);}body.cartoon .b-mobility{background:#f59e0b;}@media(max-width:640px){.nav-btn{display:none;}.live-pill{display:none;}.hdr{padding:0 14px;}.mode-btn{font-size:.62rem;padding:6px 10px;}}</style>
+<style>
+/* ================================================================
+   AnthonyCharts redesign — single dark design system.
+   Tokens per design/DESIGN-README.md: page #070b16, panel #0b1122,
+   bands #080d1a, hairline rgba(120,150,255,.14), JetBrains Mono.
+   All classes prefixed pg- (page) / dwr- (drawer); the trend chart
+   module keeps its own acx- namespace.
+   ================================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#070b16;color:#c7d2ee;font-family:'JetBrains Mono',monospace;min-height:100vh;overflow-x:hidden;}
+a{color:#6ea8ff;text-decoration:none;}
+a:hover{color:#9cc4ff;}
+.pg-wrap{width:min(1160px,calc(100% - 32px));margin:0 auto;}
+.pg-sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+.pg-seclabel{font-size:11px;font-weight:800;letter-spacing:3px;color:#5d6b93;}
+.pg-hair{flex:1;height:1px;background:rgba(120,150,255,0.12);min-width:40px;}
+.pg-secnote{font-size:9.5px;letter-spacing:1px;color:#5d6b93;display:flex;align-items:center;gap:6px;}
+.pg-panel{background:#0b1122;border:1px solid rgba(120,150,255,0.14);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.45);}
+.pg-dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+
+/* ---- header ---- */
+.pg-header{width:100%;border-bottom:1px solid rgba(120,150,255,0.1);background:#080d1a;}
+.pg-header-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;}
+.pg-brand{display:flex;align-items:baseline;gap:12px;}
+.pg-brand-name{font-size:15px;font-weight:800;letter-spacing:2px;color:#eef3ff;}
+.pg-brand-tag{font-size:9.5px;letter-spacing:1.5px;color:#5d6b93;}
+.pg-nav{display:flex;align-items:center;gap:6px;}
+.pg-navbtn{font-size:10.5px;font-weight:700;letter-spacing:1.5px;color:#8fa2cf;background:transparent;border:1px solid transparent;border-radius:6px;padding:7px 14px;cursor:pointer;font-family:inherit;}
+.pg-navbtn:hover{color:#eef3ff;}
+.pg-navbtn.pg-active{color:#eef3ff;background:rgba(120,150,255,0.08);border-color:rgba(120,150,255,0.18);}
+
+/* ---- live ticker ---- */
+.pg-ticker{width:100%;background:#0a0f20;border-bottom:1px solid rgba(120,150,255,0.12);overflow:hidden;position:relative;display:flex;align-items:stretch;}
+.pg-live{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0d1428;border-right:1px solid rgba(120,150,255,0.15);z-index:2;position:relative;}
+.pg-live .pg-dot{background:#ff2e6e;box-shadow:0 0 8px #ff2e6e;}
+.pg-live span:last-child{font-size:10px;font-weight:700;letter-spacing:2px;color:#8fa2cf;}
+.pg-tkclip{flex:1;overflow:hidden;position:relative;}
+@keyframes pgTicker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.pg-tktrack{display:flex;width:max-content;animation:pgTicker 55s linear infinite;}
+.pg-tktrack:hover{animation-play-state:paused;}
+.pg-tkitem{display:flex;align-items:center;gap:8px;padding:10px 22px;border-right:1px solid rgba(120,150,255,0.08);white-space:nowrap;}
+.pg-tkitem .pg-dot{width:6px;height:6px;flex:0 0 auto;}
+.pg-tklabel{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#8fa2cf;}
+.pg-tkval{font-size:11px;font-weight:800;letter-spacing:1px;}
+
+/* ---- Signal x Trends ---- */
+.pg-signal-panel{overflow:hidden;}
+.pg-sigrow{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(120,150,255,0.08);}
+.pg-sigscore{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:2px solid currentColor;}
+.pg-sighead{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.pg-sightitle{font-size:13px;font-weight:700;color:#eef3ff;line-height:1.4;text-wrap:pretty;}
+.pg-sigmeta{font-size:9.5px;letter-spacing:1px;color:#5d6b93;}
+.pg-sigtrends{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.pg-sigvel{display:flex;align-items:center;gap:7px;}
+.pg-sigvel .pg-dot{width:8px;height:8px;}
+.pg-sigvelval{font-size:13px;font-weight:800;}
+.pg-sigquery{font-size:9px;letter-spacing:1px;color:#5d6b93;white-space:nowrap;}
+.pg-sigfoot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 18px;background:rgba(120,150,255,0.03);}
+.pg-sigfoot span{font-size:9.5px;letter-spacing:1px;color:#5d6b93;}
+
+/* ---- The Balance ---- */
+.pg-balance{display:grid;grid-template-columns:1fr minmax(170px,200px) 1fr;gap:20px;align-items:stretch;}
+@media (max-width:760px){.pg-balance{grid-template-columns:1fr;}}
+.pg-idxcard{background:#0b1122;border-radius:12px;padding:26px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:0 12px 40px rgba(0,0,0,0.45);}
+.pg-idxlabel{font-size:11px;font-weight:800;letter-spacing:3px;color:#8fa2cf;}
+.pg-ring{position:relative;width:150px;height:150px;}
+.pg-ringfill{position:absolute;inset:0;border-radius:50%;-webkit-mask:radial-gradient(closest-side,transparent 66%,#000 67%);mask:radial-gradient(closest-side,transparent 66%,#000 67%);}
+.pg-ringcenter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+.pg-ringval{font-size:44px;font-weight:800;line-height:1;}
+.pg-ringof{font-size:10px;color:#5d6b93;letter-spacing:1px;}
+.pg-statuschip{font-size:10px;font-weight:800;letter-spacing:1.5px;border-radius:4px;padding:4px 10px;border:1px solid;}
+.pg-idxweights{font-size:11px;color:#5d6b93;line-height:1.6;text-align:center;max-width:300px;text-wrap:pretty;}
+.pg-idxlink{font-size:10.5px;font-weight:700;letter-spacing:1.5px;color:#8fa2cf;cursor:pointer;background:none;border:0;font-family:inherit;}
+.pg-idxlink:hover{color:#eef3ff;}
+.pg-net{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 8px;}
+.pg-netlabel{font-size:10px;font-weight:800;letter-spacing:2.5px;color:#5d6b93;}
+.pg-netval{font-size:38px;font-weight:800;color:#eef3ff;line-height:1;}
+.pg-netdom{font-size:10px;font-weight:800;letter-spacing:1.5px;}
+.pg-netbars{width:100%;max-width:170px;display:flex;flex-direction:column;gap:7px;margin-top:6px;}
+.pg-netbar{height:6px;border-radius:3px;background:rgba(120,150,255,0.08);overflow:hidden;}
+.pg-netbar div{height:100%;border-radius:3px;}
+.pg-netcap{font-size:9.5px;color:#5d6b93;letter-spacing:1px;}
+
+/* ---- metric sections ---- */
+.pg-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.pg-card{background:#0b1122;border:1px solid rgba(120,150,255,0.14);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;cursor:pointer;text-align:left;font-family:inherit;color:#c7d2ee;}
+.pg-card:hover{border-color:rgba(120,150,255,0.35);}
+.pg-cardtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+.pg-cardlabel{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#8fa2cf;}
+.pg-cardcad{font-size:8.5px;letter-spacing:1px;color:#5d6b93;white-space:nowrap;}
+.pg-cardmid{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;}
+.pg-cardvalwrap{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.pg-cardval{font-size:27px;font-weight:800;color:#eef3ff;line-height:1;}
+.pg-cardsub{font-size:9.5px;color:#5d6b93;letter-spacing:0.5px;}
+.pg-cardspark{width:90px;height:28px;flex:0 0 auto;}
+.pg-cardbot{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.pg-tone{font-size:9px;font-weight:800;letter-spacing:1px;border-radius:4px;padding:3px 8px;border:1px solid;}
+.pg-cardsrc{font-size:8.5px;letter-spacing:1px;color:#5d6b93;}
+
+/* ---- trusted sources ---- */
+.pg-srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:rgba(120,150,255,0.1);border:1px solid rgba(120,150,255,0.14);border-radius:10px;overflow:hidden;}
+.pg-srccell{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:#0b1122;color:#c7d2ee;}
+.pg-srccell:hover{background:#0e1530;color:#c7d2ee;}
+.pg-srctop{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+.pg-srcname{font-size:11.5px;font-weight:800;letter-spacing:0.5px;color:#eef3ff;}
+.pg-srccad{font-size:8.5px;letter-spacing:1px;color:#5d6b93;}
+.pg-srcdesc{font-size:9.5px;color:#5d6b93;letter-spacing:0.5px;line-height:1.5;}
+
+/* ---- methodology footer ---- */
+.pg-foot{width:100%;margin-top:48px;border-top:1px solid rgba(120,150,255,0.1);background:#080d1a;}
+.pg-foot-in{padding:28px 0 32px 0;display:flex;flex-direction:column;gap:16px;}
+.pg-footpara{font-size:11.5px;color:#8fa2cf;line-height:1.7;max-width:760px;text-wrap:pretty;}
+.pg-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.pg-chip{font-size:9.5px;letter-spacing:0.5px;color:#8fa2cf;background:rgba(120,150,255,0.05);border:1px solid rgba(120,150,255,0.12);border-radius:6px;padding:6px 10px;}
+.pg-chip b{font-weight:800;color:#eef3ff;}
+.pg-footrow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid rgba(120,150,255,0.08);}
+.pg-footrow span,.pg-footrow a{font-size:9.5px;letter-spacing:1px;color:#5d6b93;}
+.pg-footrow a{font-weight:700;letter-spacing:1.5px;color:#8fa2cf;cursor:pointer;}
+.pg-footrow a:hover{color:#eef3ff;}
+
+/* ---- methodology page ---- */
+.pg-page{display:none;}
+.pg-page.pg-active{display:block;}
+.pg-mth{display:flex;flex-direction:column;gap:18px;padding:36px 0 20px 0;}
+.pg-mth-title{font-size:20px;font-weight:800;letter-spacing:2px;color:#eef3ff;}
+.pg-mth-intro{font-size:11.5px;color:#8fa2cf;line-height:1.7;max-width:760px;}
+.pg-mth-item{background:#0b1122;border:1px solid rgba(120,150,255,0.14);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;}
+.pg-mth-name{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#eef3ff;}
+.pg-mth-text{font-size:10.5px;color:#8fa2cf;line-height:1.7;}
+
+/* ---- meter detail drawer ---- */
+@keyframes dwrIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+@keyframes dwrFade{from{opacity:0;}to{opacity:1;}}
+.dwr-root{position:fixed;inset:0;z-index:100;}
+.dwr-root[hidden]{display:none;}
+.dwr-backdrop{position:absolute;inset:0;background:rgba(3,6,14,0.7);animation:dwrFade 0.2s ease;}
+.dwr-panel{position:absolute;top:0;right:0;bottom:0;width:min(430px,100%);background:#0b1122;border-left:1px solid rgba(120,150,255,0.2);box-shadow:-24px 0 60px rgba(0,0,0,0.6);animation:dwrIn 0.25s ease;display:flex;flex-direction:column;overflow-y:auto;}
+.dwr-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 24px;border-bottom:1px solid rgba(120,150,255,0.12);position:sticky;top:0;background:#0b1122;z-index:1;}
+.dwr-title{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#8fa2cf;}
+.dwr-x{cursor:pointer;color:#5d6b93;font-size:16px;padding:4px 8px;background:none;border:0;font-family:inherit;}
+.dwr-x:hover{color:#eef3ff;}
+.dwr-body{display:flex;flex-direction:column;gap:24px;padding:24px;}
+.dwr-valrow{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;}
+.dwr-value{font-size:46px;font-weight:800;line-height:1;}
+.dwr-sub{font-size:10.5px;color:#5d6b93;letter-spacing:0.5px;margin-top:6px;display:block;}
+.dwr-delta{font-size:9.5px;font-weight:800;letter-spacing:1px;border-radius:4px;padding:4px 10px;white-space:nowrap;border:1px solid;}
+.dwr-seclabel{font-size:10px;font-weight:800;letter-spacing:2px;color:#5d6b93;display:block;margin-bottom:10px;}
+.dwr-histbox{background:rgba(120,150,255,0.04);border:1px solid rgba(120,150,255,0.1);border-radius:8px;padding:14px;}
+.dwr-histnote{font-size:9.5px;letter-spacing:1px;color:#5d6b93;line-height:1.6;}
+.dwr-weights{display:flex;flex-direction:column;gap:8px;}
+.dwr-wrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;}
+.dwr-wname{font-size:10px;font-weight:700;letter-spacing:1px;color:#8fa2cf;display:block;margin-bottom:4px;}
+.dwr-wtrack{height:5px;border-radius:3px;background:rgba(120,150,255,0.08);overflow:hidden;}
+.dwr-wfill{height:100%;border-radius:3px;}
+.dwr-wpct{font-size:11px;font-weight:800;color:#eef3ff;}
+.dwr-meta{border:1px solid rgba(120,150,255,0.1);border-radius:8px;overflow:hidden;}
+.dwr-metarow{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(120,150,255,0.08);}
+.dwr-metarow:last-child{border-bottom:0;}
+.dwr-metak{font-size:9.5px;letter-spacing:1.5px;color:#5d6b93;}
+.dwr-metav{font-size:10px;font-weight:700;color:#c7d2ee;}
+.dwr-share{display:flex;gap:8px;flex-wrap:wrap;}
+.dwr-sharebtn{flex:1;min-width:70px;text-align:center;font-size:10px;font-weight:800;letter-spacing:1px;color:#c7d2ee;background:rgba(120,150,255,0.06);border:1px solid rgba(120,150,255,0.15);border-radius:6px;padding:9px 0;cursor:pointer;font-family:inherit;}
+.dwr-sharebtn:hover{border-color:rgba(120,150,255,0.4);color:#eef3ff;}
+body.dwr-lock{overflow:hidden;}
+
+@media (max-width:720px){
+  .pg-brand-tag{display:none;}
+  .pg-sigrow{grid-template-columns:auto 1fr;}
+  .pg-sigtrends{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px;}
+}
+</style>
 </head>
 <body>
-<header class="hdr"><div class="logo"><span class="logo-name">Anthony Charts</span><span class="logo-sub" id="logoSub"></span></div><div class="hdr-right"><button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button><button class="nav-btn" onclick="showPage('methodology')">Methodology</button><div class="live-pill"><div class="live-dot"></div><span id="liveDate"></span></div><button class="mode-btn" onclick="toggleMode()" id="modeBtn"></button></div>
-</header>
-<div class="ticker"><div class="ticker-outer" id="tickerOuter"><div class="ticker-inner" id="tickerInner"><div class="ticker-item">🌍 WORLD ON EDGE: 88/100 ↑</div><div class="ticker-item">💚 WORLD GOODNESS: 47/100 →</div><div class="ticker-item">🌡️ TEMP ANOMALY: +1.42°C above baseline</div><div class="ticker-item">🌊 SEA LEVEL: +112mm since 1993</div><div class="ticker-item">❄️ ARCTIC ICE: Record-low March extent · NSIDC</div><div class="ticker-item">🌿 CO₂: 431.1 ppm · +1.5/yr</div><div class="ticker-item">🪐 EXOPLANETS: 6,128 confirmed</div><div class="ticker-item">☄️ NEO WATCH: 4 close approaches this week · No threats</div><div class="ticker-item">👽 TECHNOSIG WATCH: 3 candidates active</div><div class="ticker-item">☀️ SOLAR ACTIVITY: MODERATE — G1 Storm Watch</div><div class="ticker-item">🎯 INFORMATION INTEGRITY: 49.5% verified claims</div><div class="ticker-item">🚢 GLOBAL TRADE STRESS: 81/100 · High</div><div class="ticker-item">🧭 CALM WINDOW PROBABILITY: 31% — LOW</div><div class="ticker-item">⚖️ WEALTH INEQUALITY: Gini 0.67 · Top 1% owns 38%</div><div class="ticker-item">📈 SOCIAL MOBILITY: 53.4/100 · Stalled</div><div class="ticker-item">💔 CONFLICT DEATHS: 28,400 YTD · 56 active zones</div><div class="ticker-item">🕊️ PEACEKEEPING: 87,000 deployed · 12 missions</div><div class="ticker-item">🦏 SPECIES THREATENED: 44,016 · 28% of assessed</div><div class="ticker-item">🌿 CONSERVATION: 17.6% of Earth protected · 30x30 goal</div></div></div>
+
+<!-- ============ HEADER ============ -->
+<div class="pg-header">
+  <div class="pg-wrap pg-header-in">
+    <div class="pg-brand">
+      <span class="pg-brand-name">ANTHONY CHARTS</span>
+      <span class="pg-brand-tag">VERIFIABLE COMPOSITE INDEX</span>
+    </div>
+    <nav class="pg-nav">
+      <button type="button" class="pg-navbtn pg-active" id="pg-nav-dashboard" onclick="pgShowPage('dashboard')">DASHBOARD</button>
+      <button type="button" class="pg-navbtn" id="pg-nav-methodology" onclick="pgShowPage('methodology')">METHODOLOGY</button>
+    </nav>
+  </div>
 </div>
-<div id="page-dashboard" class="page active">
-<main class="main"><div class="ptrow ani" style="animation-delay:.05s"><div><div class="ptitle">World On Edge<br>vs. World Goodness</div><div class="psub">A living intelligence dashboard tracking the forces that shape our world — tension, hope, discovery, and truth. All data sourced from verified scientific and institutional feeds.</div></div><div class="pdate" id="lastUpdated"></div></div><div class="ani" style="animation-delay:.1s"><div class="sec-head"><span class="sec-label">The Balance</span><div class="sec-rule"></div></div><div class="hero-duel"><div class="hero-card hero-card-edge" onclick="openDrawer('edge')"><div class="hero-mlabel">World On Edge Index</div><span class="hero-emoji">😰</span><svg viewBox="0 0 200 120" width="210" style="overflow:visible;"><path class="arc-bg-t" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110"/><path class="arc-fill-t a-edge" id="hEdgeArc" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110" stroke-dasharray="251" stroke-dashoffset="251"/></svg><div class="big-num big-num-edge" id="edgeNum">88</div><div class="big-status big-status-edge">⚠ HIGH TENSION</div><div class="hero-desc">Composite of GPR Index, active conflicts, public stress, wealth inequality, species loss, and expert forecasts.</div><div class="click-hint">↑ Click for full detail + share</div></div><div class="hero-vs"><div class="vs-line"></div><div class="vs-label">VS</div><div class="vs-line"></div></div><div class="hero-card hero-card-good" onclick="openDrawer('good')"><div class="hero-mlabel">World Goodness Index</div><span class="hero-emoji">💚</span><svg viewBox="0 0 200 120" width="210" style="overflow:visible;"><path class="arc-bg-t" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110"/><path class="arc-fill-t a-good" id="hGoodArc" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110" stroke-dasharray="251" stroke-dashoffset="251"/></svg><div class="big-num big-num-good" id="goodNum">47</div><div class="big-status big-status-good">↗ HOLDING STEADY</div><div class="hero-desc">Tracks humanitarian aid, scientific breakthroughs, poverty reduction, conservation wins, social mobility, and global cooperation.</div><div class="click-hint">↑ Click for full detail + share</div></div></div></div><div class="ani" style="animation-delay:.18s"><!-- EARTH PILLAR --><div class="sec-head"><span class="sec-label">🌍 Earth Pulse</span><div class="sec-rule"></div></div><div class="meter-grid" style="grid-template-columns:repeat(2,1fr);"><div class="meter-card" onclick="openDrawer('temp')"><div class="meter-top"><div><div class="meter-name">Global Temp Anomaly</div><div class="meter-cadence">Updated monthly</div></div><span class="meter-icon">🌡️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-temp" id="arcTemp" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-temp">+1.42°</div><div class="meter-unit">Above 1850–1900 baseline</div></div><div class="meter-trend t-up">↑ Rising</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-temp" style="width:0%" data-w="71%"></div></div></div><div class="meter-card" onclick="openDrawer('sea')"><div class="meter-top"><div><div class="meter-name">Sea Level Rise</div><div class="meter-cadence">Updated monthly</div></div><span class="meter-icon">🌊</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-sea" id="arcSea" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-sea">+112mm</div><div class="meter-unit">Since 1993 · +4.1mm/yr</div></div><div class="meter-trend t-up">↑ Accel.</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-sea" style="width:0%" data-w="55%"></div></div></div><div class="meter-card" onclick="openDrawer('arctic')"><div class="meter-top"><div><div class="meter-name">Arctic Sea Ice Extent</div><div class="meter-cadence">Updated daily · NSIDC</div></div><span class="meter-icon">❄️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-arctic" id="arcArctic" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-arctic">REC. LOW</div><div class="meter-unit">March 2026 extent · C3S/ERA5</div></div><div class="meter-trend t-up">↓ Record</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-arctic" style="width:0%" data-w="30%"></div></div></div><div class="meter-card" onclick="openDrawer('co2')"><div class="meter-top"><div><div class="meter-name">CO₂ Concentration</div><div class="meter-cadence">Updated weekly · Mauna Loa</div></div><span class="meter-icon">🌿</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-co2" id="arcCo2" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-co2">431.1</div><div class="meter-unit">ppm · Pre-industrial: 280ppm</div></div><div class="meter-trend t-up">↑ +1.5 y/y</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-co2" style="width:0%" data-w="69%"></div></div></div></div><!-- SPACE PILLAR --><div class="sec-head" style="margin-top:22px;"><span class="sec-label">🚀 Space</span><div class="sec-rule"></div></div><div class="meter-grid"><div class="meter-card" onclick="openDrawer('planet')"><div class="meter-top"><div><div class="meter-name">Exoplanet Discovery</div><div class="meter-cadence">Updated weekly</div></div><span class="meter-icon">🪐</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-planet" id="arcPlanet" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-planet">6,128</div><div class="meter-unit">Confirmed · 6,000 crossed Sep 2025</div></div><div class="meter-trend t-dn">↑ Growing</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-planet" style="width:0%" data-w="61%"></div></div></div><div class="meter-card" onclick="openDrawer('neo')"><div class="meter-top"><div><div class="meter-name">Near-Earth Object Watch</div><div class="meter-cadence">Updated daily · NASA CNEOS</div></div><span class="meter-icon">☄️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-neo" id="arcNeo" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-neo">4</div><div class="meter-unit">Close approaches this week</div></div><div class="meter-trend t-dn" style="font-weight:700;font-size:.75rem;">✓ NO THREATS</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-neo" style="width:0%" data-w="20%"></div></div></div><div class="meter-card" onclick="openDrawer('alien')"><div class="meter-top"><div><div class="meter-name">Technosignature Watch</div><div class="meter-cadence">Updated as reported</div></div><span class="meter-icon">👽</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-alien" id="arcAlien" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-alien">3</div><div class="meter-unit">Active candidates · BL/SETI</div></div><div class="meter-trend t-warn">→ Watch</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-alien" style="width:0%" data-w="25%"></div></div></div><div class="meter-card" onclick="openDrawer('solar')"><div class="meter-top"><div><div class="meter-name">Solar Activity</div><div class="meter-cadence">Updated daily</div></div><span class="meter-icon">☀️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-solar" id="arcSolar" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-solar">G1</div><div class="meter-unit">Geomagnetic storm watch</div></div><div class="meter-trend t-warn">→ Moderate</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-solar" style="width:0%" data-w="60%"></div></div></div></div><!-- HUMAN SYSTEMS PILLAR --><div class="sec-head" style="margin-top:22px;"><span class="sec-label">🧠 Human Systems</span><div class="sec-rule"></div></div><div class="meter-grid"><div class="meter-card" onclick="openDrawer('truth')"><div class="meter-top"><div><div class="meter-name">Information Integrity Index</div><div class="meter-cadence">Updated monthly · Experimental composite</div></div><span class="meter-icon">🎯</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-truth" id="arcTruth" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-truth">49.5%</div><div class="meter-unit">Verified claims · IFCN/RSF</div></div><div class="meter-trend t-up">↓ –4pts YOY</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-truth" style="width:0%" data-w="61%"></div></div></div><div class="meter-card" onclick="openDrawer('supply')"><div class="meter-top"><div><div class="meter-name">Global Trade Stress</div><div class="meter-cadence">Updated monthly · Composite</div></div><span class="meter-icon">🚢</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-edge" id="arcSupply" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-edge">81</div><div class="meter-unit">Composite stress index · 0–100</div></div><div class="meter-trend t-warn">↓ Easing from peak 88</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-edge" style="width:0%" data-w="81%"></div></div></div><div class="meter-card" onclick="openDrawer('gini')"><div class="meter-top"><div><div class="meter-name">Wealth Inequality</div><div class="meter-cadence">Updated annually · WID.world</div></div><span class="meter-icon">⚖️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-gini" id="arcGini" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-gini">0.67</div><div class="meter-unit">Global Gini · Top 1% owns 38%</div></div><div class="meter-trend t-up">↑ Widening</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-gini" style="width:0%" data-w="67%"></div></div></div><div class="meter-card" onclick="openDrawer('mobility')"><div class="meter-top"><div><div class="meter-name">Social Mobility Index</div><div class="meter-cadence">Updated annually · World Bank</div></div><span class="meter-icon">📈</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-mobility" id="arcMobility" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-mobility">53.4</div><div class="meter-unit">Global avg · 0–100 scale</div></div><div class="meter-trend t-warn">→ Stalled</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-mobility" style="width:0%" data-w="53%"></div></div></div><div class="meter-card" onclick="openDrawer('conflict')"><div class="meter-top"><div><div class="meter-name">Conflict Deaths</div><div class="meter-cadence">Updated monthly · ACLED</div></div><span class="meter-icon">💔</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-conflict" id="arcConflict" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-conflict">28.4K</div><div class="meter-unit">Battle deaths YTD · 2026</div></div><div class="meter-trend t-up">↑ Elevated</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-conflict" style="width:0%" data-w="72%"></div></div></div><div class="meter-card" onclick="openDrawer('peace')"><div class="meter-top"><div><div class="meter-name">Peacekeeping Reach</div><div class="meter-cadence">Updated monthly · UN DPPA</div></div><span class="meter-icon">🕊️</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-peace" id="arcPeace" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-peace">87K</div><div class="meter-unit">Personnel deployed · 12 missions</div></div><div class="meter-trend t-dn">→ Holding</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-peace" style="width:0%" data-w="44%"></div></div></div></div><!-- BIOSPHERE PILLAR --><div class="sec-head" style="margin-top:22px;"><span class="sec-label">🌱 Biosphere</span><div class="sec-rule"></div></div><div class="meter-grid"><div class="meter-card" onclick="openDrawer('species')"><div class="meter-top"><div><div class="meter-name">Species Threat Index</div><div class="meter-cadence">Updated quarterly · IUCN</div></div><span class="meter-icon">🦏</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-species" id="arcSpecies" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-species">44,016</div><div class="meter-unit">Threatened species · IUCN Red List</div></div><div class="meter-trend t-up">↑ Rising</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-species" style="width:0%" data-w="78%"></div></div></div><div class="meter-card" onclick="openDrawer('conserve')"><div class="meter-top"><div><div class="meter-name">Conservation Coverage</div><div class="meter-cadence">Updated annually · UNEP-WCMC</div></div><span class="meter-icon">🌿</span></div><div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155"><path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/><path class="arc-fill-t a-conserve" id="arcConserve" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/></svg></div><div class="meter-bottom"><div><div class="meter-val v-conserve">17.6%</div><div class="meter-unit">Earth's surface protected · 30x30 goal</div></div><div class="meter-trend t-dn">↑ Growing</div></div><div class="meter-bar-bg"><div class="meter-bar-fill b-conserve" style="width:0%" data-w="59%"></div></div></div></div></div><!-- SOURCES SECTION --><div class="ani" style="animation-delay:.2s"><div class="sec-head" style="margin-top:32px;"><span class="sec-label">📚 Trusted Sources</span><div class="sec-rule"></div></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;"><a href="https://matteoiacoviello.com/gpr.htm" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">GPR Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Caldara & Iacoviello · Geopolitical Risk · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">matteoiacoviello.com →</div></div></a><a href="https://acleddata.com" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">ACLED</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Armed Conflict Location & Event Data · Real-time conflict tracking</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">acleddata.com →</div></div></a><a href="https://climate.copernicus.eu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Copernicus C3S</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">EU Climate Change Service · Temp anomaly · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">climate.copernicus.eu →</div></div></a><a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NOAA Mauna Loa</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">The Keeling Curve · CO₂ concentration · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">gml.noaa.gov →</div></div></a><a href="https://nsidc.org/data/seaice_index" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NSIDC Sea Ice Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">National Snow & Ice Data Center · Arctic extent · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">nsidc.org →</div></div></a><a href="https://exoplanetarchive.ipac.caltech.edu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA Exoplanet Archive</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Confirmed planet catalog · JWST/TESS · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">exoplanetarchive.ipac.caltech.edu →</div></div></a><a href="https://cneos.jpl.nasa.gov" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA CNEOS</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Center for Near Earth Object Studies · JPL Sentry · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">cneos.jpl.nasa.gov →</div></div></a><a href="https://www.iucnredlist.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">IUCN Red List</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Species threat assessments · Global biodiversity · Quarterly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">iucnredlist.org →</div></div></a><a href="https://www.protectedplanet.net" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Protected Planet</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">UNEP-WCMC · Conservation coverage · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">protectedplanet.net →</div></div></a><a href="https://wid.world" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">World Inequality Database</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">WID.world · Gini · Income shares · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">wid.world →</div></div></a><a href="https://opportunityinsights.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Opportunity Insights</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Harvard · Social mobility research · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">opportunityinsights.org →</div></div></a><a href="https://peacekeeping.un.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">UN Peacekeeping</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">DPPA · Active missions · Personnel deployed · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">peacekeeping.un.org →</div></div></a></div></div><div class="ani" style="animation-delay:.24s">
-<!-- ================================================================
-     ANTHONY CHARTS — 10-YEAR TREND + EXPERT PROJECTION (redesign)
-     Drop-in replacement for the current on-chart-bubbles trend chart.
-     Requires JetBrains Mono in <head>:
-     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-     ================================================================ -->
+
+<!-- ============ LIVE TICKER ============ -->
+<div class="pg-ticker">
+  <div class="pg-live"><span class="pg-dot"></span><span>LIVE</span></div>
+  <div class="pg-tkclip">
+    <div class="pg-tktrack"><!--BUILD:TICKER--></div>
+  </div>
+</div>
+
+<div id="pg-page-dashboard" class="pg-page pg-active">
+
+  <!--BUILD:SIGNAL-->
+
+  <!-- ============ THE BALANCE ============ -->
+  <div class="pg-wrap" style="margin-top:40px;">
+    <div class="pg-sechead"><span class="pg-seclabel">THE BALANCE</span><span class="pg-hair"></span></div>
+    <div class="pg-balance"><!--BUILD:BALANCE--></div>
+  </div>
+
+  <!-- ============ METRIC SECTIONS ============ -->
+  <div class="pg-wrap" style="margin-top:8px;"><!--BUILD:SECTIONS--></div>
+
+  <!-- ============ 10-YEAR TREND CHART (acx module) ============ -->
 <section id="ac-trend" class="acx">
   <div class="acx-sechead">
     <span class="acx-seclabel">10-YEAR TREND + EXPERT PROJECTION</span>
@@ -673,515 +869,196 @@ window.AC_TREND = (function (given) {
 })();
 </script>
 <!-- ================ end trend chart module ================ -->
-</div><!-- SOURCES SECTION — below chart --><div class="ani" style="animation-delay:.28s"><div class="sec-head" style="margin-top:32px;"><span class="sec-label">📚 Trusted Sources</span><div class="sec-rule"></div></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;"><a href="https://matteoiacoviello.com/gpr.htm" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">GPR Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Caldara & Iacoviello · Geopolitical Risk · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">matteoiacoviello.com →</div></div></a><a href="https://acleddata.com" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">ACLED</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Armed Conflict Location & Event Data · Real-time conflict tracking</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">acleddata.com →</div></div></a><a href="https://climate.copernicus.eu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Copernicus C3S</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">EU Climate Change Service · Temp anomaly · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">climate.copernicus.eu →</div></div></a><a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NOAA Mauna Loa</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">The Keeling Curve · CO₂ concentration · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">gml.noaa.gov →</div></div></a><a href="https://nsidc.org/data/seaice_index" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NSIDC Sea Ice Index</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">National Snow & Ice Data Center · Arctic extent · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">nsidc.org →</div></div></a><a href="https://exoplanetarchive.ipac.caltech.edu" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA Exoplanet Archive</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Confirmed planet catalog · JWST/TESS · Weekly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">exoplanetarchive.ipac.caltech.edu →</div></div></a><a href="https://cneos.jpl.nasa.gov" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">NASA CNEOS</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Center for Near Earth Object Studies · JPL Sentry · Daily</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">cneos.jpl.nasa.gov →</div></div></a><a href="https://www.iucnredlist.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">IUCN Red List</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Species threat assessments · Global biodiversity · Quarterly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">iucnredlist.org →</div></div></a><a href="https://www.protectedplanet.net" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Protected Planet</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">UNEP-WCMC · Conservation coverage · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">protectedplanet.net →</div></div></a><a href="https://wid.world" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">World Inequality Database</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">WID.world · Gini · Income shares · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">wid.world →</div></div></a><a href="https://opportunityinsights.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">Opportunity Insights</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">Harvard · Social mobility research · Annual</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">opportunityinsights.org →</div></div></a><a href="https://peacekeeping.un.org" target="_blank" style="text-decoration:none;"><div class="meter-card" style="cursor:pointer;padding:14px 16px;"><div style="font-family:var(--fd);font-weight:700;font-size:.8rem;margin-bottom:4px;">UN Peacekeeping</div><div style="font-family:var(--fb);font-size:.7rem;color:var(--tdim);line-height:1.5;">DPPA · Active missions · Personnel deployed · Monthly</div><div style="margin-top:8px;font-family:var(--fm);font-size:.55rem;color:var(--ac);letter-spacing:.1em;">peacekeeping.un.org →</div></div></a></div></div>
-</main>
+
+  <!-- ============ TRUSTED SOURCES ============ -->
+  <div class="pg-wrap" style="margin-top:40px;">
+    <div class="pg-sechead">
+      <span class="pg-seclabel">TRUSTED SOURCES</span><span class="pg-hair"></span>
+      <span class="pg-secnote"><!--BUILD:SRCCOUNT--></span>
+    </div>
+    <div class="pg-srcgrid"><!--BUILD:SOURCES--></div>
+  </div>
+
+</div><!-- /dashboard -->
+
+<!-- ============ METHODOLOGY PAGE ============ -->
+<div id="pg-page-methodology" class="pg-page">
+  <div class="pg-wrap pg-mth">
+    <span class="pg-mth-title">HOW IT WORKS</span>
+    <span class="pg-mth-intro">Every number comes from a verified public source. Composite indices publish every
+    weight — the chips below are the locked formulas, and each meter's full calculation follows.</span>
+    <div class="pg-chips"><!--BUILD:CHIPS2--></div>
+    <!--BUILD:METHOD-->
+  </div>
 </div>
-<div id="page-methodology" class="page"><div class="method-main"><div class="ani"><div class="method-title">How It Works</div><div class="method-intro">Every number from a verified public source. Composite indices publish every weight.<br><br><strong>World On Edge (88):</strong> GPR 35% · ACLED 25% · Gallup 15% · Deaths 15% · Species 10%<br><strong>World Goodness (47):</strong> OCHA 20% · Poverty 20% · Science 15% · Treaties 15% · Mobility 15% · Conservation 15%<br><strong>Calm Window (31%):</strong> GPR slope 40% · ACLED trend 40% · Volatility 20%<br><strong>Trade Stress (81):</strong> Freightos 35% · PMI 35% · World Bank 30%<br><strong>Info Integrity (49.5%):</strong> IFCN 50% · RSF 30% · NewsGuard 20%<br><br>Full detail in each meter drawer.</div></div></div></div><div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer"><div class="drawer-handle" onclick="closeDrawer()"></div><div class="drawer-inner"><div class="drawer-header"><div><span class="drawer-emoji" id="dEmoji"></span><div class="drawer-title" id="dTitle"></div></div><div class="drawer-close" onclick="closeDrawer()">✕</div></div><div class="drawer-grid" id="dStats"></div><div id="dTrend"></div><div class="drawer-sources" id="dSources"></div><div class="drawer-body" id="dBody"></div><div id="dWeights"></div><div id="dHistory"></div><div id="dThresholds"></div><div class="drawer-method"><div class="drawer-method-title">How this is calculated</div><div class="drawer-method-text" id="dMethod"></div></div><div class="share-bar"><span class="share-label">Share:</span><a class="share-btn" id="shareX" href="#" target="_blank">𝕏 Post to X</a><a class="share-btn" id="shareLI" href="#" target="_blank">in LinkedIn</a><a class="share-btn" id="shareFB" href="#" target="_blank">f Facebook</a><button class="share-btn" onclick="copyLink()">🔗 Copy Link</button></div></div>
+
+<!-- ============ METHODOLOGY FOOTER ============ -->
+<div class="pg-foot">
+  <div class="pg-wrap pg-foot-in">
+    <span class="pg-seclabel">HOW IT WORKS</span>
+    <span class="pg-footpara">Every number comes from a verified public source. Composite indices publish every weight — full detail in each meter drawer.</span>
+    <div class="pg-chips"><!--BUILD:CHIPS--></div>
+    <div class="pg-footrow">
+      <span>© 2026 ANTHONY CHARTS · ALL DATA PUBLICLY SOURCED</span>
+      <a onclick="pgShowPage('methodology')">METHODOLOGY →</a>
+    </div>
+  </div>
 </div>
-<footer class="footer"><span class="footer-copy">© 2026 Anthony Charts · All data publicly sourced</span><div class="footer-src"><span>NOAA</span><span>NASA</span><span>GPR</span><span>WEF</span><span>SETI/BL</span><span>RSF</span><span class="footer-mlink" onclick="showPage('methodology')">Methodology →</span></div>
-</footer>
-<script>// ── DYNAMIC DATES ──
-(function(){
-  const now = new Date();
-  const opts = {year:'numeric',month:'short',day:'numeric'};
-  const ds = now.toLocaleDateString('en-US',opts);
-  const ts = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('liveDate').textContent = 'Live · '+ds;
-  document.getElementById('lastUpdated').textContent='ISSUE 5 - June 11, 2026 - Day 103 - Fragile De-escalation'+ds+' · '+ts+' local';
-})();
-// ── MODE (persisted) ──
-let isNeon = (localStorage.getItem('ac_mode') || 'neon') !== 'cartoon';
-function applyMode(){
-  document.body.className = isNeon ? 'neon' : 'cartoon';
-  document.getElementById('modeBtn').textContent = isNeon ? '🎨 Cartoon' : '⚡ Neon';
-  document.getElementById('logoSub').textContent = isNeon ? '// World Intelligence Dashboard' : '✦ Tracking Everything That Matters ✦';
-}
-function toggleMode(){
-  isNeon = !isNeon;
-  localStorage.setItem('ac_mode', isNeon ? 'neon' : 'cartoon');
-  applyMode();
-}
-// ── TICKER (seamless loop) ──
-function initTicker(){
-  const inner = document.getElementById('tickerInner');
-  const clone = inner.cloneNode(true);
-  document.getElementById('tickerOuter').appendChild(clone);
-}
-// ── ARCS ──
-const ARCS=[['hEdgeArc',251,.88],['hGoodArc',251,.47],['arcTemp',170,.71],['arcSea',170,.55],['arcArctic',170,.30],['arcCo2',170,.69],['arcPlanet',170,.61],['arcNeo',170,.20],['arcAlien',170,.25],['arcSolar',170,.60],['arcTruth',170,.50],['arcSupply',170,.81],['arcGini',170,.67],['arcMobility',170,.53],['arcConflict',170,.72],['arcPeace',170,.44],['arcSpecies',170,.78],['arcConserve',170,.59]];
-function animArcs(){
-  ARCS.forEach(([id,tot,pct],i)=>{
-    const el=document.getElementById(id); if(!el)return;
-    setTimeout(()=>{ el.style.strokeDashoffset=tot*(1-pct); },120+i*75);
-  });
-  document.querySelectorAll('.meter-bar-fill').forEach((el,i)=>{
-    const w=el.getAttribute('data-w');
-    setTimeout(()=>{ el.style.width=w; },200+i*80);
-  });
-}
-// ── FLICKER ──
-function startFlicker(){
-  setInterval(()=>{
-    if(!isNeon)return;
-    document.getElementById('edgeNum').textContent=88;
-    document.getElementById('goodNum').textContent=(47+(Math.random()*.4-.2)).toFixed(1);
-  },3800);
-}
-// ── PAGE NAV ──
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+
+<!-- ============ METER DETAIL DRAWER ============ -->
+<div class="dwr-root" id="dwr" hidden>
+  <div class="dwr-backdrop" onclick="pgCloseDrawer()"></div>
+  <div class="dwr-panel" role="dialog" aria-modal="true" aria-labelledby="dwr-title">
+    <div class="dwr-head">
+      <span class="dwr-title" id="dwr-title"></span>
+      <button type="button" class="dwr-x" onclick="pgCloseDrawer()" aria-label="Close">✕</button>
+    </div>
+    <div class="dwr-body">
+      <div class="dwr-valrow">
+        <div><span class="dwr-value" id="dwr-value"></span><span class="dwr-sub" id="dwr-sub"></span></div>
+        <span class="dwr-delta" id="dwr-delta"></span>
+      </div>
+      <div>
+        <span class="dwr-seclabel">HISTORY</span>
+        <div class="dwr-histbox">
+          <svg id="dwr-histsvg" viewBox="0 0 350 90" style="width:100%;height:auto;display:block;"><polyline id="dwr-histline" fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline></svg>
+          <span class="dwr-histnote" id="dwr-histnote" hidden></span>
+        </div>
+      </div>
+      <div id="dwr-weights-wrap" hidden>
+        <span class="dwr-seclabel">WEIGHTS · LOCKED</span>
+        <div class="dwr-weights" id="dwr-weights"></div>
+      </div>
+      <div class="dwr-meta">
+        <div class="dwr-metarow"><span class="dwr-metak">SOURCE</span><span class="dwr-metav" id="dwr-source"></span></div>
+        <div class="dwr-metarow"><span class="dwr-metak">CADENCE</span><span class="dwr-metav" id="dwr-cadence"></span></div>
+        <div class="dwr-metarow"><span class="dwr-metak">LAST UPDATED</span><span class="dwr-metav" id="dwr-updated"></span></div>
+      </div>
+      <div>
+        <span class="dwr-seclabel">SHARE</span>
+        <div class="dwr-share">
+          <a class="dwr-sharebtn" id="dwr-x-share" target="_blank" rel="noopener noreferrer">𝕏 POST</a>
+          <a class="dwr-sharebtn" id="dwr-li-share" target="_blank" rel="noopener noreferrer">in LINKEDIN</a>
+          <button type="button" class="dwr-sharebtn" id="dwr-copy">🔗 COPY LINK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Injected at build time from data/issue-data.json + public/data/scores-history.json:
+   { updated, meters: { key: { label, value, sub, delta, tone, tint, source,
+     cadence, history[], weights?[{name,pct}], share } } } */
+window.AC_METERS = null;/*BUILD:AC_METERS*/
+</script>
+<script>
+// ── page nav ──
+function pgShowPage(id){
+  document.querySelectorAll('.pg-page').forEach(function(p){p.classList.remove('pg-active');});
+  document.getElementById('pg-page-'+id).classList.add('pg-active');
+  document.querySelectorAll('.pg-navbtn').forEach(function(b){b.classList.remove('pg-active');});
+  document.getElementById('pg-nav-'+id).classList.add('pg-active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-// ── DRAWER DATA ──
-const BASE_URL = 'https://anthonycharts.com';
-const SLUGS = {edge:'world-on-edge',good:'world-goodness',temp:'global-temp',sea:'sea-level',arctic:'arctic-sea-ice',co2:'co2-concentration',planet:'exoplanet-discovery',neo:'near-earth-objects',alien:'technosignature-watch',solar:'solar-activity',truth:'information-integrity',supply:'global-trade-stress',gini:'wealth-inequality',mobility:'social-mobility',conflict:'conflict-deaths',peace:'peacekeeping-reach',species:'species-threat',conserve:'conservation-coverage'};
-const DD = {
-  edge:{emoji:'😰',title:'World On Edge Index',sources:['GPR · Caldara & Iacoviello','ACLED','Gallup World Poll','UCDP Conflict Deaths','IUCN Species Threat','Monthly'],
-    trend:{dir:'up',label:'Rising — all 5 inputs elevated'},
-    stats:[{val:'88/100',lbl:'Current Score'},{val:'VERY HIGH',lbl:'Tension Status'},{val:'Day 103',lbl:'US–Iran War'},{val:'~$93',lbl:'Brent (Jun 11)'},{val:'31%',lbl:'Calm Probability'},{val:'Monthly',lbl:'Update'}],
-    weights:{final:88,inputs:[
-      {name:'GPR Index (Caldara & Iacoviello)',weight:.35,score:98,color:'#ff2d6e'},
-      {name:'ACLED Active Conflict Events',weight:.25,score:91,color:'#ff6b35'},
-      {name:'Gallup Global Worry Survey',weight:.15,score:83,color:'#ff9d00'},
-      {name:'Conflict Deaths YTD',weight:.15,score:86,color:'#ffcc00'},
-      {name:'Species Threat Index (inverted)',weight:.10,score:56,color:'#c084fc'},
-    ]},
-    history:{cols:['Period','Score','Context'],rows:[
-      {period:'Jan 2015',val:'42/100',note:'Post-financial crisis calm'},
-      {period:'Jan 2019',val:'58/100',note:'Trade war tensions rising'},
-      {period:'Jan 2022',val:'71/100',note:'Ukraine invasion begins'},
-      {period:'Jan 2024',val:'74/100',note:'Gaza conflict escalates'},
-      {period:'Feb 2026',val:'78/100',note:'Platform launch baseline'},
-      {period:'Mar 2026',val:'89/100',note:'US–Iran war · Hormuz closed · index record'},
-      {period:'Jun 2026',val:'88/100',note:'Current — Day 103 · fragile de-escalation'},
-    ]},
-    thresholds:{levels:[
-      {val:'0–39',label:'Low — stable geopolitical environment',color:'#00ff9d',current:false},
-      {val:'40–59',label:'Moderate — elevated but manageable',color:'#ffcc00',current:false},
-      {val:'60–74',label:'High — multiple concurrent stress signals',color:'#ff9d00',current:false},
-      {val:'75–89',label:'Very High — systemic risk indicators active',color:'#ff6b35',current:true},
-      {val:'90–100',label:'Critical — structural instability threshold',color:'#ff2d6e',current:false},
-    ]},
-    body:'The World On Edge Index holds at 88/100 — one point off its March record. Day 103 of the US–Iran war brought the sharpest oscillation yet: the ceasefire broke open June 7–8 into the worst Israel–Iran exchange in months, US strikes resumed, and Iran hit US facilities in Bahrain, Jordan, and Kuwait. Yet the economic axis is easing — Hormuz ship traffic is increasing per the US Energy Secretary, Brent has cooled to the low $90s from a $138 wartime peak, and a US ceasefire framework is on the table against hawkish resistance. Kinetic risk and trade stress are now pointing in opposite directions for the first time since February. Prior context:  GPR hit 127.89 in January 2026, driven by Eurasia conflict language in major global newspapers. ACLED track...',
-    method:'Five inputs normalized 0–100, weighted and summed. GPR (35%): Caldara & Iacoviello index vs 0–200 range. ACLED (25%): active conflict zones vs 0–80 range. Gallup (15%): worry index as published. Conflict Deaths (15%): YTD deaths vs 50,000 threshold. Species Threat (10%): threatened % vs 50% threshold. Weights at anthonycharts.com/composites-v1.0.json',
-    share:'World On Edge: 88/100 — Very High. US–Iran war Day 103: worst strikes in months, yet Hormuz traffic rising and Brent down to ~$93. Calm Window 31%. anthonycharts.com 🌍'},
-  good:{emoji:'💚',title:'World Goodness Index',sources:['OCHA','World Bank','Our World in Data','UN Treaty DB','World Bank GSMI','Protected Planet','Monthly'],
-    trend:{dir:'down-bad',label:'Slight decline — inequality dragging composite'},
-    stats:[{val:'47/100',lbl:'Current Score'},{val:'STEADY',lbl:'Status'},{val:'$24.8B',lbl:'Aid Volume 2025'},{val:'8.4%',lbl:'Extreme Poverty'},{val:'17.6%',lbl:'Land Protected'},{val:'Monthly',lbl:'Update'}],
-    weights:{final:47,inputs:[
-      {name:'OCHA Humanitarian Aid Volume',weight:.20,score:50,color:'#00ff9d'},
-      {name:'World Bank Extreme Poverty (inverted)',weight:.20,score:55,color:'#00d4ff'},
-      {name:'Scientific Breakthrough Count',weight:.15,score:65,color:'#a78bfa'},
-      {name:'UN Treaty Signatures / Quarter',weight:.15,score:30,color:'#60a5fa'},
-      {name:'Social Mobility Index (GSMI)',weight:.15,score:50,color:'#34d399'},
-      {name:'Conservation Coverage Growth',weight:.15,score:30,color:'#6ee7b7'},
-    ]},
-    history:{cols:['Period','Score','Context'],rows:[
-      {period:'Jan 2015',val:'61/100',note:'Post-MDG momentum strong'},
-      {period:'Jan 2019',val:'58/100',note:'SDG progress slowing'},
-      {period:'Jan 2021',val:'49/100',note:'COVID collapses aid + cooperation'},
-      {period:'Jan 2024',val:'56/100',note:'Partial recovery'},
-      {period:'Feb 2026',val:'54/100',note:'Platform launch baseline'},
-      {period:'Jun 2026',val:'47/100',note:'Current — war diverting aid and cooperation'},
-    ]},
-    thresholds:{levels:[
-      {val:'0–39',label:'Critical — major positive momentum collapse',color:'#ff2d6e',current:false},
-      {val:'40–54',label:'Low — below historical average',color:'#ff9d00',current:true},
-      {val:'55–69',label:'Moderate — typical peacetime indicators',color:'#ffcc00',current:false},
-      {val:'70–84',label:'High — strong humanitarian signals',color:'#00ff9d',current:false},
-      {val:'85–100',label:'Exceptional — sustained global momentum',color:'#00d4ff',current:false},
-    ]},
-    body:'At 47/100 the World Goodness Index holds below its pre-COVID baseline of ~61. Aid volume and poverty reduction are the strongest inputs. Conservati...',
-    method:'Six inputs normalized 0–100, weighted and summed. Aid (20%): OCHA commitments vs 30B USD. Poverty (20%): World Bank rate inverted. Breakthroughs (15%): OWID annual count vs 50. Treaties (15%): UN quarterly signatures vs 30. Social Mobility (15%): World Bank GSMI 0–100. Conservation (15%): % of 30x30 target achieved. Weights at anthonycharts.com/composites-v1.0.json',
-    share:'World Goodness: 47/100 — below historical average. Aid holding. Inequality dragging. Not the inverse of Edge — independently constructed. anthonycharts.com 💚'},
-  temp:{emoji:'🌡️',title:'Global Temp Anomaly',sources:['Copernicus C3S ERA5','NOAA GISSTEMP','Berkeley Earth','Monthly'],
-    trend:{dir:'up',label:'Rising — +0.2°C since 2015, trajectory steepening'},
-    stats:[{val:'+1.42°C',lbl:'12-Mo Trailing · May 2026'},{val:'+1.62°C',lbl:'2024 Annual Record'},{val:'1.5°C',lbl:'Paris Threshold'},{val:'2°C',lbl:'Danger Threshold'},{val:'2030–35',lbl:'Sustained 1.5° Projected'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Year','Anomaly','Context'],rows:[
-      {period:'2000',val:'+0.42°C',note:'Warming clearly established'},
-      {period:'2010',val:'+0.72°C',note:'Hottest decade then recorded'},
-      {period:'2015',val:'+0.90°C',note:'Paris Agreement signed'},
-      {period:'2020',val:'+1.25°C',note:'Warming continues through COVID'},
-      {period:'2024',val:'+1.62°C',note:'Hottest year on record'},
-      {period:'May 2026',val:'+1.42°C',note:'Joint 2nd-warmest May · El Niño developing'},
-    ]},
-    thresholds:{levels:[
-      {val:'+1.42°C',label:'Current — 12-month trailing average',color:'#ff9d00',current:true},
-      {val:'+1.5°C',label:'Paris Agreement threshold — first sustained breach projected 2030–35',color:'#ff6b35',current:false},
-      {val:'+2.0°C',label:'Danger threshold — severe regional disruption',color:'#ff2d6e',current:false},
-      {val:'+3.0°C',label:'Catastrophic — regional uninhabitability scenarios',color:'#c084fc',current:false},
-    ]},
-    body:'We are 1.42°C above the 1850–1900 pre-industrial average (12-month trailing, Copernicus ERA5 through May 2026). May 2026 was the joint second-warmest May on record, sea surface temperatures hit their second-highest level, and El Niño conditions are developing — forecasters warn 2027 could push to new records. 2024 broke all records at +1.62°C — the first calendar year above 1.5...',
-    method:'12-month trailing average of global surface temperature anomaly above 1850–1900 pre-industrial mean. Primary: Copernicus C3S ERA5 reanalysis. Cross-referenced with NOAA GISSTEMP and Berkeley Earth. Arc = position in 0–2°C Paris risk corridor. Updated monthly.',
-    share:'Global temp: +1.42°C above pre-industrial (12-mo avg). 2024 hit +1.62°C — hottest year on record. Paris threshold: 1.5°C. anthonycharts.com 🌡️'},
-  sea:{emoji:'🌊',title:'Sea Level Rise',sources:['NASA JPL Altimetry','CSIRO','Sentinel-6 Freilich','Monthly'],
-    trend:{dir:'up',label:'Rising and accelerating — rate 2.5x higher than 1990s'},
-    stats:[{val:'+112mm',lbl:'Since 1993'},{val:'+4.1mm/yr',lbl:'Current Rate'},{val:'x2.5',lbl:'Rate vs 1990s'},{val:'+600mm',lbl:'2100 High Projection'},{val:'Greenland',lbl:'Primary Driver'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Period','Rise','Annual Rate'],rows:[
-      {period:'1993',val:'0mm (baseline)',note:'+1.7mm/yr'},
-      {period:'2000',val:'+23mm',note:'+2.1mm/yr'},
-      {period:'2010',val:'+50mm',note:'+2.8mm/yr'},
-      {period:'2020',val:'+91mm',note:'+3.6mm/yr'},
-      {period:'Feb 2026',val:'+112mm',note:'+4.1mm/yr — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'+50mm',label:'2010 level — nuisance coastal flooding begins',color:'#60a5fa',current:false},
-      {val:'+112mm',label:'Current — Feb 2026',color:'#00d4ff',current:true},
-      {val:'+300mm',label:'High-risk — major coastal infrastructure at risk',color:'#ff9d00',current:false},
-      {val:'+600mm',label:'2100 high-end projection — major city displacement',color:'#ff2d6e',current:false},
-    ]},
-    body:'Global mean sea level up 112mm since 1993. Current rate of +4.1mm/year has accelerated 2.5x from the 1990s (+1.7mm/yr). Primary drivers: thermal ex...',
-    method:'Continuous satellite altimetry: TOPEX/Poseidon (1993) → Jason-1/2/3 → Sentinel-6 Michael Freilich (2020–present). Monthly global mean averages from NASA JPL Physical Oceanography DAAC. Arc = position in 0–200mm scale. Rate acceleration from linear trend analysis of 5-year segments.',
-    share:'Sea level: +112mm since 1993. Rate +4.1mm/yr — 2.5x faster than the 1990s. Greenland driving acceleration. Full trend: anthonycharts.com 🌊'},
-  arctic:{emoji:'❄️',title:'Arctic Sea Ice Extent',sources:['NSIDC Sea Ice Index','Passive Microwave Satellite','Daily'],
-    trend:{dir:'down-bad',label:'Below seasonal median — long-term declining trend'},
-    stats:[{val:'RECORD LOW',lbl:'March 2026 Extent · C3S'},{val:'–1.2M km²',lbl:'vs Median (Feb)'},{val:'3.37M km²',lbl:'2012 Summer Min. Record'},{val:'Mar 2026',lbl:'Record Low March'},{val:'15%',lbl:'Min. Concentration Used'},{val:'Daily',lbl:'Update'}],
-    history:{cols:['Period','Feb Extent','vs Median'],rows:[
-      {period:'1980',val:'~16.0M km²',note:'+0.5M above median'},
-      {period:'2000',val:'~15.1M km²',note:'Near median'},
-      {period:'2012',val:'~14.4M km²',note:'–0.8M below median'},
-      {period:'2020',val:'~14.5M km²',note:'–0.8M below median'},
-      {period:'Feb 2026',val:'13.8M km²',note:'–1.2M below median'},
-      {period:'Mar 2026',val:'Record low',note:'Lowest March extent on record — C3S'},
-    ]},
-    thresholds:{levels:[
-      {val:'Above median',label:'Historically normal winter extent',color:'#00d4ff',current:false},
-      {val:'1981–2010 median',label:'Climatological baseline for this calendar date',color:'#60a5fa',current:false},
-      {val:'–1.2M km²',label:'Current — below seasonal median',color:'#ff9d00',current:true},
-      {val:'Ice-free summer',label:'Projected by 2040–2050 in high-emission scenarios',color:'#ff2d6e',current:false},
-    ]},
-    body:'March 2026 set the lowest Arctic sea ice extent on record for the month (Copernicus C3S) — the winter maximum ended at a record deficit, and the melt season is now underway from that depressed starting point. February stood 1.2M km² below the 1981–2010 median. Seasonal variation is completely no...',
-    method:'NSIDC Sea Ice Index via satellite passive microwave (SMMR, SSM/I, SSMIS). Extent = total ocean area with at least 15% ice concentration. Updated daily. Compared against 1981–2010 median for the same calendar day to remove seasonal signal. Arc = percentile within seasonal historical range.',
-    share:'Arctic ice: 13.8M km² — 1.2M km² below seasonal median. Long-term decline continues. February 2024 was record low winter month. anthonycharts.com ❄️'},
-  co2:{emoji:'🌿',title:'CO₂ Concentration',sources:['NOAA Mauna Loa Observatory','Scripps Institution of Oceanography','Weekly'],
-    trend:{dir:'up',label:'Rising — fastest rate in 800,000-year ice core record'},
-    stats:[{val:'431.1 ppm',lbl:'April 2026 · NOAA'},{val:'280 ppm',lbl:'Pre-Industrial'},{val:'+54.0%',lbl:'Total Increase'},{val:'+1.5 ppm y/y',lbl:'Apr 2025→26 · La Niña damped'},{val:'1958',lbl:'Keeling Record Begins'},{val:'Weekly',lbl:'Update'}],
-    history:{cols:['Year','CO₂ Level','Context'],rows:[
-      {period:'Pre-industrial',val:'~280 ppm',note:'Holocene stable baseline'},
-      {period:'1958',val:'315 ppm',note:'Keeling measurement begins'},
-      {period:'2000',val:'370 ppm',note:'+90 ppm from baseline'},
-      {period:'2015',val:'400 ppm',note:'First sustained 400ppm breach'},
-      {period:'2020',val:'413 ppm',note:'+133 from baseline'},
-      {period:'Apr 2026',val:'431.1 ppm',note:'+151.1 from baseline — current · NOAA MLO'},
-    ]},
-    thresholds:{levels:[
-      {val:'350 ppm',label:'Safe zone upper bound — Hansen, 1988 (now exceeded)',color:'#00ff9d',current:false},
-      {val:'400 ppm',label:'Symbolic threshold — permanently breached since 2016',color:'#ffcc00',current:false},
-      {val:'431.1 ppm',label:'Current — Apr 2026 (NOAA Mauna Loa)',color:'#ff9d00',current:true},
-      {val:'450 ppm',label:'High-risk — 2°C warming likely at sustained levels',color:'#ff6b35',current:false},
-      {val:'500 ppm',label:'Arc maximum — extreme risk scenario',color:'#ff2d6e',current:false},
-    ]},
-    body:'CO₂ at 431.1 ppm (April 2026, NOAA Mauna Loa) — 54% above pre-industrial. Year-over-year growth slowed to +1.5 ppm as La Niña damped the increment, but the long-run climb is the fastest in the 800,000-year ice core record, and forecasters expect the developing El Niño to re-accelerate it. The Kee...',
-    method:'Continuous measurement at NOAA Mauna Loa Observatory since 1958 (the Keeling Curve). Weekly averages from NOAA Global Monitoring Laboratory. Cross-referenced with Scripps Institution CO₂ program. Arc = position between 280ppm (pre-industrial) and 500ppm (extreme risk ceiling).',
-    share:'CO₂: 431.1 ppm — 54% above pre-industrial. Rising faster than any point in 800,000 years. The Keeling Curve climbs. anthonycharts.com 🌿'},
-  planet:{emoji:'🪐',title:'Exoplanet Discovery',sources:['NASA Exoplanet Archive','JWST Mission','TESS Mission','Weekly'],
-    trend:{dir:'up-good',label:'Rising — JWST accelerating discovery and atmosphere analysis'},
-    stats:[{val:'6,128',lbl:'Confirmed · Feb 2026 Archive'},{val:'Sep 2025',lbl:'6,000 Milestone Crossed'},{val:'Aug 30 2026',lbl:'Roman Telescope Launch'},{val:'1992',lbl:'First Confirmed'},{val:'~10,000',lbl:'2030 Projection'},{val:'Weekly',lbl:'Update'}],
-    history:{cols:['Year','Confirmed','Milestone'],rows:[
-      {period:'1992',val:'1',note:'First confirmed — pulsar worlds'},
-      {period:'1995',val:'8',note:'First sun-like star (51 Pegasi b)'},
-      {period:'2009',val:'400+',note:'Kepler mission launches'},
-      {period:'2020',val:'4,300+',note:'TESS extends search'},
-      {period:'2022',val:'5,000+',note:'5,000 milestone crossed'},
-      {period:'Sep 2025',val:'6,000',note:'NASA 6,000 milestone announced'},
-      {period:'Feb 2026',val:'6,128',note:'Current archive count — JWST accelerating'},
-    ]},
-    thresholds:{levels:[
-      {val:'6,128',label:'Current count — confirmed via peer review (Feb 2026)',color:'#00d4ff',current:true},
-      {val:'~10,000',label:'2030 projection if JWST maintains pace',color:'#a78bfa',current:false},
-      {val:'Biosignature',label:'No confirmed biosignatures yet — JWST now capable of detection',color:'#ffcc00',current:false},
-    ]},
-    body:'6,128 confirmed planets orbiting other stars — a number that was zero 34 years ago. NASA announced the 6,000 milestone on September 17, 2025, and the Nancy Grace Roman Space Telescope launches August 30, 2026 — projected to discover 100,000+ more. 183 sit in their star\'s habitable zone where liquid water could exist. JWST can now analyze exoplanet atmospheres directly for chemical biosignatures. No conclusive biological signals detected yet, but the search has genuinely begun.',
-    method:'Raw count from NASA Exoplanet Archive. Confirmed status requires: peer-reviewed publication, independent verification via secondary detection method, and archive acceptance. Habitable zone defined by orbital distance allowing liquid surface water. Arc = pace toward 10,000 milestone by 2030.',
-    share:'6,128 confirmed exoplanets — past the 6,000 milestone. Roman Telescope launches Aug 2026. JWST now reading atmospheres. The universe is full of worlds. anthonycharts.com 🪐'},
-  alien:{emoji:'👽',title:'Technosignature Watch',sources:['Breakthrough Listen','SETI Institute','MeerKAT Telescope','As Reported'],
-    trend:{dir:'stable',label:'Stable — 3 active candidates, none confirmed, none new'},
-    stats:[{val:'3',lbl:'Active Candidates'},{val:'0',lbl:'Confirmed Ever'},{val:'1977',lbl:'Wow! Signal Year'},{val:'1M+',lbl:'Stars Scanned'},{val:'LOW',lbl:'Confirm Probability'},{val:'As Reported',lbl:'Update'}],
-    history:{cols:['Year','Candidate','Outcome'],rows:[
-      {period:'1977',val:"Wow! Signal",note:'Still unexplained — never repeated'},
-      {period:'2016',val:"Tabby's Star",note:'Resolved: dust clouds'},
-      {period:'2020',val:'BLC1 Proxima Cen.',note:'Resolved: RFI interference'},
-      {period:'2022',val:'FAST telescope ×3',note:'Under review — current'},
-      {period:'Feb 2026',val:'3 active',note:'In peer review — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'0 confirmed',label:'Current — no confirmed extraterrestrial signal ever',color:'#00d4ff',current:true},
-      {val:'Candidate',label:'Passes RFI filter + multi-beam — still unresolved',color:'#a78bfa',current:false},
-      {val:'Confirmed detection',label:'Would require: repeatability + independent verification',color:'#ffcc00',current:false},
-    ]},
-    body:'Three signals remain in active review as technosignature candidates. The track record: every prior candidate has resolved to natural causes or radi...',
-    method:'Manual count from Breakthrough Listen published candidate reports and SETI Institute announcements. Candidate criteria: passed RFI filtering, observed in multiple independent beams, no confirmed natural explanation at time of logging. Updated as reported in peer-reviewed publications.',
-    share:'3 technosignature candidates active. 0 confirmed ever. Wow! Signal still unexplained after 49 years. Breakthrough Listen: 1M+ stars scanned. anthonycharts.com 👽'},
-  solar:{emoji:'☀️',title:'Solar Activity',sources:['NOAA SWPC','ESA Space Weather Service','WDC-SILSO Belgium','Daily'],
-    trend:{dir:'down',label:'Declining — past Solar Cycle 25 maximum, activity trending lower'},
-    stats:[{val:'G1',lbl:'Storm Level Today'},{val:'Solar Cycle 25',lbl:'Current Cycle'},{val:'Late 2025',lbl:'Cycle 25 Peak'},{val:'147',lbl:'Sunspot Number'},{val:'G5',lbl:'Maximum Scale'},{val:'Daily',lbl:'Update'}],
-    history:{cols:['Cycle','Peak Storm','Character'],rows:[
-      {period:'Cycle 23 (2003)',val:'G5 Halloween',note:'Grid impacts, satellite loss'},
-      {period:'Cycle 24 (2015)',val:'G4 — weak',note:'Below all predictions'},
-      {period:'Cycle 25 (2023)',val:'G4 — stronger',note:'Higher than predicted'},
-      {period:'Feb 2026',val:'G1 — current',note:'Post-peak, declining'},
-    ]},
-    thresholds:{levels:[
-      {val:'G1 — Minor',label:'Current — weak grid fluctuations at high latitudes',color:'#ffcc00',current:true},
-      {val:'G2 — Moderate',label:'Power grid fluctuations, satellite drag increases',color:'#ff9d00',current:false},
-      {val:'G3 — Strong',label:'GPS degraded, voltage corrections needed',color:'#ff6b35',current:false},
-      {val:'G4 — Severe',label:'Grid problems, satellite failures possible',color:'#ff2d6e',current:false},
-      {val:'G5 — Extreme',label:'Grid collapse risk, widespread satellite damage',color:'#c084fc',current:false},
-    ]},
-    body:'Solar Cycle 25 peaked in late 2025 at higher intensity than NOAA predictions — a notable forecasting miss. G1 is the mildest storm classification: ...',
-    method:'24-hour peak geomagnetic storm rating from NOAA Space Weather Prediction Center (SWPC). G-scale from Kp-index: G1=Kp≥5, G2=Kp≥6, G3=Kp≥7, G4=Kp≥8, G5=Kp=9. Sunspot number from WDC-SILSO, Royal Observatory of Belgium — international standard since 1849.',
-    share:'Solar Activity: G1 today. Cycle 25 peaked higher than predicted. Now descending. NOAA tracks daily. anthonycharts.com ☀️'},
-  neo:{emoji:'☄️',title:'Near-Earth Object Watch',sources:['NASA CNEOS','JPL Sentry System','ESA NEO Coordination','Daily'],
-    trend:{dir:'up-good',label:'Catalog growing — more known = safer, not more dangerous'},
-    stats:[{val:'4',lbl:'Close Approaches/Week'},{val:'0',lbl:'Impact Threats'},{val:'36,000+',lbl:'Known NEOs Total'},{val:'2,350+',lbl:'Potentially Hazardous'},{val:'0.05 AU',lbl:'Close Approach Def.'},{val:'Daily',lbl:'Update'}],
-    history:{cols:['Year','Known NEOs','Milestone'],rows:[
-      {period:'1998',val:'~500',note:'Spaceguard survey begins'},
-      {period:'2005',val:'~4,000',note:'Congress mandates 90% survey'},
-      {period:'2015',val:'~13,000',note:'1km+ objects 95% catalogued'},
-      {period:'2022',val:'~28,000',note:'DART deflection mission success'},
-      {period:'Feb 2026',val:'36,000+',note:'Catalog expanding — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'0 threats',label:'Current — no objects on impact trajectory',color:'#00ff9d',current:true},
-      {val:'Close approach',label:'Within 0.05 AU (~7.5M km) — tracked, not threatening',color:'#00d4ff',current:false},
-      {val:'Potentially hazardous',label:'>140m diameter + passes within 0.05 AU of Earth',color:'#ffcc00',current:false},
-      {val:'Palermo Scale > 0',label:'Would trigger active planetary defense response',color:'#ff2d6e',current:false},
-    ]},
-    body:'NASA tracks 36,000+ near-Earth objects. This week: 4 close approaches, all at safe distances measured in lunar distances (LD). None classified as i...',
-    method:'NASA CNEOS close approach database. Close approach = within 0.05 AU (~7.5M km). Impact probability from JPL Sentry automated orbital mechanics. Potentially hazardous: >140m + intersects within 0.05 AU. Updated daily from automated telescope observations worldwide.',
-    share:'4 NEO close approaches this week — all safe. 36,000+ known, 0 threats. DART proved we can deflect them. anthonycharts.com ☄️'},
-  gini:{emoji:'⚖️',title:'Wealth Inequality',sources:['World Inequality Database (WID.world)','World Inequality Report 2022','Annual'],
-    trend:{dir:'up',label:'Widening — COVID accelerated gap, no recovery'},
-    stats:[{val:'0.67',lbl:'Global Gini Coefficient'},{val:'38%',lbl:'Top 1% Wealth Share'},{val:'69%',lbl:'Top 10% Share'},{val:'2%',lbl:'Bottom 50% Share'},{val:'Widening',lbl:'Trend'},{val:'Annual',lbl:'Update'}],
-    history:{cols:['Year','Global Gini','Top 1% Share'],rows:[
-      {period:'2000',val:'0.69',note:'38.1% — asset boom begins'},
-      {period:'2010',val:'0.67',note:'37.5%'},
-      {period:'2019',val:'0.65',note:'36.8% — pre-COVID relative low'},
-      {period:'2021',val:'0.68',note:'39.1% — COVID asset spike'},
-      {period:'2026',val:'0.67',note:'38% — not recovered'},
-    ]},
-    thresholds:{levels:[
-      {val:'0.25–0.35',label:'Low inequality — Nordic countries',color:'#00ff9d',current:false},
-      {val:'0.45–0.55',label:'Moderate — OECD average range',color:'#ffcc00',current:false},
-      {val:'0.67',label:'Current global Gini',color:'#ff9d00',current:true},
-      {val:'0.80+',label:'Extreme — approaching oligarchic concentration',color:'#ff2d6e',current:false},
-    ]},
-    body:'Global wealth Gini of 0.67: the top 1% own 38% of all global wealth; the bottom 50% share 2%. Inequality widened sharply during COVID — asset price...',
-    method:'Global Gini from World Inequality Database (WID.world) — maintained by Piketty, Chancel, Saez, and Zucman. Gini: 0 = perfect equality, 1 = perfect inequality. Arc normalized against 0–1.0 scale, with 0.8 as practical ceiling. Updated annually with World Inequality Report.',
-    share:'Global Gini: 0.67. Top 1% own 38% of wealth. Bottom 50% share 2%. COVID widened the gap. No recovery yet. anthonycharts.com ⚖️'},
-  mobility:{emoji:'📈',title:'Social Mobility Index',sources:['World Bank GSMI','Opportunity Insights (Harvard)','Annual'],
-    trend:{dir:'stable',label:'Stalled — no meaningful global progress since 2020'},
-    stats:[{val:'53.4',lbl:'Global Average'},{val:'83.6',lbl:'Denmark (Highest)'},{val:'76.1',lbl:'United States'},{val:'36.7',lbl:'India (Reference)'},{val:'Stalled',lbl:'Global Trend'},{val:'Annual',lbl:'Update'}],
-    history:{cols:['Year','Global Avg','Context'],rows:[
-      {period:'2010',val:'~50.1',note:'Baseline era'},
-      {period:'2015',val:'~51.8',note:'Slow improvement'},
-      {period:'2019',val:'53.0',note:'First GSMI publication'},
-      {period:'2022',val:'53.2',note:'COVID disruption stalls progress'},
-      {period:'2026',val:'53.4',note:'Effectively flat — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'83–90',label:'High — Nordic countries, Australia',color:'#00ff9d',current:false},
-      {val:'70–82',label:'Above average — W. Europe, Canada',color:'#00d4ff',current:false},
-      {val:'53.4',label:'Global average — current',color:'#ffcc00',current:true},
-      {val:'40–52',label:'Below average — South Asia, Sub-Saharan Africa',color:'#ff9d00',current:false},
-      {val:'< 40',label:'Low — birth largely determines outcome',color:'#ff2d6e',current:false},
-    ]},
-    body:'The World Bank Global Social Mobility Index scores countries 0–100 across 10 pillars. The global average of 53.4 reflects a world where birthplace ...',
-    method:'World Bank GSMI: 10 equal-weight pillars — health, education access, education quality, lifelong learning, technology access, work opportunities, fair wages, working conditions, social protection, institutions. Supplemented by Opportunity Insights intergenerational income mobility data. Annual publication.',
-    share:'Social Mobility: 53.4/100 globally. Denmark leads at 83.6. US: 76.1. Progress stalled since 2020. Where you\'re born still largely determines outcomes. anthonycharts.com 📈'},
-  conflict:{emoji:'💔',title:'Conflict Deaths',sources:['ACLED','UCDP Uppsala Conflict Data Program','Monthly'],
-    trend:{dir:'up',label:'Elevated — above pre-2022 baseline, Ukraine and Gaza primary'},
-    stats:[{val:'28,400',lbl:'Battle Deaths YTD'},{val:'56',lbl:'Active Conflict Zones'},{val:'Ukraine',lbl:'Highest Zone'},{val:'Gaza',lbl:'Second Highest'},{val:'~180K',lbl:'2022 Annual Peak'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Year','Battle Deaths','Primary Driver'],rows:[
-      {period:'2010',val:'~50,000',note:'Arab Spring begins'},
-      {period:'2015',val:'~160,000',note:'Syria peak'},
-      {period:'2019',val:'~80,000',note:'Relative decline'},
-      {period:'2022',val:'~180,000',note:'Ukraine invasion — highest since 1990s'},
-      {period:'2023',val:'~120,000',note:'Gaza conflict significant'},
-      {period:'2026 YTD',val:'28,400',note:'Current pace'},
-    ]},
-    thresholds:{levels:[
-      {val:'< 50K/yr',label:'Low — peacetime baseline range',color:'#00ff9d',current:false},
-      {val:'28,400 YTD',label:'Current pace — elevated above pre-2022 avg',color:'#ff9d00',current:true},
-      {val:'100K+/yr',label:'High — multiple major conflicts',color:'#ff6b35',current:false},
-      {val:'150K+/yr',label:'Very High — major interstate war level',color:'#ff2d6e',current:false},
-    ]},
-    body:'28,400 battle deaths recorded YTD in 2026 across 56 active conflict zones. Ukraine and Gaza account for the majority. 2022 Ukraine invasion drove t...',
-    method:'Primary: ACLED — real-time coding of political violence events from media, NGOs, and government sources across 200+ countries. Cross-referenced with UCDP (Uppsala Conflict Data Program) for battle death estimates. Battle deaths only — excludes indirect deaths from displacement or disease. Updated monthly.',
-    share:'28,400 conflict deaths YTD in 2026 — 56 active zones. Ukraine and Gaza primary. Above pre-2022 baseline. Paired with Peacekeeping Reach at anthonycharts.com 💔'},
-  peace:{emoji:'🕊️',title:'Peacekeeping Reach',sources:['UN DPPA Monthly Fact Sheets','UN General Assembly Appropriations','Monthly'],
-    trend:{dir:'down-bad',label:'Declining — 27% below 2015 peak, funding under pressure'},
-    stats:[{val:'87,000',lbl:'Personnel Deployed'},{val:'12',lbl:'Active Missions'},{val:'$6.4B',lbl:'Annual Budget'},{val:'120,000',lbl:'2015 Peak'},{val:'0.5%',lbl:'Of Global Military Spend'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Year','Personnel','Missions'],rows:[
-      {period:'2005',val:'~70,000',note:'Post-Cold War expansion'},
-      {period:'2010',val:'~100,000',note:'Haiti, DRC, Sudan active'},
-      {period:'2015',val:'~120,000',note:'All-time peak deployment'},
-      {period:'2020',val:'~95,000',note:'COVID and drawdowns'},
-      {period:'Feb 2026',val:'87,000',note:'Current — 12 missions'},
-    ]},
-    thresholds:{levels:[
-      {val:'120,000+',label:'Peak capacity — 2015 level',color:'#00ff9d',current:false},
-      {val:'87,000',label:'Current — 27% below peak',color:'#ffcc00',current:true},
-      {val:'56 zones active',label:'Conflict zones vs 12 peacekeeping missions',color:'#ff9d00',current:false},
-      {val:'$6.4B budget',label:'<0.5% of global military spending ($2.2T)',color:'#ff6b35',current:false},
-    ]},
-    body:'87,000 UN peacekeeping personnel deployed across 12 missions — 27% below the 2015 peak of 120,000. DR Congo (MONUSCO) remains the largest. The $6.4B peacekeeping budget is less than 0.5% of global military spending — the world\'s response capacity is proportional to its crises.',
-    method:'UN DPPA monthly fact sheets. Personnel = troops + police + civilian international/national staff. Budget from UN General Assembly appropriations. Mission count = active mandated operations. Updated monthly from official UN reporting.',
-    share:'87,000 peacekeepers, 12 missions — 27% below 2015 peak. Budget $6.4B = <0.5% of global military spend. 56 conflict zones vs 12 missions. anthonycharts.com 🕊️'},
-  species:{emoji:'🦏',title:'Species Threat Index',sources:['IUCN Red List','Quarterly Update'],
-    trend:{dir:'up',label:'Rising — threat rate accelerating, 902 confirmed extinct since 1500'},
-    stats:[{val:'44,016',lbl:'Threatened Species'},{val:'157,190',lbl:'Total Assessed'},{val:'28%',lbl:'% at Risk'},{val:'902',lbl:'Extinct Since 1500'},{val:'41%',lbl:'Amphibians at Risk'},{val:'Quarterly',lbl:'Update'}],
-    history:{cols:['Year','Threatened','% Assessed'],rows:[
-      {period:'2000',val:'~18,000',note:'~24% of assessed'},
-      {period:'2010',val:'~25,000',note:'~26% of assessed'},
-      {period:'2016',val:'~24,000',note:'Assessment coverage grows'},
-      {period:'2020',val:'~35,000',note:'28% — COVID gaps assessments'},
-      {period:'Feb 2026',val:'44,016',note:'28% — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'< 20%',label:'Below historical average — relative stability',color:'#00ff9d',current:false},
-      {val:'28%',label:'Current — 44,016 of 157,190 assessed',color:'#ff9d00',current:true},
-      {val:'> 35%',label:'Elevated crisis — mass extinction indicators active',color:'#ff6b35',current:false},
-      {val:'50%',label:'Arc maximum — mass extinction scenario',color:'#ff2d6e',current:false},
-    ]},
-    body:'44,016 species classified as threatened (Vulnerable, Endangered, or Critically Endangered) — 28% of all assessed. 902 confirmed extinctions since 1...',
-    method:'IUCN Red List — the world\'s most comprehensive biodiversity database. Assessed across nine categories from Least Concern to Extinct. Threatened = Vulnerable + Endangered + Critically Endangered. Updated quarterly. Arc = threatened % of assessed, normalized against 50% ceiling.',
-    share:'44,016 species threatened — 28% of all assessed. 902 extinct since 1500. Paired with Conservation Coverage. anthonycharts.com 🦏'},
-  conserve:{emoji:'🌿',title:'Conservation Coverage',sources:['Protected Planet (UNEP-WCMC + IUCN)','Annual Update'],
-    trend:{dir:'up-good',label:'Growing — but below pace required for 30x30 by 2030'},
-    stats:[{val:'17.6%',lbl:'Land Protected'},{val:'8.2%',lbl:'Ocean Protected'},{val:'30%',lbl:'30x30 Target'},{val:'2030',lbl:'Target Year'},{val:'196',lbl:'Countries Committed'},{val:'Annual',lbl:'Update'}],
-    history:{cols:['Year','Land','Ocean'],rows:[
-      {period:'2000',val:'~10%',note:'~1% ocean'},
-      {period:'2010',val:'~14%',note:'~3% ocean — Aichi targets'},
-      {period:'2016',val:'~15%',note:'~4% ocean'},
-      {period:'2020',val:'~17%',note:'~7% ocean — momentum growing'},
-      {period:'Feb 2026',val:'17.6%',note:'8.2% ocean — current'},
-    ]},
-    thresholds:{levels:[
-      {val:'10%',label:'Pre-2010 baseline — Aichi era',color:'#60a5fa',current:false},
-      {val:'17.6%',label:'Current land coverage — Feb 2026',color:'#00d4ff',current:true},
-      {val:'30%',label:'30x30 target — COP15, 2022',color:'#00ff9d',current:false},
-      {val:'50%',label:"Half-Earth (E.O. Wilson) — long-term aspirational",color:'#a78bfa',current:false},
-    ]},
-    body:'17.6% of land and 8.2% of oceans are formally protected — up from 14% land and 3% ocean in 2010. The 30x30 target was agreed at COP15 in Montreal i...',
-    method:'Protected Planet database by UNEP-WCMC and IUCN. Counts nationally designated protected areas and OECMs (Other Effective Area-Based Conservation Measures). Updated annually with country submissions to the Convention on Biological Diversity. Arc = % of 30x30 land target achieved.',
-    share:'17.6% land protected. 8.2% ocean. Racing toward 30x30 by 2030 — ocean will fall short at current pace. Paired with Species Threat. anthonycharts.com 🌿'},
-  supply:{emoji:'🚢',title:'Global Trade Stress',sources:['Freightos Baltic Index','S&P Global PMI','World Bank Trade Index','Monthly · Experimental'],
-    trend:{dir:'down',label:'Easing — down from the 88 peak, still elevated'},
-    stats:[{val:'81/100',lbl:'Stress Index'},{val:'HIGH',lbl:'Status'},{val:'+18%',lbl:'Freight Rates YOY'},{val:'47.2',lbl:'Manufacturing PMI'},{val:'88',lbl:'Recent Peak Score'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Period','Score','Driver'],rows:[
-      {period:'2019 pre-COVID',val:'~35/100',note:'Normal trade conditions'},
-      {period:'2021 peak',val:'~88/100',note:'Supply chain collapse'},
-      {period:'2023',val:'~45/100',note:'Near-normalization'},
-      {period:'2024',val:'~58/100',note:'Red Sea disruptions begin'},
-      {period:'Feb 2026',val:'62/100',note:'Platform launch baseline'},
-      {period:'Jun 2026',val:'81/100',note:'Current — high, easing from 88 peak'},
-    ]},
-    thresholds:{levels:[
-      {val:'< 40',label:'Normal — typical global trade conditions',color:'#00ff9d',current:false},
-      {val:'40–59',label:'Elevated — friction present but functioning',color:'#ffcc00',current:false},
-      {val:'60–69',label:'Elevated-high — Red Sea + war-driven freight',color:'#ff9d00',current:false},
-      {val:'70–79',label:'High stress — visible supply chain disruption',color:'#ff6b35',current:false},
-      {val:'80+',label:'Current (81) — crisis-level, easing from the 88 peak',color:'#ff2d6e',current:true},
-    ]},
-    body:'Global Trade Stress at 81/100 — high and easing from the 88 wartime peak. Houthi attacks on Red Sea shipping are rerouting cargo arou...',
-    method:'Experimental composite: Freightos Baltic Index (35%) — global container freight benchmark normalized historically. Manufacturing PMI inverted (35%) — S&P Global composite, inverted so contraction = higher stress. World Bank trade volume momentum (30%) — month-over-month change. Weights at anthonycharts.com/composites-v1.0.json',
-    share:'Trade Stress: 81/100 — high, easing from the 88 peak. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. Full breakdown: anthonycharts.com 🚢'},
-  truth:{emoji:'🎯',title:'Information Integrity Index',sources:['IFCN Fact-Checkers Network','RSF Press Freedom Index','NewsGuard','Monthly · Experimental'],
-    trend:{dir:'down-bad',label:'Declining — down 4 pts YOY, 10+ pts below pre-COVID'},
-    stats:[{val:'49.5%',lbl:'Verified Claim Rate'},{val:'–4 pts',lbl:'Year over Year'},{val:'~72%',lbl:'2019 Baseline'},{val:'RSF 65',lbl:'Press Freedom Score'},{val:'1,000+',lbl:'Sites Rated'},{val:'Monthly',lbl:'Update'}],
-    history:{cols:['Period','Score','Context'],rows:[
-      {period:'2019',val:'~72%',note:'Pre-COVID baseline'},
-      {period:'2020',val:'~65%',note:'COVID misinformation surge'},
-      {period:'2022',val:'~67%',note:'Partial recovery'},
-      {period:'2024',val:'~65.4%',note:'Election year pressure'},
-      {period:'Feb 2026',val:'49.5%',note:'Current — declining'},
-    ]},
-    thresholds:{levels:[
-      {val:'> 80%',label:'High integrity — most major claims accurate',color:'#00ff9d',current:false},
-      {val:'65–79%',label:'Moderate — significant misinformation present',color:'#ffcc00',current:false},
-      {val:'49.5%',label:'Current — 4 in 10 major claims failing',color:'#ff9d00',current:true},
-      {val:'< 50%',label:'Low — majority of claims unverified or false',color:'#ff2d6e',current:false},
-    ]},
-    body:'Information Integrity at 49.5%: roughly half of major claims reviewed by IFCN-certified fact-checkers did not meet accuracy standards. Down 4 point...',
-    method:'Experimental composite: IFCN claim accuracy rate (50%) — from IFCN-verified fact-checkers internationally. RSF Press Freedom Index inverted (30%) — higher freedom = higher integrity score. NewsGuard credibility average (20%) — ratings of major news and information sources. Experimental — weights subject to revision, published at anthonycharts.com/composites-v1.0.json',
-    share:'Information Integrity: 49.5% — roughly half of major claims not meeting accuracy standards. Down 4pts YOY. 10+ pts below pre-COVID. anthonycharts.com 🎯'}
-};
-function openDrawer(key){
-  const d=DD[key]; if(!d)return;
-  const emojiEl=document.getElementById('dEmoji');
-  emojiEl.textContent=d.emoji;
-  emojiEl.style.display=isNeon?'none':'block';
-  document.getElementById('dTitle').textContent=d.title;
-  document.getElementById('dStats').innerHTML=d.stats.map(s=>`<div class="dstat"><div class="dstat-val">${s.val}</div><div class="dstat-lbl">${s.lbl}</div></div>`).join('');
-  // ── TREND BADGE ──
-  const trendEl=document.getElementById('dTrend');
-  if(d.trend){
-    const cls={'up':'trend-up','down':'trend-down','stable':'trend-stable','up-good':'trend-up-good','down-bad':'trend-down-bad'}[d.trend.dir]||'trend-stable';
-    const arrows={'up':'↑','down':'↓','stable':'→','up-good':'↑','down-bad':'↓'};
-    trendEl.innerHTML=`<div class="drawer-trend ${cls}">${arrows[d.trend.dir]||'→'} ${d.trend.label}</div>`;
-  } else { trendEl.innerHTML=''; }
-  document.getElementById('dSources').innerHTML=d.sources.map(s=>``).join('');
-  document.getElementById('dBody').textContent=d.body;
-  // ── WEIGHT BARS (composites only) ──
-  const wEl=document.getElementById('dWeights');
-  if(d.weights){
-    const rows=d.weights.inputs.map(w=>{
-      const pct=Math.round(w.weight*100);
-      const score=w.score;
-      const contrib=(score*w.weight).toFixed(1);
-      return `<div class="weight-row"><div class="weight-header"><span class="weight-name">${w.name}</span><span class="weight-meta">${pct}% weight · Score: ${score}/100</span></div><div class="weight-track"><div class="weight-fill" style="width:${score}%;background:${w.color}"></div></div><div class="weight-score-row"><span class="weight-score">Normalized 0–100</span><span class="weight-contribution">Contributes ${contrib} pts</span></div></div>`;
-    }).join('');
-    wEl.innerHTML=`<div class="drawer-weights"><div class="drawer-weights-title">Input Breakdown — How the score is built</div>${rows}
-      <div class="calc-box">${d.weights.inputs.map(w=>`(${Math.round(w.score)} × ${Math.round(w.weight*100)}%)`).join(' + ')} = <span class="calc-final">${d.weights.final}/100</span></div></div>`;
-  } else { wEl.innerHTML=''; }
-  // ── HISTORY TABLE ──
-  const hEl=document.getElementById('dHistory');
-  if(d.history){
-    const rows=d.history.rows.map((r,i)=>`<tr><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.period}</td><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.val}</td><td${i===d.history.rows.length-1?' class="h-now"':''}>${r.note}</td></tr>`).join('');
-    hEl.innerHTML=`<div class="drawer-history"><div class="drawer-history-title">Historical Context</div><table class="history-table"><thead><tr><th>${d.history.cols[0]}</th><th>${d.history.cols[1]}</th><th>${d.history.cols[2]}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-  } else { hEl.innerHTML=''; }
-  // ── THRESHOLD MARKERS ──
-  const thEl=document.getElementById('dThresholds');
-  if(d.thresholds){
-    const rows=d.thresholds.levels.map(t=>`<div class="thresh-row"><div class="thresh-dot" style="background:${t.color}"></div><span class="thresh-label">${t.label}</span><span class="thresh-val" style="color:${t.color}">${t.val}</span>
-      ${t.current?'<span class="thresh-current">◀ NOW</span>':''}
-    </div>`).join('');
-    thEl.innerHTML=`<div class="drawer-thresholds"><div class="drawer-thresh-title">Scale & Thresholds</div>${rows}</div>`;
-  } else { thEl.innerHTML=''; }
-  document.getElementById('dMethod').textContent=d.method;
-  const slug=SLUGS[key]||key;
-  const url=encodeURIComponent(BASE_URL);
-  const txt=encodeURIComponent(d.share+' '+BASE_URL);
-  document.getElementById('shareX').href=`https://twitter.com/intent/tweet?text=${txt}`;
-  document.getElementById('shareLI').href=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-  document.getElementById('shareFB').href=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('drawerOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeDrawer(){
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('drawerOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-function copyLink(){
-  const key=Object.keys(SLUGS).find(k=>document.getElementById('dTitle').textContent===DD[k]?.title)||'';
-  const url=BASE_URL;
-  navigator.clipboard.writeText(url).then(()=>{
-    const btns=document.querySelectorAll('.share-btn');
-    const cb=Array.from(btns).find(b=>b.textContent.includes('Copy'));
-    if(cb){const o=cb.textContent;cb.textContent='✓ Copied!';setTimeout(()=>cb.textContent=o,2000);}
+
+// ── meter detail drawer ──
+(function(){
+  var TONES = {
+    bad:     { color:'#ff5c8f', bg:'rgba(255,46,110,0.1)',  border:'rgba(255,46,110,0.35)' },
+    good:    { color:'#22e58e', bg:'rgba(34,229,142,0.08)', border:'rgba(34,229,142,0.3)' },
+    neutral: { color:'#8fa2cf', bg:'rgba(120,150,255,0.06)',border:'rgba(120,150,255,0.18)' }
+  };
+  var BASE = 'https://anthonycharts.com';
+  function $(id){ return document.getElementById(id); }
+
+  // 350x90 sparkline from real history values (min 3 points enforced upstream).
+  function sparkBig(arr){
+    var min = Math.min.apply(null, arr), max = Math.max.apply(null, arr), range = (max - min) || 1;
+    return arr.map(function(v,i){
+      return (i/(arr.length-1)*334+8).toFixed(1)+','+(78-(v-min)/range*66).toFixed(1);
+    }).join(' ');
+  }
+
+  window.pgOpenDrawer = function(key){
+    var M = window.AC_METERS;
+    var m = M && M.meters && M.meters[key];
+    if (!m) return;
+    var tone = TONES[m.tone] || TONES.neutral;
+    $('dwr-title').textContent = m.label;
+    $('dwr-value').textContent = m.value;
+    $('dwr-value').style.color = m.tint;
+    $('dwr-sub').textContent = m.sub;
+    var d = $('dwr-delta');
+    d.textContent = m.delta;
+    d.style.color = tone.color; d.style.background = tone.bg; d.style.borderColor = tone.border;
+
+    // HISTORY — real points only; under 3 points shows an honest note, never a curve.
+    var line = $('dwr-histline'), note = $('dwr-histnote'), svg = $('dwr-histsvg');
+    var hist = (m.history || []).filter(function(v){ return typeof v === 'number' && isFinite(v); });
+    if (hist.length >= 3) {
+      line.setAttribute('points', sparkBig(hist));
+      line.setAttribute('stroke', m.tint);
+      svg.hidden = false; note.hidden = true;
+    } else {
+      svg.hidden = true; note.hidden = false;
+      note.textContent = 'NOT ENOUGH REAL HISTORY YET (' + hist.length + ' ISSUE POINT' + (hist.length === 1 ? '' : 'S') + ') — THE LEDGER GROWS EACH ISSUE.';
+    }
+
+    // WEIGHTS · LOCKED — composites only
+    var ww = $('dwr-weights-wrap'), wl = $('dwr-weights');
+    wl.textContent = '';
+    if (m.weights && m.weights.length) {
+      m.weights.forEach(function(w){
+        var row = document.createElement('div'); row.className = 'dwr-wrow';
+        var left = document.createElement('div');
+        var nm = document.createElement('span'); nm.className = 'dwr-wname'; nm.textContent = w.name;
+        var tr = document.createElement('div'); tr.className = 'dwr-wtrack';
+        var fl = document.createElement('div'); fl.className = 'dwr-wfill';
+        fl.style.width = w.pct + '%'; fl.style.background = m.tint;
+        tr.appendChild(fl); left.appendChild(nm); left.appendChild(tr);
+        var pc = document.createElement('span'); pc.className = 'dwr-wpct'; pc.textContent = w.pct + '%';
+        row.appendChild(left); row.appendChild(pc); wl.appendChild(row);
+      });
+      ww.hidden = false;
+    } else { ww.hidden = true; }
+
+    $('dwr-source').textContent = m.source;
+    $('dwr-cadence').textContent = m.cadence;
+    $('dwr-updated').textContent = M.updated;
+
+    var text = encodeURIComponent((m.share || (m.label + ': ' + m.value)) );
+    $('dwr-x-share').href = 'https://twitter.com/intent/tweet?text=' + text;
+    $('dwr-li-share').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(BASE);
+
+    $('dwr').hidden = false;
+    document.body.classList.add('dwr-lock');
+  };
+
+  window.pgCloseDrawer = function(){
+    $('dwr').hidden = true;
+    document.body.classList.remove('dwr-lock');
+  };
+
+  $('dwr-copy').addEventListener('click', function(){
+    var btn = this;
+    navigator.clipboard && navigator.clipboard.writeText(BASE).then(function(){
+      var o = btn.textContent; btn.textContent = '✓ COPIED';
+      setTimeout(function(){ btn.textContent = o; }, 2000);
+    });
   });
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
-window.addEventListener('load',()=>{
-  applyMode();
-  initTicker();
-  animArcs();
-  startFlicker();
-});</script>
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !$('dwr').hidden) pgCloseDrawer();
+  });
+
+  // metric cards + index-card links open the drawer
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-meter]');
+    if (t) pgOpenDrawer(t.getAttribute('data-meter'));
+  });
+})();
+</script>
+
 </body>
 </html>

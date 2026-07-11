@@ -85,13 +85,14 @@ function applySignalBlend(data, aggregate, { now = Date.now() } = {}) {
   }
   const th = drawer.thresholds?.levels?.find((l) => l.current);
   if (th) th.val = pctLabel;
+  // Short names render directly in the drawer WEIGHTS block and weight chips.
   drawer.weights = {
     final: blended,
     inputs: [
-      { name: 'IFCN claim accuracy rate', weight: w.ifcn, score: c.ifcn, color: '#ff6ec7' },
-      { name: 'RSF Press Freedom Index (inverted)', weight: w.rsf, score: c.rsf, color: '#8bbef0' },
-      { name: 'NewsGuard credibility average', weight: w.newsguard, score: c.newsguard, color: '#ffd700' },
-      { name: 'Signal Scanner (24h mean integrity)', weight: w.signal, score: round1(signal), color: '#5aabb0' },
+      { name: 'IFCN', short: 'IFCN', weight: w.ifcn, score: c.ifcn },
+      { name: 'RSF', short: 'RSF', weight: w.rsf, score: c.rsf },
+      { name: 'NEWSGUARD', short: 'NEWSGUARD', weight: w.newsguard, score: c.newsguard },
+      { name: 'SIGNAL SCANNER', short: 'SIGNAL', weight: w.signal, score: round1(signal) },
     ],
   };
   drawer.method =
