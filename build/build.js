@@ -1,21 +1,23 @@
 #!/usr/bin/env node
 /*
- * AnthonyCharts v17 build-time generator.
+ * AnthonyCharts v18 build-time generator (redesign).
  *
  * Single source of truth:  data/issue-data.json
- * Static skeleton (CSS/layout/SVG): build/template.html
- * Output (deployed page): public/index.html
+ * Metric history ledger:   public/data/scores-history.json (append-only; this
+ *                          generator appends the current issue's snapshot)
+ * Trend series ledger:     public/data/scores-history.csv (append-only)
+ * Static skeleton:         build/template.html (anchors: <!--BUILD:*--> and
+ *                          window.AC_* = null;/*BUILD:*<slash>)
+ * Output (deployed page):  public/index.html
  *
- * To publish an issue update: edit data/issue-data.json, then run:
- *     node build/build.js
- *     node build/verify.js     # proves the rendered DOM only changed where intended
+ * Publish an issue update: edit data/issue-data.json (+ append the CSV row),
+ * run `node build/build.js`, then `node build/verify.js`.
  *
- * Every value-bearing region (hero, meter tiles, ticker, drawers, arcs,
- * meta tags, methodology footer, the trend chart series, the flicker target
- * and the banner) is regenerated from the JSON (plus, for the trend chart,
- * the append-only ledger public/data/scores-history.csv). Nothing else in
- * the page is touched. Each substitution asserts its match count, so a template change
- * that breaks an anchor fails loudly instead of silently skipping.
+ * Every value-bearing region — ticker, Signal × Trends, Balance rings, the 16
+ * metric cards + sparklines, trend chart series, Trusted Sources, weight
+ * chips, methodology page, drawer data (window.AC_METERS), meta tags — is
+ * generated from the JSON + ledgers. Each substitution asserts its match
+ * count, so a broken anchor fails loudly instead of silently skipping.
  */
 const fs = require('fs');
 const path = require('path');
@@ -25,12 +27,25 @@ const ROOT = path.join(__dirname, '..');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/issue-data.json'), 'utf8'));
 let html = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 
-// ── Info Integrity × Signal blend (Task 4 plumbing; flag in issue-data) ──
-// Runs BEFORE the substitutions so an applied blend flows through the normal
-// tile/ticker/drawer/arc regeneration. Behind signal_blend.enabled (weights
-// are locked until the new split is signed off); a stale (>48h) or thin
-// (<min_scored) aggregate falls back to the three-source composite and logs
-// why — a thin sample never moves the published meter.
+// Replace `re` with `fn`, asserting it matched exactly `expected` times.
+function sub(re, fn, expected, label) {
+  const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
+  const n = (html.match(g) || []).length;
+  if (n !== expected) {
+    throw new Error(`[build] ${label}: expected ${expected} match(es), found ${n}`);
+  }
+  html = html.replace(re, fn);
+}
+// Anchor comment replacement (exact string, must appear exactly once).
+function fill(anchor, content, label) {
+  const needle = `<!--BUILD:${anchor}-->`;
+  const n = html.split(needle).length - 1;
+  if (n !== 1) throw new Error(`[build] ${label || anchor}: anchor found ${n} times, expected 1`);
+  html = html.replace(needle, content);
+}
+const escHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// ── Info Integrity × Signal blend (flagged; see signal-blend.js) ──
 async function blendSignal() {
   if (!data.signal_blend || !data.signal_blend.enabled) {
     return { applied: false, reason: 'disabled (signal_blend.enabled=false)' };
@@ -39,146 +54,374 @@ async function blendSignal() {
   return applySignalBlend(data, aggregate);
 }
 
-// Replace `re` with `fn`, asserting it matched exactly `expected` times.
-function sub(re, fn, expected, label) {
-  // Count real matches with a global clone (plain .match() also returns capture
-  // groups for non-global regexes, which would miscount).
-  const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
-  const n = (html.match(g) || []).length;
-  if (n !== expected) {
-    throw new Error(`[build] ${label}: expected ${expected} match(es), found ${n}`);
-  }
-  html = html.replace(re, fn);
+/* ================================================================
+   Presentation tables — layout facts (labels, groupings, tints,
+   source shorthands) that do not change per issue. Values never
+   live here; they all come from issue-data + the ledgers.
+   ================================================================ */
+const SECTIONS = [
+  { title: 'EARTH PULSE', tint: '#5eb9ff', keys: ['temp', 'sea', 'arctic', 'co2'] },
+  { title: 'SPACE', tint: '#c58bff', keys: ['planet', 'neo', 'alien', 'solar'] },
+  { title: 'HUMAN SYSTEMS', tint: '#ff8f5c', keys: ['truth', 'supply', 'gini', 'mobility', 'conflict', 'peace'] },
+  { title: 'BIOSPHERE', tint: '#22e58e', keys: ['species', 'conserve'] },
+];
+const CARD_META = {
+  temp: { label: 'GLOBAL TEMP ANOMALY', src: 'COPERNICUS C3S' },
+  sea: { label: 'SEA LEVEL RISE', src: 'NASA / NOAA' },
+  arctic: { label: 'ARCTIC SEA ICE', src: 'NSIDC' },
+  co2: { label: 'CO₂ CONCENTRATION', src: 'NOAA MAUNA LOA' },
+  planet: { label: 'EXOPLANET DISCOVERY', src: 'NASA ARCHIVE' },
+  neo: { label: 'NEO WATCH', src: 'NASA CNEOS' },
+  alien: { label: 'TECHNOSIGNATURES', src: 'BL / SETI' },
+  solar: { label: 'SOLAR ACTIVITY', src: 'NOAA SWPC' },
+  truth: { label: 'INFO INTEGRITY', src: 'IFCN / RSF' },
+  supply: { label: 'TRADE STRESS', src: 'FREIGHTOS / PMI' },
+  gini: { label: 'WEALTH INEQUALITY', src: 'WID.WORLD' },
+  mobility: { label: 'SOCIAL MOBILITY', src: 'WORLD BANK' },
+  conflict: { label: 'CONFLICT DEATHS', src: 'ACLED' },
+  peace: { label: 'PEACEKEEPING', src: 'UN DPPA' },
+  species: { label: 'SPECIES THREATENED', src: 'IUCN RED LIST' },
+  conserve: { label: 'CONSERVATION', src: 'UNEP-WCMC' },
+};
+const TONE = { 't-up': 'bad', 't-dn': 'good', 't-warn': 'neutral' };
+const TONE_CSS = {
+  bad: 'color:#ff5c8f;background:rgba(255,46,110,0.1);border-color:rgba(255,46,110,0.35);',
+  good: 'color:#22e58e;background:rgba(34,229,142,0.08);border-color:rgba(34,229,142,0.3);',
+  neutral: 'color:#8fa2cf;background:rgba(120,150,255,0.06);border-color:rgba(120,150,255,0.18);',
+};
+// The Calm Window has no meter drawer; its published formula is stated here
+// once (same text as composites-v1.0.json).
+const CALM_FORMULA = '· GPR SLOPE 40% · ACLED TREND 40% · VOLATILITY 20%';
+
+const tileByKey = Object.fromEntries(data.tiles.map((t) => [t.key, t]));
+const arcByTile = Object.fromEntries(data.tiles.map((t) => [t.key, (data.arcs.find((a) => a[0] === t.arcId) || [])[2]]));
+const E = data.composite.edge.num;
+const G = data.composite.good.num;
+const C = Number(data.composite.calm_pct);
+const arrowOf = (key) => ({ up: '↑', 'up-good': '↑', down: '↓', 'down-bad': '↓', stable: '→' }[data.drawers[key]?.trend?.dir] || '→');
+const toneOf = (t) => TONE[Object.keys(TONE).find((k) => t.trendClass.includes(k))] || 'neutral';
+const cadenceOf = (t) => {
+  const m = String(t.cadence).match(/Updated\s+([a-z\s]+?)(\s*·|$)/i);
+  const w = m ? m[1].trim().toLowerCase() : 'per issue';
+  return ({ monthly: 'MONTHLY', weekly: 'WEEKLY', daily: 'DAILY', quarterly: 'QUARTERLY', annually: 'ANNUAL', 'as reported': 'AS REPORTED' }[w] || w.toUpperCase());
+};
+
+/* ================================================================
+   Metric history ledger — append-only. The current issue's numeric
+   snapshot is appended once (idempotent by issue id); existing
+   entries are NEVER rewritten. Sparklines render only from these
+   real recorded points (guardrail 5: no invented curves).
+   ================================================================ */
+function numFromDisplay(s) {
+  if (s == null) return null;
+  const str = String(s).trim();
+  const g = str.match(/^G(\d)/i); // solar geomagnetic scale G1..G5
+  if (g) return Number(g[1]);
+  const m = str.replace(/,/g, '').match(/-?\d+(\.\d+)?/);
+  if (!m) return null;
+  let v = parseFloat(m[0]);
+  if (/(\d)(\.\d+)?K\b/i.test(str.replace(/,/g, ''))) v *= 1000;
+  return v;
 }
 
-const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function updateHistoryLedger() {
+  const p = path.join(ROOT, 'public/data/scores-history.json');
+  const ledger = JSON.parse(fs.readFileSync(p, 'utf8'));
+  const meters = {};
+  meters.edge = { value: E, display: String(E), arc_pct: E / 100 };
+  meters.good = { value: G, display: String(G), arc_pct: G / 100 };
+  meters.calm = { value: C, display: `${C}%`, arc_pct: C / 100 };
+  for (const t of data.tiles) {
+    meters[t.key] = { value: numFromDisplay(t.val), display: t.val, arc_pct: arcByTile[t.key] ?? null };
+  }
+  if (!ledger.issues.some((i) => String(i.issue) === String(data.issue.id))) {
+    ledger.issues.push({ date: data.issue.date, issue: String(data.issue.id), label: data.issue.label || '', type: 'standard', meters });
+    fs.writeFileSync(p, JSON.stringify(ledger, null, 2) + '\n');
+    console.log(`[build] scores-history.json: appended Issue ${data.issue.id} snapshot (${ledger.issues.length} entries)`);
+  }
+  // Per-key numeric series, ledger order. Nulls (unparseable displays like
+  // "REC. LOW") are skipped — a gap, never a made-up point.
+  const series = {};
+  for (const entry of ledger.issues) {
+    for (const [k, m] of Object.entries(entry.meters || {})) {
+      if (typeof m.value === 'number' && isFinite(m.value)) (series[k] = series[k] || []).push(m.value);
+    }
+  }
+  return series;
+}
 
+// 90×28 card sparkline points (same mapping as the design prototype).
+function sparkPoints(arr) {
+  const min = Math.min(...arr), max = Math.max(...arr), range = max - min || 1;
+  return arr.map((v, i) => ((i / (arr.length - 1)) * 86 + 2).toFixed(1) + ',' + (24 - ((v - min) / range) * 20).toFixed(1)).join(' ');
+}
+
+/* ================================================================
+   Module builders
+   ================================================================ */
+function buildTicker() {
+  const t = tileByKey;
+  const tradeLevel = (v) => (v >= 75 ? 'HIGH' : v >= 50 ? 'ELEVATED' : 'NORMAL');
+  const calmLevel = (v) => (v >= 65 ? 'HIGH' : v >= 35 ? 'MODERATE' : 'LOW');
+  const items = [
+    { dot: '#ff5c8f', label: 'ON EDGE', value: `${E} ${arrowOf('edge')}` },
+    { dot: '#22e58e', label: 'GOODNESS', value: `${G} ${arrowOf('good')}` },
+    { dot: '#ffb02e', label: 'TEMP ANOMALY', value: `${t.temp.val}C` },
+    { dot: '#22e58e', label: 'CO₂', value: `${t.co2.val} PPM` },
+    { dot: '#5eb9ff', label: 'ARCTIC ICE', value: t.arctic.val },
+    { dot: '#c58bff', label: 'EXOPLANETS', value: t.planet.val },
+    { dot: '#ffd75e', label: 'SOLAR', value: `${t.solar.val} WATCH` },
+    { dot: '#ff5c8f', label: 'CONFLICT DEATHS', value: `${t.conflict.val} YTD` },
+    { dot: '#5eb9ff', label: 'TRADE STRESS', value: `${t.supply.val} · ${tradeLevel(numFromDisplay(t.supply.val))}` },
+    { dot: '#c58bff', label: 'CALM WINDOW', value: `${C}% · ${calmLevel(C)}` },
+  ];
+  const item = (k) =>
+    `<div class="pg-tkitem"><span class="pg-dot" style="background:${k.dot};"></span>` +
+    `<span class="pg-tklabel">${escHtml(k.label)}</span>` +
+    `<span class="pg-tkval" style="color:${k.dot};">${escHtml(k.value)}</span></div>`;
+  // duplicated once so the 0→-50% marquee loops seamlessly
+  return items.concat(items).map(item).join('');
+}
+
+function buildSignal() {
+  const cfg = data.signal_trends;
+  if (!cfg || !cfg.enabled) return '';
+  const scoreColor = (s) => (s >= 85 ? '#22e58e' : s >= 70 ? '#ffd75e' : '#ff5c8f');
+  const rows = (cfg.rows || [])
+    .map((r) => {
+      const dot = r.match ? '#ffd75e' : 'rgba(120,150,255,0.25)';
+      const glow = r.match ? 'box-shadow:0 0 8px #ffd75e;' : '';
+      const vel = r.match ? '#ffd75e' : '#8fa2cf';
+      return (
+        `<div class="pg-sigrow">` +
+        `<span class="pg-sigscore" style="color:${scoreColor(r.score)};">${r.score}</span>` +
+        `<div class="pg-sighead"><span class="pg-sightitle">${escHtml(r.headline)}</span>` +
+        `<span class="pg-sigmeta">${escHtml(r.source)} · ${escHtml(r.time)} · SIGNAL INTEGRITY ${r.score}/100</span></div>` +
+        `<div class="pg-sigtrends"><span class="pg-sigvel"><span class="pg-dot" style="background:${dot};${glow}"></span>` +
+        `<span class="pg-sigvelval" style="color:${vel};">${escHtml(r.trend)}</span></span>` +
+        `<span class="pg-sigquery">"${escHtml(r.query)}" · 7-DAY</span></div></div>`
+      );
+    })
+    .join('');
+  // Guardrail 5: the SAMPLE DATA label stays until a real pipeline feeds rows.
+  const srcNote = 'SOURCES: SIGNAL SCANNER · GOOGLE TRENDS (US)' + (cfg.sample ? ' · SAMPLE DATA' : '');
+  return (
+    `<div class="pg-wrap" style="margin-top:32px;">` +
+    `<div class="pg-sechead"><span class="pg-seclabel">SIGNAL × TRENDS — FEATURED HEADLINES</span><span class="pg-hair"></span>` +
+    `<span class="pg-secnote"><span class="pg-dot" style="background:#ffd75e;box-shadow:0 0 6px #ffd75e;"></span>MATCHED RISING GOOGLE TRENDS QUERY</span></div>` +
+    `<div class="pg-panel pg-signal-panel">${rows}` +
+    `<div class="pg-sigfoot"><span>SELECTION: SIGNAL INTEGRITY ≥ 70 · RANKED BY TRENDS VELOCITY</span><span>${srcNote}</span></div></div></div>`
+  );
+}
+
+function ringCard(key, tint, tintSoft, value, status, statusCss, weightsLine) {
+  const deg = (value / 100) * 270;
+  return (
+    `<div class="pg-idxcard" style="border:1px solid ${tintSoft};">` +
+    `<span class="pg-idxlabel">${key === 'edge' ? 'WORLD ON EDGE INDEX' : 'WORLD GOODNESS INDEX'}</span>` +
+    `<div class="pg-ring"><div class="pg-ringfill" style="background:conic-gradient(from 135deg, ${tint} 0deg ${deg.toFixed(1)}deg, ${tintSoft.replace('0.25', '0.14')} ${deg.toFixed(1)}deg 270deg, transparent 270deg 360deg);filter:drop-shadow(0 0 12px ${tintSoft.replace('0.25', '0.45')});"></div>` +
+    `<div class="pg-ringcenter"><span class="pg-ringval" style="color:${key === 'edge' ? '#ff5c8f' : '#22e58e'};">${value}</span><span class="pg-ringof">/ 100</span></div></div>` +
+    `<span class="pg-statuschip" style="${statusCss}">${escHtml(status)}</span>` +
+    `<span class="pg-idxweights">${escHtml(weightsLine)}</span>` +
+    `<button type="button" class="pg-idxlink" data-meter="${key}">FULL DETAIL + SHARE →</button></div>`
+  );
+}
+
+function buildBalance() {
+  const wLine = (key) => data.drawers[key].weights.inputs.map((i) => `${i.short || i.name} ${Math.round(i.weight * 100)}%`).join(' · ');
+  const edgeStatus = /[↑↓→↗↘]/.test(data.composite.edge.status) ? data.composite.edge.status : `${data.composite.edge.status} · ${arrowOf('edge')}`;
+  const goodStatus = /[↑↓→↗↘]/.test(data.composite.good.status) ? data.composite.good.status : `${data.composite.good.status} · ${arrowOf('good')}`;
+  const net = G - E;
+  const netStr = (net < 0 ? '−' : net > 0 ? '+' : '') + Math.abs(net);
+  const dom = E > G ? ['TENSION DOMINANT', '#ff5c8f'] : G > E ? ['GOODNESS DOMINANT', '#22e58e'] : ['BALANCED', '#8fa2cf'];
+  return (
+    ringCard('edge', '#ff2e6e', 'rgba(255,46,110,0.25)', E, edgeStatus, TONE_CSS.bad, wLine('edge')) +
+    `<div class="pg-net"><span class="pg-netlabel">NET BALANCE</span><span class="pg-netval">${netStr}</span>` +
+    `<span class="pg-netdom" style="color:${dom[1]};">${dom[0]}</span>` +
+    `<div class="pg-netbars"><div class="pg-netbar"><div style="width:${E}%;background:#ff2e6e;"></div></div>` +
+    `<div class="pg-netbar"><div style="width:${G}%;background:#22e58e;"></div></div></div>` +
+    `<span class="pg-netcap">EDGE ${E} · GOODNESS ${G}</span></div>` +
+    ringCard('good', '#22e58e', 'rgba(34,229,142,0.25)', G, goodStatus, TONE_CSS.good, wLine('good'))
+  );
+}
+
+function buildSections(series) {
+  return SECTIONS.map((sec) => {
+    const cards = sec.keys
+      .map((key) => {
+        const t = tileByKey[key];
+        const meta = CARD_META[key];
+        const hist = series[key] || [];
+        // Sparkline only from ≥3 real ledger points — otherwise the card
+        // ships without one (an invented curve would violate guardrail 5).
+        const spark = hist.length >= 3
+          ? `<svg class="pg-cardspark" viewBox="0 0 90 28"><polyline points="${sparkPoints(hist)}" fill="none" stroke="${sec.tint}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"></polyline></svg>`
+          : '';
+        const tone = toneOf(t);
+        return (
+          `<button type="button" class="pg-card" data-meter="${key}">` +
+          `<div class="pg-cardtop"><span class="pg-cardlabel">${escHtml(meta.label)}</span><span class="pg-cardcad">${escHtml(cadenceOf(t))}</span></div>` +
+          `<div class="pg-cardmid"><div class="pg-cardvalwrap"><span class="pg-cardval">${escHtml(t.val)}</span>` +
+          `<span class="pg-cardsub">${escHtml(String(t.unit).toUpperCase())}</span></div>${spark}</div>` +
+          `<div class="pg-cardbot"><span class="pg-tone" style="${TONE_CSS[tone]}">${escHtml(String(t.trend).toUpperCase())}</span>` +
+          `<span class="pg-cardsrc">${escHtml(meta.src)}</span></div></button>`
+        );
+      })
+      .join('');
+    return (
+      `<div style="margin-top:32px;">` +
+      `<div class="pg-sechead"><span style="display:flex;align-items:center;gap:8px;">` +
+      `<span class="pg-dot" style="background:${sec.tint};box-shadow:0 0 6px ${sec.tint};"></span>` +
+      `<span class="pg-seclabel">${sec.title}</span></span><span class="pg-hair"></span></div>` +
+      `<div class="pg-cards">${cards}</div></div>`
+    );
+  }).join('');
+}
+
+function buildSources() {
+  return data.sources
+    .map(
+      (s) =>
+        `<a class="pg-srccell" href="${escHtml(s.url)}" target="_blank" rel="noopener noreferrer">` +
+        `<span class="pg-srctop"><span class="pg-srcname">${escHtml(s.name)}</span><span class="pg-srccad">${escHtml(s.cadence)}</span></span>` +
+        `<span class="pg-srcdesc">${escHtml(s.desc)}</span></a>`
+    )
+    .join('');
+}
+
+function weightsFormula(key) {
+  return data.drawers[key].weights.inputs.map((i) => `· ${(i.short || i.name).toUpperCase()} ${Math.round(i.weight * 100)}%`).join(' ');
+}
+function buildChips() {
+  const chips = [
+    { name: `ON EDGE ${E}`, formula: weightsFormula('edge') },
+    { name: `GOODNESS ${G}`, formula: weightsFormula('good') },
+    { name: `CALM WINDOW ${C}%`, formula: CALM_FORMULA },
+    { name: `TRADE STRESS ${tileByKey.supply.val}`, formula: weightsFormula('supply') },
+    { name: `INFO INTEGRITY ${tileByKey.truth.val}`, formula: weightsFormula('truth') },
+  ];
+  return chips.map((c) => `<span class="pg-chip"><b>${escHtml(c.name)}</b> ${escHtml(c.formula)}</span>`).join('');
+}
+
+function buildMethod() {
+  return Object.entries(data.drawers)
+    .map(
+      ([key, d]) =>
+        `<div class="pg-mth-item"><span class="pg-mth-name">${escHtml(d.title).toUpperCase()}</span>` +
+        `<span class="pg-mth-text">${escHtml(d.method)}</span></div>`
+    )
+    .join('');
+}
+
+function buildMeters(series) {
+  const updated = new Date(data.issue.date + 'T00:00:00Z')
+    .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+    .toUpperCase();
+  const meters = {};
+  const weightsOf = (key) => {
+    const w = data.drawers[key]?.weights;
+    if (!w || !w.inputs?.length) return undefined;
+    return w.inputs.map((i) => ({ name: (i.short || i.name).toUpperCase(), pct: Math.round(i.weight * 100) }));
+  };
+  for (const sec of SECTIONS) {
+    for (const key of sec.keys) {
+      const t = tileByKey[key];
+      meters[key] = {
+        label: CARD_META[key].label,
+        value: t.val,
+        sub: String(t.unit).toUpperCase(),
+        delta: String(t.trend).toUpperCase(),
+        tone: toneOf(t),
+        tint: sec.tint,
+        source: CARD_META[key].src,
+        cadence: cadenceOf(t),
+        history: series[key] || [],
+        weights: weightsOf(key),
+        share: data.drawers[key]?.share || '',
+      };
+    }
+  }
+  meters.edge = {
+    label: 'WORLD ON EDGE INDEX', value: String(E),
+    sub: `COMPOSITE · 0–100 · ${data.drawers.edge.weights.inputs.length} FEEDS`,
+    delta: data.composite.edge.status, tone: 'bad', tint: '#ff2e6e',
+    source: 'COMPOSITE', cadence: 'PER ISSUE',
+    history: series.edge || [], weights: weightsOf('edge'), share: data.drawers.edge.share || '',
+  };
+  meters.good = {
+    label: 'WORLD GOODNESS INDEX', value: String(G),
+    sub: `COMPOSITE · 0–100 · ${data.drawers.good.weights.inputs.length} FEEDS`,
+    delta: data.composite.good.status, tone: 'good', tint: '#22e58e',
+    source: 'COMPOSITE', cadence: 'PER ISSUE',
+    history: series.good || [], weights: weightsOf('good'), share: data.drawers.good.share || '',
+  };
+  return { updated, meters };
+}
+
+/* ================================================================
+   Trend chart series (window.AC_TREND) — unchanged from v17.1:
+   pre-ledger traced approximation + every real row from the
+   append-only CSV ledger.
+   ================================================================ */
+const TREND_BASELINE = [
+  [2015.0, 42, 38], [2015.5, 48, 37], [2016.0, 46, 40], [2016.5, 52, 41],
+  [2017.0, 50, 42], [2017.5, 49, 43], [2018.0, 54, 44], [2018.5, 55, 45],
+  [2019.0, 56, 45], [2019.5, 58, 44], [2020.1, 72, 38], [2020.5, 66, 41],
+  [2020.9, 63, 46], [2021.5, 60, 48], [2022.15, 76, 44], [2022.7, 73, 45],
+  [2023.2, 75, 45], [2023.8, 82, 44], [2024.3, 80, 46], [2024.8, 81, 46],
+  [2025.3, 84, 46], [2025.45, 86, 46], [2025.8, 86, 47],
+];
+function trendSeries() {
+  const csv = fs.readFileSync(path.join(ROOT, 'public/data/scores-history.csv'), 'utf8').trim().split(/\r?\n/);
+  const cols = csv[0].split(',').map((h) => h.replace(/"/g, '').trim().toLowerCase());
+  const di = cols.indexOf('date'), ei = cols.indexOf('world_on_edge'), gi = cols.indexOf('world_goodness');
+  if (di < 0 || ei < 0 || gi < 0) throw new Error('[build] scores-history.csv: date/world_on_edge/world_goodness columns not found');
+  const decYear = (iso) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return y + ((m - 1) + (d - 1) / 31) / 12;
+  };
+  const lastBase = TREND_BASELINE[TREND_BASELINE.length - 1][0];
+  const rows = csv.slice(1).map((line) => {
+    const c = line.split(',').map((s) => s.replace(/^"|"$/g, '').trim());
+    const t = decYear(c[di]), e = parseFloat(c[ei]), g = parseFloat(c[gi]);
+    if (!isFinite(t) || !isFinite(e) || !isFinite(g)) throw new Error(`[build] scores-history.csv: bad row: ${line}`);
+    return [Math.round(t * 1000) / 1000, e, g];
+  }).filter((r) => r[0] > lastBase).sort((a, b) => a[0] - b[0]);
+  if (!rows.length) throw new Error('[build] scores-history.csv: no ledger rows after the baseline series');
+  return TREND_BASELINE.concat(rows);
+}
+
+/* ================================================================
+   Main
+   ================================================================ */
 async function main() {
   const blend = await blendSignal();
   console.log(blend.applied
     ? `[build] Info Integrity blended with Signal: ${blend.blended}%`
     : `[build] Signal blend not applied — ${blend.reason}; keeping the three-source composite`);
 
-  // ── Meter tiles (regenerated per card, anchored by drawer key) ──
-  function card(t) {
-    return `<div class="meter-card" onclick="openDrawer('${t.key}')">`
-      + `<div class="meter-top"><div><div class="meter-name">${t.name}</div>`
-      + `<div class="meter-cadence">${t.cadence}</div></div>`
-      + `<span class="meter-icon">${t.icon}</span></div>`
-      + `<div class="arc-zone"><svg class="arc-svg" viewBox="0 0 140 85" width="155">`
-      + `<path class="arc-bg-t" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78"/>`
-      + `<path class="${t.arcClass}" id="${t.arcId}" stroke-width="10" d="M 16 78 A 54 54 0 0 1 124 78" stroke-dasharray="170" stroke-dashoffset="170"/>`
-      + `</svg></div>`
-      + `<div class="meter-bottom"><div><div class="${t.valClass}"${t.valStyle ? ` style="${t.valStyle}"` : ''}>${t.val}</div>`
-      + `<div class="meter-unit">${t.unit}</div></div>`
-      + `<div class="${t.trendClass}"${t.trendStyle ? ` style="${t.trendStyle}"` : ''}>${t.trend}</div></div>`
-      + `<div class="meter-bar-bg"><div class="${t.barClass}" style="width:0%" data-w="${t.barW}"></div></div>`
-      + `</div>`;
-  }
-  data.tiles.forEach(t => {
-    const re = new RegExp(`<div class="meter-card" onclick="openDrawer\\('${t.key}'\\)">[\\s\\S]*?data-w="[^"]*"></div></div></div>`);
-    sub(re, () => card(t), 1, `tile:${t.key}`);
-  });
+  const series = updateHistoryLedger();
 
-  // ── Hero cards (regenerated, value/status/desc from composite) ──
-  const HERO = {
-    edge: { mlabel: 'World On Edge Index', emoji: '😰', numId: 'edgeNum', numCls: 'big-num-edge', statCls: 'big-status-edge', arcCls: 'a-edge', arcId: 'hEdgeArc' },
-    good: { mlabel: 'World Goodness Index', emoji: '💚', numId: 'goodNum', numCls: 'big-num-good', statCls: 'big-status-good', arcCls: 'a-good', arcId: 'hGoodArc' },
-  };
-  function hero(side) {
-    const c = data.composite[side], h = HERO[side];
-    return `<div class="hero-card hero-card-${side}" onclick="openDrawer('${side}')">`
-      + `<div class="hero-mlabel">${h.mlabel}</div><span class="hero-emoji">${h.emoji}</span>`
-      + `<svg viewBox="0 0 200 120" width="210" style="overflow:visible;">`
-      + `<path class="arc-bg-t" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110"/>`
-      + `<path class="arc-fill-t ${h.arcCls}" id="${h.arcId}" stroke-width="13" d="M 20 110 A 80 80 0 0 1 180 110" stroke-dasharray="251" stroke-dashoffset="251"/>`
-      + `</svg>`
-      + `<div class="big-num ${h.numCls}" id="${h.numId}">${c.num}</div>`
-      + `<div class="big-status ${h.statCls}">${c.status}</div>`
-      + `<div class="hero-desc">${c.desc}</div>`
-      + `<div class="click-hint">↑ Click for full detail + share</div></div>`;
-  }
-  sub(/<div class="hero-card hero-card-edge"[\s\S]*?↑ Click for full detail \+ share<\/div><\/div>/, () => hero('edge'), 1, 'hero-edge');
-  sub(/<div class="hero-card hero-card-good"[\s\S]*?↑ Click for full detail \+ share<\/div><\/div>/, () => hero('good'), 1, 'hero-good');
+  // Head meta values (description + og + twitter) — same three anchors as v17.
+  sub(/World On Edge: \d+\/100\. World Goodness: \d+\/100/g,
+    () => `World On Edge: ${E}/100. World Goodness: ${G}/100`, 3, 'meta');
 
-  // ── Ticker (regenerated from the ticker array) ──
-  sub(/<div class="ticker-inner" id="tickerInner">[\s\S]*?<\/div><\/div>/,
-    () => '<div class="ticker-inner" id="tickerInner">'
-      + data.ticker.map(t => `<div class="ticker-item">${t}</div>`).join('')
-      + '</div>',
-    1, 'ticker');
+  fill('TICKER', buildTicker(), 'ticker');
+  fill('SIGNAL', buildSignal(), 'signal-trends');
+  fill('BALANCE', buildBalance(), 'balance');
+  fill('SECTIONS', buildSections(series), 'metric-sections');
+  fill('SRCCOUNT', `${data.sources.length} FEEDS · ALL PUBLIC`, 'source-count');
+  fill('SOURCES', buildSources(), 'sources');
+  fill('CHIPS2', buildChips(), 'chips-methodology');
+  fill('CHIPS', buildChips(), 'chips-footer');
+  fill('METHOD', buildMethod(), 'methodology');
 
-  // ── Drawer data + arc table (regenerated as JS literals) ──
-  sub(/const DD = \{[\s\S]*?\n\};/, () => 'const DD = ' + JSON.stringify(data.drawers) + ';', 1, 'DD');
-  sub(/const ARCS=\[[\s\S]*?\];/, () => 'const ARCS=' + JSON.stringify(data.arcs) + ';', 1, 'ARCS');
-
-  // ── Scalars derived from the canonical composite values ──
-  const E = data.composite.edge.num;
-  const G = data.composite.good.num;
-  const C = data.composite.calm_pct;
-  const TR = data.composite.trade_footer;
-
-  sub(/World On Edge: \d+\/100\. World Goodness: \d+\/100/g, () => `World On Edge: ${E}/100. World Goodness: ${G}/100`, 3, 'meta');
-  sub(/World On Edge \(\d+\)/, () => `World On Edge (${E})`, 1, 'mth-edge');
-  sub(/World Goodness \(\d+\)/, () => `World Goodness (${G})`, 1, 'mth-good');
-  sub(/Calm Window \(\d+%\)/, () => `Calm Window (${C}%)`, 1, 'mth-calm');
-  sub(/Trade Stress \(\d+\)/, () => `Trade Stress (${TR})`, 1, 'mth-trade');
-  // ── 10-year trend chart (window.AC_TREND injected before the module script) ──
-  // The pre-ledger shape (Jan 2015 → late 2025) is the traced approximation from
-  // the redesign prototype; every point from Issue 1 onward comes from the
-  // append-only ledger public/data/scores-history.csv. The chart module keeps its
-  // inline events/explainer/options and re-stitches the projection to the last
-  // real row, so only `historical` is emitted here.
-  const TREND_BASELINE = [
-    [2015.0, 42, 38], [2015.5, 48, 37], [2016.0, 46, 40], [2016.5, 52, 41],
-    [2017.0, 50, 42], [2017.5, 49, 43], [2018.0, 54, 44], [2018.5, 55, 45],
-    [2019.0, 56, 45], [2019.5, 58, 44], [2020.1, 72, 38], [2020.5, 66, 41],
-    [2020.9, 63, 46], [2021.5, 60, 48], [2022.15, 76, 44], [2022.7, 73, 45],
-    [2023.2, 75, 45], [2023.8, 82, 44], [2024.3, 80, 46], [2024.8, 81, 46],
-    [2025.3, 84, 46], [2025.45, 86, 46], [2025.8, 86, 47],
-  ];
-  function trendSeries() {
-    const csv = fs.readFileSync(path.join(ROOT, 'public/data/scores-history.csv'), 'utf8')
-      .trim().split(/\r?\n/);
-    const cols = csv[0].split(',').map(h => h.replace(/"/g, '').trim().toLowerCase());
-    const di = cols.indexOf('date'), ei = cols.indexOf('world_on_edge'), gi = cols.indexOf('world_goodness');
-    if (di < 0 || ei < 0 || gi < 0) throw new Error('[build] scores-history.csv: date/world_on_edge/world_goodness columns not found');
-    // Decimal year, matching the chart module's own date mapping.
-    const decYear = iso => {
-      const [y, m, d] = iso.split('-').map(Number);
-      return y + ((m - 1) + (d - 1) / 31) / 12;
-    };
-    const lastBase = TREND_BASELINE[TREND_BASELINE.length - 1][0];
-    const rows = csv.slice(1).map(line => {
-      const c = line.split(',').map(s => s.replace(/^"|"$/g, '').trim());
-      const t = decYear(c[di]), e = parseFloat(c[ei]), g = parseFloat(c[gi]);
-      if (!isFinite(t) || !isFinite(e) || !isFinite(g)) throw new Error(`[build] scores-history.csv: bad row: ${line}`);
-      return [Math.round(t * 1000) / 1000, e, g];
-    }).filter(r => r[0] > lastBase).sort((a, b) => a[0] - b[0]);
-    if (!rows.length) throw new Error('[build] scores-history.csv: no ledger rows after the baseline series');
-    return TREND_BASELINE.concat(rows);
-  }
+  sub(/window\.AC_METERS = null;\/\*BUILD:AC_METERS\*\//,
+    () => 'window.AC_METERS = ' + JSON.stringify(buildMeters(series)) + ';', 1, 'AC_METERS');
   sub(/window\.AC_TREND = null;\/\*BUILD:AC_TREND\*\//,
-    () => 'window.AC_TREND = ' + JSON.stringify({ historical: trendSeries() }) + ';',
-    1, 'AC_TREND');
-  sub(/getElementById\('edgeNum'\)\.textContent=\d+;/, () => `getElementById('edgeNum').textContent=${E};`, 1, 'flick-edge');
-  sub(/getElementById\('goodNum'\)\.textContent=\(\d+\+/, () => `getElementById('goodNum').textContent=(${G}+`, 1, 'flick-good');
+    () => 'window.AC_TREND = ' + JSON.stringify({ historical: trendSeries() }) + ';', 1, 'AC_TREND');
 
-  // ── Banner ──
-  if (/['\\]/.test(data.banner.raw)) throw new Error('[build] banner contains a quote/backslash; escape it before inlining');
-  sub(/textContent='[^']*Day \d+[^']*?'\+ds/, () => `textContent='${data.banner.raw}'+ds`, 1, 'banner');
-
-  // Methodology page line — rewritten only when the blend actually applied
-  // (unblended builds keep the locked three-source weights verbatim).
-  if (blend.applied) {
-    const bw = data.signal_blend.weights;
-    sub(/Info Integrity \([\d.]+%\):<\/strong> IFCN \d+% · RSF \d+% · NewsGuard \d+%/,
-      () => `Info Integrity (${blend.blended}%):</strong> IFCN ${Math.round(bw.ifcn * 100)}% · `
-        + `RSF ${Math.round(bw.rsf * 100)}% · NewsGuard ${Math.round(bw.newsguard * 100)}% · `
-        + `Signal ${Math.round(bw.signal * 100)}%<br><em>${data.signal_blend.note}</em>`,
-      1, 'mth-truth');
-  }
-
+  if (/<!--BUILD:/.test(html)) throw new Error('[build] unfilled BUILD anchor remains');
   fs.writeFileSync(path.join(ROOT, 'public/index.html'), html);
   console.log(`[build] wrote public/index.html (${html.length} bytes) from data/issue-data.json`);
 }

@@ -3,16 +3,21 @@
     "schema": "v17.0",
     "note": "Single source of truth for AnthonyCharts. Edit this file, run build/build.js, verify with build/verify.js. Drawers/ticker/tiles/arcs are generated into public/index.html."
   },
+  "issue": {
+    "id": "5",
+    "date": "2026-06-11",
+    "label": "Fragile De-escalation"
+  },
   "signal_blend": {
     "enabled": false,
-    "_note": "Task 4 plumbing — DISABLED pending Anthony's sign-off on the new weight split (published weights are locked). Flipping enabled to true is the versioned methodology change: the generator fetches `url` at build time, and if the aggregate is fresh (<48h) with >= min_scored real scores, re-weights Info Integrity and emits the drawer WEIGHTS block + dated methodology line.",
+    "_note": "Task 4 plumbing - DISABLED. Anthony (Jul 11 2026): keep flag off; flip to SIGNAL 10% only after 14 days of Signal fallback rate <10%. Prior weights renormalized x0.9 (IFCN 50->45, RSF 30->27, NewsGuard 20->18). Replace placeholder component subscores with real IFCN/RSF/NewsGuard values before enabling.",
     "url": "https://anthony-signal.vercel.app/api/aggregate",
     "min_scored": 30,
     "weights": {
-      "ifcn": 0.4,
-      "rsf": 0.25,
-      "newsguard": 0.15,
-      "signal": 0.2
+      "ifcn": 0.45,
+      "rsf": 0.27,
+      "newsguard": 0.18,
+      "signal": 0.1
     },
     "components": {
       "_note": "TODO(Anthony): replace with the real IFCN/RSF/NewsGuard subscores before enabling. Placeholders reproduce the published 49.5% composite exactly.",
@@ -20,7 +25,7 @@
       "rsf": 49.5,
       "newsguard": 49.5
     },
-    "note": "JUL 2026 — Info Integrity adds Signal Scanner at 20%; prior weights renormalized (IFCN 50→40, RSF 30→25, NewsGuard 20→15)."
+    "note": "JUL 2026 — Info Integrity adds Signal Scanner at 10%; prior weights renormalized (IFCN 50→45, RSF 30→27, NewsGuard 20→18)."
   },
   "banner": {
     "raw": "ISSUE 5 - June 11, 2026 - Day 103 - Fragile De-escalation"
@@ -444,31 +449,36 @@
             "name": "GPR Index (Caldara & Iacoviello)",
             "weight": 0.35,
             "score": 98,
-            "color": "#ff2d6e"
+            "color": "#ff2d6e",
+            "short": "GPR"
           },
           {
             "name": "ACLED Active Conflict Events",
             "weight": 0.25,
             "score": 91,
-            "color": "#ff6b35"
+            "color": "#ff6b35",
+            "short": "ACLED"
           },
           {
             "name": "Gallup Global Worry Survey",
             "weight": 0.15,
             "score": 83,
-            "color": "#ff9d00"
+            "color": "#ff9d00",
+            "short": "GALLUP"
           },
           {
             "name": "Conflict Deaths YTD",
             "weight": 0.15,
             "score": 86,
-            "color": "#ffcc00"
+            "color": "#ffcc00",
+            "short": "DEATHS"
           },
           {
             "name": "Species Threat Index (inverted)",
             "weight": 0.1,
             "score": 56,
-            "color": "#c084fc"
+            "color": "#c084fc",
+            "short": "SPECIES"
           }
         ]
       },
@@ -603,37 +613,43 @@
             "name": "OCHA Humanitarian Aid Volume",
             "weight": 0.2,
             "score": 50,
-            "color": "#00ff9d"
+            "color": "#00ff9d",
+            "short": "OCHA"
           },
           {
             "name": "World Bank Extreme Poverty (inverted)",
             "weight": 0.2,
             "score": 55,
-            "color": "#00d4ff"
+            "color": "#00d4ff",
+            "short": "POVERTY"
           },
           {
             "name": "Scientific Breakthrough Count",
             "weight": 0.15,
             "score": 65,
-            "color": "#a78bfa"
+            "color": "#a78bfa",
+            "short": "SCIENCE"
           },
           {
             "name": "UN Treaty Signatures / Quarter",
             "weight": 0.15,
             "score": 30,
-            "color": "#60a5fa"
+            "color": "#60a5fa",
+            "short": "TREATIES"
           },
           {
             "name": "Social Mobility Index (GSMI)",
             "weight": 0.15,
             "score": 50,
-            "color": "#34d399"
+            "color": "#34d399",
+            "short": "MOBILITY"
           },
           {
             "name": "Conservation Coverage Growth",
             "weight": 0.15,
             "score": 30,
-            "color": "#6ee7b7"
+            "color": "#6ee7b7",
+            "short": "CONSERVATION"
           }
         ]
       },
@@ -2319,7 +2335,24 @@
       },
       "body": "Global Trade Stress at 81/100 — high and easing from the 88 wartime peak. Houthi attacks on Red Sea shipping are rerouting cargo arou...",
       "method": "Experimental composite: Freightos Baltic Index (35%) — global container freight benchmark normalized historically. Manufacturing PMI inverted (35%) — S&P Global composite, inverted so contraction = higher stress. World Bank trade volume momentum (30%) — month-over-month change. Weights at anthonycharts.com/composites-v1.0.json",
-      "share": "Trade Stress: 81/100 — high, easing from the 88 peak. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. Full breakdown: anthonycharts.com 🚢"
+      "share": "Trade Stress: 81/100 — high, easing from the 88 peak. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. Full breakdown: anthonycharts.com 🚢",
+      "weights": {
+        "final": 81,
+        "inputs": [
+          {
+            "name": "FREIGHTOS",
+            "weight": 0.35
+          },
+          {
+            "name": "PMI",
+            "weight": 0.35
+          },
+          {
+            "name": "WORLD BANK",
+            "weight": 0.3
+          }
+        ]
+      }
     },
     "truth": {
       "emoji": "🎯",
@@ -2424,7 +2457,141 @@
       },
       "body": "Information Integrity at 49.5%: roughly half of major claims reviewed by IFCN-certified fact-checkers did not meet accuracy standards. Down 4 point...",
       "method": "Experimental composite: IFCN claim accuracy rate (50%) — from IFCN-verified fact-checkers internationally. RSF Press Freedom Index inverted (30%) — higher freedom = higher integrity score. NewsGuard credibility average (20%) — ratings of major news and information sources. Experimental — weights subject to revision, published at anthonycharts.com/composites-v1.0.json",
-      "share": "Information Integrity: 49.5% — roughly half of major claims not meeting accuracy standards. Down 4pts YOY. 10+ pts below pre-COVID. anthonycharts.com 🎯"
+      "share": "Information Integrity: 49.5% — roughly half of major claims not meeting accuracy standards. Down 4pts YOY. 10+ pts below pre-COVID. anthonycharts.com 🎯",
+      "weights": {
+        "final": 49.5,
+        "inputs": [
+          {
+            "name": "IFCN",
+            "weight": 0.5
+          },
+          {
+            "name": "RSF",
+            "weight": 0.3
+          },
+          {
+            "name": "NEWSGUARD",
+            "weight": 0.2
+          }
+        ]
+      }
     }
+  },
+  "sources": [
+    {
+      "name": "GPR Index",
+      "desc": "Caldara & Iacoviello · Geopolitical risk",
+      "cadence": "MONTHLY",
+      "url": "https://matteoiacoviello.com/gpr.htm"
+    },
+    {
+      "name": "ACLED",
+      "desc": "Armed conflict location & event data",
+      "cadence": "REAL-TIME",
+      "url": "https://acleddata.com"
+    },
+    {
+      "name": "Copernicus C3S",
+      "desc": "EU climate service · Temp anomaly",
+      "cadence": "MONTHLY",
+      "url": "https://climate.copernicus.eu"
+    },
+    {
+      "name": "NOAA Mauna Loa",
+      "desc": "Keeling Curve · CO₂ concentration",
+      "cadence": "WEEKLY",
+      "url": "https://gml.noaa.gov/ccgg/trends/"
+    },
+    {
+      "name": "NSIDC",
+      "desc": "Sea Ice Index · Arctic extent",
+      "cadence": "DAILY",
+      "url": "https://nsidc.org/data/seaice_index"
+    },
+    {
+      "name": "NASA Exoplanet Archive",
+      "desc": "Confirmed planet catalog · JWST/TESS",
+      "cadence": "WEEKLY",
+      "url": "https://exoplanetarchive.ipac.caltech.edu"
+    },
+    {
+      "name": "NASA CNEOS",
+      "desc": "Near-Earth objects · JPL Sentry",
+      "cadence": "DAILY",
+      "url": "https://cneos.jpl.nasa.gov"
+    },
+    {
+      "name": "IUCN Red List",
+      "desc": "Species threat assessments",
+      "cadence": "QUARTERLY",
+      "url": "https://www.iucnredlist.org"
+    },
+    {
+      "name": "Protected Planet",
+      "desc": "UNEP-WCMC · Conservation coverage",
+      "cadence": "ANNUAL",
+      "url": "https://www.protectedplanet.net"
+    },
+    {
+      "name": "WID.world",
+      "desc": "World Inequality Database · Gini",
+      "cadence": "ANNUAL",
+      "url": "https://wid.world"
+    },
+    {
+      "name": "Opportunity Insights",
+      "desc": "Harvard · Social mobility research",
+      "cadence": "ANNUAL",
+      "url": "https://opportunityinsights.org"
+    },
+    {
+      "name": "UN Peacekeeping",
+      "desc": "DPPA · Missions & personnel",
+      "cadence": "MONTHLY",
+      "url": "https://peacekeeping.un.org"
+    }
+  ],
+  "signal_trends": {
+    "enabled": true,
+    "sample": true,
+    "_note": "Guardrail 5: rows below are the prototype samples. The footer shows a SAMPLE DATA label while sample=true; it only comes off when a real Signal x Trends pipeline replaces these rows.",
+    "rows": [
+      {
+        "score": 92,
+        "headline": "NATO convenes emergency consultations after Baltic drone incursions",
+        "source": "REUTERS",
+        "time": "2H AGO",
+        "trend": "+340%",
+        "query": "nato article 4",
+        "match": true
+      },
+      {
+        "score": 71,
+        "headline": "Freight rates spike as Red Sea rerouting stretches into third month",
+        "source": "BLOOMBERG",
+        "time": "8H AGO",
+        "trend": "+150%",
+        "query": "shipping rates",
+        "match": true
+      },
+      {
+        "score": 88,
+        "headline": "CO₂ passes 431 ppm as Mauna Loa confirms new seasonal record",
+        "source": "AP",
+        "time": "5H AGO",
+        "trend": "+85%",
+        "query": "co2 record",
+        "match": true
+      },
+      {
+        "score": 95,
+        "headline": "TESS data release pushes confirmed exoplanet count past 6,100",
+        "source": "NASA",
+        "time": "1D AGO",
+        "trend": "+12%",
+        "query": "exoplanets",
+        "match": false
+      }
+    ]
   }
 }

@@ -63,9 +63,11 @@ const fresh = {
   check('ticker updated', d.ticker.some((t) => t.includes(`${expected}%`)));
   const wts = d.drawers.truth.weights;
   check(
-    'drawer WEIGHTS block: 4 inputs, SIGNAL at 20%',
-    wts && wts.inputs.length === 4 && /Signal/.test(wts.inputs[3].name) && wts.inputs[3].weight === 0.2 && wts.final === expected
+    `drawer WEIGHTS block: 4 inputs, SIGNAL at ${Math.round(w.signal * 100)}%`,
+    wts && wts.inputs.length === 4 && /SIGNAL/i.test(wts.inputs[3].name) && wts.inputs[3].weight === w.signal && wts.final === expected
   );
+  const wSum = wts.inputs.reduce((s, i) => s + i.weight, 0);
+  check('blended weights sum to 100%', Math.abs(wSum - 1) < 1e-9, String(wSum));
   check('drawer method carries the dated methodology note', d.drawers.truth.method.includes('JUL 2026'));
   check('composites untouched by the blend', JSON.stringify(d.composite) === JSON.stringify(before.composite));
 }
@@ -93,11 +95,14 @@ const fresh = {
   check('committed aggregate.json seed trips the guard', !r.applied, r.reason);
 }
 
-// 6. The methodology-page anchor the enabled build rewrites exists exactly once.
+// 6. v18: the weight chips and drawer render straight from drawers.truth.weights,
+//    so an applied blend needs no template anchor — prove the shape the
+//    renderer consumes ({short|name, weight}) is intact after a blend.
 {
-  const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
-  const m = tpl.match(/Info Integrity \([\d.]+%\):<\/strong> IFCN \d+% · RSF \d+% · NewsGuard \d+%/g);
-  check('methodology anchor present exactly once in template', m && m.length === 1);
+  const d = loadEnabled();
+  applySignalBlend(d, fresh, { now: NOW });
+  const ok = d.drawers.truth.weights.inputs.every((i) => (i.short || i.name) && typeof i.weight === 'number');
+  check('blended inputs carry the {short|name, weight} shape the page renders from', ok);
 }
 
 console.log(failures === 0 ? '\nPASS — blend guard behaves.' : `\nFAIL — ${failures} check(s) failed.`);
