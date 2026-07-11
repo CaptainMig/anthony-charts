@@ -192,10 +192,19 @@ function buildSignal() {
       const dot = r.match ? '#ffd75e' : 'rgba(120,150,255,0.25)';
       const glow = r.match ? 'box-shadow:0 0 8px #ffd75e;' : '';
       const vel = r.match ? '#ffd75e' : '#8fa2cf';
+      // Click-through only where a REAL destination exists: `link` opens the
+      // source article, `signalUrl` opens the Signal article page. Sample
+      // rows carry null for both, so nothing links to a made-up article.
+      const ring = `<span class="pg-sigscore" style="color:${scoreColor(r.score)};">${r.score}</span>`;
+      const ringOut = r.signalUrl
+        ? `<a href="${escHtml(r.signalUrl)}" target="_blank" rel="noopener noreferrer" title="Open in Signal">${ring}</a>`
+        : ring;
+      const title = r.link
+        ? `<a class="pg-siglink" href="${escHtml(r.link)}" target="_blank" rel="noopener noreferrer"><span class="pg-sightitle">${escHtml(r.headline)}</span></a>`
+        : `<span class="pg-sightitle">${escHtml(r.headline)}</span>`;
       return (
-        `<div class="pg-sigrow">` +
-        `<span class="pg-sigscore" style="color:${scoreColor(r.score)};">${r.score}</span>` +
-        `<div class="pg-sighead"><span class="pg-sightitle">${escHtml(r.headline)}</span>` +
+        `<div class="pg-sigrow">` + ringOut +
+        `<div class="pg-sighead">${title}` +
         `<span class="pg-sigmeta">${escHtml(r.source)} · ${escHtml(r.time)} · SIGNAL INTEGRITY ${r.score}/100</span></div>` +
         `<div class="pg-sigtrends"><span class="pg-sigvel"><span class="pg-dot" style="background:${dot};${glow}"></span>` +
         `<span class="pg-sigvelval" style="color:${vel};">${escHtml(r.trend)}</span></span>` +
@@ -204,7 +213,9 @@ function buildSignal() {
     })
     .join('');
   // Guardrail 5: the SAMPLE DATA label stays until a real pipeline feeds rows.
-  const srcNote = 'SOURCES: SIGNAL SCANNER · GOOGLE TRENDS (US)' + (cfg.sample ? ' · SAMPLE DATA' : '');
+  const srcNote =
+    'SOURCES: <a class="pg-sigsrclink" href="https://anthony-signal.vercel.app" target="_blank" rel="noopener noreferrer">SIGNAL SCANNER</a> · GOOGLE TRENDS (US)' +
+    (cfg.sample ? ' · SAMPLE DATA' : '');
   return (
     `<div class="pg-wrap" style="margin-top:32px;">` +
     `<div class="pg-sechead"><span class="pg-seclabel">SIGNAL × TRENDS — FEATURED HEADLINES</span><span class="pg-hair"></span>` +
