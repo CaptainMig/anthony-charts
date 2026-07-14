@@ -142,12 +142,21 @@ export default function MethodologyPanel({ open, onClose }) {
           <p className="text-[12.5px] leading-relaxed text-white/60">
             Opening an article extracts its full text and scores the headline against the real
             body — a stronger judgment than the sweep&apos;s headline-plus-snippet pass. Each
-            article is scored <span className="text-white/80">once</span>: the verdict is stored
-            on your device and served from that store on every later view, with no re-extraction
-            and no re-score. Where a full-text verdict exists, it{' '}
+            article is scored <span className="text-white/80">once, globally</span>: the verdict
+            is stored on your device and on the server, and served from those stores on every
+            later view — on any device — with no re-extraction and no re-score. Where a
+            full-text verdict exists, it{' '}
             <span className="text-white/80">overrides the sweep verdict</span> in the scan table
             (marked <span className="text-teal">FT</span>); scan-level aggregates remain computed
             from the sweep so they describe one consistent methodology.
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
+            <span className="text-white/80">Auto-escalation:</span> after each sweep, every row
+            flagged PROVISIONAL, MISLEADING, or CONTESTED is queued for full-text scoring
+            automatically — in the background, one at a time, rate-limited. The table updates row
+            by row as verdicts land. Rows whose full text can&apos;t be extracted (paywalls,
+            consent walls) simply keep their sweep verdict — a fragment is never scored as the
+            article.
           </p>
 
           <SectionHeader>Framing Integrity</SectionHeader>
