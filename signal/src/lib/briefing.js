@@ -50,7 +50,7 @@ const VERDICT_SENTENCE = {
   VERIFIED: 'Most coverage was straight — verdicts skewed Verified.',
   CONTEXTUAL:
     'The dominant issue was omission, not fabrication — most flags were Contextual (true but missing context).',
-  UNVERIFIED: 'Hedged or developing claims led the day — most flags were Unverified.',
+  UNVERIFIED: 'Hedged or developing claims led the day — most flags were Unverifiable.',
   CONTESTED: 'Disputed framing led the day — most flags were Contested.',
   PROVISIONAL:
     'Suspected distortion led the day — Provisional flags awaiting full-text confirmation were most common.',

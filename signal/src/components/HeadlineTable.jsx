@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { DISPLAY_VERDICTS, VERDICT_COLORS } from '../config.js';
+import { DISPLAY_VERDICTS, VERDICT_COLORS, verdictLabel } from '../config.js';
 import { ageLabel, ageMinutes } from '../lib/stats.js';
 
 const ROW_HEIGHT = 44; // px — fixed so the virtual window math stays simple
@@ -12,9 +12,9 @@ const FILTERS = ['ALL', ...DISPLAY_VERDICTS, 'UNSCORED'];
 
 // Column definitions: how to read the sort key from a row. Null scores
 // (UNSCORED rows) sort below every real number. The verdict column is wider
-// than the rest — PROVISIONAL plus the FT override marker needs the room.
+// than the rest — UNVERIFIABLE plus the FT override marker needs the room.
 const COLUMNS = [
-  { key: 'verdict', label: 'Verdict', get: (h) => h.score.verdict, align: 'left', w: 'w-[130px]' },
+  { key: 'verdict', label: 'Verdict', get: (h) => h.score.verdict, align: 'left', w: 'w-[140px]' },
   { key: 'headline', label: 'Headline', get: (h) => h.title.toLowerCase(), align: 'left', grow: true },
   { key: 'publication', label: 'Publication', get: (h) => h.publication.toLowerCase(), align: 'left' },
   { key: 'owner', label: 'Owner', get: (h) => h.owner.toLowerCase(), align: 'left' },
@@ -31,7 +31,7 @@ function VerdictPill({ verdict }) {
       className="inline-block rounded-[2px] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider"
       style={{ color, backgroundColor: `${color}1f`, border: `0.5px solid ${color}55` }}
     >
-      {verdict}
+      {verdictLabel(verdict)}
     </span>
   );
 }
@@ -139,7 +139,7 @@ export default function HeadlineTable({ headlines, isTrending, onOpen }) {
                 borderColor: `${color}66`,
               }}
             >
-              {f === 'ALL' ? 'All' : f} {counts[f] ?? 0}
+              {f === 'ALL' ? 'All' : verdictLabel(f)} {counts[f] ?? 0}
             </button>
           );
         })}
@@ -213,10 +213,10 @@ export default function HeadlineTable({ headlines, isTrending, onOpen }) {
                       style={{ backgroundColor: VERDICT_COLORS[h.score.verdict] }}
                     />
                     <div
-                      className="flex w-[130px] shrink-0 items-center gap-1.5 px-3"
+                      className="flex w-[140px] shrink-0 items-center gap-1.5 px-3"
                       title={
                         h.score.fulltext
-                          ? `Full-text verdict — overrides the headline-only sweep verdict (${h.sweepScore?.verdict || 'UNSCORED'}).${h.score.rationale ? ` ${h.score.rationale}` : ''}`
+                          ? `Full-text verdict — overrides the headline-only sweep verdict (${verdictLabel(h.sweepScore?.verdict || 'UNSCORED')}).${h.score.rationale ? ` ${h.score.rationale}` : ''}`
                           : h.score.rationale || undefined
                       }
                     >

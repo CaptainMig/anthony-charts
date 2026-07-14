@@ -103,6 +103,14 @@ export const DISPLAY_VERDICTS = [
   'MISLEADING',
 ];
 
+// Display labels. Internal verdict tokens are load-bearing and stable — the
+// model emits them, cached scans and share payloads carry them — so a rename
+// is a DISPLAY mapping, never a data migration. UNVERIFIED reads as a judgment
+// on the outlet; UNVERIFIABLE says what it means: the claim can't be verified
+// from what the article/source gives us.
+export const VERDICT_LABELS = { UNVERIFIED: 'UNVERIFIABLE' };
+export const verdictLabel = (v) => VERDICT_LABELS[v] || v;
+
 export const VERDICT_COLORS = {
   VERIFIED: '#6fd49a',
   CONTEXTUAL: '#8bbef0',

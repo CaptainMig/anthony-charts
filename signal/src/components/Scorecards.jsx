@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DISPLAY_VERDICTS, VERDICT_COLORS } from '../config.js';
+import { DISPLAY_VERDICTS, VERDICT_COLORS, verdictLabel } from '../config.js';
 
 const round1 = (n) => Math.round(n * 10) / 10;
 
@@ -10,7 +10,7 @@ function MiniBar({ distribution }) {
         <div
           key={seg.verdict}
           style={{ width: `${seg.pct}%`, backgroundColor: VERDICT_COLORS[seg.verdict] }}
-          title={`${seg.verdict}: ${seg.count}`}
+          title={`${verdictLabel(seg.verdict)}: ${seg.count}`}
         />
       ))}
     </div>
