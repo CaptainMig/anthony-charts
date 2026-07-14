@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { VERDICTS, VERDICT_COLORS } from '../config.js';
+import { DISPLAY_VERDICTS, VERDICT_COLORS } from '../config.js';
 
 const round1 = (n) => Math.round(n * 10) / 10;
 
@@ -74,7 +74,7 @@ function clusterByOwner(cards) {
       const total = members.reduce((s, m) => s + m.count, 0);
       const wavg = (key) =>
         total ? members.reduce((s, m) => s + m[key] * m.count, 0) / total : 0;
-      const distribution = VERDICTS.map((verdict) => {
+      const distribution = DISPLAY_VERDICTS.map((verdict) => {
         const count = members.reduce(
           (s, m) => s + (m.distribution.find((d) => d.verdict === verdict)?.count || 0),
           0

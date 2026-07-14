@@ -85,15 +85,32 @@ export const MIN_HEADLINE_CHARS = 15;
 export const MODEL = 'claude-sonnet-4-6';
 export const CONCURRENCY = 3;
 
-// The five verdicts, in display order, with their palette colors and the
-// definitions injected into every scoring prompt.
+// The five MODEL verdicts, in display order, with their palette colors and the
+// definitions injected into every scoring prompt. This is the set the model may
+// return — parseScore rejects anything else.
 export const VERDICTS = ['VERIFIED', 'CONTEXTUAL', 'CONTESTED', 'UNVERIFIED', 'MISLEADING'];
+
+// Display set: PROVISIONAL is a policy verdict, never a model verdict. A
+// headline-only sweep can't confirm distortion (it never saw the article body),
+// so a sweep MISLEADING is downgraded to PROVISIONAL until full-text scoring
+// confirms or clears it. See lib/prompt.js provisionalize().
+export const DISPLAY_VERDICTS = [
+  'VERIFIED',
+  'CONTEXTUAL',
+  'CONTESTED',
+  'UNVERIFIED',
+  'PROVISIONAL',
+  'MISLEADING',
+];
 
 export const VERDICT_COLORS = {
   VERIFIED: '#6fd49a',
   CONTEXTUAL: '#8bbef0',
   CONTESTED: '#c5a0f0',
   UNVERIFIED: '#c8971f',
+  // Policy verdict: sweep-flagged as misleading but awaiting full-text
+  // confirmation — deliberately between UNVERIFIED amber and MISLEADING red.
+  PROVISIONAL: '#e0876a',
   MISLEADING: '#f08080',
   // Not a model verdict: the scoring call failed (timeout/error) and the row is
   // shown grey and excluded from every average. See lib/scoring.js.
@@ -105,7 +122,8 @@ export const VERDICT_DEFINITIONS = {
   CONTEXTUAL: 'true but missing important context that changes meaning',
   CONTESTED: 'facts genuinely disputed, or editorially slanted but not false',
   UNVERIFIED: 'anonymous sources, speculation as fact, premature conclusions',
-  MISLEADING: 'engineered to trigger reaction, distorts or omits facts for outrage/clicks',
+  PROVISIONAL: 'headline-only sweep flagged distortion — held until the full text confirms or clears it',
+  MISLEADING: 'engineered to trigger reaction, distorts or omits facts for outrage/clicks — full-text confirmed',
 };
 
 // Verdicts that count toward Framing Integrity.
@@ -116,4 +134,7 @@ export const INK = '#0f0d0a';
 
 export const STORAGE_KEYS = {
   lastScan: 'signal.lastScan',
+  // Persisted full-text verdicts, keyed by stable article id — score once on
+  // first detail view, serve from here forever after. See lib/fulltextStore.js.
+  fulltextVerdicts: 'signal.fulltextVerdicts',
 };

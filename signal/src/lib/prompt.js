@@ -82,6 +82,16 @@ function clampScore(n) {
   return Math.min(10, Math.max(0, v));
 }
 
+// Sweep-side policy, applied AFTER parsing (shared by api/score.js and the
+// client's cached-scan normalizer): a headline-only sweep never saw the
+// article body, so it cannot confirm distortion. A sweep MISLEADING is
+// downgraded to PROVISIONAL — same axis numbers, same rationale — until
+// full-text scoring (which may emit MISLEADING) confirms or clears it.
+export function provisionalize(score) {
+  if (!score || score.verdict !== 'MISLEADING') return score;
+  return { ...score, verdict: 'PROVISIONAL', provisional: true };
+}
+
 // Pull the first JSON object out of the model's text and normalize it.
 // Accepts the reframe schema (sensationalism/clickbait) and the legacy keys.
 export function parseScore(text) {

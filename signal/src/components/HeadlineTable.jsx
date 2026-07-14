@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { VERDICTS, VERDICT_COLORS } from '../config.js';
+import { DISPLAY_VERDICTS, VERDICT_COLORS } from '../config.js';
 import { ageLabel, ageMinutes } from '../lib/stats.js';
 
 const ROW_HEIGHT = 44; // px — fixed so the virtual window math stays simple
@@ -8,12 +8,13 @@ const OVERSCAN = 8;
 
 // UNSCORED is a failure state, not a verdict — it filters like one but its
 // rows are grey and carry no numbers.
-const FILTERS = ['ALL', ...VERDICTS, 'UNSCORED'];
+const FILTERS = ['ALL', ...DISPLAY_VERDICTS, 'UNSCORED'];
 
 // Column definitions: how to read the sort key from a row. Null scores
-// (UNSCORED rows) sort below every real number.
+// (UNSCORED rows) sort below every real number. The verdict column is wider
+// than the rest — PROVISIONAL plus the FT override marker needs the room.
 const COLUMNS = [
-  { key: 'verdict', label: 'Verdict', get: (h) => h.score.verdict, align: 'left' },
+  { key: 'verdict', label: 'Verdict', get: (h) => h.score.verdict, align: 'left', w: 'w-[130px]' },
   { key: 'headline', label: 'Headline', get: (h) => h.title.toLowerCase(), align: 'left', grow: true },
   { key: 'publication', label: 'Publication', get: (h) => h.publication.toLowerCase(), align: 'left' },
   { key: 'owner', label: 'Owner', get: (h) => h.owner.toLowerCase(), align: 'left' },
@@ -98,7 +99,7 @@ export default function HeadlineTable({ headlines, isTrending, onOpen }) {
 
   const counts = useMemo(() => {
     const c = { ALL: headlines.length, SLAM: 0, UNSCORED: 0 };
-    for (const v of VERDICTS) c[v] = 0;
+    for (const v of DISPLAY_VERDICTS) c[v] = 0;
     for (const h of headlines) {
       if (h.score.verdict in c) c[h.score.verdict]++;
       if (h.slam?.matched) c.SLAM++;
@@ -168,7 +169,7 @@ export default function HeadlineTable({ headlines, isTrending, onOpen }) {
               type="button"
               onClick={() => toggleSort(col.key)}
               className={`flex items-center gap-1 px-3 py-2.5 hover:text-white/80 ${
-                col.grow ? 'flex-1' : 'w-[110px] shrink-0'
+                col.grow ? 'flex-1' : `${col.w || 'w-[110px]'} shrink-0`
               } ${col.align === 'right' ? 'justify-end' : 'justify-start'}`}
             >
               <span>{col.label}</span>
@@ -212,10 +213,19 @@ export default function HeadlineTable({ headlines, isTrending, onOpen }) {
                       style={{ backgroundColor: VERDICT_COLORS[h.score.verdict] }}
                     />
                     <div
-                      className="w-[110px] shrink-0 px-3"
-                      title={h.score.rationale || undefined}
+                      className="flex w-[130px] shrink-0 items-center gap-1.5 px-3"
+                      title={
+                        h.score.fulltext
+                          ? `Full-text verdict — overrides the headline-only sweep verdict (${h.sweepScore?.verdict || 'UNSCORED'}).${h.score.rationale ? ` ${h.score.rationale}` : ''}`
+                          : h.score.rationale || undefined
+                      }
                     >
                       <VerdictPill verdict={h.score.verdict} />
+                      {h.score.fulltext && (
+                        <span className="shrink-0 font-mono text-[8px] font-bold tracking-wider text-teal">
+                          FT
+                        </span>
+                      )}
                     </div>
                     <div className="flex min-w-0 flex-1 items-center gap-2 px-3" title={h.title}>
                       {(() => {

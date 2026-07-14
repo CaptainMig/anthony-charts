@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { VERDICT_COLORS, ACCENT } from '../config.js';
 import { articleIntegrity, shareUrl } from '../lib/article.js';
+import { getFulltext } from '../lib/fulltextStore.js';
 import { ageLabel } from '../lib/stats.js';
 
 // ---------------------------------------------------------------------------
 // Article detail page (/article/:id).
 //
 // Three sections, each honest about its own failure mode:
-//  1. Full-text verdict — /api/extract pulls the article body, /api/score in
-//     fulltext mode judges headline-vs-body. Paywalled/stub pages show
+//  1. Full-text verdict — served from the persistent store when the article
+//     was already scored (score once, cache, serve — no re-extraction on a
+//     repeat view). Otherwise /api/extract pulls the article body and
+//     /api/score in fulltext mode judges headline-vs-body, then the verdict is
+//     persisted via onFulltextScored. Paywalled/stub pages show
 //     "FULL TEXT UNAVAILABLE — HEADLINE-ONLY SCORE" instead of a fragment score.
 //  2. Fact-check cross-reference — Google Fact Check Tools reviews, or a plain
 //     "none found" / "lookup unavailable" state. Never faked.
@@ -83,7 +87,7 @@ function Ring({ value }) {
   );
 }
 
-export default function ArticleDetail({ headline, onBack }) {
+export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
   // Full-text scoring state: 'loading' | 'scored' | 'unavailable' | 'error'
   const [fulltext, setFulltext] = useState({ state: 'loading' });
   // Fact-check state: 'loading' | 'ok' | 'unavailable'
@@ -92,32 +96,49 @@ export default function ArticleDetail({ headline, onBack }) {
 
   useEffect(() => {
     let alive = true;
-    setFulltext({ state: 'loading' });
     setFactcheck({ state: 'loading' });
 
-    (async () => {
-      try {
-        const ex = await fetch(`/api/extract?url=${encodeURIComponent(headline.link)}`).then((r) => r.json());
-        if (!alive) return;
-        if (!ex.ok) {
-          setFulltext({ state: 'unavailable', reason: ex.reason });
-          return;
+    // Cache-first: an article is full-text scored ONCE, ever. A stored verdict
+    // is served directly — no re-extraction, no re-score on repeat views.
+    const stored = getFulltext(headline.link);
+    if (stored) {
+      setFulltext({ state: 'scored', score: stored.score, chars: stored.chars, cached: true });
+    } else {
+      setFulltext({ state: 'loading' });
+      (async () => {
+        try {
+          const ex = await fetch(`/api/extract?url=${encodeURIComponent(headline.link)}`).then((r) => r.json());
+          if (!alive) return;
+          if (!ex.ok) {
+            setFulltext({ state: 'unavailable', reason: ex.reason });
+            return;
+          }
+          const sc = await fetch('/api/score', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ headline: headline.title, article: ex.text, mode: 'fulltext' }),
+          }).then((r) => r.json());
+          if (!alive) return;
+          if (!sc || sc.fallback || !sc.verdict) {
+            setFulltext({ state: 'error', reason: sc?.reason || 'scoring failed' });
+          } else {
+            const score = {
+              verdict: sc.verdict,
+              truth: sc.truth,
+              sens: sc.sens,
+              click: sc.click,
+              rationale: sc.rationale,
+            };
+            setFulltext({ state: 'scored', score, chars: ex.chars });
+            // Persist so this article is never extracted or scored again, and
+            // so the scan table can override the sweep verdict immediately.
+            onFulltextScored?.(headline.link, { score, chars: ex.chars });
+          }
+        } catch (e) {
+          if (alive) setFulltext({ state: 'error', reason: e.message });
         }
-        const sc = await fetch('/api/score', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ headline: headline.title, article: ex.text, mode: 'fulltext' }),
-        }).then((r) => r.json());
-        if (!alive) return;
-        if (!sc || sc.fallback || !sc.verdict) {
-          setFulltext({ state: 'error', reason: sc?.reason || 'scoring failed' });
-        } else {
-          setFulltext({ state: 'scored', score: sc, chars: ex.chars });
-        }
-      } catch (e) {
-        if (alive) setFulltext({ state: 'error', reason: e.message });
-      }
-    })();
+      })();
+    }
 
     (async () => {
       try {
@@ -202,6 +223,7 @@ export default function ArticleDetail({ headline, onBack }) {
             <p className="mt-2 font-mono text-[10px] text-white/30">
               scored against {fulltext.chars.toLocaleString()} extracted characters · headline-only sweep
               verdict was {headlineScore?.verdict || 'UNSCORED'}
+              {fulltext.cached ? ' · served from cache (scored once on first view)' : ''}
             </p>
           </div>
         )}
