@@ -10,6 +10,8 @@ import { buildBriefing } from './lib/briefing.js';
 import { fetchTrends, makeTrendingMatcher } from './lib/trends.js';
 import { setFramingIntegrity } from './lib/integrity.js';
 import { articleId, decodeShare, encodeShare } from './lib/article.js';
+import { provisionalize } from './lib/prompt.js';
+import { loadFulltextStore, saveFulltext } from './lib/fulltextStore.js';
 import { submitAggregate } from './lib/aggregate.js';
 import ArticleDetail from './components/ArticleDetail.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -59,6 +61,10 @@ function loadCache() {
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed.scored)) return null;
+    // Cached scans hold headline-only sweep scores. Scans saved before the
+    // PROVISIONAL policy may still carry sweep MISLEADING verdicts — normalize
+    // them so the rule "headline-only never emits MISLEADING" holds everywhere.
+    parsed.scored = parsed.scored.map((h) => ({ ...h, score: provisionalize(h.score) }));
     return parsed;
   } catch {
     return null;
@@ -86,6 +92,15 @@ export default function App() {
 
   // Monotonic run id — lets an in-flight scan know it has been superseded.
   const runRef = useRef(0);
+
+  // Persisted full-text verdicts (articleId -> { at, score, chars }). Loaded
+  // once from localStorage; updated when a detail view scores a new article.
+  // These override sweep verdicts in the scan table — full text outranks a
+  // headline-only judgment.
+  const [ftMap, setFtMap] = useState(loadFulltextStore);
+  function handleFulltextScored(link, entry) {
+    setFtMap({ ...saveFulltext(link, entry) });
+  }
 
   // Article detail route — /article/:id. Kept in sync with the History API so
   // back/forward and shared links behave like real pages.
@@ -295,10 +310,21 @@ export default function App() {
     }),
     [realScored, scored.length, meta.sourcesActive, slam.index]
   );
-  const tableRows = useMemo(
-    () => (selectedPub ? scoredSlam.filter((h) => h.publication === selectedPub) : scoredSlam),
-    [scoredSlam, selectedPub]
-  );
+  // Scan-table rows only: a persisted full-text verdict overrides the sweep
+  // verdict (marked `fulltext` so the table can disclose it; the replaced sweep
+  // score is kept as `sweepScore`). Scan-level aggregates above stay computed
+  // from the sweep — they describe the sweep, not a mixed methodology.
+  const tableRows = useMemo(() => {
+    const rows = selectedPub
+      ? scoredSlam.filter((h) => h.publication === selectedPub)
+      : scoredSlam;
+    return rows.map((h) => {
+      const ft = ftMap[articleId(h.link)];
+      return ft?.score
+        ? { ...h, score: { ...ft.score, fulltext: true }, sweepScore: h.score }
+        : h;
+    });
+  }, [scoredSlam, selectedPub, ftMap]);
 
   const briefDate = useMemo(
     () => new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
@@ -382,7 +408,11 @@ export default function App() {
 
       {route ? (
         articleHeadline ? (
-          <ArticleDetail headline={articleHeadline} onBack={closeArticle} />
+          <ArticleDetail
+            headline={articleHeadline}
+            onBack={closeArticle}
+            onFulltextScored={handleFulltextScored}
+          />
         ) : (
           <section className="mx-auto max-w-[900px] px-6 pb-20 pt-10">
             <button

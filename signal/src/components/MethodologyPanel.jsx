@@ -19,8 +19,12 @@ const VERDICT_ROWS = [
     text: 'The claim relies on anonymous sources, speculation presented as fact, or a conclusion drawn before the evidence is in.',
   },
   {
+    verdict: 'PROVISIONAL',
+    text: 'The headline-only sweep flagged engineered distortion, but a sweep never sees the article body, so it cannot confirm the call. The flag is held as Provisional until the full text is scored — open the article to resolve it.',
+  },
+  {
     verdict: 'MISLEADING',
-    text: 'The headline is engineered to trigger a reaction. It distorts, omits, or exaggerates facts in a way that serves outrage over accuracy.',
+    text: 'The headline is engineered to trigger a reaction. It distorts, omits, or exaggerates facts in a way that serves outrage over accuracy. Only full-text scoring can issue this verdict — a headline-only sweep flags Provisional instead.',
   },
   {
     verdict: 'UNSCORED',
@@ -133,6 +137,18 @@ export default function MethodologyPanel({ open, onClose }) {
               </div>
             ))}
           </div>
+
+          <SectionHeader>Full-text verdicts</SectionHeader>
+          <p className="text-[12.5px] leading-relaxed text-white/60">
+            Opening an article extracts its full text and scores the headline against the real
+            body — a stronger judgment than the sweep&apos;s headline-plus-snippet pass. Each
+            article is scored <span className="text-white/80">once</span>: the verdict is stored
+            on your device and served from that store on every later view, with no re-extraction
+            and no re-score. Where a full-text verdict exists, it{' '}
+            <span className="text-white/80">overrides the sweep verdict</span> in the scan table
+            (marked <span className="text-teal">FT</span>); scan-level aggregates remain computed
+            from the sweep so they describe one consistent methodology.
+          </p>
 
           <SectionHeader>Framing Integrity</SectionHeader>
           <p className="text-[12.5px] leading-relaxed text-white/65">

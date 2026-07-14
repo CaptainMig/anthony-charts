@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 import Anthropic from '@anthropic-ai/sdk';
 import { MODEL } from '../src/config.js';
-import { SYSTEM_PROMPT, FULLTEXT_SUFFIX, userContent, parseScore } from '../src/lib/prompt.js';
+import { SYSTEM_PROMPT, FULLTEXT_SUFFIX, userContent, parseScore, provisionalize } from '../src/lib/prompt.js';
 
 // Naive per-IP rate limit. In-memory, so it resets on cold start — adequate
 // as a light abuse guard, not a hard quota. Set well above a single full scan
@@ -92,7 +92,9 @@ export default async function handler(req, res) {
       .filter((b) => b.type === 'text')
       .map((b) => b.text)
       .join('');
-    const score = parseScore(text);
+    // Headline-only sweeps cannot emit MISLEADING — the sweep never saw the
+    // article body, so distortion stays PROVISIONAL until full-text confirms.
+    const score = fulltext ? parseScore(text) : provisionalize(parseScore(text));
     return res.status(200).json({ ok: true, ...score });
   } catch (e) {
     const aborted = ctrl.signal.aborted || e?.name === 'AbortError' || e?.name === 'APIUserAbortError';

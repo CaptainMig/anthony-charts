@@ -1,14 +1,15 @@
 // ---------------------------------------------------------------------------
 // Derived statistics — atmosphere distribution, strip stats, scorecards.
 // ---------------------------------------------------------------------------
-import { VERDICTS, INTEGRITY_VERDICTS } from '../config.js';
+import { DISPLAY_VERDICTS, INTEGRITY_VERDICTS } from '../config.js';
 
 const avg = (nums) => (nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : 0);
 const round1 = (n) => Math.round(n * 10) / 10;
 
-// Empty count map keyed by verdict, preserving display order.
+// Empty count map keyed by verdict, preserving display order. Uses the display
+// set (includes PROVISIONAL) — rows can carry policy verdicts, not just model ones.
 export function emptyVerdictCounts() {
-  return VERDICTS.reduce((acc, v) => ((acc[v] = 0), acc), {});
+  return DISPLAY_VERDICTS.reduce((acc, v) => ((acc[v] = 0), acc), {});
 }
 
 /**
@@ -28,7 +29,7 @@ export function atmosphere(scored) {
   const counts = emptyVerdictCounts();
   for (const h of scored) counts[h.score.verdict]++;
   const total = scored.length;
-  return VERDICTS.map((verdict) => ({
+  return DISPLAY_VERDICTS.map((verdict) => ({
     verdict,
     count: counts[verdict],
     pct: total ? (counts[verdict] / total) * 100 : 0,
@@ -69,7 +70,7 @@ export function scorecards(scored) {
         publication: group.publication,
         owner: group.owner,
         count: total,
-        distribution: VERDICTS.map((verdict) => ({
+        distribution: DISPLAY_VERDICTS.map((verdict) => ({
           verdict,
           count: counts[verdict],
           pct: total ? (counts[verdict] / total) * 100 : 0,

@@ -30,8 +30,8 @@ function clickbaitClause(c) {
   return ', and headlines frequently withheld the payoff.';
 }
 
-// Dominant verdict = mode of the five verdicts; ties broken by this precedence.
-const VERDICT_PRECEDENCE = ['VERIFIED', 'CONTEXTUAL', 'UNVERIFIED', 'CONTESTED', 'MISLEADING'];
+// Dominant verdict = mode of the display verdicts; ties broken by this precedence.
+const VERDICT_PRECEDENCE = ['VERIFIED', 'CONTEXTUAL', 'UNVERIFIED', 'CONTESTED', 'PROVISIONAL', 'MISLEADING'];
 
 function dominantVerdict(counts) {
   let best = null;
@@ -52,6 +52,8 @@ const VERDICT_SENTENCE = {
     'The dominant issue was omission, not fabrication — most flags were Contextual (true but missing context).',
   UNVERIFIED: 'Hedged or developing claims led the day — most flags were Unverified.',
   CONTESTED: 'Disputed framing led the day — most flags were Contested.',
+  PROVISIONAL:
+    'Suspected distortion led the day — Provisional flags awaiting full-text confirmation were most common.',
   MISLEADING: 'Distortion was elevated today — Misleading was the leading flag.',
 };
 
@@ -66,7 +68,7 @@ const VERDICT_SENTENCE = {
  * @param b.fiLo,b.fiHi Framing Integrity 95% CI bounds (the strip's integers).
  * @param b.avgSens     avg sensationalism (strip value).
  * @param b.avgClick    avg clickbait (strip value).
- * @param b.verdictCounts { VERIFIED, CONTEXTUAL, CONTESTED, UNVERIFIED, MISLEADING }.
+ * @param b.verdictCounts { VERIFIED, CONTEXTUAL, CONTESTED, UNVERIFIED, PROVISIONAL, MISLEADING }.
  * @param b.slam        { computed, flaggedCount, index, lo, hi, topOutlet } | null.
  */
 export function buildBriefing(b) {
