@@ -31,7 +31,7 @@ Every headline gets one **verdict** and three **scores** (0–10).
 | **VERIFIED** | The headline faithfully and fairly represents its article. No spin detected. |
 | **CONTEXTUAL** | Accurate, but omits context the article itself supplies that would change how you read it. Not wrong — incomplete. |
 | **CONTESTED** | The article presents the claim as disputed or attributed; the headline states it more flatly than the article warrants. |
-| **UNVERIFIED** | The article itself flags the claim as developing, alleged, or anonymously sourced, and the headline drops that hedge. |
+| **UNVERIFIED** (displayed as **UNVERIFIABLE**) | The article itself flags the claim as developing, alleged, or anonymously sourced, and the headline drops that hedge. |
 | **MISLEADING** | The headline distorts, omits, or exaggerates relative to its own article body. |
 
 Note what these are scored *against*: the article, every time. "UNVERIFIED" never means "the model doesn't know about this." It means the article's own language hedges and the headline doesn't.
