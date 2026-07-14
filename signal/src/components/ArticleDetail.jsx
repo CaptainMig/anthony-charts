@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { VERDICT_COLORS, ACCENT } from '../config.js';
+import { VERDICT_COLORS, ACCENT, verdictLabel } from '../config.js';
 import { articleId, articleIntegrity, shareUrl } from '../lib/article.js';
 import { getFulltext, fetchServerVerdicts } from '../lib/fulltextStore.js';
 import { ageLabel } from '../lib/stats.js';
@@ -27,9 +27,18 @@ function Pill({ verdict }) {
       className="inline-block rounded-[2px] px-2 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider"
       style={{ color, backgroundColor: `${color}1f`, border: `0.5px solid ${color}55` }}
     >
-      {verdict}
+      {verdictLabel(verdict)}
     </span>
   );
+}
+
+// Publisher-side refusals: hard bot-blocks (401/402/403/451) and paywall/
+// consent-wall shells ('stub' from api/extract.js). These are properties of
+// the SOURCE — the article can never earn a full-text verdict — and must read
+// that way, not as a judgment on the outlet or the story. Transient failures
+// (timeouts, 5xx) are NOT blocks: a later attempt may succeed.
+function isSourceBlocked(reason) {
+  return /^HTTP (401|402|403|451)$/.test(reason || '') || reason === 'stub';
 }
 
 function AxisRow({ label, value, invert = false }) {
@@ -172,7 +181,7 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
   const displayScore = fulltext.state === 'scored' ? fulltext.score : headlineScore;
   const integrity = articleIntegrity(displayScore);
   const url = shareUrl({ ...headline, score: displayScore });
-  const shareText = `${displayScore?.verdict || 'UNSCORED'} · SIGNAL INTEGRITY ${integrity ?? '—'}/100 — ${headline.title}`;
+  const shareText = `${verdictLabel(displayScore?.verdict || 'UNSCORED')} · SIGNAL INTEGRITY ${integrity ?? '—'}/100 — ${headline.title}`;
 
   function copyLink() {
     navigator.clipboard?.writeText(url).then(() => {
@@ -198,7 +207,13 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <Pill verdict={displayScore?.verdict || 'UNSCORED'} />
             <span className="font-mono text-[10px] uppercase tracking-wider text-white/35">
-              {fulltext.state === 'scored' ? 'full-text score' : 'headline-only score'}
+              {fulltext.state === 'scored'
+                ? 'full-text score'
+                : fulltext.state === 'unavailable' && isSourceBlocked(fulltext.reason)
+                  ? 'unverifiable — source blocked'
+                  : fulltext.state === 'unavailable' && fulltext.reason === 'timeout'
+                    ? 'full text unavailable (timeout)'
+                    : 'headline-only score'}
             </span>
           </div>
           <h1 className="font-display text-[22px] font-semibold leading-snug text-[#e8e4dc]">
@@ -234,14 +249,28 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
             <p className="text-[14px] leading-relaxed text-[#e8e4dc]/90">{fulltext.score.rationale}</p>
             <p className="mt-2 font-mono text-[10px] text-white/30">
               scored against {fulltext.chars.toLocaleString()} extracted characters · headline-only sweep
-              verdict was {headlineScore?.verdict || 'UNSCORED'}
+              verdict was {verdictLabel(headlineScore?.verdict || 'UNSCORED')}
               {fulltext.cached ? ' · served from cache (scored once on first view)' : ''}
             </p>
           </div>
         )}
-        {fulltext.state === 'unavailable' && (
+        {fulltext.state === 'unavailable' && isSourceBlocked(fulltext.reason) && (
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-wider text-[#c8971f]">
+              Unverifiable — source blocked{fulltext.reason !== 'stub' ? ` (${fulltext.reason})` : ' (paywall)'}.
+            </p>
+            <p className="mt-1.5 text-[12px] leading-relaxed text-white/50">
+              The publisher refuses automated retrieval, so this article can only ever receive a
+              headline-only score and cannot earn a full-text verdict. That is a coverage
+              limitation of the source, not a judgment on the outlet or the story.
+            </p>
+          </div>
+        )}
+        {fulltext.state === 'unavailable' && !isSourceBlocked(fulltext.reason) && (
           <p className="font-mono text-[11px] uppercase tracking-wider text-[#c8971f]">
-            Full text unavailable{fulltext.reason ? ` (${fulltext.reason})` : ''} — headline-only score shown.
+            {fulltext.reason === 'timeout'
+              ? 'Full text unavailable (timeout) — headline-only score shown.'
+              : `Full text unavailable${fulltext.reason ? ` (${fulltext.reason})` : ''} — headline-only score shown.`}
           </p>
         )}
         {fulltext.state === 'error' && (

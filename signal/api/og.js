@@ -30,6 +30,12 @@ function decodePayload(d) {
   }
 }
 
+// Display label for a verdict token — mirror of src/config.js VERDICT_LABELS
+// (this function stays dependency-free; keep in sync).
+function verdictLabel(v) {
+  return v === 'UNVERIFIED' ? 'UNVERIFIABLE' : v;
+}
+
 // Same composite as src/lib/article.js articleIntegrity — keep in sync.
 function integrity(x) {
   if (x.tr == null || x.s == null || x.c == null) return null;
@@ -49,7 +55,7 @@ export default function handler(req, res) {
   let desc = 'Scores how closely a headline matches its own article — not whether the news is true.';
   if (x) {
     const n = integrity(x);
-    title = `${n != null ? `SIGNAL INTEGRITY ${n}/100 · ` : ''}${x.v || 'UNSCORED'} — ${x.t}`.slice(0, 200);
+    title = `${n != null ? `SIGNAL INTEGRITY ${n}/100 · ` : ''}${verdictLabel(x.v) || 'UNSCORED'} — ${x.t}`.slice(0, 200);
     desc = [
       x.p ? `${x.p}.` : '',
       x.tr != null ? `Fidelity ${x.tr}/10 · Sensationalism ${x.s}/10 · Clickbait ${x.c}/10.` : 'Not scored.',

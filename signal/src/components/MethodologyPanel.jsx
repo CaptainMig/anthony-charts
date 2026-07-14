@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { VERDICT_COLORS } from '../config.js';
+import { VERDICT_COLORS, verdictLabel } from '../config.js';
 
 const VERDICT_ROWS = [
   {
@@ -16,7 +16,7 @@ const VERDICT_ROWS = [
   },
   {
     verdict: 'UNVERIFIED',
-    text: 'The claim relies on anonymous sources, speculation presented as fact, or a conclusion drawn before the evidence is in.',
+    text: 'The claim cannot be verified from what the article gives: anonymous sources, speculation presented as fact, or a conclusion drawn before the evidence is in. A property of the sourcing, not a judgment on the outlet.',
   },
   {
     verdict: 'PROVISIONAL',
@@ -118,7 +118,7 @@ export default function MethodologyPanel({ open, onClose }) {
                     className="font-mono text-[11px] font-semibold uppercase tracking-wider"
                     style={{ color: VERDICT_COLORS[row.verdict] }}
                   >
-                    {row.verdict}
+                    {verdictLabel(row.verdict)}
                   </div>
                   <p className="mt-0.5 text-[12.5px] leading-relaxed text-white/60">{row.text}</p>
                 </div>
@@ -213,6 +213,12 @@ export default function MethodologyPanel({ open, onClose }) {
           </p>
 
           <p className="mt-8 border-t-hair border-white/10 pt-4 text-[10px] leading-relaxed text-white/30">
+            Coverage limitation, disclosed: paywalled or bot-blocked sources (hard 403s, paywall
+            shells) receive headline-only scores and cannot earn full-text verdicts — their detail
+            pages read UNVERIFIABLE — SOURCE BLOCKED, a property of the source&apos;s
+            retrievability, never a judgment on the outlet or the story.
+          </p>
+          <p className="mt-3 text-[10px] leading-relaxed text-white/30">
             Signal scores reflect AI editorial synthesis, not ground truth. Scoring is fast and
             imperfect. Use it as a signal, not a verdict. Headlines remain © their respective
             publications. NERVA is a decision-integrity framework developed by Starpoint LLC.

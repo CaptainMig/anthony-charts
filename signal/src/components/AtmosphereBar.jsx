@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { VERDICT_COLORS } from '../config.js';
+import { VERDICT_COLORS, verdictLabel } from '../config.js';
 
 // The hero element: a full-width 56px stacked bar showing the live distribution
 // of all five verdicts. Segment widths animate as scoring progresses.
@@ -31,7 +31,7 @@ export default function AtmosphereBar({ distribution, total }) {
                 style={{ width: `${seg.pct}%`, backgroundColor: VERDICT_COLORS[seg.verdict] }}
                 onMouseEnter={() => setHover(seg.verdict)}
                 onMouseLeave={() => setHover(null)}
-                title={`${seg.verdict}: ${seg.count} (${seg.pct.toFixed(1)}%)`}
+                title={`${verdictLabel(seg.verdict)}: ${seg.count} (${seg.pct.toFixed(1)}%)`}
               />
             ))}
           </div>
@@ -41,7 +41,7 @@ export default function AtmosphereBar({ distribution, total }) {
           <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-sm bg-ink/90 px-3 py-1.5 font-mono text-[11px] text-white/90 ring-1 ring-white/15">
             {(() => {
               const seg = distribution.find((d) => d.verdict === hover);
-              return `${hover} — ${seg.count} · ${seg.pct.toFixed(1)}%`;
+              return `${verdictLabel(hover)} — ${seg.count} · ${seg.pct.toFixed(1)}%`;
             })()}
           </div>
         )}
@@ -56,7 +56,7 @@ export default function AtmosphereBar({ distribution, total }) {
               style={{ backgroundColor: VERDICT_COLORS[seg.verdict] }}
             />
             <span className="font-mono text-[10px] uppercase tracking-wider text-white/50">
-              {seg.verdict}
+              {verdictLabel(seg.verdict)}
             </span>
             <span className="font-mono text-[10px] tabular-nums text-white/35">
               {seg.count}
