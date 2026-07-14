@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { VERDICT_COLORS, ACCENT } from '../config.js';
-import { articleIntegrity, shareUrl } from '../lib/article.js';
-import { getFulltext } from '../lib/fulltextStore.js';
+import { articleId, articleIntegrity, shareUrl } from '../lib/article.js';
+import { getFulltext, fetchServerVerdicts } from '../lib/fulltextStore.js';
 import { ageLabel } from '../lib/stats.js';
 
 // ---------------------------------------------------------------------------
@@ -98,8 +98,10 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
     let alive = true;
     setFactcheck({ state: 'loading' });
 
-    // Cache-first: an article is full-text scored ONCE, ever. A stored verdict
-    // is served directly — no re-extraction, no re-score on repeat views.
+    // Cache-first: an article is full-text scored ONCE, globally. This device's
+    // store is checked synchronously, then the server store (another device or
+    // the auto-escalation queue may have scored it) — only a miss on both
+    // extracts and scores. No re-extraction, no re-score on repeat views.
     const stored = getFulltext(headline.link);
     if (stored) {
       setFulltext({ state: 'scored', score: stored.score, chars: stored.chars, cached: true });
@@ -107,6 +109,16 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
       setFulltext({ state: 'loading' });
       (async () => {
         try {
+          const remote = await fetchServerVerdicts([headline.link]);
+          const entry = remote?.[articleId(headline.link)];
+          if (!alive) return;
+          if (entry) {
+            setFulltext({ state: 'scored', score: entry.score, chars: entry.chars, cached: true });
+            // Let the scan table pick up the server-served verdict too (the
+            // redundant server push inside is idempotent).
+            onFulltextScored?.(headline.link, { score: entry.score, chars: entry.chars });
+            return;
+          }
           const ex = await fetch(`/api/extract?url=${encodeURIComponent(headline.link)}`).then((r) => r.json());
           if (!alive) return;
           if (!ex.ok) {

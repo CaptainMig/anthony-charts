@@ -11,7 +11,13 @@ import { fetchTrends, makeTrendingMatcher } from './lib/trends.js';
 import { setFramingIntegrity } from './lib/integrity.js';
 import { articleId, decodeShare, encodeShare } from './lib/article.js';
 import { provisionalize } from './lib/prompt.js';
-import { loadFulltextStore, saveFulltext } from './lib/fulltextStore.js';
+import {
+  loadFulltextStore,
+  saveFulltext,
+  fetchServerVerdicts,
+  pushServerVerdict,
+} from './lib/fulltextStore.js';
+import { escalateRows, needsEscalation } from './lib/escalate.js';
 import { submitAggregate } from './lib/aggregate.js';
 import ArticleDetail from './components/ArticleDetail.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -94,13 +100,32 @@ export default function App() {
   const runRef = useRef(0);
 
   // Persisted full-text verdicts (articleId -> { at, score, chars }). Loaded
-  // once from localStorage; updated when a detail view scores a new article.
-  // These override sweep verdicts in the scan table — full text outranks a
-  // headline-only judgment.
+  // from localStorage, topped up from the server store, updated when a detail
+  // view or the escalation queue scores a new article. These override sweep
+  // verdicts in the scan table — full text outranks a headline-only judgment.
   const [ftMap, setFtMap] = useState(loadFulltextStore);
   function handleFulltextScored(link, entry) {
     setFtMap({ ...saveFulltext(link, entry) });
+    pushServerVerdict(link, entry); // share with every other device — fire-and-forget
   }
+
+  // Auto-escalation progress: null | { active, done, total, updated }.
+  const [escalation, setEscalation] = useState(null);
+
+  // On load, top up local verdicts from the server store for the cached scan's
+  // rows — verdicts escalated by other devices land here without any scoring.
+  useEffect(() => {
+    if (!scored.length) return undefined;
+    let alive = true;
+    fetchServerVerdicts(scored.map((h) => h.link)).then((map) => {
+      if (alive && map) setFtMap({ ...map });
+    });
+    return () => {
+      alive = false;
+    };
+    // Mount-only: post-sweep sync is handled inside runScan itself.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Article detail route — /article/:id. Kept in sync with the History API so
   // back/forward and shared links behave like real pages.
@@ -157,6 +182,7 @@ export default function App() {
     setScanning(true);
     setSelectedPub(null);
     setProgress({ done: 0, total: 0 });
+    setEscalation(null); // any previous escalation queue sees the new run id and stops
 
     // Refresh Trends in parallel — fire-and-forget, never awaited, so a slow or
     // broken Trends endpoint cannot delay or break the scan.
@@ -265,6 +291,29 @@ export default function App() {
       );
     } catch {
       /* localStorage may be full or unavailable — non-fatal */
+    }
+
+    // Auto-escalation: a sweep can only SUSPECT distortion (PROVISIONAL, plus
+    // legacy MISLEADING) or flag disputes (CONTESTED) from the headline — the
+    // full text decides. First sync the server store so rows another device
+    // already escalated are served without scoring, then queue the rest:
+    // background, strictly serial, rate-limited. The table updates row by row
+    // as verdicts land (via ftMap); nothing else is ever escalated.
+    const have = (await fetchServerVerdicts(collected.map((h) => h.link))) || loadFulltextStore();
+    if (runRef.current !== myRun) return;
+    setFtMap({ ...have });
+    const queue = collected.filter((h) => needsEscalation(h, have));
+    if (queue.length) {
+      setEscalation({ active: true, done: 0, total: queue.length, updated: 0 });
+      // Deliberately not awaited — the queue drains in the background.
+      escalateRows(queue, {
+        shouldStop: () => runRef.current !== myRun,
+        onVerdict: handleFulltextScored,
+        onProgress: ({ done, total, updated }) => {
+          if (runRef.current !== myRun) return;
+          setEscalation({ active: done < total, done, total, updated });
+        },
+      });
     }
   }
 
@@ -448,6 +497,16 @@ export default function App() {
         <div className="mx-auto max-w-[1400px] px-6 pt-3">
           <p className="font-mono text-[10px] leading-relaxed text-[#c8971f]/80">
             {meta.status.join(' · ')}
+          </p>
+        </div>
+      )}
+
+      {escalation && escalation.total > 0 && (
+        <div className="mx-auto max-w-[1400px] px-6 pt-2">
+          <p className="font-mono text-[10px] leading-relaxed text-teal/80">
+            {escalation.active
+              ? `Auto-escalation: full-text scoring ${escalation.total} flagged headline(s) in the background — ${escalation.done}/${escalation.total} checked, ${escalation.updated} verdict(s) updated`
+              : `Auto-escalation complete — ${escalation.done}/${escalation.total} flagged headline(s) checked, ${escalation.updated} full-text verdict(s) applied (marked FT in the table)`}
           </p>
         </div>
       )}
