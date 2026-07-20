@@ -102,31 +102,39 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
   // Fact-check state: 'loading' | 'ok' | 'unavailable'
   const [factcheck, setFactcheck] = useState({ state: 'loading' });
   const [copied, setCopied] = useState(false);
+  // Re-score request: cached verdicts are scored-once, so after a rubric
+  // change the only way to refresh one is an explicit user re-run. The link is
+  // part of the state so a pending request never leaks onto another article.
+  const [rescore, setRescore] = useState({ link: null, n: 0 });
 
   useEffect(() => {
     let alive = true;
-    setFactcheck({ state: 'loading' });
+    const force = rescore.n > 0 && rescore.link === headline.link;
 
     // Cache-first: an article is full-text scored ONCE, globally. This device's
     // store is checked synchronously, then the server store (another device or
     // the auto-escalation queue may have scored it) — only a miss on both
-    // extracts and scores. No re-extraction, no re-score on repeat views.
-    const stored = getFulltext(headline.link);
+    // extracts and scores. No re-extraction, no re-score on repeat views —
+    // unless the user explicitly asked for a re-score, which skips both cache
+    // tiers and overwrites them with the fresh verdict.
+    const stored = force ? null : getFulltext(headline.link);
     if (stored) {
       setFulltext({ state: 'scored', score: stored.score, chars: stored.chars, cached: true });
     } else {
-      setFulltext({ state: 'loading' });
+      setFulltext({ state: 'loading', rescoring: force });
       (async () => {
         try {
-          const remote = await fetchServerVerdicts([headline.link]);
-          const entry = remote?.[articleId(headline.link)];
-          if (!alive) return;
-          if (entry) {
-            setFulltext({ state: 'scored', score: entry.score, chars: entry.chars, cached: true });
-            // Let the scan table pick up the server-served verdict too (the
-            // redundant server push inside is idempotent).
-            onFulltextScored?.(headline.link, { score: entry.score, chars: entry.chars });
-            return;
+          if (!force) {
+            const remote = await fetchServerVerdicts([headline.link]);
+            const entry = remote?.[articleId(headline.link)];
+            if (!alive) return;
+            if (entry) {
+              setFulltext({ state: 'scored', score: entry.score, chars: entry.chars, cached: true });
+              // Let the scan table pick up the server-served verdict too (the
+              // redundant server push inside is idempotent).
+              onFulltextScored?.(headline.link, { score: entry.score, chars: entry.chars });
+              return;
+            }
           }
           const ex = await fetch(`/api/extract?url=${encodeURIComponent(headline.link)}`).then((r) => r.json());
           if (!alive) return;
@@ -153,6 +161,8 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
             setFulltext({ state: 'scored', score, chars: ex.chars });
             // Persist so this article is never extracted or scored again, and
             // so the scan table can override the sweep verdict immediately.
+            // On a re-score this overwrites both cache tiers (local save and
+            // server PUT both replace the stored entry).
             onFulltextScored?.(headline.link, { score, chars: ex.chars });
           }
         } catch (e) {
@@ -161,6 +171,14 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
       })();
     }
 
+    return () => {
+      alive = false;
+    };
+  }, [headline.link, headline.title, rescore]);
+
+  useEffect(() => {
+    let alive = true;
+    setFactcheck({ state: 'loading' });
     (async () => {
       try {
         const fc = await fetch(`/api/factcheck?q=${encodeURIComponent(headline.title.slice(0, 200))}`).then((r) => r.json());
@@ -171,11 +189,10 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
         if (alive) setFactcheck({ state: 'unavailable', reason: e.message });
       }
     })();
-
     return () => {
       alive = false;
     };
-  }, [headline.link, headline.title]);
+  }, [headline.title]);
 
   const headlineScore = headline.score;
   const displayScore = fulltext.state === 'scored' ? fulltext.score : headlineScore;
@@ -242,16 +259,28 @@ export default function ArticleDetail({ headline, onBack, onFulltextScored }) {
       <div className="mt-8">
         <SectionLabel>Full-text verdict</SectionLabel>
         {fulltext.state === 'loading' && (
-          <p className="font-mono text-[11px] text-white/40">extracting and scoring full text…</p>
+          <p className="font-mono text-[11px] text-white/40">
+            {fulltext.rescoring ? 're-scoring full text…' : 'extracting and scoring full text…'}
+          </p>
         )}
         {fulltext.state === 'scored' && (
           <div className="rounded-sm border-hair border-white/10 bg-white/[0.03] p-4">
             <p className="text-[14px] leading-relaxed text-[#e8e4dc]/90">{fulltext.score.rationale}</p>
-            <p className="mt-2 font-mono text-[10px] text-white/30">
-              scored against {fulltext.chars.toLocaleString()} extracted characters · headline-only sweep
-              verdict was {verdictLabel(headlineScore?.verdict || 'UNSCORED')}
-              {fulltext.cached ? ' · served from cache (scored once on first view)' : ''}
-            </p>
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+              <p className="font-mono text-[10px] text-white/30">
+                scored against {fulltext.chars.toLocaleString()} extracted characters · headline-only sweep
+                verdict was {verdictLabel(headlineScore?.verdict || 'UNSCORED')}
+                {fulltext.cached ? ' · served from cache (scored once on first view)' : ''}
+              </p>
+              <button
+                type="button"
+                onClick={() => setRescore((r) => ({ link: headline.link, n: r.n + 1 }))}
+                title="Discard the cached verdict and re-extract and re-score this article (useful after a rubric update)"
+                className="rounded-sm border-hair border-white/15 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-white/45 hover:border-white/30 hover:text-white/70"
+              >
+                ↻ Re-score
+              </button>
+            </div>
           </div>
         )}
         {fulltext.state === 'unavailable' && isSourceBlocked(fulltext.reason) && (
