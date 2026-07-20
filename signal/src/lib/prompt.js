@@ -42,6 +42,16 @@ VERDICT — exactly one, from the headline↔article relationship only:
                anonymously sourced, and the headline drops that hedge.
   MISLEADING — headline exaggerates, distorts, or contradicts the article body.
 
+SHORTHAND IS NOT DISTORTION. Standard editorial compression is faithful:
+"merger" for an acquisition, short company names (Paramount for Paramount
+Skydance, Warner for Warner Bros. Discovery), "X-Y merger" phrasing (which
+asserts no direction of acquisition), rounded figures, and title shorthand.
+MISLEADING requires the headline to assert something the article CONTRADICTS —
+not to use a less precise synonym for something the article describes. If the
+headline's claim and the article's account describe the same event at different
+precision, that is VERIFIED (or CONTEXTUAL if the lost precision changes the
+reader's takeaway), never MISLEADING.
+
 You may NEVER assign UNVERIFIED or low fidelity because you personally don't
 know about the event. Those come from the ARTICLE's own signals, not your
 knowledge. If the article confirms the claim plainly, it is VERIFIED.
