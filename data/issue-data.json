@@ -4,9 +4,9 @@
     "note": "Single source of truth for AnthonyCharts. Edit this file, run build/build.js, verify with build/verify.js. Drawers/ticker/tiles/arcs are generated into public/index.html."
   },
   "issue": {
-    "id": "5",
-    "date": "2026-06-11",
-    "label": "Fragile De-escalation"
+    "id": "6",
+    "date": "2026-08-18",
+    "label": "Deadline Expired"
   },
   "signal_blend": {
     "enabled": false,
@@ -21,18 +21,18 @@
     },
     "components": {
       "_note": "TODO(Anthony): replace with the real IFCN/RSF/NewsGuard subscores before enabling. Placeholders reproduce the published 49.5% composite exactly.",
-      "ifcn": 49.5,
-      "rsf": 49.5,
-      "newsguard": 49.5
+      "ifcn": 48.6,
+      "rsf": 48.6,
+      "newsguard": 48.6
     },
     "note": "JUL 2026 — Info Integrity adds Signal Scanner at 10%; prior weights renormalized (IFCN 50→45, RSF 30→27, NewsGuard 20→18)."
   },
   "banner": {
-    "raw": "ISSUE 5 - June 11, 2026 - Day 103 - Fragile De-escalation"
+    "raw": "ISSUE 6 - August 18, 2026 - Day 171 - Deadline Expired"
   },
   "composite": {
     "edge": {
-      "num": "88",
+      "num": "89",
       "status": "⚠ HIGH TENSION",
       "desc": "Composite of GPR Index, active conflicts, public stress, wealth inequality, species loss, and expert forecasts."
     },
@@ -41,8 +41,8 @@
       "status": "↗ HOLDING STEADY",
       "desc": "Tracks humanitarian aid, scientific breakthroughs, poverty reduction, conservation wins, social mobility, and global cooperation."
     },
-    "calm_pct": "31",
-    "trade_footer": "81"
+    "calm_pct": "18",
+    "trade_footer": "82"
   },
   "tiles": [
     {
@@ -50,14 +50,14 @@
       "name": "Global Temp Anomaly",
       "cadence": "Updated monthly",
       "icon": "🌡️",
-      "val": "+1.42°",
+      "val": "+1.45°",
       "valClass": "meter-val v-temp",
       "unit": "Above 1850–1900 baseline",
       "trend": "↑ Rising",
       "trendClass": "meter-trend t-up",
       "arcId": "arcTemp",
       "arcClass": "arc-fill-t a-temp",
-      "barW": "71%",
+      "barW": "72%",
       "barClass": "meter-bar-fill b-temp"
     },
     {
@@ -65,14 +65,14 @@
       "name": "Sea Level Rise",
       "cadence": "Updated monthly",
       "icon": "🌊",
-      "val": "+112mm",
+      "val": "+102mm",
       "valClass": "meter-val v-sea",
-      "unit": "Since 1993 · +4.1mm/yr",
+      "unit": "Since 1993 · +4.4mm/yr · NASA",
       "trend": "↑ Accel.",
       "trendClass": "meter-trend t-up",
       "arcId": "arcSea",
       "arcClass": "arc-fill-t a-sea",
-      "barW": "55%",
+      "barW": "51%",
       "barClass": "meter-bar-fill b-sea"
     },
     {
@@ -80,14 +80,14 @@
       "name": "Arctic Sea Ice Extent",
       "cadence": "Updated daily · NSIDC",
       "icon": "❄️",
-      "val": "REC. LOW",
+      "val": "7.02M",
       "valClass": "meter-val v-arctic",
-      "unit": "March 2026 extent · C3S/ERA5",
-      "trend": "↓ Record",
+      "unit": "km² · Aug 2 extent · 9th lowest",
+      "trend": "↓ Low",
       "trendClass": "meter-trend t-up",
       "arcId": "arcArctic",
       "arcClass": "arc-fill-t a-arctic",
-      "barW": "30%",
+      "barW": "38%",
       "barClass": "meter-bar-fill b-arctic"
     },
     {
@@ -95,14 +95,14 @@
       "name": "CO₂ Concentration",
       "cadence": "Updated weekly · Mauna Loa",
       "icon": "🌿",
-      "val": "431.1",
+      "val": "427.6",
       "valClass": "meter-val v-co2",
       "unit": "ppm · Pre-industrial: 280ppm",
-      "trend": "↑ +1.5 y/y",
+      "trend": "↑ +2.1 y/y",
       "trendClass": "meter-trend t-up",
       "arcId": "arcCo2",
       "arcClass": "arc-fill-t a-co2",
-      "barW": "69%",
+      "barW": "67%",
       "barClass": "meter-bar-fill b-co2"
     },
     {
@@ -110,14 +110,14 @@
       "name": "Exoplanet Discovery",
       "cadence": "Updated weekly",
       "icon": "🪐",
-      "val": "6,128",
+      "val": "6,336",
       "valClass": "meter-val v-planet",
-      "unit": "Confirmed · 6,000 crossed Sep 2025",
+      "unit": "Confirmed · Roman launches Aug 30",
       "trend": "↑ Growing",
       "trendClass": "meter-trend t-dn",
       "arcId": "arcPlanet",
       "arcClass": "arc-fill-t a-planet",
-      "barW": "61%",
+      "barW": "63%",
       "barClass": "meter-bar-fill b-planet"
     },
     {
@@ -125,14 +125,14 @@
       "name": "Near-Earth Object Watch",
       "cadence": "Updated daily · NASA CNEOS",
       "icon": "☄️",
-      "val": "4",
+      "val": "7",
       "valClass": "meter-val v-neo",
       "unit": "Close approaches this week",
       "trend": "✓ NO THREATS",
       "trendClass": "meter-trend t-dn",
       "arcId": "arcNeo",
       "arcClass": "arc-fill-t a-neo",
-      "barW": "20%",
+      "barW": "35%",
       "barClass": "meter-bar-fill b-neo",
       "trendStyle": "font-weight:700;font-size:.75rem;"
     },
@@ -141,14 +141,14 @@
       "name": "Technosignature Watch",
       "cadence": "Updated as reported",
       "icon": "👽",
-      "val": "3",
+      "val": "0",
       "valClass": "meter-val v-alien",
-      "unit": "Active candidates · BL/SETI",
+      "unit": "Confirmed ever · BL/SETI",
       "trend": "→ Watch",
       "trendClass": "meter-trend t-warn",
       "arcId": "arcAlien",
       "arcClass": "arc-fill-t a-alien",
-      "barW": "25%",
+      "barW": "10%",
       "barClass": "meter-bar-fill b-alien"
     },
     {
@@ -171,14 +171,14 @@
       "name": "Information Integrity Index",
       "cadence": "Updated monthly · Experimental composite",
       "icon": "🎯",
-      "val": "49.5%",
+      "val": "48.6%",
       "valClass": "meter-val v-truth",
       "unit": "Verified claims · IFCN/RSF",
-      "trend": "↓ –4pts YOY",
+      "trend": "↓ Declining",
       "trendClass": "meter-trend t-up",
       "arcId": "arcTruth",
       "arcClass": "arc-fill-t a-truth",
-      "barW": "61%",
+      "barW": "49%",
       "barClass": "meter-bar-fill b-truth"
     },
     {
@@ -186,14 +186,14 @@
       "name": "Global Trade Stress",
       "cadence": "Updated monthly · Composite",
       "icon": "🚢",
-      "val": "81",
+      "val": "82",
       "valClass": "meter-val v-edge",
       "unit": "Composite stress index · 0–100",
-      "trend": "↓ Easing from peak 88",
-      "trendClass": "meter-trend t-warn",
+      "trend": "→ Holding high",
+      "trendClass": "meter-trend t-up",
       "arcId": "arcSupply",
       "arcClass": "arc-fill-t a-edge",
-      "barW": "81%",
+      "barW": "82%",
       "barClass": "meter-bar-fill b-edge"
     },
     {
@@ -203,7 +203,7 @@
       "icon": "⚖️",
       "val": "0.67",
       "valClass": "meter-val v-gini",
-      "unit": "Global Gini · Top 1% owns 38%",
+      "unit": "Global Gini · Top 1% owns 37%",
       "trend": "↑ Widening",
       "trendClass": "meter-trend t-up",
       "arcId": "arcGini",
@@ -214,7 +214,7 @@
     {
       "key": "mobility",
       "name": "Social Mobility Index",
-      "cadence": "Updated annually · World Bank",
+      "cadence": "Updated annually · WEF",
       "icon": "📈",
       "val": "53.4",
       "valClass": "meter-val v-mobility",
@@ -233,7 +233,7 @@
       "icon": "💔",
       "val": "28.4K",
       "valClass": "meter-val v-conflict",
-      "unit": "Battle deaths YTD · 2026",
+      "unit": "Battle deaths YTD · thru Jun 11",
       "trend": "↑ Elevated",
       "trendClass": "meter-trend t-up",
       "arcId": "arcConflict",
@@ -246,14 +246,14 @@
       "name": "Peacekeeping Reach",
       "cadence": "Updated monthly · UN DPPA",
       "icon": "🕊️",
-      "val": "87K",
+      "val": "59K",
       "valClass": "meter-val v-peace",
-      "unit": "Personnel deployed · 12 missions",
-      "trend": "→ Holding",
-      "trendClass": "meter-trend t-dn",
+      "unit": "Personnel · 11 missions · corrected",
+      "trend": "↓ Corrected",
+      "trendClass": "meter-trend t-up",
       "arcId": "arcPeace",
       "arcClass": "arc-fill-t a-peace",
-      "barW": "44%",
+      "barW": "30%",
       "barClass": "meter-bar-fill b-peace"
     },
     {
@@ -261,7 +261,7 @@
       "name": "Species Threat Index",
       "cadence": "Updated quarterly · IUCN",
       "icon": "🦏",
-      "val": "44,016",
+      "val": "49,505",
       "valClass": "meter-val v-species",
       "unit": "Threatened species · IUCN Red List",
       "trend": "↑ Rising",
@@ -291,7 +291,7 @@
     [
       "hEdgeArc",
       251,
-      0.88
+      0.89
     ],
     [
       "hGoodArc",
@@ -301,37 +301,37 @@
     [
       "arcTemp",
       170,
-      0.71
+      0.72
     ],
     [
       "arcSea",
       170,
-      0.55
+      0.51
     ],
     [
       "arcArctic",
       170,
-      0.3
+      0.38
     ],
     [
       "arcCo2",
       170,
-      0.69
+      0.67
     ],
     [
       "arcPlanet",
       170,
-      0.61
+      0.63
     ],
     [
       "arcNeo",
       170,
-      0.2
+      0.35
     ],
     [
       "arcAlien",
       170,
-      0.25
+      0.1
     ],
     [
       "arcSolar",
@@ -341,12 +341,12 @@
     [
       "arcTruth",
       170,
-      0.5
+      0.49
     ],
     [
       "arcSupply",
       170,
-      0.81
+      0.82
     ],
     [
       "arcGini",
@@ -366,7 +366,7 @@
     [
       "arcPeace",
       170,
-      0.44
+      0.3
     ],
     [
       "arcSpecies",
@@ -380,24 +380,24 @@
     ]
   ],
   "ticker": [
-    "🌍 WORLD ON EDGE: 88/100 ↑",
+    "🌍 WORLD ON EDGE: 89/100 ↑",
     "💚 WORLD GOODNESS: 47/100 →",
-    "🌡️ TEMP ANOMALY: +1.42°C above baseline",
-    "🌊 SEA LEVEL: +112mm since 1993",
-    "❄️ ARCTIC ICE: Record-low March extent · NSIDC",
-    "🌿 CO₂: 431.1 ppm · +1.5/yr",
-    "🪐 EXOPLANETS: 6,128 confirmed",
-    "☄️ NEO WATCH: 4 close approaches this week · No threats",
-    "👽 TECHNOSIG WATCH: 3 candidates active",
+    "🌡️ TEMP ANOMALY: +1.45°C above baseline",
+    "🌊 SEA LEVEL: +102mm since 1993 · NASA",
+    "❄️ ARCTIC ICE: 9th-lowest Aug extent · Met Office",
+    "🌿 CO₂: 427.6 ppm · +2.1/yr",
+    "🪐 EXOPLANETS: 6,336 confirmed",
+    "☄️ NEO WATCH: 7 close approaches this week · No threats",
+    "👽 TECHNOSIG WATCH: 0 confirmed · surveys ongoing",
     "☀️ SOLAR ACTIVITY: MODERATE — G1 Storm Watch",
-    "🎯 INFORMATION INTEGRITY: 49.5% verified claims",
-    "🚢 GLOBAL TRADE STRESS: 81/100 · High",
-    "🧭 CALM WINDOW PROBABILITY: 31% — LOW",
-    "⚖️ WEALTH INEQUALITY: Gini 0.67 · Top 1% owns 38%",
+    "🎯 INFORMATION INTEGRITY: 48.6% verified claims",
+    "🚢 GLOBAL TRADE STRESS: 82/100 · High",
+    "🧭 CALM WINDOW PROBABILITY: 18% — LOW",
+    "⚖️ WEALTH INEQUALITY: Gini 0.67 · Top 1% owns 37%",
     "📈 SOCIAL MOBILITY: 53.4/100 · Stalled",
-    "💔 CONFLICT DEATHS: 28,400 YTD · 56 active zones",
-    "🕊️ PEACEKEEPING: 87,000 deployed · 12 missions",
-    "🦏 SPECIES THREATENED: 44,016 · 28% of assessed",
+    "💔 CONFLICT DEATHS: 28,400 thru Jun · ACLED update pending",
+    "🕊️ PEACEKEEPING: 59,376 deployed · 11 missions",
+    "🦏 SPECIES THREATENED: 49,505 · 28% of assessed",
     "🌿 CONSERVATION: 17.6% of Earth protected · 30x30 goal"
   ],
   "drawers": {
@@ -414,11 +414,11 @@
       ],
       "trend": {
         "dir": "up",
-        "label": "Rising — all 5 inputs elevated"
+        "label": "Rising — deadline expired, ties March record"
       },
       "stats": [
         {
-          "val": "88/100",
+          "val": "89/100",
           "lbl": "Current Score"
         },
         {
@@ -426,15 +426,15 @@
           "lbl": "Tension Status"
         },
         {
-          "val": "Day 103",
+          "val": "Day 171",
           "lbl": "US–Iran War"
         },
         {
-          "val": "~$93",
-          "lbl": "Brent (Jun 11)"
+          "val": "~$91",
+          "lbl": "Brent (Aug 18)"
         },
         {
-          "val": "31%",
+          "val": "18%",
           "lbl": "Calm Probability"
         },
         {
@@ -443,7 +443,7 @@
         }
       ],
       "weights": {
-        "final": 88,
+        "final": 89,
         "inputs": [
           {
             "name": "GPR Index (Caldara & Iacoviello)",
@@ -455,21 +455,21 @@
           {
             "name": "ACLED Active Conflict Events",
             "weight": 0.25,
-            "score": 91,
+            "score": 92,
             "color": "#ff6b35",
             "short": "ACLED"
           },
           {
             "name": "Gallup Global Worry Survey",
             "weight": 0.15,
-            "score": 83,
+            "score": 84,
             "color": "#ff9d00",
             "short": "GALLUP"
           },
           {
             "name": "Conflict Deaths YTD",
             "weight": 0.15,
-            "score": 86,
+            "score": 88,
             "color": "#ffcc00",
             "short": "DEATHS"
           },
@@ -522,7 +522,12 @@
           {
             "period": "Jun 2026",
             "val": "88/100",
-            "note": "Current — Day 103 · fragile de-escalation"
+            "note": "Day 103 · fragile de-escalation"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "89/100",
+            "note": "Current — Day 171 · deadline expired · ties record"
           }
         ]
       },
@@ -560,9 +565,9 @@
           }
         ]
       },
-      "body": "The World On Edge Index holds at 88/100 — one point off its March record. Day 103 of the US–Iran war brought the sharpest oscillation yet: the ceasefire broke open June 7–8 into the worst Israel–Iran exchange in months, US strikes resumed, and Iran hit US facilities in Bahrain, Jordan, and Kuwait. Yet the economic axis is easing — Hormuz ship traffic is increasing per the US Energy Secretary, Brent has cooled to the low $90s from a $138 wartime peak, and a US ceasefire framework is on the table against hawkish resistance. Kinetic risk and trade stress are now pointing in opposite directions for the first time since February. Prior context:  GPR hit 127.89 in January 2026, driven by Eurasia conflict language in major global newspapers. ACLED track...",
+      "body": "The World On Edge Index rises to 89/100 — tying its March record. The Islamabad Memorandum's 60-day window expired August 17 with no deal: talks deadlocked over Hormuz management and frozen Iranian funds, and Washington now says there is 'no time schedule' for ending the war. Day 171. Since June: the July 8 ceasefire collapse brought 11+ consecutive nights of US strikes reaching Tehran's outskirts, and the Strait of Hormuz went from recovering to effectively shut — zero transits on August 16 against a pre-war ~178/day, with war-risk premiums at 3–10% of hull value. Brent holds near $91, kept below the February $138 peak by reserve releases and demand fears rather than peace. The one live off-ramp: the Iran–Oman shipping-route agreement of August 5, reaffirmed by Tehran even as the deadline lapsed, with Kushner shuttling between Hamas and Netanyahu the same weekend. Beyond the Gulf: Russia's summer offensive grinds at Kupiansk amid US interceptor shortages, and Ethiopia–Tigray clashes near Sheraro are the first since the 2022 Pretoria accord.",
       "method": "Five inputs normalized 0–100, weighted and summed. GPR (35%): Caldara & Iacoviello index vs 0–200 range. ACLED (25%): active conflict zones vs 0–80 range. Gallup (15%): worry index as published. Conflict Deaths (15%): YTD deaths vs 50,000 threshold. Species Threat (10%): threatened % vs 50% threshold. Weights at anthonycharts.com/composites-v1.0.json",
-      "share": "World On Edge: 88/100 — Very High. US–Iran war Day 103: worst strikes in months, yet Hormuz traffic rising and Brent down to ~$93. Calm Window 31%. anthonycharts.com 🌍"
+      "share": "World On Edge: 89/100 — ties the March record. US–Iran war Day 171: the 60-day deal expired with no agreement, Hormuz near zero transits, Brent ~$91. Calm Window 18%. anthonycharts.com 🌍"
     },
     "good": {
       "emoji": "💚",
@@ -577,8 +582,8 @@
         "Monthly"
       ],
       "trend": {
-        "dir": "down-bad",
-        "label": "Slight decline — inequality dragging composite"
+        "dir": "stable",
+        "label": "Holding — science and diplomacy offset humanitarian strain"
       },
       "stats": [
         {
@@ -612,7 +617,7 @@
           {
             "name": "OCHA Humanitarian Aid Volume",
             "weight": 0.2,
-            "score": 50,
+            "score": 45,
             "color": "#00ff9d",
             "short": "OCHA"
           },
@@ -626,14 +631,14 @@
           {
             "name": "Scientific Breakthrough Count",
             "weight": 0.15,
-            "score": 65,
+            "score": 68,
             "color": "#a78bfa",
             "short": "SCIENCE"
           },
           {
             "name": "UN Treaty Signatures / Quarter",
             "weight": 0.15,
-            "score": 30,
+            "score": 32,
             "color": "#60a5fa",
             "short": "TREATIES"
           },
@@ -688,7 +693,12 @@
           {
             "period": "Jun 2026",
             "val": "47/100",
-            "note": "Current — war diverting aid and cooperation"
+            "note": "War diverting aid and cooperation"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "47/100",
+            "note": "Current — strained aid offset by science wins"
           }
         ]
       },
@@ -726,9 +736,9 @@
           }
         ]
       },
-      "body": "At 47/100 the World Goodness Index holds below its pre-COVID baseline of ~61. Aid volume and poverty reduction are the strongest inputs. Conservati...",
+      "body": "The World Goodness Index holds at 47/100. The strain is real: the DRC is fighting the largest Ebola outbreak ever recorded — 2,325 deaths across five provinces as of mid-August — Venezuela is digging out from twin June earthquakes that killed 6,400+, and the aid system is absorbing both on top of three wars. But the offsetting column is unusually strong. Artemis II carried four astronauts around the Moon in April — the farthest humans have ever flown. The Roman Space Telescope is fueled for an August 30 launch, nine months early. A Moderna Ebola vaccine entered clinical trials, and Uganda declared its own outbreak over. The July 30 Hamas disarmament roadmap — however contested its implementation — is the first actionable framework of its kind. Quieter wins: an Iran–Oman shipping accord, a Dominican Republic–Venezuela normalization framework, and an Egypt–Sudan dam-rehabilitation agreement.",
       "method": "Six inputs normalized 0–100, weighted and summed. Aid (20%): OCHA commitments vs 30B USD. Poverty (20%): World Bank rate inverted. Breakthroughs (15%): OWID annual count vs 50. Treaties (15%): UN quarterly signatures vs 30. Social Mobility (15%): World Bank GSMI 0–100. Conservation (15%): % of 30x30 target achieved. Weights at anthonycharts.com/composites-v1.0.json",
-      "share": "World Goodness: 47/100 — below historical average. Aid holding. Inequality dragging. Not the inverse of Edge — independently constructed. anthonycharts.com 💚"
+      "share": "World Goodness holds at 47/100 — a record Ebola outbreak and quake recovery strain the aid system, offset by Artemis II, an Ebola vaccine trial, and a Hamas disarmament roadmap. anthonycharts.com 💚"
     },
     "temp": {
       "emoji": "🌡️",
@@ -741,12 +751,12 @@
       ],
       "trend": {
         "dir": "up",
-        "label": "Rising — +0.2°C since 2015, trajectory steepening"
+        "label": "Rising — July tied the hottest month ever recorded"
       },
       "stats": [
         {
-          "val": "+1.42°C",
-          "lbl": "12-Mo Trailing · May 2026"
+          "val": "+1.45°C",
+          "lbl": "12-Mo Trailing · Jul 2026"
         },
         {
           "val": "+1.62°C",
@@ -805,6 +815,11 @@
             "period": "May 2026",
             "val": "+1.42°C",
             "note": "Joint 2nd-warmest May · El Niño developing"
+          },
+          {
+            "period": "Jul 2026",
+            "val": "+1.45°C",
+            "note": "July ties July 2024 as hottest month recorded"
           }
         ]
       },
@@ -836,9 +851,9 @@
           }
         ]
       },
-      "body": "We are 1.42°C above the 1850–1900 pre-industrial average (12-month trailing, Copernicus ERA5 through May 2026). May 2026 was the joint second-warmest May on record, sea surface temperatures hit their second-highest level, and El Niño conditions are developing — forecasters warn 2027 could push to new records. 2024 broke all records at +1.62°C — the first calendar year above 1.5...",
+      "body": "We are 1.45°C above the 1850–1900 pre-industrial average (12-month trailing, Copernicus ERA5 through July 2026). July 2026 tied July 2024 as the joint-hottest month ever recorded — NOAA scored it joint-warmest of any month, NASA rated it the hottest July — with record July sea-surface temperatures. A strong El Niño is building fast: forecasters give >90% odds of a very strong event this winter, potentially the strongest since 1950, which would push 2027 toward new records. The ten warmest Julys have all come since 2016. 2024 remains the record calendar year at +1.62°C — the first above 1.5°C.",
       "method": "12-month trailing average of global surface temperature anomaly above 1850–1900 pre-industrial mean. Primary: Copernicus C3S ERA5 reanalysis. Cross-referenced with NOAA GISSTEMP and Berkeley Earth. Arc = position in 0–2°C Paris risk corridor. Updated monthly.",
-      "share": "Global temp: +1.42°C above pre-industrial (12-mo avg). 2024 hit +1.62°C — hottest year on record. Paris threshold: 1.5°C. anthonycharts.com 🌡️"
+      "share": "Global temp: +1.45°C above pre-industrial (12-mo avg). July 2026 tied the hottest month ever recorded — and a super El Niño is building. anthonycharts.com 🌡️"
     },
     "sea": {
       "emoji": "🌊",
@@ -851,20 +866,20 @@
       ],
       "trend": {
         "dir": "up",
-        "label": "Rising and accelerating — rate 2.5x higher than 1990s"
+        "label": "Rising and accelerating — rate more than doubled since 1993"
       },
       "stats": [
         {
-          "val": "+112mm",
-          "lbl": "Since 1993"
+          "val": "+102mm",
+          "lbl": "Since 1993 · NASA"
         },
         {
-          "val": "+4.1mm/yr",
+          "val": "+4.4mm/yr",
           "lbl": "Current Rate"
         },
         {
-          "val": "x2.5",
-          "lbl": "Rate vs 1990s"
+          "val": "×2+",
+          "lbl": "Rate vs Early 1990s"
         },
         {
           "val": "+600mm",
@@ -909,7 +924,12 @@
           {
             "period": "Feb 2026",
             "val": "+112mm",
-            "note": "+4.1mm/yr — current"
+            "note": "+4.1mm/yr — prior series"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "+102mm",
+            "note": "+4.4mm/yr — re-baselined to NASA series"
           }
         ]
       },
@@ -941,9 +961,9 @@
           }
         ]
       },
-      "body": "Global mean sea level up 112mm since 1993. Current rate of +4.1mm/year has accelerated 2.5x from the 1990s (+1.7mm/yr). Primary drivers: thermal ex...",
+      "body": "Global mean sea level is up ~102mm since 1993 (NASA satellite altimetry), rising at ~4.4mm per year — more than double the early-1990s rate of 2.1mm. A correction this issue: the previous headline of +112mm is not corroborated by NASA's published series (~102mm); the dashboard now tracks NASA's number directly. The acceleration itself is not in dispute — the rate has roughly doubled in three decades, driven by Greenland melt and thermal expansion, and the 2100 high-emission projections still run to +600mm and beyond.",
       "method": "Continuous satellite altimetry: TOPEX/Poseidon (1993) → Jason-1/2/3 → Sentinel-6 Michael Freilich (2020–present). Monthly global mean averages from NASA JPL Physical Oceanography DAAC. Arc = position in 0–200mm scale. Rate acceleration from linear trend analysis of 5-year segments.",
-      "share": "Sea level: +112mm since 1993. Rate +4.1mm/yr — 2.5x faster than the 1990s. Greenland driving acceleration. Full trend: anthonycharts.com 🌊"
+      "share": "Sea level: +102mm since 1993 (NASA), rising 4.4mm/yr — more than double the 1990s rate. Re-baselined this issue to NASA's published series. anthonycharts.com 🌊"
     },
     "arctic": {
       "emoji": "❄️",
@@ -955,28 +975,28 @@
       ],
       "trend": {
         "dir": "down-bad",
-        "label": "Below seasonal median — long-term declining trend"
+        "label": "Well below average — record-low winter max, 9th-lowest August"
       },
       "stats": [
         {
-          "val": "RECORD LOW",
-          "lbl": "March 2026 Extent · C3S"
+          "val": "7.02M km²",
+          "lbl": "Aug 2 Extent · Met Office"
         },
         {
-          "val": "–1.2M km²",
-          "lbl": "vs Median (Feb)"
+          "val": "9th lowest",
+          "lbl": "For the Date"
         },
         {
-          "val": "3.37M km²",
+          "val": "–1.38M km²",
+          "lbl": "vs 1981–2010 Avg"
+        },
+        {
+          "val": "14.29M km²",
+          "lbl": "Mar 2026 Max · Record-low tie"
+        },
+        {
+          "val": "3.39M km²",
           "lbl": "2012 Summer Min. Record"
-        },
-        {
-          "val": "Mar 2026",
-          "lbl": "Record Low March"
-        },
-        {
-          "val": "15%",
-          "lbl": "Min. Concentration Used"
         },
         {
           "val": "Daily",
@@ -1019,6 +1039,11 @@
             "period": "Mar 2026",
             "val": "Record low",
             "note": "Lowest March extent on record — C3S"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "7.02M km²",
+            "note": "9th-lowest Aug 2 extent · Met Office"
           }
         ]
       },
@@ -1050,9 +1075,9 @@
           }
         ]
       },
-      "body": "March 2026 set the lowest Arctic sea ice extent on record for the month (Copernicus C3S) — the winter maximum ended at a record deficit, and the melt season is now underway from that depressed starting point. February stood 1.2M km² below the 1981–2010 median. Seasonal variation is completely no...",
+      "body": "August 2 extent: 7.02M km² — ninth-lowest for the date in the satellite record and 1.38M km² below the 1981–2010 average, with the Kara Sea exceptionally low (UK Met Office August briefing). July averaged 8.29M km², joint-fifth lowest. The March 2026 winter maximum of 14.29M km² statistically tied 2025 for the record low (NASA/NSIDC). The September minimum is highly uncertain but not projected to break 2012's 3.39M km² record. A data note: NSIDC's monthly analyses are suspended after 2025 funding cuts and an AMSR2 sensor outage, so this issue leans on the Met Office briefing — a reminder that the observing system itself is under strain.",
       "method": "NSIDC Sea Ice Index via satellite passive microwave (SMMR, SSM/I, SSMIS). Extent = total ocean area with at least 15% ice concentration. Updated daily. Compared against 1981–2010 median for the same calendar day to remove seasonal signal. Arc = percentile within seasonal historical range.",
-      "share": "Arctic ice: 13.8M km² — 1.2M km² below seasonal median. Long-term decline continues. February 2024 was record low winter month. anthonycharts.com ❄️"
+      "share": "Arctic ice: 7.02M km² — 9th-lowest for the date, 1.38M below average. The winter maximum tied the record low. anthonycharts.com ❄️"
     },
     "co2": {
       "emoji": "🌿",
@@ -1064,24 +1089,24 @@
       ],
       "trend": {
         "dir": "up",
-        "label": "Rising — fastest rate in 800,000-year ice core record"
+        "label": "Rising — seasonal dip, growth rate re-accelerating"
       },
       "stats": [
         {
-          "val": "431.1 ppm",
-          "lbl": "April 2026 · NOAA"
+          "val": "427.6 ppm",
+          "lbl": "Week of Aug 9 · NOAA"
         },
         {
           "val": "280 ppm",
           "lbl": "Pre-Industrial"
         },
         {
-          "val": "+54.0%",
+          "val": "+52.7%",
           "lbl": "Total Increase"
         },
         {
-          "val": "+1.5 ppm y/y",
-          "lbl": "Apr 2025→26 · La Niña damped"
+          "val": "+2.1 ppm y/y",
+          "lbl": "Aug 2025→26"
         },
         {
           "val": "1958",
@@ -1127,7 +1152,12 @@
           {
             "period": "Apr 2026",
             "val": "431.1 ppm",
-            "note": "+151.1 from baseline — current · NOAA MLO"
+            "note": "+151.1 from baseline · NOAA MLO"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "427.6 ppm",
+            "note": "+2.1 y/y — seasonal dip, El Niño building"
           }
         ]
       },
@@ -1165,9 +1195,9 @@
           }
         ]
       },
-      "body": "CO₂ at 431.1 ppm (April 2026, NOAA Mauna Loa) — 54% above pre-industrial. Year-over-year growth slowed to +1.5 ppm as La Niña damped the increment, but the long-run climb is the fastest in the 800,000-year ice core record, and forecasters expect the developing El Niño to re-accelerate it. The Kee...",
+      "body": "CO₂ at 427.6 ppm (week of August 9, NOAA Mauna Loa) — 53% above pre-industrial. The drop from June's 431 is the Northern Hemisphere growing season breathing in, not progress: year-over-year growth is back up to +2.1 ppm from the La Niña-damped +1.5 earlier this year, and the strengthening El Niño is expected to push the increment higher into 2027. The Keeling Curve's long-run climb remains the fastest in the 800,000-year ice-core record.",
       "method": "Continuous measurement at NOAA Mauna Loa Observatory since 1958 (the Keeling Curve). Weekly averages from NOAA Global Monitoring Laboratory. Cross-referenced with Scripps Institution CO₂ program. Arc = position between 280ppm (pre-industrial) and 500ppm (extreme risk ceiling).",
-      "share": "CO₂: 431.1 ppm — 54% above pre-industrial. Rising faster than any point in 800,000 years. The Keeling Curve climbs. anthonycharts.com 🌿"
+      "share": "CO₂: 427.6 ppm — that's the seasonal dip, not progress. Growth is back up to +2.1 ppm/yr as El Niño builds. anthonycharts.com 🌿"
     },
     "planet": {
       "emoji": "🪐",
@@ -1184,8 +1214,8 @@
       },
       "stats": [
         {
-          "val": "6,128",
-          "lbl": "Confirmed · Feb 2026 Archive"
+          "val": "6,336",
+          "lbl": "Confirmed · Aug 2026 Archive"
         },
         {
           "val": "Sep 2025",
@@ -1193,7 +1223,7 @@
         },
         {
           "val": "Aug 30 2026",
-          "lbl": "Roman Telescope Launch"
+          "lbl": "Roman Launch · T–12 days"
         },
         {
           "val": "1992",
@@ -1248,7 +1278,12 @@
           {
             "period": "Feb 2026",
             "val": "6,128",
-            "note": "Current archive count — JWST accelerating"
+            "note": "Archive count — JWST accelerating"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "6,336",
+            "note": "Roman launch T–12 days"
           }
         ]
       },
@@ -1274,9 +1309,9 @@
           }
         ]
       },
-      "body": "6,128 confirmed planets orbiting other stars — a number that was zero 34 years ago. NASA announced the 6,000 milestone on September 17, 2025, and the Nancy Grace Roman Space Telescope launches August 30, 2026 — projected to discover 100,000+ more. 183 sit in their star's habitable zone where liquid water could exist. JWST can now analyze exoplanet atmospheres directly for chemical biosignatures. No conclusive biological signals detected yet, but the search has genuinely begun.",
+      "body": "6,336 confirmed planets orbiting other stars — 208 added since June, a number that was zero 34 years ago. The Nancy Grace Roman Space Telescope is fueled and integrated on its Falcon Heavy, set for August 30 — nine months ahead of schedule — and projected to discover 100,000 more. JWST meanwhile delivered one of the year's biggest results: a 'black hole star' 660 million years after the Big Bang that may explain the mysterious Little Red Dots. And Artemis II's April crewed lunar flyby took humans farther from Earth than they have ever been.",
       "method": "Raw count from NASA Exoplanet Archive. Confirmed status requires: peer-reviewed publication, independent verification via secondary detection method, and archive acceptance. Habitable zone defined by orbital distance allowing liquid surface water. Arc = pace toward 10,000 milestone by 2030.",
-      "share": "6,128 confirmed exoplanets — past the 6,000 milestone. Roman Telescope launches Aug 2026. JWST now reading atmospheres. The universe is full of worlds. anthonycharts.com 🪐"
+      "share": "6,336 confirmed exoplanets — and the Roman Telescope launches Aug 30, projected to find 100,000 more. anthonycharts.com 🪐"
     },
     "alien": {
       "emoji": "👽",
@@ -1289,28 +1324,28 @@
       ],
       "trend": {
         "dir": "stable",
-        "label": "Stable — 3 active candidates, none confirmed, none new"
+        "label": "No confirmed detection — 'active candidates' metric retired"
       },
       "stats": [
-        {
-          "val": "3",
-          "lbl": "Active Candidates"
-        },
         {
           "val": "0",
           "lbl": "Confirmed Ever"
         },
         {
+          "val": "Retired",
+          "lbl": "'Active Candidates' Count"
+        },
+        {
+          "val": "1.2M+",
+          "lbl": "MeerKAT Pointings · BLUSE"
+        },
+        {
+          "val": "Null",
+          "lbl": "K2-18 b Search Result"
+        },
+        {
           "val": "1977",
           "lbl": "Wow! Signal Year"
-        },
-        {
-          "val": "1M+",
-          "lbl": "Stars Scanned"
-        },
-        {
-          "val": "LOW",
-          "lbl": "Confirm Probability"
         },
         {
           "val": "As Reported",
@@ -1347,7 +1382,12 @@
           {
             "period": "Feb 2026",
             "val": "3 active",
-            "note": "In peer review — current"
+            "note": "In peer review"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "0 confirmed",
+            "note": "Candidate-count metric retired"
           }
         ]
       },
@@ -1373,9 +1413,9 @@
           }
         ]
       },
-      "body": "Three signals remain in active review as technosignature candidates. The track record: every prior candidate has resolved to natural causes or radi...",
-      "method": "Manual count from Breakthrough Listen published candidate reports and SETI Institute announcements. Candidate criteria: passed RFI filtering, observed in multiple independent beams, no confirmed natural explanation at time of logging. Updated as reported in peer-reviewed publications.",
-      "share": "3 technosignature candidates active. 0 confirmed ever. Wow! Signal still unexplained after 49 years. Breakthrough Listen: 1M+ stars scanned. anthonycharts.com 👽"
+      "body": "This issue retires the 'active candidates' count. No observatory or survey publishes such a register, and the FAST candidates previously carried here have no verifiable published status — so the honest headline is the number that has never changed: zero confirmed technosignatures, ever. The searching itself accelerated in 2026: a VLA + MeerKAT narrowband search of K2-18 b returned a null result, Breakthrough Listen's BLUSE commensal survey has autonomously processed 1.2M+ MeerKAT pointings, and a SETI Institute–NVIDIA system now scans the Allen Telescope Array roughly 600× faster. The Wow! Signal turns 49 this week — still unexplained, still never repeated.",
+      "method": "Confirmed detections from peer-reviewed publications — none exist. The prior 'active candidates' count (FAST 2022 reports) was retired in August 2026: no source publishes an ongoing candidate register, so the dashboard no longer displays one. Survey progress tracked from Breakthrough Listen and SETI Institute publications.",
+      "share": "Technosignatures confirmed ever: 0. The search got faster in 2026 — 1.2M+ MeerKAT pointings, K2-18 b came up null. Still listening. anthonycharts.com 👽"
     },
     "solar": {
       "emoji": "☀️",
@@ -1393,7 +1433,7 @@
       "stats": [
         {
           "val": "G1",
-          "lbl": "Storm Level Today"
+          "lbl": "Storm Watch · Aug 19"
         },
         {
           "val": "Solar Cycle 25",
@@ -1404,8 +1444,8 @@
           "lbl": "Cycle 25 Peak"
         },
         {
-          "val": "147",
-          "lbl": "Sunspot Number"
+          "val": "Coronal hole",
+          "lbl": "Aug 19 Storm Driver"
         },
         {
           "val": "G5",
@@ -1440,8 +1480,13 @@
           },
           {
             "period": "Feb 2026",
-            "val": "G1 — current",
+            "val": "G1",
             "note": "Post-peak, declining"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "G1 — current",
+            "note": "Coronal-hole stream · declining phase"
           }
         ]
       },
@@ -1479,9 +1524,9 @@
           }
         ]
       },
-      "body": "Solar Cycle 25 peaked in late 2025 at higher intensity than NOAA predictions — a notable forecasting miss. G1 is the mildest storm classification: ...",
+      "body": "Solar Cycle 25 remains in its declining phase past the late-2025 peak. NOAA SWPC has a G1 (Minor) watch for August 19, driven by a negative-polarity coronal-hole high-speed stream — the workhorse of a descending cycle — with minor R1–R2 radio blackouts at 35% daily odds. G1 is the mildest storm classification: aurora at high latitudes, negligible infrastructure risk. An earlier G1 storm passed on August 3 without incident.",
       "method": "24-hour peak geomagnetic storm rating from NOAA Space Weather Prediction Center (SWPC). G-scale from Kp-index: G1=Kp≥5, G2=Kp≥6, G3=Kp≥7, G4=Kp≥8, G5=Kp=9. Sunspot number from WDC-SILSO, Royal Observatory of Belgium — international standard since 1849.",
-      "share": "Solar Activity: G1 today. Cycle 25 peaked higher than predicted. Now descending. NOAA tracks daily. anthonycharts.com ☀️"
+      "share": "Solar Activity: G1 watch for Aug 19. Cycle 25 descending — coronal-hole streams drive the weather now. anthonycharts.com ☀️"
     },
     "neo": {
       "emoji": "☄️",
@@ -1498,7 +1543,7 @@
       },
       "stats": [
         {
-          "val": "4",
+          "val": "7",
           "lbl": "Close Approaches/Week"
         },
         {
@@ -1506,7 +1551,7 @@
           "lbl": "Impact Threats"
         },
         {
-          "val": "36,000+",
+          "val": "~39,000",
           "lbl": "Known NEOs Total"
         },
         {
@@ -1552,7 +1597,12 @@
           {
             "period": "Feb 2026",
             "val": "36,000+",
-            "note": "Catalog expanding — current"
+            "note": "Catalog expanding"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "~39,000",
+            "note": "7 approaches this week — all clear"
           }
         ]
       },
@@ -1584,16 +1634,17 @@
           }
         ]
       },
-      "body": "NASA tracks 36,000+ near-Earth objects. This week: 4 close approaches, all at safe distances measured in lunar distances (LD). None classified as i...",
+      "body": "Seven close approaches this week (Aug 17–23, JPL CNEOS) — none inside one lunar distance; the nearest, 2026 PX, passes at ~2.4 LD on August 23. Nothing on the Sentry risk list carries a Torino rating above zero. The catalog stands near 39,000 known NEOs, and growth means safety: every object found is one that can't surprise us. DART already proved deflection works.",
       "method": "NASA CNEOS close approach database. Close approach = within 0.05 AU (~7.5M km). Impact probability from JPL Sentry automated orbital mechanics. Potentially hazardous: >140m + intersects within 0.05 AU. Updated daily from automated telescope observations worldwide.",
-      "share": "4 NEO close approaches this week — all safe. 36,000+ known, 0 threats. DART proved we can deflect them. anthonycharts.com ☄️"
+      "share": "7 NEO close approaches this week — all safe, none inside 1 lunar distance. ~39,000 known, 0 threats. anthonycharts.com ☄️"
     },
     "gini": {
       "emoji": "⚖️",
       "title": "Wealth Inequality",
       "sources": [
         "World Inequality Database (WID.world)",
-        "World Inequality Report 2022",
+        "World Inequality Report 2026",
+        "UBS Global Wealth Report 2026",
         "Annual"
       ],
       "trend": {
@@ -1606,11 +1657,11 @@
           "lbl": "Global Gini Coefficient"
         },
         {
-          "val": "38%",
-          "lbl": "Top 1% Wealth Share"
+          "val": "37%",
+          "lbl": "Top 1% Wealth Share · WIR 2026"
         },
         {
-          "val": "69%",
+          "val": "75%",
           "lbl": "Top 10% Share"
         },
         {
@@ -1656,7 +1707,7 @@
           {
             "period": "2026",
             "val": "0.67",
-            "note": "38% — not recovered"
+            "note": "Top 1% at 37% — WIR 2026"
           }
         ]
       },
@@ -1688,16 +1739,17 @@
           }
         ]
       },
-      "body": "Global wealth Gini of 0.67: the top 1% own 38% of all global wealth; the bottom 50% share 2%. Inequality widened sharply during COVID — asset price...",
+      "body": "The World Inequality Report 2026 puts the top 1% at 37% of global wealth — 18 times everything the bottom half owns combined; the top 10% hold about 75%, the bottom 50% share 2%. UBS's 2026 Global Wealth Report, using a different method, puts the top-1% share at 47.5%. Whichever lens, the direction is unchanged: the COVID-era widening has not reversed. A precision note: the headline 0.67 is an income-style Gini from the WID series — wealth Ginis run far higher (~0.88).",
       "method": "Global Gini from World Inequality Database (WID.world) — maintained by Piketty, Chancel, Saez, and Zucman. Gini: 0 = perfect equality, 1 = perfect inequality. Arc normalized against 0–1.0 scale, with 0.8 as practical ceiling. Updated annually with World Inequality Report.",
-      "share": "Global Gini: 0.67. Top 1% own 38% of wealth. Bottom 50% share 2%. COVID widened the gap. No recovery yet. anthonycharts.com ⚖️"
+      "share": "Top 1% own 37% of global wealth — 18x the entire bottom half combined (World Inequality Report 2026). anthonycharts.com ⚖️"
     },
     "mobility": {
       "emoji": "📈",
       "title": "Social Mobility Index",
       "sources": [
-        "World Bank GSMI",
+        "WEF Global Social Mobility Index (2020)",
         "Opportunity Insights (Harvard)",
+        "World Bank Income Mobility DB (2025)",
         "Annual"
       ],
       "trend": {
@@ -1707,7 +1759,7 @@
       "stats": [
         {
           "val": "53.4",
-          "lbl": "Global Average"
+          "lbl": "Global Average · WEF 2020"
         },
         {
           "val": "83.6",
@@ -1798,9 +1850,9 @@
           }
         ]
       },
-      "body": "The World Bank Global Social Mobility Index scores countries 0–100 across 10 pillars. The global average of 53.4 reflects a world where birthplace ...",
-      "method": "World Bank GSMI: 10 equal-weight pillars — health, education access, education quality, lifelong learning, technology access, work opportunities, fair wages, working conditions, social protection, institutions. Supplemented by Opportunity Insights intergenerational income mobility data. Annual publication.",
-      "share": "Social Mobility: 53.4/100 globally. Denmark leads at 83.6. US: 76.1. Progress stalled since 2020. Where you're born still largely determines outcomes. anthonycharts.com 📈"
+      "body": "The Global Social Mobility Index scores countries 0–100 across 10 pillars; the global average of 53.4 reflects a world where birthplace still largely determines outcomes. An attribution correction this issue: this is the World Economic Forum's 2020 index — it has not been re-published since, and no World Bank global 0–100 score exists. The freshest related data, a 2025 World Bank database of intergenerational income mobility across 87 countries, confirms the pattern: mobility rises with national income, and global progress has stalled since 2020. The metric is carried as stale-but-labeled until a real successor exists.",
+      "method": "WEF Global Social Mobility Index (2020, unrevised): 10 equal-weight pillars — health, education access, education quality, lifelong learning, technology access, work opportunities, fair wages, working conditions, social protection, institutions. Supplemented by Opportunity Insights intergenerational income mobility data and the World Bank's 2025 income-mobility database. No update since 2020 — carried as stale-but-labeled.",
+      "share": "Social Mobility: 53.4/100 globally — unchanged since the WEF's 2020 index, because no one has re-measured it. Where you're born still decides too much. anthonycharts.com 📈"
     },
     "conflict": {
       "emoji": "💔",
@@ -1812,24 +1864,24 @@
       ],
       "trend": {
         "dir": "up",
-        "label": "Elevated — above pre-2022 baseline, Ukraine and Gaza primary"
+        "label": "Elevated — ACLED mid-year figure pending; war tolls mounting"
       },
       "stats": [
         {
           "val": "28,400",
-          "lbl": "Battle Deaths YTD"
+          "lbl": "Battle Deaths · thru Jun 11"
         },
         {
-          "val": "56",
-          "lbl": "Active Conflict Zones"
+          "val": "9,000+",
+          "lbl": "Iran War Deaths · Low Est."
         },
         {
-          "val": "Ukraine",
-          "lbl": "Highest Zone"
+          "val": "4,335",
+          "lbl": "Lebanon Killed Since Mar 2"
         },
         {
-          "val": "Gaza",
-          "lbl": "Second Highest"
+          "val": "30+",
+          "lbl": "Countries w/ Active Conflict"
         },
         {
           "val": "~180K",
@@ -1875,7 +1927,12 @@
           {
             "period": "2026 YTD",
             "val": "28,400",
-            "note": "Current pace"
+            "note": "Pace through Jun 11"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "28,400 (Jun)",
+            "note": "Held at June value — no verified ACLED update"
           }
         ]
       },
@@ -1907,9 +1964,9 @@
           }
         ]
       },
-      "body": "28,400 battle deaths recorded YTD in 2026 across 56 active conflict zones. Ukraine and Gaza account for the majority. 2022 Ukraine invasion drove t...",
+      "body": "An honesty note leads this update: ACLED has published no verifiable mid-2026 year-to-date figure, so the 28,400 YTD number is carried as of June 11 rather than silently extrapolated. What is documented since: cross-source Iran-war death estimates reached 9,000–18,300 by August 17 (the better-corroborated band was ~7,100–9,700 in July); Lebanon counts 4,335 killed since March 2; Russian missile and drone strikes on Kyiv killed 26+ in the first week of August alone, with Ukraine's Patriot interceptors running short; Sudan, Yemen, and Myanmar grind on; and Ethiopia–Tigray clashes near Sheraro are the first since the 2022 Pretoria accord. Active high-intensity conflict spans 30+ countries.",
       "method": "Primary: ACLED — real-time coding of political violence events from media, NGOs, and government sources across 200+ countries. Cross-referenced with UCDP (Uppsala Conflict Data Program) for battle death estimates. Battle deaths only — excludes indirect deaths from displacement or disease. Updated monthly.",
-      "share": "28,400 conflict deaths YTD in 2026 — 56 active zones. Ukraine and Gaza primary. Above pre-2022 baseline. Paired with Peacekeeping Reach at anthonycharts.com 💔"
+      "share": "Conflict deaths: 28.4K YTD through June — ACLED update pending. Iran war estimates 9,000+; Lebanon 4,335; Tigray reigniting. anthonycharts.com 💔"
     },
     "peace": {
       "emoji": "🕊️",
@@ -1921,28 +1978,28 @@
       ],
       "trend": {
         "dir": "down-bad",
-        "label": "Declining — 27% below 2015 peak, funding under pressure"
+        "label": "Corrected — official UN count: 59,376 across 11 missions"
       },
       "stats": [
         {
-          "val": "87,000",
-          "lbl": "Personnel Deployed"
+          "val": "59,376",
+          "lbl": "Personnel · UN Fact Sheet"
         },
         {
-          "val": "12",
+          "val": "11",
           "lbl": "Active Missions"
         },
         {
-          "val": "$6.4B",
-          "lbl": "Annual Budget"
+          "val": "121",
+          "lbl": "Contributing Countries"
         },
         {
           "val": "120,000",
           "lbl": "2015 Peak"
         },
         {
-          "val": "0.5%",
-          "lbl": "Of Global Military Spend"
+          "val": "–50%",
+          "lbl": "vs 2015 Peak"
         },
         {
           "val": "Monthly",
@@ -1979,7 +2036,12 @@
           {
             "period": "Feb 2026",
             "val": "87,000",
-            "note": "Current — 12 missions"
+            "note": "12 missions — uncorrected series"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "59,376",
+            "note": "Corrected to official UN fact sheet · 11 missions"
           }
         ]
       },
@@ -2011,9 +2073,9 @@
           }
         ]
       },
-      "body": "87,000 UN peacekeeping personnel deployed across 12 missions — 27% below the 2015 peak of 120,000. DR Congo (MONUSCO) remains the largest. The $6.4B peacekeeping budget is less than 0.5% of global military spending — the world's response capacity is proportional to its crises.",
-      "method": "UN DPPA monthly fact sheets. Personnel = troops + police + civilian international/national staff. Budget from UN General Assembly appropriations. Mission count = active mandated operations. Updated monthly from official UN reporting.",
-      "share": "87,000 peacekeepers, 12 missions — 27% below 2015 peak. Budget $6.4B = <0.5% of global military spend. 56 conflict zones vs 12 missions. anthonycharts.com 🕊️"
+      "body": "A correction, not just an update: this dashboard previously carried 87,000 personnel across 12 missions, which does not match official UN reporting. The UN's own fact sheet lists 59,376 total personnel — 50,963 troops, 5,852 police, plus observers and staff — across 11 peacekeeping operations, drawn from 121 contributing countries. That is roughly half the 2015 peak of 120,000. The correction steepens the story this tile has always told: the world's response capacity is shrinking while its conflict map grows.",
+      "method": "UN peacekeeping fact sheets (peacekeeping.un.org). Personnel = troops + police + military observers + staff officers + civilians. Mission count = active mandated operations. Prior 87K/12 figure corrected Aug 2026 to the official series. Updated from UN reporting.",
+      "share": "Corrected: 59,376 UN peacekeepers across 11 missions — half the 2015 peak, per the UN's own fact sheet. 30+ countries in conflict vs 11 missions. anthonycharts.com 🕊️"
     },
     "species": {
       "emoji": "🦏",
@@ -2028,19 +2090,19 @@
       },
       "stats": [
         {
-          "val": "44,016",
+          "val": "49,505",
           "lbl": "Threatened Species"
         },
         {
-          "val": "157,190",
+          "val": "175,909",
           "lbl": "Total Assessed"
         },
         {
-          "val": "28%",
+          "val": "28.1%",
           "lbl": "% at Risk"
         },
         {
-          "val": "902",
+          "val": "917",
           "lbl": "Extinct Since 1500"
         },
         {
@@ -2082,7 +2144,12 @@
           {
             "period": "Feb 2026",
             "val": "44,016",
-            "note": "28% — current"
+            "note": "28% of assessed"
+          },
+          {
+            "period": "Jul 2026",
+            "val": "49,505",
+            "note": "2026-1 update — 28.1% of assessed"
           }
         ]
       },
@@ -2114,9 +2181,9 @@
           }
         ]
       },
-      "body": "44,016 species classified as threatened (Vulnerable, Endangered, or Critically Endangered) — 28% of all assessed. 902 confirmed extinctions since 1...",
+      "body": "The July 2026 Red List update (2026-1) lists 49,505 species as threatened — 28.1% of 175,909 assessed, both new highs as assessment coverage grows. Fifteen more species were declared Extinct, including six mammals. More than half of assessed hydrothermal-vent molluscs are threatened by prospective deep-sea mining — a frontier extinction risk arriving before the industry does. One recovery: the numbat improved. The share at risk holds near 28%: the rising count partly reflects wider assessment; the composition reflects real pressure.",
       "method": "IUCN Red List — the world's most comprehensive biodiversity database. Assessed across nine categories from Least Concern to Extinct. Threatened = Vulnerable + Endangered + Critically Endangered. Updated quarterly. Arc = threatened % of assessed, normalized against 50% ceiling.",
-      "share": "44,016 species threatened — 28% of all assessed. 902 extinct since 1500. Paired with Conservation Coverage. anthonycharts.com 🦏"
+      "share": "49,505 species now threatened — 28% of all assessed. 15 more declared extinct in the July Red List update. anthonycharts.com 🦏"
     },
     "conserve": {
       "emoji": "🌿",
@@ -2231,12 +2298,12 @@
         "Monthly · Experimental"
       ],
       "trend": {
-        "dir": "down",
-        "label": "Easing — down from the 88 peak, still elevated"
+        "dir": "up",
+        "label": "Holding high — Hormuz shut; PMI input corrected"
       },
       "stats": [
         {
-          "val": "81/100",
+          "val": "82/100",
           "lbl": "Stress Index"
         },
         {
@@ -2244,12 +2311,12 @@
           "lbl": "Status"
         },
         {
-          "val": "+18%",
-          "lbl": "Freight Rates YOY"
+          "val": "+80%",
+          "lbl": "Freight Rates YOY · WCI"
         },
         {
-          "val": "47.2",
-          "lbl": "Manufacturing PMI"
+          "val": "51.1",
+          "lbl": "Manufacturing PMI · Jul"
         },
         {
           "val": "88",
@@ -2295,7 +2362,12 @@
           {
             "period": "Jun 2026",
             "val": "81/100",
-            "note": "Current — high, easing from 88 peak"
+            "note": "High, easing from 88 peak"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "82/100",
+            "note": "Hormuz shut · PMI input corrected"
           }
         ]
       },
@@ -2333,11 +2405,11 @@
           }
         ]
       },
-      "body": "Global Trade Stress at 81/100 — high and easing from the 88 wartime peak. Houthi attacks on Red Sea shipping are rerouting cargo arou...",
+      "body": "Trade Stress edges up to 82/100. The Strait of Hormuz has effectively closed — zero transits on August 16 against a pre-war ~178/day, war-risk premiums at 3–10% of hull value — and transpacific container rates hit new highs (Asia–US East Coast at $9,400/FEU), with the Drewry composite roughly 80% above a year ago. One correction pulls the other way: this composite previously carried a manufacturing PMI of 47.2 (contraction), but the published J.P.Morgan global PMI was 52.2 in June and 51.1 in July — decelerating expansion, not contraction. The corrected input is applied this issue and keeps the composite below its 88–95 wartime peaks even as shipping stress worsens.",
       "method": "Experimental composite: Freightos Baltic Index (35%) — global container freight benchmark normalized historically. Manufacturing PMI inverted (35%) — S&P Global composite, inverted so contraction = higher stress. World Bank trade volume momentum (30%) — month-over-month change. Weights at anthonycharts.com/composites-v1.0.json",
-      "share": "Trade Stress: 81/100 — high, easing from the 88 peak. Red Sea disruptions, PMI 47.2 (contraction), freight +18% YOY. Full breakdown: anthonycharts.com 🚢",
+      "share": "Trade Stress: 82/100. Hormuz effectively shut, transpacific freight at record highs (+80% YoY). PMI input corrected: 51.1 — expansion, not contraction. anthonycharts.com 🚢",
       "weights": {
-        "final": 81,
+        "final": 82,
         "inputs": [
           {
             "name": "FREIGHTOS",
@@ -2365,28 +2437,28 @@
       ],
       "trend": {
         "dir": "down-bad",
-        "label": "Declining — down 4 pts YOY, 10+ pts below pre-COVID"
+        "label": "Declining — every published input pointing down"
       },
       "stats": [
         {
-          "val": "49.5%",
+          "val": "48.6%",
           "lbl": "Verified Claim Rate"
         },
         {
-          "val": "–4 pts",
-          "lbl": "Year over Year"
+          "val": "–0.9",
+          "lbl": "vs June"
         },
         {
           "val": "~72%",
           "lbl": "2019 Baseline"
         },
         {
-          "val": "RSF 65",
-          "lbl": "Press Freedom Score"
+          "val": "25-yr low",
+          "lbl": "RSF Press Freedom"
         },
         {
-          "val": "1,000+",
-          "lbl": "Sites Rated"
+          "val": "3,749",
+          "lbl": "AI Content Farms · NewsGuard"
         },
         {
           "val": "Monthly",
@@ -2423,7 +2495,12 @@
           {
             "period": "Feb 2026",
             "val": "49.5%",
-            "note": "Current — declining"
+            "note": "Declining"
+          },
+          {
+            "period": "Aug 2026",
+            "val": "48.6%",
+            "note": "RSF 25-yr low · AI farms 3,749"
           }
         ]
       },
@@ -2455,11 +2532,11 @@
           }
         ]
       },
-      "body": "Information Integrity at 49.5%: roughly half of major claims reviewed by IFCN-certified fact-checkers did not meet accuracy standards. Down 4 point...",
+      "body": "Information Integrity slips to 48.6%. Every measurable input worsened this cycle. RSF's 2026 index puts press freedom at a 25-year low, with over half of countries in 'difficult' or 'very serious' conditions for the first time. NewsGuard's monitor finds top AI chatbots repeating false claims 35% of the time (versus 18% a year ago) and counts 3,749 AI content-farm sites, up from 3,006 in March. IFCN reports 76% of fact-checking organizations in financial crisis after funding withdrawals. There is now a dedicated false-claims tracking center solely for the Iran war.",
       "method": "Experimental composite: IFCN claim accuracy rate (50%) — from IFCN-verified fact-checkers internationally. RSF Press Freedom Index inverted (30%) — higher freedom = higher integrity score. NewsGuard credibility average (20%) — ratings of major news and information sources. Experimental — weights subject to revision, published at anthonycharts.com/composites-v1.0.json",
-      "share": "Information Integrity: 49.5% — roughly half of major claims not meeting accuracy standards. Down 4pts YOY. 10+ pts below pre-COVID. anthonycharts.com 🎯",
+      "share": "Information Integrity: 48.6%. Press freedom at a 25-year low, AI chatbots repeating false claims 35% of the time, 3,749 AI content farms and counting. anthonycharts.com 🎯",
       "weights": {
-        "final": 49.5,
+        "final": 48.6,
         "inputs": [
           {
             "name": "IFCN",
