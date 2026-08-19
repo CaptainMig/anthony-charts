@@ -6,4 +6,4 @@ Allow: /composites-v1.0.json
 Allow: /data/scores-history.csv
 Allow: /methodology
 
-Sitemap: https://anthonycharts.com/sitemap.xml
+Sitemap: https://www.anthonycharts.com/sitemap.xml

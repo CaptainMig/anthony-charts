@@ -16,20 +16,20 @@
 <meta name="keywords" content="composite index, geopolitical risk index, world tension index, global conflict tracker, climate data dashboard, NOAA data, NASA data, GPR index, ACLED conflict data, verifiable index, world intelligence, global indicators">
 <meta name="author" content="Anthony Charts">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://anthonycharts.com">
+<link rel="canonical" href="https://www.anthonycharts.com/">
 <!-- Open Graph / Social -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://anthonycharts.com">
+<meta property="og:url" content="https://www.anthonycharts.com/">
 <meta property="og:title" content="Anthony Charts — Verifiable Composite Index">
 <meta property="og:description" content="A verifiable composite index tracking Earth, Space, and Human Systems. World On Edge: 89/100. World Goodness: 47/100. Sources published. Weights locked. Updated weekly.">
-<meta property="og:image" content="https://anthonycharts.com/og-image.png">
+<meta property="og:image" content="https://www.anthonycharts.com/og-image.png">
 <meta property="og:site_name" content="Anthony Charts">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@anthonycharts">
 <meta name="twitter:title" content="Anthony Charts — Verifiable Composite Index">
 <meta name="twitter:description" content="A verifiable composite index tracking Earth, Space, and Human Systems. World On Edge: 89/100. World Goodness: 47/100. Sources published. Weights locked.">
-<meta name="twitter:image" content="https://anthonycharts.com/og-image.png">
+<meta name="twitter:image" content="https://www.anthonycharts.com/og-image.png">
 <!-- Structured Data — WebSite -->
 <script type="application/ld+json">
 {
@@ -37,16 +37,16 @@
   "@type": "WebSite",
   "name": "Anthony Charts",
   "alternateName": "AC Composite Index",
-  "url": "https://anthonycharts.com",
+  "url": "https://www.anthonycharts.com",
   "description": "A verifiable composite index tracking Earth, Space, and Human Systems through verified scientific data from NOAA, NASA, GPR, ACLED, IUCN, and others.",
   "publisher": {
     "@type": "Organization",
     "name": "Anthony Charts",
-    "url": "https://anthonycharts.com"
+    "url": "https://www.anthonycharts.com"
   },
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://anthonycharts.com/?q={search_term_string}",
+    "target": "https://www.anthonycharts.com/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -58,7 +58,7 @@
   "@type": "Dataset",
   "name": "Anthony Charts Composite Index",
   "description": "Verifiable composite indices tracking global geopolitical risk, humanitarian goodness, climate systems, space exploration, and human systems. Updated weekly. Sources and weights published.",
-  "url": "https://anthonycharts.com",
+  "url": "https://www.anthonycharts.com",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "creator": {
     "@type": "Organization",
@@ -68,12 +68,12 @@
     {
       "@type": "DataDownload",
       "encodingFormat": "text/csv",
-      "contentUrl": "https://anthonycharts.com/data/scores-history.csv"
+      "contentUrl": "https://www.anthonycharts.com/data/scores-history.csv"
     },
     {
       "@type": "DataDownload",
       "encodingFormat": "application/json",
-      "contentUrl": "https://anthonycharts.com/composites-v1.0.json"
+      "contentUrl": "https://www.anthonycharts.com/composites-v1.0.json"
     }
   ],
   "temporalCoverage": "2026/..",
@@ -967,6 +967,8 @@ function pgShowPage(id){
   document.getElementById('pg-nav-'+id).classList.add('pg-active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+// /methodology is a real URL (static copy) — open that view on load
+if (location.pathname.replace(/\/+$/,'') === '/methodology') { pgShowPage('methodology'); }
 
 // ── meter detail drawer ──
 (function(){
@@ -975,7 +977,7 @@ function pgShowPage(id){
     good:    { color:'#22e58e', bg:'rgba(34,229,142,0.08)', border:'rgba(34,229,142,0.3)' },
     neutral: { color:'#8fa2cf', bg:'rgba(120,150,255,0.06)',border:'rgba(120,150,255,0.18)' }
   };
-  var BASE = 'https://anthonycharts.com';
+  var BASE = 'https://www.anthonycharts.com';
   function $(id){ return document.getElementById(id); }
 
   // 350x90 sparkline from real history values (min 3 points enforced upstream).
