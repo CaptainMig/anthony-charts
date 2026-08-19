@@ -435,6 +435,32 @@ async function main() {
   if (/<!--BUILD:/.test(html)) throw new Error('[build] unfilled BUILD anchor remains');
   fs.writeFileSync(path.join(ROOT, 'public/index.html'), html);
   console.log(`[build] wrote public/index.html (${html.length} bytes) from data/issue-data.json`);
+
+  // ── /methodology as a real URL: same generated page, own canonical/title ──
+  let mhtml = html;
+  const mrep = (re, to, label) => {
+    if (!re.test(mhtml)) throw new Error(`[build] methodology page: ${label} not found`);
+    mhtml = mhtml.replace(re, to);
+  };
+  mrep(/<link rel="canonical" href="https:\/\/www\.anthonycharts\.com\/">/,
+    '<link rel="canonical" href="https://www.anthonycharts.com/methodology">', 'canonical');
+  mrep(/<meta property="og:url" content="https:\/\/www\.anthonycharts\.com\/">/,
+    '<meta property="og:url" content="https://www.anthonycharts.com/methodology">', 'og:url');
+  mrep(/<title>[^<]*<\/title>/,
+    '<title>Methodology — Anthony Charts | How the Composite Index Works</title>', 'title');
+  mrep(/<meta name="description" content="[^"]*">/,
+    '<meta name="description" content="How Anthony Charts works: every input, weight, and threshold behind the World On Edge and World Goodness composites — GPR, ACLED, NOAA, NASA, IUCN and more. Weights locked and published.">', 'description');
+  fs.mkdirSync(path.join(ROOT, 'public/methodology'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'public/methodology/index.html'), mhtml);
+
+  // ── stamp sitemap lastmod from the issue date ──
+  const smPath = path.join(ROOT, 'public/sitemap.xml');
+  let sxml = fs.readFileSync(smPath, 'utf8');
+  const nStamped = (sxml.match(/<lastmod>/g) || []).length;
+  if (!nStamped) throw new Error('[build] sitemap: no lastmod entries found');
+  sxml = sxml.replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${data.issue.date}</lastmod>`);
+  fs.writeFileSync(smPath, sxml);
+  console.log(`[build] wrote public/methodology/index.html; stamped sitemap lastmod ×${nStamped} → ${data.issue.date}`);
 }
 
 main().catch((e) => {
