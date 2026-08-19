@@ -453,14 +453,170 @@ async function main() {
   fs.mkdirSync(path.join(ROOT, 'public/methodology'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'public/methodology/index.html'), mhtml);
 
-  // ── stamp sitemap lastmod from the issue date ──
-  const smPath = path.join(ROOT, 'public/sitemap.xml');
-  let sxml = fs.readFileSync(smPath, 'utf8');
-  const nStamped = (sxml.match(/<lastmod>/g) || []).length;
-  if (!nStamped) throw new Error('[build] sitemap: no lastmod entries found');
-  sxml = sxml.replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${data.issue.date}</lastmod>`);
-  fs.writeFileSync(smPath, sxml);
-  console.log(`[build] wrote public/methodology/index.html; stamped sitemap lastmod ×${nStamped} → ${data.issue.date}`);
+  // ── per-issue permalink pages + archive index ──
+  const issueUrls = buildIssuePages();
+
+  // ── sitemap generated from the ledger (lastmod = issue dates) ──
+  const smEntry = (loc, lastmod, changefreq, priority) =>
+    `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+  const D = data.issue.date;
+  const sm = [
+    smEntry(`${SITE}/`, D, 'weekly', '1.0'),
+    smEntry(`${SITE}/methodology`, D, 'monthly', '0.9'),
+    smEntry(`${SITE}/issues/`, D, 'weekly', '0.9'),
+    ...issueUrls.map((u) => smEntry(`${SITE}${u.path}`, u.date, 'monthly', '0.7')),
+    smEntry(`${SITE}/composites-v1.0.json`, D, 'monthly', '0.6'),
+    smEntry(`${SITE}/data/scores-history.csv`, D, 'weekly', '0.6'),
+  ].join('\n\n');
+  fs.writeFileSync(path.join(ROOT, 'public/sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n${sm}\n\n</urlset>\n`);
+  console.log(`[build] wrote /methodology, ${issueUrls.length} issue permalinks, /issues/ index, sitemap (${issueUrls.length + 5} urls)`);
+}
+
+/* ================================================================
+   Issue permalink pages — one static page per ledger row, generated
+   from the CSV (composites, deltas, editorial note) merged with the
+   per-meter snapshot ledger where one was recorded.
+================================================================ */
+const SITE = 'https://www.anthonycharts.com';
+
+function parseCsvLine(line) {
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (q) {
+      if (ch === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+      else cur += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === ',') { out.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
+function fmtDate(iso) {
+  const M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${M[m - 1]} ${d}, ${y}`;
+}
+
+function buildIssuePages() {
+  const csv = fs.readFileSync(path.join(ROOT, 'public/data/scores-history.csv'), 'utf8').trim().split(/\r?\n/);
+  const cols = parseCsvLine(csv[0]).map((h) => h.trim().toLowerCase());
+  const col = (name) => {
+    const i = cols.indexOf(name);
+    if (i < 0) throw new Error(`[build] issue pages: CSV column ${name} not found`);
+    return i;
+  };
+  const [ciDate, ciIssue, ciE, ciG, ciC, ciDE, ciDG, ciDC, ciNotes] =
+    ['date', 'issue', 'world_on_edge', 'world_goodness', 'calm_window', 'woe_delta', 'wg_delta', 'cw_delta', 'notes'].map(col);
+  const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/data/scores-history.json'), 'utf8'));
+  const snapByIssue = {};
+  for (const it of ledger.issues) snapByIssue[String(it.issue)] = it;
+
+  const rows = csv.slice(1).map(parseCsvLine).map((c) => ({
+    date: c[ciDate].trim(), id: c[ciIssue].trim(),
+    edge: c[ciE].trim(), good: c[ciG].trim(), calm: c[ciC].trim(),
+    dE: c[ciDE].trim(), dG: c[ciDG].trim(), dC: c[ciDC].trim(),
+    notes: c[ciNotes].trim(),
+  }));
+  if (!rows.length) throw new Error('[build] issue pages: no CSV rows');
+
+  const slug = (id) => id.toLowerCase();
+  const label = (r) => (snapByIssue[r.id] && snapByIssue[r.id].label) ||
+    (r.id.toUpperCase().includes('E') ? 'Emergency Update' : `Issue ${r.id}`);
+  const deltaHtml = (d, invert) => {
+    if (!d || d === '—' || d === '0') return `<span class="d flat">${d === '0' ? '±0' : 'baseline'}</span>`;
+    const up = d.startsWith('+');
+    const bad = invert ? !up : up;
+    return `<span class="d ${bad ? 'bad' : 'good'}">${escHtml(d)}</span>`;
+  };
+
+  const CSS = `*{margin:0;padding:0;box-sizing:border-box}body{background:#070b14;color:#c9d4ee;font-family:'SF Mono',SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;line-height:1.7;font-size:15px}a{color:#5eb9ff;text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:860px;margin:0 auto;padding:28px 22px 60px}.brand{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid rgba(120,150,255,.15);padding-bottom:14px;margin-bottom:30px;flex-wrap:wrap}.brand b{color:#fff;letter-spacing:.14em;font-size:.95rem}.brand nav{display:flex;gap:18px;font-size:.72rem;letter-spacing:.12em}.kicker{font-size:.68rem;letter-spacing:.22em;color:#7d8db4;margin-bottom:8px}h1{color:#fff;font-size:1.7rem;letter-spacing:.02em;line-height:1.25;margin-bottom:4px}.pdate{font-size:.75rem;color:#7d8db4;letter-spacing:.1em;margin-bottom:26px}.emergency{display:inline-block;background:rgba(255,46,110,.12);border:1px solid rgba(255,46,110,.4);color:#ff5c8f;font-size:.62rem;letter-spacing:.16em;padding:3px 10px;border-radius:4px;margin-bottom:12px}.comps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px}@media(max-width:600px){.comps{grid-template-columns:1fr}}.comp{border:1px solid rgba(120,150,255,.16);border-radius:10px;padding:16px 18px;background:rgba(120,150,255,.03)}.comp .l{font-size:.62rem;letter-spacing:.18em;color:#7d8db4;margin-bottom:6px}.comp .v{font-size:2rem;font-weight:700;color:#fff}.comp.edge .v{color:#ff5c8f}.comp.good .v{color:#22e58e}.comp.calm .v{color:#5eb9ff}.d{font-size:.72rem;margin-left:8px}.d.bad{color:#ff5c8f}.d.good{color:#22e58e}.d.flat{color:#7d8db4}h2{font-size:.72rem;letter-spacing:.22em;color:#7d8db4;margin:34px 0 14px}.note{border-left:2px solid rgba(94,185,255,.4);padding:4px 0 4px 18px;color:#c9d4ee;font-size:.92rem}.meters{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}.m{border:1px solid rgba(120,150,255,.13);border-radius:8px;padding:11px 13px;background:rgba(120,150,255,.02)}.m .l{font-size:.58rem;letter-spacing:.14em;color:#7d8db4;margin-bottom:4px}.m .v{font-size:1.05rem;color:#fff;font-weight:700}.nomet{color:#7d8db4;font-size:.85rem}.pn{display:flex;justify-content:space-between;gap:12px;margin-top:44px;border-top:1px solid rgba(120,150,255,.15);padding-top:18px;font-size:.78rem;letter-spacing:.08em}.foot{margin-top:40px;font-size:.68rem;color:#56618a;letter-spacing:.08em}.rowlist{display:flex;flex-direction:column;gap:10px}.irow{display:flex;justify-content:space-between;align-items:center;gap:14px;border:1px solid rgba(120,150,255,.14);border-radius:10px;padding:14px 18px;background:rgba(120,150,255,.02);flex-wrap:wrap}.irow:hover{border-color:rgba(94,185,255,.45)}.irow .t{color:#fff;font-weight:700}.irow .meta{font-size:.68rem;color:#7d8db4;letter-spacing:.1em}.irow .nums{font-size:.72rem;letter-spacing:.06em;color:#c9d4ee;white-space:nowrap}`;
+
+  const head = (title, desc, canonPath, published) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escHtml(title)}</title>
+<meta name="description" content="${escHtml(desc)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="${SITE}${canonPath}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="${SITE}${canonPath}">
+<meta property="og:title" content="${escHtml(title)}">
+<meta property="og:description" content="${escHtml(desc)}">
+<meta property="og:image" content="${SITE}/og-image.png">
+<meta property="og:site_name" content="Anthony Charts">
+<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'NewsArticle',
+    headline: title, datePublished: published, dateModified: published,
+    url: `${SITE}${canonPath}`, isPartOf: { '@type': 'WebSite', name: 'Anthony Charts', url: `${SITE}/` },
+    publisher: { '@type': 'Organization', name: 'Anthony Charts', url: `${SITE}/` },
+  })}</scr${'ipt'}>
+<style>${CSS}</style>
+</head>
+<body><div class="wrap">
+<div class="brand"><b>ANTHONY CHARTS</b><nav><a href="/">DASHBOARD</a><a href="/issues/">ARCHIVE</a><a href="/methodology">METHODOLOGY</a></nav></div>`;
+  const foot = `<div class="foot">Every number traces to a public source. Ledger: <a href="/data/scores-history.csv">scores-history.csv</a> · Weights: <a href="/composites-v1.0.json">composites-v1.0.json</a></div>
+</div></body></html>`;
+
+  fs.mkdirSync(path.join(ROOT, 'public/issues'), { recursive: true });
+  const urls = [];
+
+  rows.forEach((r, i) => {
+    const isEmergency = r.id.toUpperCase().includes('E');
+    const lb = label(r);
+    const title = `Issue ${r.id} — ${lb} · ${fmtDate(r.date)} | Anthony Charts`;
+    const desc = (`World On Edge ${r.edge}, Goodness ${r.good}, Calm Window ${r.calm}%. ` + r.notes).slice(0, 158);
+    const snap = snapByIssue[r.id];
+    let metersHtml = '';
+    if (snap) {
+      metersHtml = SECTIONS.map((sec) => {
+        const cells = sec.keys.filter((k) => snap.meters[k]).map((k) =>
+          `<div class="m"><div class="l" style="color:${sec.tint}">${escHtml(CARD_META[k].label)}</div><div class="v">${escHtml(String(snap.meters[k].display))}</div></div>`).join('');
+        return cells ? `<h2 style="color:${sec.tint}">${sec.title}</h2><div class="meters">${cells}</div>` : '';
+      }).join('');
+    } else {
+      metersHtml = `<h2>METER SNAPSHOT</h2><p class="nomet">No per-meter snapshot was recorded in the ledger for this issue — composites and the ledger entry above are the full record.</p>`;
+    }
+    const prev = rows[i - 1], next = rows[i + 1];
+    const page = head(title, desc, `/issues/${slug(r.id)}/`, r.date) + `
+${isEmergency ? '<div class="emergency">⚡ EMERGENCY UPDATE</div>' : ''}
+<div class="kicker">THE LEDGER · ISSUE ${escHtml(r.id)}</div>
+<h1>${escHtml(lb)}</h1>
+<div class="pdate">${fmtDate(r.date).toUpperCase()}</div>
+<div class="comps">
+<div class="comp edge"><div class="l">WORLD ON EDGE</div><div class="v">${escHtml(r.edge)}<span style="font-size:.9rem;color:#7d8db4">/100</span>${deltaHtml(r.dE, false)}</div></div>
+<div class="comp good"><div class="l">WORLD GOODNESS</div><div class="v">${escHtml(r.good)}<span style="font-size:.9rem;color:#7d8db4">/100</span>${deltaHtml(r.dG, true)}</div></div>
+<div class="comp calm"><div class="l">CALM WINDOW</div><div class="v">${escHtml(r.calm)}<span style="font-size:.9rem;color:#7d8db4">%</span>${deltaHtml(r.dC, true)}</div></div>
+</div>
+<h2>THE LEDGER ENTRY</h2>
+<div class="note">${escHtml(r.notes)}</div>
+${metersHtml}
+<div class="pn"><span>${prev ? `<a href="/issues/${slug(prev.id)}/">← Issue ${escHtml(prev.id)} · ${fmtDate(prev.date)}</a>` : ''}</span><span>${next ? `<a href="/issues/${slug(next.id)}/">Issue ${escHtml(next.id)} · ${fmtDate(next.date)} →</a>` : '<a href="/">Live dashboard →</a>'}</span></div>
+${foot}`;
+    fs.mkdirSync(path.join(ROOT, `public/issues/${slug(r.id)}`), { recursive: true });
+    fs.writeFileSync(path.join(ROOT, `public/issues/${slug(r.id)}/index.html`), page);
+    urls.push({ path: `/issues/${slug(r.id)}/`, date: r.date });
+  });
+
+  // archive index — newest first
+  const list = rows.slice().reverse().map((r) => `<a class="irow" href="/issues/${slug(r.id)}/">
+<span><span class="t">Issue ${escHtml(r.id)} — ${escHtml(label(r))}</span><br><span class="meta">${fmtDate(r.date).toUpperCase()}${r.id.toUpperCase().includes('E') ? ' · ⚡ EMERGENCY' : ''}</span></span>
+<span class="nums">EDGE ${escHtml(r.edge)} · GOOD ${escHtml(r.good)} · CALM ${escHtml(r.calm)}%</span></a>`).join('\n');
+  const idx = head('Issue Archive — Every Published Update | Anthony Charts',
+    `Every published issue of the Anthony Charts verifiable composite index — ${rows.length} updates since February 2026, with World On Edge, Goodness, and Calm Window scores on the record.`,
+    '/issues/', rows[rows.length - 1].date) + `
+<div class="kicker">THE LEDGER</div>
+<h1>Issue Archive</h1>
+<div class="pdate">${rows.length} ISSUES PUBLISHED · APPEND-ONLY · NEVER REWRITTEN</div>
+<div class="rowlist">${list}</div>
+${foot}`;
+  fs.writeFileSync(path.join(ROOT, 'public/issues/index.html'), idx);
+  return urls;
 }
 
 main().catch((e) => {
