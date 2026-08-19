@@ -619,6 +619,109 @@
           "arc_pct": 0.59
         }
       }
+    },
+    {
+      "date": "2026-08-18",
+      "issue": "6.1",
+      "label": "Deadline Expired",
+      "type": "standard",
+      "meters": {
+        "edge": {
+          "value": "89",
+          "display": "89",
+          "arc_pct": 0.89
+        },
+        "good": {
+          "value": "47",
+          "display": "47",
+          "arc_pct": 0.47
+        },
+        "calm": {
+          "value": 18,
+          "display": "18%",
+          "arc_pct": 0.18
+        },
+        "temp": {
+          "value": 1.45,
+          "display": "+1.45°",
+          "arc_pct": 0.72
+        },
+        "sea": {
+          "value": 102,
+          "display": "+102mm",
+          "arc_pct": 0.51
+        },
+        "arctic": {
+          "value": 7.02,
+          "display": "7.02M",
+          "arc_pct": 0.38
+        },
+        "co2": {
+          "value": 427.6,
+          "display": "427.6",
+          "arc_pct": 0.67
+        },
+        "planet": {
+          "value": 6336,
+          "display": "6,336",
+          "arc_pct": 0.63
+        },
+        "neo": {
+          "value": 7,
+          "display": "7",
+          "arc_pct": 0.35
+        },
+        "alien": {
+          "value": 0,
+          "display": "0",
+          "arc_pct": 0.1
+        },
+        "solar": {
+          "value": 1,
+          "display": "G1",
+          "arc_pct": 0.6
+        },
+        "truth": {
+          "value": 48.6,
+          "display": "48.6%",
+          "arc_pct": 0.49
+        },
+        "supply": {
+          "value": 82,
+          "display": "82",
+          "arc_pct": 0.82
+        },
+        "gini": {
+          "value": 0.67,
+          "display": "0.67",
+          "arc_pct": 0.67
+        },
+        "mobility": {
+          "value": 53.4,
+          "display": "53.4",
+          "arc_pct": 0.53
+        },
+        "conflict": {
+          "value": 245000,
+          "display": "~245K",
+          "arc_pct": 0.82
+        },
+        "peace": {
+          "value": 59000,
+          "display": "59K",
+          "arc_pct": 0.3
+        },
+        "species": {
+          "value": 49505,
+          "display": "49,505",
+          "arc_pct": 0.78
+        },
+        "conserve": {
+          "value": 17.6,
+          "display": "17.6%",
+          "arc_pct": 0.59
+        }
+      }
     }
   ]
 }
