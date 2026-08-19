@@ -398,8 +398,15 @@ function trendSeries() {
     if (!isFinite(t) || !isFinite(e) || !isFinite(g)) throw new Error(`[build] scores-history.csv: bad row: ${line}`);
     return [Math.round(t * 1000) / 1000, e, g];
   }).filter((r) => r[0] > lastBase).sort((a, b) => a[0] - b[0]);
-  if (!rows.length) throw new Error('[build] scores-history.csv: no ledger rows after the baseline series');
-  return TREND_BASELINE.concat(rows);
+  // same-date rows (e.g. a correction issue like 6.1) collapse to the last one —
+  // the trend series needs strictly ascending time and one point per date
+  const dedup = [];
+  for (const r of rows) {
+    if (dedup.length && dedup[dedup.length - 1][0] === r[0]) dedup[dedup.length - 1] = r;
+    else dedup.push(r);
+  }
+  if (!dedup.length) throw new Error('[build] scores-history.csv: no ledger rows after the baseline series');
+  return TREND_BASELINE.concat(dedup);
 }
 
 /* ================================================================

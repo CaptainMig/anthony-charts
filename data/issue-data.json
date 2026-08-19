@@ -4,7 +4,7 @@
     "note": "Single source of truth for AnthonyCharts. Edit this file, run build/build.js, verify with build/verify.js. Drawers/ticker/tiles/arcs are generated into public/index.html."
   },
   "issue": {
-    "id": "6",
+    "id": "6.1",
     "date": "2026-08-18",
     "label": "Deadline Expired"
   },
@@ -28,7 +28,7 @@
     "note": "JUL 2026 — Info Integrity adds Signal Scanner at 10%; prior weights renormalized (IFCN 50→45, RSF 30→27, NewsGuard 20→18)."
   },
   "banner": {
-    "raw": "ISSUE 6 - August 18, 2026 - Day 171 - Deadline Expired"
+    "raw": "ISSUE 6.1 - August 18, 2026 - Day 171 - Deadline Expired - Conflict tile corrected"
   },
   "composite": {
     "edge": {
@@ -231,14 +231,14 @@
       "name": "Conflict Deaths",
       "cadence": "Updated monthly · ACLED",
       "icon": "💔",
-      "val": "28.4K",
+      "val": "~245K",
       "valClass": "meter-val v-conflict",
-      "unit": "Battle deaths YTD · thru Jun 11",
-      "trend": "↑ Elevated",
+      "unit": "Fatalities · 12 mo thru Nov 2025 · ACLED",
+      "trend": "↑ Corrected",
       "trendClass": "meter-trend t-up",
       "arcId": "arcConflict",
       "arcClass": "arc-fill-t a-conflict",
-      "barW": "72%",
+      "barW": "82%",
       "barClass": "meter-bar-fill b-conflict"
     },
     {
@@ -361,7 +361,7 @@
     [
       "arcConflict",
       170,
-      0.72
+      0.82
     ],
     [
       "arcPeace",
@@ -395,7 +395,7 @@
     "🧭 CALM WINDOW PROBABILITY: 18% — LOW",
     "⚖️ WEALTH INEQUALITY: Gini 0.67 · Top 1% owns 37%",
     "📈 SOCIAL MOBILITY: 53.4/100 · Stalled",
-    "💔 CONFLICT DEATHS: 28,400 thru Jun · ACLED update pending",
+    "💔 CONFLICT DEATHS: ~245K · 12 mo thru Nov 2025 · ACLED",
     "🕊️ PEACEKEEPING: 59,376 deployed · 11 missions",
     "🦏 SPECIES THREATENED: 49,505 · 28% of assessed",
     "🌿 CONSERVATION: 17.6% of Earth protected · 30x30 goal"
@@ -1858,34 +1858,34 @@
       "emoji": "💔",
       "title": "Conflict Deaths",
       "sources": [
-        "ACLED",
+        "ACLED Conflict Index",
         "UCDP Uppsala Conflict Data Program",
         "Monthly"
       ],
       "trend": {
         "dir": "up",
-        "label": "Elevated — ACLED mid-year figure pending; war tolls mounting"
+        "label": "Corrected — re-anchored to ACLED's published Conflict Index"
       },
       "stats": [
         {
+          "val": "~245K",
+          "lbl": "Fatalities · 12 Mo thru Nov 2025"
+        },
+        {
+          "val": "~20K/mo",
+          "lbl": "Global Run Rate · ACLED"
+        },
+        {
           "val": "28,400",
-          "lbl": "Battle Deaths · thru Jun 11"
+          "lbl": "Retired YTD Figure"
         },
         {
-          "val": "9,000+",
-          "lbl": "Iran War Deaths · Low Est."
-        },
-        {
-          "val": "4,335",
-          "lbl": "Lebanon Killed Since Mar 2"
+          "val": "42,860",
+          "lbl": "RU Claimed Losses · Jul · incl. wounded"
         },
         {
           "val": "30+",
           "lbl": "Countries w/ Active Conflict"
-        },
-        {
-          "val": "~180K",
-          "lbl": "2022 Annual Peak"
         },
         {
           "val": "Monthly",
@@ -1931,8 +1931,8 @@
           },
           {
             "period": "Aug 2026",
-            "val": "28,400 (Jun)",
-            "note": "Held at June value — no verified ACLED update"
+            "val": "~245K",
+            "note": "6.1 correction — re-anchored to ACLED Conflict Index"
           }
         ]
       },
@@ -1964,9 +1964,9 @@
           }
         ]
       },
-      "body": "An honesty note leads this update: ACLED has published no verifiable mid-2026 year-to-date figure, so the 28,400 YTD number is carried as of June 11 rather than silently extrapolated. What is documented since: cross-source Iran-war death estimates reached 9,000–18,300 by August 17 (the better-corroborated band was ~7,100–9,700 in July); Lebanon counts 4,335 killed since March 2; Russian missile and drone strikes on Kyiv killed 26+ in the first week of August alone, with Ukraine's Patriot interceptors running short; Sudan, Yemen, and Myanmar grind on; and Ethiopia–Tigray clashes near Sheraro are the first since the 2022 Pretoria accord. Active high-intensity conflict spans 30+ countries.",
-      "method": "Primary: ACLED — real-time coding of political violence events from media, NGOs, and government sources across 200+ countries. Cross-referenced with UCDP (Uppsala Conflict Data Program) for battle death estimates. Battle deaths only — excludes indirect deaths from displacement or disease. Updated monthly.",
-      "share": "Conflict deaths: 28.4K YTD through June — ACLED update pending. Iran war estimates 9,000+; Lebanon 4,335; Tigray reigniting. anthonycharts.com 💔"
+      "body": "A correction, on the record: the 28,400 battle-deaths-YTD figure this tile carried since launch could not be traced to any ACLED publication, and it is inconsistent with ACLED's own published scale — the ACLED Conflict Index recorded ~244,700 fatalities from political violence worldwide in the 12 months through November 2025, roughly 20,000 per month, which would put a genuine year-to-date count near 150,000 by mid-August, not 28,400. The tile is now anchored to ACLED's published Conflict Index figure and will update when ACLED publishes its next annual index. A definitional note prompted this check: headlines of \"45,000 Russian soldiers lost this past month\" trace to Ukraine's General Staff July figure of 42,860 — which counts killed, wounded, missing, and captured; independent death-only estimates (Mediazona/BBC confirmed records, probate-registry analysis) run at roughly one-third of claimed losses. Claimed casualties, verified deaths, and coded fatalities are three different measures — this dashboard now says which one it uses. The World On Edge DEATHS input (15%) is being re-based against the corrected scale for issue 7.",
+      "method": "ACLED Conflict Index — fatalities coded from reported political-violence events across all conflicts worldwide; conservative by design, and deliberately undercounts military deaths ACLED deems unverifiable (notably Ukraine). Cross-referenced with UCDP. Correction Aug 2026 (issue 6.1): the prior 28,400 YTD figure was retired after failing a source check; the tile now carries ACLED's published 12-month Conflict Index figure. Battle-death-only YTD reporting resumes if/when ACLED publishes one.",
+      "share": "Corrected: conflict fatalities re-anchored to ACLED's published Conflict Index — ~245K worldwide in the 12 months through Nov 2025. The old 28.4K YTD figure failed its source check and is retired. anthonycharts.com 💔"
     },
     "peace": {
       "emoji": "🕊️",
