@@ -1,4 +1,15 @@
-# Anthony Charts · Signal
+# Anthony Charts · Signal — ARCHIVED (v1)
+
+> **This directory is the retired v1 app.** Signal was rebuilt from the
+> ground up as **[CaptainMig/SIGNAL](https://github.com/CaptainMig/SIGNAL)**
+> (v2: scans run server-side on a schedule, an append-only ledger lives in
+> the repo, the site is static and read-only, `/api/aggregate` keeps the
+> same shape). The live address **anthony-signal.vercel.app** now belongs to
+> that project. Nothing here is maintained; it is kept only so the old
+> Vercel project keeps serving until the domain is moved, after which the
+> old project can be deleted and this directory removed. The text below is
+> the v1 README as it was.
+
 
 **A media-integrity scanner that scores how faithfully a headline represents its own article — not whether the underlying event is true.**
 
